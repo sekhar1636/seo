@@ -1,0 +1,49 @@
+P {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+}
+
+TD {
+  font-family: Arial, Helvetica;
+  font-size: 11pt;
+}
+
+TH {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+}
+
+
+H1 {
+  font-family: Arial, Helvetica;
+  font-size: 18pt;
+}
+
+H2 {
+  font-family: Arial, Helvetica;
+  font-size: 16pt;
+}
+
+H3 {
+  font-family: Arial, Helvetica;
+  font-size: 14pt;
+}
+
+LI {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+}
+
+UL {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+}
+
+H4 {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+}
+
+BODY {
+  background-image: url(/graphics03/Bk10a.GIF);
+}

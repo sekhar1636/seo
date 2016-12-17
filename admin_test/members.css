@@ -1,0 +1,52 @@
+P {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+}
+
+TD {
+  font-family: Arial, Helvetica;
+  font-size: 11pt;
+}
+
+H1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18pt;
+}
+
+H2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16pt;
+}
+
+H3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+}
+
+BODY {
+  background-image: url(Bk10a.GIF);
+}
+
+LI {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+}
+
+UL {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+}
+
+H4 {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+}
+
+.advice {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11pt;
+}
+
+$DOCUMENT {
+}
+th {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold}

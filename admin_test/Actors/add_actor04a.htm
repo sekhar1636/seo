@@ -1,0 +1,167 @@
+<html>
+<head>
+<title>Add Actor Record 2005</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="/Members05/admin_test/members.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<h1>StrawHat Actor 2005 Database: Add Record To All Tables</h1>
+<form name="form1" method="post" action="actor_addrecorda.php">
+  <table width="82%" border="0" align="center">
+    <tr bgcolor="#FF66CC"> 
+      <td colspan="5"> 
+        <div align="center"><b>Add actor (table:actor) Info</b></div>
+      </td>
+    </tr>
+    <tr> 
+      <td width="19%"><b>First Name:</b><BR><b>Middle:</b></td>
+      <td width="27%"> 
+        <input type="text" name="firstname" maxlength="30" size="30"><BR>
+		<input type="text" name="midname" maxlength="20" size="22"><BR>
+      </td>
+      <td width="13%"><b>Last Name:</b> </td>
+      <td colspan="2"> 
+        <input type="text" name="lastname" size="30" maxlength="30">
+      </td>
+    </tr>
+    <tr> 
+      <td width="19%"><b>Email</b></td>
+      <td width="27%"> 
+        <input type="text" name="email" maxlength="50" size="50">
+      </td>
+      <td width="13%"><b>Phone</b></td>
+      <td width="18%"> 
+        <input type="text" name="phone" maxlength="20" size="20">
+      </td>
+      <td width="23%"><b>h/s</b> 
+        <select name="h_or_serv" size="1">
+          <option selected>H</option>
+          <option>S</option>
+          <option>C</option>
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td width="19%"> <b>Unpaid apprentice?</b> </td>
+      <td width="27%"> 
+        <select name="apprentice" size="1">
+          <option value="Y">Yes</option>
+          <option value="N" selected>No</option>
+        </select>
+      </td>
+      <td width="13%"><b>Gender</b></td>
+      <td colspan="2"> 
+        <select name="gender" size="1">
+          <option selected>F</option>
+          <option>M</option>
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td width="19%"> <b>Internship?</b> </td>
+      <td width="27%"> 
+        <select name="intern" size="1">
+          <option value="Y">Yes</option>
+          <option value="N" selected>No</option>
+        </select>
+      </td>
+      <td width="13%"><b>Singing </b></td>
+      <td colspan="2"> 
+        <select name="singing" size="1">
+          <option value="Y" selected>Yes</option>
+          <option value="N">No</option>
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="2"> 
+        <div align="center"><b>Union Status</b> </div>
+      </td>
+      <td colspan="3"> 
+        <div align="center"><b>Nearest Largest City: 
+          <input name="large_city" size="30" type="text" maxlength="20">
+          </b></div>
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="2"> 
+        <div align="center"><b> 
+          <input type="checkbox" name="u_none" value="None" checked>
+          None</b> 
+          <input type="checkbox" name="u_emc" value="EMC">
+          <b>EMC</b> 
+          <input type="checkbox" name="u_sag" value="SAG">
+          <b> SAG </b> 
+          <input type="checkbox" name="u_aftra" value="AFTRA">
+          <b>AFTRA</b> <br>
+          <input type="checkbox" name="u_agva" value="AGVA">
+          <b>AGVA</b> 
+          <input type="checkbox" name="u_agma" value="AGMA">
+          <b>AGMA</b> </div>
+      </td>
+      <td colspan="3"> 
+        <div align="center"></div>
+        <div align="center"><b>Region:</b> 
+          <select name="region" size="1">
+            <option value="Northeast">Northeast</option>
+            <option value="Midwest">Midwest</option>
+            <option value="Southwest">Southwest</option>
+            <option value="Southeast">Southeast</option>
+            <option value="South">South</option>
+            <option value="Northwest">Northwest</option>
+          </select>
+        </div>
+      </td>
+    </tr>
+    <tr> 
+      <td width="19%">&nbsp;</td>
+      <td width="27%"> </td>
+      <td colspan="3"> 
+        <div align="center"></div>
+      </td>
+    </tr>
+    <tr> 
+      <td width="19%"><b>Availability</b><b> From:</b> </td>
+      <td width="27%"> 
+        <select name="availfor">
+          <option selected></option>
+          <option>Now</option>
+          <option>April</option>
+          <option>May</option>
+          <option>June</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+        </select>
+      </td>
+      <td colspan="3"><b>To:</b> 
+        <select name="availto">
+          <option selected></option>
+          <option>Open</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+          <option>After September</option>
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="5"> 
+        <div align="center"> 
+          <input type="submit" value="Add Record" name="submit">
+          <input type="reset" value="Clear Form" name="reset">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5">
+        <div align="center"><a href="/Members05/admin_test/admin_menu05.htm">Back 
+          to Main Menu</a></div>
+      </td>
+    </tr>
+  </table>
+</form>
+
+</body>
+</html>

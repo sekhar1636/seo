@@ -1,0 +1,240 @@
+<html>
+<head>
+<title>Add Record</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<h1>StrawHat Actor Database: Add Record</h1>
+<table width="75%" border="1" align="center">
+  <tr> 
+    <td><a href="/admin/admin_menu.htm">Main Menu</a></td>
+    <td>Change Record</td>
+    <td>List of Data</td>
+    
+  </tr>
+</table>
+<form name="form1" method="post" action="client_addrecord.php">
+  <table width="97%" border="0">
+    <tr> 
+      <td width="13%">First Name:</td>
+      <td width="32%"> 
+        <input type="text" name="firstname" maxlength="30" size="30">
+      </td>
+      <td width="14%">Last Name: </td>
+      <td width="41%"> 
+        <input type="text" name="lastname" size="30" maxlength="30">
+      </td>
+    </tr>
+    <tr> 
+      <td width="13%">Address:</td>
+      <td width="32%"> 
+        <input type="text" name="add1" size="30" value="">
+      </td>
+      <td width="14%">&nbsp;</td>
+      <td width="41%">&nbsp; </td>
+    </tr>
+    <tr> 
+      <td width="13%">Address 2:</td>
+      <td width="32%"> 
+        <input type="text" name="add2" size="30" value="">
+      </td>
+      <td width="14%">City: </td>
+      <td width="41%"> 
+        <input type="text" name="city" size="30">
+      </td>
+    </tr>
+    <tr> 
+      <td width="13%">Email:</td>
+      <td width="32%"> 
+        <input type="text" name="email" size="30">
+      </td>
+      <td width="14%">State:</td>
+      <td width="41%"> 
+        <input type="text" name="state" size="2" maxlength="2">
+        Zip: 
+        <input type="text" name="zip" size="13" maxlength="10">
+      </td>
+    </tr>
+    <tr> 
+      <td width="13%">Phone:</td>
+      <td width="32%"> 
+        <input type="text" name="phone" maxlength="20">
+      </td>
+      <td width="14%">Service:</td>
+      <td width="41%"> 
+        <input type="text" name="svc" maxlength="20">
+      </td>
+    </tr>
+  </table>  <br>
+  <table width="97%" border="1">
+    <tr> 
+      <td colspan="4"> 
+        <div align="center"><b>Audition Information</b></div>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td width="16%">Audition in 2001? 
+        <select name="audtion01">
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </td>
+      <td width="7%">2000? 
+        <select name="audition00">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+      <td width="9%">Ever? 
+        <select size="1" name="ever">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+      <td width="27%">Apply in 2001? 
+        <select name="apply01" size="1">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td width="16%">Summer Stock in 2000? 
+        <select name="stock2001" size="1">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+        <br>
+        Where? 
+        <input type="text" name="wherestock" maxlength="30" size="30">
+      </td>
+      <td width="7%">Unpaid apprentice? 
+        <select name="apprentice" size="1">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+      <td width="9%">Internship? 
+        <select name="intern" size="1">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+      <td width="27%">&nbsp; </td>
+    </tr>
+    <tr> 
+      <td colspan="4" bgcolor="black">&nbsp;</td>
+    </tr>
+    <tr valign="top"> 
+      <td width="16%">Age: 
+        <input type="text" name="age" maxlength="3" size="5">
+      </td>
+      <td width="7%">Suit/Dress Size: 
+        <input type="text" name="suit" maxlength="3" size="5">
+      </td>
+      <td width="9%">Chest/Bust Size: 
+        <input type="text" name="chest" maxlength="3" size="5">
+      </td>
+      <td width="27%">Waist: 
+        <input type="text" name="waist" maxlength="3" size="5">
+        <br>
+        Inseam/Hips: 
+        <input type="text" name="hips" maxlength="3" size="5">
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td>Audition Day 
+        <select name="aud_day">
+          <option value="1">Sun Morning</option>
+          <option value="2">Sun Afternoon</option>
+          <option value="3">Mon Morning </option>
+          <option value="4">Mon Afternoon - Mono</option>
+          <option value="5">Tues Morning</option>
+          <option value="6">Tues Afternoon</option>
+        </select>
+      </td>
+      <td> Audition Time: 
+        <input type="text" name="aud_time" maxlength="8" size="10">
+      </td>
+      <td>Accept Standby: 
+        <select name="standby">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+      <td><b>Nearest Largest City: </b> 
+        <input type="text" name="location" size="30">
+        <br>
+        <b>Region: </b> 
+        <select name="region">
+          <option value="NE">Northeast</option>
+          <option value="SE">Southeast</option>
+          <option value="MW">Midwest</option>
+          <option value="S">South</option>
+          <option value="SW">Southwest</option>
+          <option value="NW">Northwest</option>
+        </select>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <div align="right"><b>Union Status</b></div>
+      </td>
+      <td>AEA 
+        <input type="checkbox" name="aea" value="aea">
+      </td>
+      <td>SAG 
+        <input type="checkbox" name="sag" value="sag">
+      </td>
+      <td>Availability</td>
+    </tr>
+    <tr valign="top"> 
+      <td>&nbsp;</td>
+      <td>AFTRA 
+        <input type="checkbox" name="aftra" value="aftra">
+      </td>
+      <td>AGVA 
+        <input type="checkbox" name="agva" value="agva">
+      </td>
+      <td>From: 
+        <select name="avail_from">
+          <option>Anytime</option>
+          <option>April</option>
+          <option>May</option>
+          <option>June</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+        </select>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td>&nbsp;</td>
+      <td>#EMC 
+        <input type="text" name="emc_wks" size="5" maxlength="3">
+      </td>
+      <td>AGMA 
+        <input type="checkbox" name="agma" value="agma">
+      </td>
+      <td>To: 
+        <select name="avail_to">
+          <option>Anytime</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+          <option>After September</option>
+        </select>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td colspan="4">
+        <input type="submit" value="Add Record" name="submit">
+        <input type="reset" value="Clear Form" name="reset">
+      </td>
+    </tr>
+  </table>
+  
+  </form>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>Add Record</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<h1>StrawHat Techie Database: Add Record</h1>
+<table width="75%" border="1" align="center">
+  <tr> 
+    <td width="36%"><a href="/Members02/admin_test/admin_menu.htm">Main Menu</a></td>
+    <td width="36%"><a href="/Members02/admin_test/techie_modifyrecord.php">Change 
+      Record</a></td>
+    <td width="28%"><a href="/Members02/admin_test/techie_searchcat.htm">Search 
+      by Category</a></td>
+  </tr>
+</table>
+<form name="form1" method="post" action="techie_addrecord.php">
+  <table width="97%" border="0">
+    <tr> 
+      <td width="13%">First Name:</td>
+      <td width="32%"> 
+        <input type="text" name="firstname" maxlength="25" size="25">
+      </td>
+      <td width="14%">Last Name: </td>
+      <td width="41%"> 
+        <input type="text" name="lastname" size="25" maxlength="25">
+      </td>
+    </tr>
+    <tr> 
+      <td width="13%">Job1:</td>
+      <td width="32%"> 
+        <select name="job1" size="1">
+          <option></option>
+          <option>Other</option>
+          <option>Accompanist</option>
+          <option>Administration</option>
+          <option>Box Office</option>
+          <option>Carpentry</option>
+          <option>Choreographer</option>
+          <option>Costume Design</option>
+          <option>Director</option>
+          <option>Electrics</option>
+          <option>Graphics</option>
+          <option>House Management</option>
+          <option>Lighting Design</option>
+          <option>Musical Director</option>
+          <option>Photography</option>
+          <option>Properties</option>
+          <option>Publicity</option>
+          <option>Scenic Artist</option>
+          <option>Set Design</option>
+          <option>Sewing/Wardrobe</option>
+          <option>Stage Management</option>
+          <option>Technical Director</option>
+          <option>Video</option>
+        </select>
+      </td>
+      <td width="14%">Job2:</td>
+      <td width="41%"> 
+        <select name="job2" size="1">
+          <option></option>
+          <option>Other</option>
+          <option>Accompanist</option>
+          <option>Administration</option>
+          <option>Box Office</option>
+          <option>Carpentry</option>
+          <option>Choreographer</option>
+          <option>Costume Design</option>
+          <option>Director</option>
+          <option>Electrics</option>
+          <option>Graphics</option>
+          <option>House Management</option>
+          <option>Lighting Design</option>
+          <option>Musical Director</option>
+          <option>Photography</option>
+          <option>Properties</option>
+          <option>Publicity</option>
+          <option>Scenic Artist</option>
+          <option>Set Design</option>
+          <option>Sewing/Wardrobe</option>
+          <option>Stage Management</option>
+          <option>Technical Director</option>
+          <option>Video</option>
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td width="13%">Other::</td>
+      <td> 
+        <input type="text" name="other" size="30" value="" maxlength="30">
+      </td>
+      <td>Portfolio</td>
+      <td>
+        <select name="portfolio" size=1>
+          <option>N</option>
+          <option>Y</option>
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="4"> 
+        <input type="submit" value="Add Record" name="submit">
+        <input type="reset" value="Clear Form" name="reset">
+      </td>
+    </tr>
+  </table>
+  <br>
+</form>
+</body>
+</html>

@@ -1,0 +1,1 @@
+[06-Aug-2012 10:15:27] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Too many connections in /home/strawh5/public_html/Comm/connect.inc on line 6
