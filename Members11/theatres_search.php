@@ -20,13 +20,14 @@ include("session.inc");
         ONMOUSEOVER="this.style.color='red'" ONMOUSEOUT="this.style.color='blue'">Click Here for Theatre Description Sheets.</a>
 </P>
 -->
+<!--
 <p align = "center">
 <img src="../graphics03/BALL3.GIF" alt="[*]" width="14" height="14" border="0"> 
         <a href="../2016_TheatreInfoPages_opt.pdf" target="myNewWin" onClick="sendme()"    
         ONMOUSEOVER="this.style.color='red'" ONMOUSEOUT="this.style.color='blue'"> 
         <font size="3">Theatre Pages</font></a>
 </p>
-
+-->
 
 <p align = "center">Thank you for using StrawHat Auditions as a casting resource this season! 
 <BR>Some tips on how to navigate this site:</p>

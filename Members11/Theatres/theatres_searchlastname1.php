@@ -89,9 +89,9 @@ $title4 = $row["title4"];
 $title5 = $row["title5"];
 $nonmusical = $row["nonmusical"];
 $dancers = $row["dancers"];
+$fri = $row["fri"];
 $sat = $row["sat"];
 $sun = $row["sun"];
-$mon = $row["mon"];
 $web_only = $row["web_only"];
 
 //fetch row and assign to variables for THEATREPERF
@@ -563,16 +563,16 @@ echo "
 
 <td>  
 ";
+    if(!empty($fri) ) {
+          echo "Friday, "; }
+        else {echo "- ";}    
+        
     if(!empty($sat) ) {
           echo "Saturday, "; }
         else {echo "- ";}    
         
     if(!empty($sun) ) {
           echo "Sunday, "; }
-        else {echo "- ";}    
-        
-    if(!empty($mon) ) {
-          echo "Monday, "; }
         else {echo "- "; }
         
     if(!empty($web_only) ) {

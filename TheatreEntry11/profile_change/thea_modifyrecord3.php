@@ -37,10 +37,15 @@ $title4 = $_POST['title4'];
 $title5 = $_POST['title5'];
 $nonmusical = $_POST['nonmusical'];
 $dancers = $_POST['dancers'];
+
+
+//now 2017
+$fri =  $_POST['fri'];
 $sat =  $_POST['sat'];
 $sun =  $_POST['sun'];
-$mon =  $_POST['mon'];
+
 $web_only =  $_POST['web_only'];
+
 //11/18/15 add vid_submission, where_submit_
 $vid_submission =  $_POST['vid_submission'];
 $where_submit = $_POST['where_submit']; 
@@ -145,9 +150,9 @@ title4=\"$title4\",
 title5=\"$title5\",
 nonmusical=\"$nonmusical\",
 dancers=\"$dancers\",
+fri=\"$fri\",
 sat=\"$sat\",
 sun=\"$sun\",
-mon=\"$mon\",
 web_only=\"$web_only\",
 vid_submission=\"$vid_submission\",
 emc_points=\"$emc_points\",
@@ -316,17 +321,17 @@ echo "
 
 <td>  
 ";
+    if(!empty($fri) ) {
+          echo "Friday, "; }        
+
     if(!empty($sat) ) {
-          echo "Saturday, "; }        
+          echo "Saturday, "; }
 
-    if(!empty($sun) ) {
-          echo "Sunday, "; }
-
-if(!empty($mon) ) {
-          echo "Monday"; }
+if(!empty($sun) ) {
+          echo "Sunday"; }
 
  if(!empty($web_only) ) {
-          echo " (Web Only)"; }
+          echo " Web Only"; }
          
           
 echo "

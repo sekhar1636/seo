@@ -18,19 +18,19 @@ include("../../Comm/connect.inc");
 $sql = "SELECT  thea_uid, company, address, city, state, zip
 	FROM theatre11    
     WHERE thea_uid != \"38\"    
-    AND thea_uid != \"6\"
+    
+    AND thea_uid != \"1\"
     AND thea_uid != \"27\"
     AND thea_uid != \"44\"
     AND thea_uid != \"45\"
-    AND thea_uid != \"12\"
     AND thea_uid != \"28\"        
-    AND thea_uid != \"14\"
-    
-    
-                
+                   
 	ORDER BY company ASC"
     ;
-//WHERE thea_uid != \"1\" WAS STRAWHAT
+
+//Theatres above are not being shown 1/17/2017
+    
+    //WHERE thea_uid != \"1\" WAS STRAWHAT
 
 //get count for all techies
 $sql_countall = "SELECT COUNT(*) FROM theatre11";

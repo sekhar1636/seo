@@ -1230,7 +1230,8 @@ echo "
 </tr>
 
 <tr>
-    <td width="94%"><font face="Arial, Helvetica, sans-serif"><font size="3"><b>DID YOU EMAIL</b> your headshot 
+    <td width="94%"><font face="Arial, Helvetica, sans-serif"><font size="3">
+    <b>DID YOU EMAIL TO info@strawhat-auditions.com,</b> your headshot  
       (jpg only) and resume (pdf only)</font></td>
     <td width="6%"><font face="Arial, Helvetica, sans-serif">
       <input type="checkbox" name="checkbox5" value="checkbox">

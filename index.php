@@ -283,14 +283,14 @@ Strawhat, StrawHat, non-equity, non-equity auditions, auditions, summer stock th
         </A>
         
         
-        <p align="center"><b>Site last updated: 11/4/16.</b>
+        <p align="center"><b>Site last updated: 1/10/2017.</b>
         </A>
         
         <br>
         
         
         <font face="Arial" size="-1">
-        <b>Applications available November 15.</b>
+        <b>Applications available to Febuary 1.</b>
         </font>
         </p>
         
@@ -313,8 +313,8 @@ Strawhat, StrawHat, non-equity, non-equity auditions, auditions, summer stock th
         <p align="center">
         <font face="Arial, Helvetica, sans-serif", size="+2"> </font> 
         <font color="BLACK" size = +2>  <b><i> "OUR THIRTY-NINTH ANNIVERSARY!" </i></b></font>
-        <img src="/graphics/2017DatesBANNERsmall.jpg" border="0" alt="2017">     
-        <br>
+        <img src="/graphics/2017_Full_Spotlight_DEADLINE_Feb1.jpg" border="0" alt="2017">     
+     
         </p>
                 
         <p align="center">
