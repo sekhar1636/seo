@@ -14,20 +14,21 @@ include("session.inc");
   <BODY BACKGROUND="../graphics03/Bk10a.GIF""> <SCRIPT SRC="navbar.js"></SCRIPT>
 
 
-<!--
+
 <h2 align = "center">Actor Audition By Time or Last Name</h2>
 
 <table align = "center">
 <tr>
 <td>
--->
 
-<!-- activate when ready
+
+<!-- activate when ready -->
     <img src="../graphics03/BALL3.GIF" alt="[*]" width="14" height="14" border="0"> 
-        <a href="ActorsLastName2016.pdf" target="myNewWin" onClick="sendme()"    
+        <a href="ActorsLastName2017.pdf" target="myNewWin" onClick="sendme()"    
         ONMOUSEOVER="this.style.color='red'" ONMOUSEOUT="this.style.color='blue'"> 
-        <font size="3">2016 List of Auditioning Actors by Last Name</font></a><br>
--->
+        <font size="3">2017 List of Auditioning Actors by Last Name</font></a><br>
+        
+
 
 <!-- end of ActorsLastname2015.pdf link 
 <font size="3">2015 List of Auditioning Actors by Last Name (TBA)</font><br>
@@ -37,31 +38,31 @@ use when turn off the link
 </td>
 </tr>
 
-<!-- TURN BACK ON WHEN HAVE CURRENT 2017 ACTORS 
+<!-- TURN BACK ON WHEN HAVE CURRENT 2017 ACTORS -->
 <tr>
 <td>
-<!--
+
     <img src="../graphics03/BALL3.GIF" alt="[*]" width="14" height="14" border="0"> 
         <a href="ActorsSchedule2017.pdf" target="myNewWin" onClick="sendme()"    
         ONMOUSEOVER="this.style.color='red'" ONMOUSEOUT="this.style.color='blue'"> 
 
 
-<!-- end of ActorsSchedule2017.pdf link         
+<!-- end of ActorsSchedule2017.pdf link  -->       
 <font size="3">2017 Schedule of Auditioning Actors (TBA)</font>
--->
+
 
 </td>
 </tr>
 
 <tr>
 <td>
-<!--
+
+
 <img src="../graphics03/BALL3.GIF" alt="[*]" width="14" height="14" border="0"> 
         <a href="CodesForLabels2015.pdf" target="myNewWin" onClick="sendme()"    
         ONMOUSEOVER="this.style.color='red'" ONMOUSEOUT="this.style.color='blue'"> 
         <font size="3">How the Labels Work for Auditioning Actors</font></a>
         <P ALIGN = "CENTER">Schedule of Auditioning Actors and other lists will be posted.</P>
--->
 </td>
 </tr>        
 </table>
@@ -91,8 +92,14 @@ use when turn off the link
   <li><a href="Actors/role_search.php">Roles Search</a>(get a list of actors that have done the show!)</li>
   <li><a href="Actors/actor_searchlastname.php">Search Actors by Last Name</a> (Looking for an Actor?)</li>
   <BR>
+<!--
   <li><a href="Actors/advanced_actor_search.php">NEW! Advanced Combined Actor Search</a></li>
-</ul>
+Fix search 021217
+-->
+
+<li>Advanced Combined Actor Search updating a/o 2/12/17</a></li>
+  
+  </ul>
 
 </td>
 </tr>

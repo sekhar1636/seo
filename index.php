@@ -283,14 +283,17 @@ Strawhat, StrawHat, non-equity, non-equity auditions, auditions, summer stock th
         </A>
         
         
-        <p align="center"><b>Site last updated: 1/10/2017.</b>
+        <p align="center"><b>Site last updated: 2/1/2017.</b>
         </A>
         
         <br>
         
         
         <font face="Arial" size="-1">
-        <b>Applications available to Febuary 1.</b>
+        <b>Actor Registrations for the 2017 Auditions are closed.
+        
+        <!-- Applications available to Febuary 1.</b> -->
+        <!-- asdfasdf ->
         </font>
         </p>
         
@@ -330,6 +333,9 @@ Strawhat, StrawHat, non-equity, non-equity auditions, auditions, summer stock th
         <font face="Arial, Helvetica, sans-serif", size="+1" color = "BLACK">
         
         Actors, Singers, Dancers, Musicians, Staff, Tech, Design... All 3 Days!
+        <BR>
+        
+        Actor Registrations for the 2017 Auditions are closed.
         
         </font>
         </b>                                                

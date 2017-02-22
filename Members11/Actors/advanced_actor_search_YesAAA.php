@@ -444,9 +444,9 @@ elseif($type == 'SB') {echo "Standby Audition, ";}
 //audition day
 if($audition_yes_no == "Y")
 { 
-if($day == 'Sat') {echo "Saturday, ";}
+if($day == 'Fri') {echo "Friday, ";}
+elseif($day == 'Sat') {echo "Saturday, ";}
 elseif($day == 'Sun') {echo "Sunday, ";}
-elseif($day == 'Mon') {echo "Monday, ";}
 
 //audition hour
 if($hour == '10') {echo "10am,";}
@@ -684,7 +684,7 @@ echo "
 $audition_yes_no = $_POST['audition_yes_no']; 
 if ($audition_yes_no == "N")
 {
-    
+/*-------------------------------------------------*/    
     //ACTORS THAT DID NOT GET AN AUDITION
 //apprentice intern, adding dance, etc 1/1/2014
 //new query for AR's??
@@ -751,13 +751,26 @@ $indian = $_POST['indian'];
 $white = $_POST['white'];
 
 
+//HEIGHT 1                                                                      
 // Actors Height: feet, inches 
-$feet = $_POST['feet'];        //echo"<BR>Feet: $feet</BR>";     
-$inches = $_POST['inches'];    //echo"<BR>Inches: $inches</BR>";     
+$feet = $_POST['feet'];             //echo"<BR>Feet: $feet</BR>";     
+$inches = $_POST['inches'];         //echo"<BR>Inches: $inches</BR>";     
 
 $new_ht = ($feet * 12) + $inches;   //echo "<BR>Height: $new_ht</BR>";
 
-$ht = $new_ht;
+                                    //echo "<BR>new_ht: $new_ht</BR>";
+
+//HEIGHT 2                                                                      
+// Actors Height: feet, inches 
+//$feet2 = $_POST['feet2'];             //echo"<BR>Feet2: $feet2</BR>";     
+//$inches2 = $_POST['inches2'];         //echo"<BR>Inches2: $inches2</BR>";                                                 
+
+//$new_ht2 = ($feet2 * 12) + $inches;   //echo "<BR>new_ht2: $new_ht2</BR>";
+//$ht2 = $new_ht2;                      //echo "<BR>New Height2: $new_ht2</BR>";
+
+
+
+
 
 //audition info
 $mononly = $_POST['mononly'];   
@@ -778,14 +791,11 @@ $dateto_day = $_POST['dateto_day'];           //echo "$dateto_day<BR>";
 $dateto_year = $_POST['dateto_year'];         //echo "$dateto_year<BR>";       
 
 //parse availto, availfrom dates
-
 $availfor = $datefrom_year . "-" . $datefrom_month . "-" . $datefrom_day;   
-//echo "AVAIL 775: $availfor<BR>";
 
 //parse availto, availto dates
-
 $availto = $dateto_year . "-" . $dateto_month . "-" .  $dateto_day;
-//echo "AVAIL 780: $availto<BR>";
+
 
 //include("session.inc");
 
@@ -817,7 +827,7 @@ AND actor_ID = phys_uid
 AND item = \"AR\"
 ";
 
-
+                                       
 //$sqlRECTEST ="SELECT *
 //FROM rec11
 //WHERE actor_ID = \"actor_uid\"
@@ -853,6 +863,8 @@ AND item = \"AA\"
 $sql_mononly = "AND audition11.mononly = \"$mononly\" ";
 $sql_app = "AND audition11.apprentice = \"$apprentice\" ";
 $sql_intern = "AND audition11.intern = \"$intern\" ";
+
+//skills11
 $sql_set_design = "AND skills11.set_design >= \"$set_design\" ";
 $sql_lights = "AND skills11.lights >= \"$lights\" ";
 $sql_costume = "AND skills11.costume >= \"$costume\" "; 
@@ -860,14 +872,14 @@ $sql_stagem = "AND skills11.stagem >= \"$stagem\" ";
 $sql_box_office = "AND skills11.box_office >= \"$box_office\" ";
 $sql_props = "AND skills11.props >= \"$props\" ";
 
-//dance
+//skills11/dance
 $sql_ballet = "AND skills11.ballet >= \"$ballet\" ";
 $sql_mus_thea = "AND skills11.mus_thea >= \"$mus_thea\" ";
 $sql_ballroom = "AND skills11.ballroom >= \"$ballroom\" ";
 $sql_swing = "AND skills11.swing >= \"$swing\" ";
 $sql_jazz = "AND skills11.jazz >= \"$jazz\" ";
 
-//instruments
+//skills11/instruments
 $sql_banjo = "AND skills11.banjo >= \"$banjo\" ";
 $sql_drums = "AND skills11.drums >= \"$drums\" ";
 $sql_perc = "AND skills11.perc >= \"$perc\" ";
@@ -906,17 +918,30 @@ $sql_mideast = "AND physical11.mideast = \"$mideast\" ";
 $sql_indian = "AND physical11.indian = \"$indian\" ";
 $sql_white = "AND physical11.white = \"$white\" ";
 
-//age_range
+//physical11/age_range
 $sql_age_range = "AND physical11.age_range = \"$age_range\" ";
 
 //height
-$sql_ht = "AND physical11.ht = \"$ht\" ";
+$sql_new_ht = "AND physical11.ht = \"$new_ht\" ";
+
+// IF THERE WAS A HEIGHT RANGE, YOU WOULD ESTABLISH 
+//$sql_new_ht2 = "AND physical11.ht <= \"$new_ht2\" ";
+
 
 
 //height - feet, inches
 //$sql_feet = "AND physical11.feet = \"$feet\" ";
 //$sql_inches = "AND physical11.inches = \"$inches\" ";
-//$sql_ht = "AND physical11.ht = \"$ht\" ";
+$sql_ht = "AND physical11.ht = \"$ht\" ";     //echo "$ht";
+
+//Height variables $new_ht, $new_ht2
+/*
+if($new_ht > 0){
+$sql_new_ht = "AND new_ht <= \"$new_ht\" ";}            
+
+if($new_ht2 > 0){
+$sql_new_ht2 = "AND new_ht2 >= \"$new_ht2\" ";}         
+*/
 
 if($availfor > 0){
 $sql_availfor = "AND availfor <= \"$availfor\" ";}
@@ -925,20 +950,12 @@ if($availto > 0){
 $sql_availto = "AND availto >= \"$availto\" ";}
 
 
-
-
-
-//availto, availfor
-//if($availfor != "0"){"AND availfor >= \"$availfor\" ";}
-//if($availto != "0"){"AND availto <= \"$availto\" ";}
-//$sql_availto = "AND availto <= \"$availto\" ";
-
 //variables for offset and limit
 $num_of_results;
 $offset_start;
 
 //Ending clause for for offest and num of results
-if($offset_start > "0" && $num_of_results > "0" ){
+if($offset_start > "0" || $num_of_results > "0" ){
 $sql_B = "ORDER BY actor11.lastname ASC LIMIT $num_of_results OFFSET $offset_start";}
 
 
@@ -1005,7 +1022,9 @@ if($standup) {$sql = $sql . $sql_standup;}
 if($vocal) {$sql = $sql . $sql_vocal;}
 
 //physical 
-if($ht) {$sql = $sql . $sql_ht;}    //height
+if($new_ht) {$sql = $sql . $sql_new_ht;}    
+if($new_ht2) {$sql = $sql . $sql_new_ht2;}  
+
 if($age_range) {$sql = $sql . $sql_age_range;}  
 
 //availfor, availto
@@ -1102,8 +1121,8 @@ echo "
 ";
 
 //Limits
-if($offset_start)   {echo "Offset($offset_start),";}
-if($num_of_results) {echo "Results($num_of_results),";}
+if($offset_start)   {echo "Offset ($offset_start),";}
+if($num_of_results) {echo "Results ($num_of_results), ";}
 
 if($apprentice) {echo "Apprentice, ";}
 if($intern) {echo "Intern, ";}
@@ -1158,12 +1177,12 @@ elseif($vocal == 'B') {echo "Vocal(Baritone),&nbsp";}
 elseif($vocal == 'BR') {echo "Vocal(Bass Baritone),&nbsp";}
 
 //physical
-if($gender == 'M') {echo "Male,&nbsp";}
-elseif($gender == 'F') {echo "Female,&nbsp ";}
+if($gender == 'M') {echo "&nbspMale,&nbsp";}
+elseif($gender == 'F') {echo "&nbspFemale,&nbsp";}
 
 
 //height - feet
-if($feet == '0') {echo "";}
+//if($feet == '0') {echo "0";}
 if($feet == '3') {echo "3',";}
 if($feet == '4') {echo "4',";}
 if($feet == '5') {echo "5',";}
@@ -1171,7 +1190,7 @@ if($feet == '6') {echo "6',";}
 if($feet == '7') {echo "7',";}
 
 //inches - inches
-if($inches == '0') {echo "";}
+//if($inches == '0') {echo "0";}
 if($inches == '1') {echo "1'',";}
 if($inches == '2') {echo "2'',";}
 if($inches == '3') {echo "3'',";}
@@ -1197,13 +1216,13 @@ if($dateto_day) {echo "$dateto_day/";}
 if($dateto_year) {echo "$dateto_year,";}
 
 //physical, age_range        
-if($age_range == '16') {echo "Age Range (Under 16),";}
-elseif($age_range == '20') {echo "Age Range (16-20),";}
-elseif($age_range == '25') {echo "Age Range (21-35),";}
-elseif($age_range == '30') {echo "Age Range (26-30),";}
-elseif($age_range == '35') {echo "Age Range (31-35),";}
-elseif($age_range == '40') {echo "Age Range (36-40),";}
-elseif($age_range == '41') {echo "Age Range (Over 40),";}
+if($age_range == '16') {echo "Age Range (Under 16),&nbsp";}
+elseif($age_range == '20') {echo "Age Range (16-20),&nbsp";}
+elseif($age_range == '25') {echo "Age Range (21-25),&nbsp";}
+elseif($age_range == '30') {echo "Age Range (26-30),&nbsp";}
+elseif($age_range == '35') {echo "Age Range (31-35),&nbsp";}
+elseif($age_range == '40') {echo "Age Range (36-40),&nbsp";}
+elseif($age_range == '41') {echo "Age Range (Over 40),&nbsp";}
 
 
 
@@ -1315,8 +1334,6 @@ $sql_result = mysql_query($sql,$connection) or die("Couldn't execute input query
 
 //physical
     $gender = $row["gender"];
-
-
     
     $nativeam = $row["nativeam"];
     $asian = $row["asian"];

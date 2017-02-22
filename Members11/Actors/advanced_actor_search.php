@@ -22,11 +22,11 @@ echo "
 <tr>
 <td width = \"50%\">
 
-<p align = \"center\">To use the <B>COMBINED SEARCH</B> start from the top and move from top to bottom. <B>(updated a/o 3/26/16)</B></P>
+<p align = \"center\">To use the <B>COMBINED SEARCH</B> start from the top and move from top to bottom. <B>(updated 2/21/17)</B></P>
 
-<p><b>If you are searching for Actors Who Have an Audition:</b></P>
+<p><b><font size = \"4\">If you are searching for Actors Who Have an Audition:</font></b></P>
 
-<P>Select <B>Actors Who Have an Audition</B>. Then select any combo of Audition Type, Day or Hour... OR, just choose one of the three and add on from there.";
+<P>Select <B><U>Actors Who Have an Audition</U></B>. Then select any combo of Audition Type, Day or Hour... OR, just choose one of the three and add on from there.";
 /*
  Add Audition Types to search for Singer, Non Singer, Dancer and Standby.  Search by Gender, Vocal Range and Role Type. Select Actors will work as Apprentices and/or Interns using their Technical Skills. Finally, select Actors who have skills as Dancers, Musicians and Other Skills.
  */
@@ -34,11 +34,11 @@ echo "
  
  </P>
 
-<P><b>If you are searching for All Actors:</b></P>
+<P><b><font size = \"4\">If you are searching for All Actors:</font></b></P>
 
 <p>Select <B>All Actors Search</B>, which combines Actors that have an audition with Actors that did not get an audition. <B>IMPORTANT:</b> Set Audition Type, Day and Hour to <B>No Selection</B>. Everthing else is the same as other searches.
 </P>
-
+<BR>
 
 </td>
 </tr>
@@ -66,13 +66,18 @@ echo "
         
         <select name=\"audition_yes_no\" size=\"1\">        
 ";          
+
+//was part of selected
+//<option selected value=\"N\"><B>No Selection? Review Auditioning Actors or All Actors</B></option>
           
 echo "          
          
-          <option selected value=\"N\"><B>No Selection? Review Auditioning Actors or All Actors</B></option>
+          
           <option value=\"Y\" $audition_yes_no=\"Y\">Actors Who Have an Audition</option>
           <option value=\"N\" $audition_yes_no=\"N\">All Actors Search</option>                            
           </select>
+          
+          
 
 ";
 
@@ -110,7 +115,7 @@ echo "
         <b>Audition Day<BR> 
         <font size = \"1\">(For Actors That Have an Audition)</font></b>:
         <select name=\"day\" size=\"1\">
-        
+<!-- 2016 database WAS  SAT SUN, MON, now used for 2017 TESTING-->        
           <option selected value=\"\">No Selection</option>          
           <option value=\"Fri\">Friday</option>
           <option value=\"Sat\">Saturday</option>
@@ -144,7 +149,7 @@ echo "
 ";
 
 
-echo "
+echo "<!--
 <BR>
 
 
@@ -165,7 +170,10 @@ echo "
         </td>
 </tr>
 </TABLE>
+-->
 <BR>        
+
+
 ";        
 
 
