@@ -24,7 +24,7 @@ class ActorController extends BaseController {
 	}
 	
 	function actorList(){
-		
+
 		/*Initialize*/
 		$actorList = '';
 		
@@ -32,12 +32,21 @@ class ActorController extends BaseController {
 		
 		/*Loop through the Actors*/
 		foreach($actors as $actor){
-			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . '"';
-				$actorList .= 'data-age="' . $actor['physical']['age_range'] . '"';
-				$actorList .= 'data-name="' . $actor['firstname'] . '"';
+			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . '" ';
+				$actorList .= 'data-age="' . (int) $actor['physical']['age_range'] . '" ';
+				$actorList .= 'data-name="' . $actor['firstname'] . '" ';
+				$actorList .= 'data-height="' . (int) $actor['physical']['height'] . '" ';
+				$actorList .= 'data-weight="' . (int) $actor['physical']['weight'] . '" ';
 			$actorList .= '>';
-			$actorList .= '<h4>' . $actor['firstname'] . ' ' . $actor['lastname'] . '</h4>';
-			$actorList .= '</div>';	
+				$actorList .= '<div class="mix-content">';
+					$actorList .= '<h4>' . $actor['firstname'] . ' ' . $actor['lastname'] . '</h4>';
+					$actorList .= '<ul>';
+						$actorList .= '<li><strong>Age: </strong>' . (int) $actor['physical']['age_range'] . '</li>';
+						$actorList .= '<li><strong>Height: </strong>' . (int) $actor['physical']['height'] . '</li>';
+						$actorList .= '<li><strong>Weight: </strong>' . (int) $actor['physical']['weight'] . '</li>';
+					$actorList .= '</ul>';
+				$actorList .= '</div>';
+			$actorList .= '</div>\n';	
 		}
 
 		return $actorList;

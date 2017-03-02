@@ -1,10 +1,13 @@
 var containerEl = document.querySelector('.container');
 
 var mixer = mixitup(containerEl, {
-    animation: {
-        effects: 'fade scale stagger(50ms)' // Set a 'stagger' effect for the loading animation
-    },
-    load: {
+	load: {
         sort: 'age:desc name:asc',
+    },
+	multifilter: {
+	    enable: true
+	},
+    pagination: {
+        limit: 25
     }
 });  

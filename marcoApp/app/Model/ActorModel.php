@@ -44,7 +44,8 @@ class ActorModel extends BaseModel {
 				],
 				"ORDER" => [
 					"actor11.actor_uid" => "ASC",
-				]
+				],
+				"LIMIT" => 1000
 			]
 		);
 		return $data;
