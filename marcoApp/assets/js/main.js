@@ -2,7 +2,7 @@ var containerEl = document.querySelector('.container');
 
 var mixer = mixitup(containerEl, {
 	load: {
-        sort: 'age:desc name:asc',
+        sort: 'age:desc last-name:asc',
     },
 	multifilter: {
 	    enable: true

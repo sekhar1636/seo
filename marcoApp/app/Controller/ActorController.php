@@ -34,9 +34,9 @@ class ActorController extends BaseController {
 		foreach($actors as $actor){
 			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . '" ';
 				$actorList .= 'data-age="' . (int) $actor['physical']['age_range'] . '" ';
-				$actorList .= 'data-name="' . $actor['firstname'] . '" ';
+				$actorList .= 'data-last-name="' . $actor['lastname'] . '" ';
 				$actorList .= 'data-height="' . (int) $actor['physical']['height'] . '" ';
-				$actorList .= 'data-weight="' . (int) $actor['physical']['weight'] . '" ';
+				$actorList .= 'data-weight="' . (int) $actor['physical']['weight'] . '"';
 			$actorList .= '>';
 				$actorList .= '<div class="mix-content">';
 					$actorList .= '<h4>' . $actor['firstname'] . ' ' . $actor['lastname'] . '</h4>';
@@ -46,10 +46,9 @@ class ActorController extends BaseController {
 						$actorList .= '<li><strong>Weight: </strong>' . (int) $actor['physical']['weight'] . '</li>';
 					$actorList .= '</ul>';
 				$actorList .= '</div>';
-			$actorList .= '</div>\n';	
+			$actorList .= '</div>' . PHP_EOL;	
 		}
 
 		return $actorList;
-	
 	}
 }

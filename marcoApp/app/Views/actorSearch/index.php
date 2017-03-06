@@ -5,15 +5,6 @@ $ActorController = new \App\Controller\ActorController;
 
 <?php include VIEWS_PATH . 'actorSearch/_layouts/main.header.php';?>
 
-<!--<div class="controls">
-    <button type="button" class="control" data-sort="age:desc name:asc">Desc</button>
-    <button type="button" class="control" data-sort="age:asc name:asc">Asc</button>
-    
-    <button type="button" class="control" data-filter="all">All</button>
-    <button type="button" class="control" data-filter=".M">Male</button>
-    <button type="button" class="control" data-filter=".F">Female</button>
-</div>-->
-
 <form class="controls">
     <button type="reset" class="control control-text">Reset</button>
     
@@ -23,6 +14,13 @@ $ActorController = new \App\Controller\ActorController;
 	    <button type="button" class="control control-gender control-text" data-filter="all">All</button>
 	    <button type="button" class="control control-gender control-text" data-filter=".M">Male</button>
 	    <button type="button" class="control control-gender control-text" data-filter=".F">Female</button>
+    </fieldset>
+
+    <fieldset data-filter-group="last-name" class="control-group">
+        <label class="control-group-label control-text">Name</label>
+
+	    <button type="button" class="control control-sort" data-sort="last-name:desc">Desc</button>
+	    <button type="button" class="control control-sort" data-sort="last-name:asc">Asc</button>
     </fieldset>
     
     <fieldset data-filter-group="age" class="control-group">
