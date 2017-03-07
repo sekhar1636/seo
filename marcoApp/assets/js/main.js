@@ -10,4 +10,4 @@ var mixer = mixitup(containerEl, {
     pagination: {
         limit: 25
     }
-});  
+});

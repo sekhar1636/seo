@@ -1,6 +1,7 @@
 <?php namespace App\Controller;
 	
 use \App\Model\ActorModel;	
+use \App\Process\ActorProcess;
 	
 class ActorController extends BaseController {
 
@@ -10,6 +11,7 @@ class ActorController extends BaseController {
 		$this->actorID = filter_input(INPUT_GET, 'actorID', FILTER_SANITIZE_STRING);
 		
 		$this->actorModel = new ActorModel;		
+		$this->actorProcess = new ActorProcess;	
 	}
 
 	function single(){
@@ -28,26 +30,56 @@ class ActorController extends BaseController {
 		/*Initialize*/
 		$actorList = '';
 		
+		/*Get the Actor List*/
 		$actors = $this->actorModel->getActors();
 		
 		/*Loop through the Actors*/
 		foreach($actors as $actor){
-			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . '" ';
+			
+			/*Define Actor Image URL*/
+			$actorImage = $this->actorProcess->processActorImage($actor);
+			
+			/*Build the Output*/
+			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . ' ' . (int) $actor['physical']['age_range'] . ' ' . $actor['lastname'] . ' ' . (int) $actor['physical']['ht'] . '" ';
 				$actorList .= 'data-age="' . (int) $actor['physical']['age_range'] . '" ';
 				$actorList .= 'data-last-name="' . $actor['lastname'] . '" ';
-				$actorList .= 'data-height="' . (int) $actor['physical']['height'] . '" ';
-				$actorList .= 'data-weight="' . (int) $actor['physical']['weight'] . '"';
+				$actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
 			$actorList .= '>';
 				$actorList .= '<div class="mix-content">';
 					$actorList .= '<h4>' . $actor['firstname'] . ' ' . $actor['lastname'] . '</h4>';
+					
+					if($actorImage){
+						$actorList .= '<img src="' . $actorImage . '" height="130" style="height:130px;">';	
+					}
+
 					$actorList .= '<ul>';
 						$actorList .= '<li><strong>Age: </strong>' . (int) $actor['physical']['age_range'] . '</li>';
-						$actorList .= '<li><strong>Height: </strong>' . (int) $actor['physical']['height'] . '</li>';
-						$actorList .= '<li><strong>Weight: </strong>' . (int) $actor['physical']['weight'] . '</li>';
+						$actorList .= '<li><strong>Height: </strong>' . (int) $actor['physical']['ht'] . '</li>';
+						$actorList .= '<li><strong>Audition Type: </strong>'  . $actor['audition']['mononly'] . '</li>';
+						$actorList .= '<li><strong>Availability: </strong>';
+							$actorList .='<ul>';
+								$actorList .= '<li>Apprentice: ' . $this->actorProcess->processYesNoMaybe($actor['audition']['apprentice']) . '</li>';
+								$actorList .= '<li>Internship: ' . $this->actorProcess->processYesNoMaybe($actor['audition']['intern']) . '</li>';
+								$actorList .= '<li>Standbye: ' . $this->actorProcess->processYesNoMaybe($actor['audition']['standby']) . '</li>';
+							$actorList .= '</ul></li>';
+						$actorList .= '<li><strong>Employment availability : </strong>';
+							$actorList .= $actor['audition']['availfor'] . ' to ' . $actor['audition']['availto'] . '</li>';	
 					$actorList .= '</ul>';
 				$actorList .= '</div>';
 			$actorList .= '</div>' . PHP_EOL;	
 		}
+		/*
+			Gender
+			Audition type (Song &Monologue, Dancer Who Sings, Non-Singer)
+			Employment Availability
+			Role Type (ethnicity)
+			Vocal Range
+			Height
+			
+			Dance
+			Instrumental
+			Other Skills	
+		*/	
 
 		return $actorList;
 	}

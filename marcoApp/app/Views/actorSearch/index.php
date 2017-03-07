@@ -3,7 +3,7 @@
 $ActorController = new \App\Controller\ActorController;
 ?>
 
-<?php include VIEWS_PATH . 'actorSearch/_layouts/main.header.php';?>
+<?php include VIEWS_DIR_PATH . 'actorSearch/_layouts/main.header.php';?>
 
 <form class="controls">
     <button type="reset" class="control control-text">Reset</button>
@@ -16,12 +16,14 @@ $ActorController = new \App\Controller\ActorController;
 	    <button type="button" class="control control-gender control-text" data-filter=".F">Female</button>
     </fieldset>
 
+<!--
     <fieldset data-filter-group="last-name" class="control-group">
         <label class="control-group-label control-text">Name</label>
 
 	    <button type="button" class="control control-sort" data-sort="last-name:desc">Desc</button>
 	    <button type="button" class="control control-sort" data-sort="last-name:asc">Asc</button>
     </fieldset>
+-->
     
     <fieldset data-filter-group="age" class="control-group">
         <label class="control-group-label control-text">Age</label>
@@ -35,22 +37,16 @@ $ActorController = new \App\Controller\ActorController;
 
 	    <button type="button" class="control control-sort" data-sort="height:desc">Desc</button>
 	    <button type="button" class="control control-sort" data-sort="height:asc">Asc</button>
-    </fieldset> 
-    
-    <fieldset data-filter-group="weight" class="control-group">
-        <label class="control-group-label control-text">Weight</label>
-
-	    <button type="button" class="control control-sort" data-sort="weight:desc">Desc</button>
-	    <button type="button" class="control control-sort" data-sort="weight:asc">Asc</button>
-    </fieldset> 
+    </fieldset>
     
 </form>
 
 <div class="container">
     <?php echo $ActorController->actorList();?>
-    <div class="gap"></div>
-    <div class="gap"></div>
-    <div class="gap"></div>
+	<div class="gap"></div>
+	<div class="gap"></div>
+	<div class="gap"></div>
+	<div class="gap"></div>
 </div>
 
 <div class="controls-pagination">
@@ -58,4 +54,4 @@ $ActorController = new \App\Controller\ActorController;
     <div class="mixitup-page-stats"></div>
 </div>
 
-<?php include VIEWS_PATH . 'actorSearch/_layouts/main.footer.php';?>
+<?php include VIEWS_DIR_PATH . 'actorSearch/_layouts/main.footer.php';?>
