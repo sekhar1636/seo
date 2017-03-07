@@ -8,7 +8,7 @@ $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING);
 /*SET - Routes*/
 switch($page){
 	case 'actorSearch':
-		require(VIEWS_PATH . 'actorSearch/index.php');
+		require(VIEWS_DIR_PATH . 'actorSearch/index.php');
 		break;
 	default:
 		echo 'You should not be here';

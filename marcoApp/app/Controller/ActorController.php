@@ -40,10 +40,16 @@ class ActorController extends BaseController {
 			$actorImage = $this->actorProcess->processActorImage($actor);
 			
 			/*Build the Output*/
-			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . ' ' . (int) $actor['physical']['age_range'] . ' ' . $actor['lastname'] . ' ' . (int) $actor['physical']['ht'] . '" ';
+			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . '" ';
 				$actorList .= 'data-age="' . (int) $actor['physical']['age_range'] . '" ';
+				$actorList .= 'data-first-name="' . $actor['firstname'] . '" ';
 				$actorList .= 'data-last-name="' . $actor['lastname'] . '" ';
 				$actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
+				$actorList .= 'data-apprentice="' . $actor['audition']['apprentice'] . '" ';
+				$actorList .= 'data-intern="' . $actor['audition']['intern'] . '" ';
+				$actorList .= 'data-standby="' . $actor['audition']['standby'] . '" ';
+				$actorList .= 'data-availfor="' . $actor['audition']['availfor'] . '" ';
+				$actorList .= 'data-availto="' . $actor['audition']['availto'] . '" ';
 			$actorList .= '>';
 				$actorList .= '<div class="mix-content">';
 					$actorList .= '<h4>' . $actor['firstname'] . ' ' . $actor['lastname'] . '</h4>';

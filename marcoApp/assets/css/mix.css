@@ -198,6 +198,22 @@
     width: 100%;
 }
 
+.text-input-wrapper {
+    display: inline-block;
+    padding: .5rem;
+    background: #2a2a2a;
+    margin-left: .75rem;
+    vertical-align: top;
+}
+
+.text-input-wrapper input {
+    font-family: 'helvetica-neue', arial, sans-serif;
+    font-size: .9rem;
+    padding: .5em;
+    border-radius: 2px;
+    border: 0;
+}
+
 /* Target Elements
 ---------------------------------------------------------------------- */
 
@@ -211,6 +227,7 @@
     background: #fff;
     margin-bottom: 1rem;
     position: relative;
+    height: 370px;
 }
 
 .mix:before {
