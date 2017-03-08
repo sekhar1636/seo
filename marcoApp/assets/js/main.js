@@ -1,13 +1,16 @@
 var containerEl = document.querySelector('.actorContainer');
 
 var mixer = mixitup(containerEl, {
-	load: {
-        sort: 'last-name:asc',
+    controls: {
+        toggleLogic: 'and'
     },
-	multifilter: {
-	    enable: true
+	load: {
+		sort: 'last-name:asc',
 	},
-    pagination: {
-        limit: 40
-    }
+	multifilter: {
+		enable: true
+	},
+	pagination: {
+		limit: 40
+	}
 });

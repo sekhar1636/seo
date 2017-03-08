@@ -112,4 +112,43 @@ class ActorProcess extends BaseProcess {
 		
 		return $output;
 	}
+	
+	function processActorEthnicity($actor){
+		
+		/*Initialize*/
+		$ethnicities = [];
+		$ethnicityOutput = '';
+		
+		/*Check each of the Ethnicities*/
+		if($actor['ethnicity']['nativeam']){
+			$ethnicities[] = $actor['ethnicity']['nativeam'];
+		}
+		if($actor['ethnicity']['asian']){
+			$ethnicities[] = $actor['ethnicity']['asian'];
+		}
+		if($actor['ethnicity']['white']){
+			$ethnicities[] = $actor['ethnicity']['white'];
+		}
+		if($actor['ethnicity']['black']){
+			$ethnicities[] = $actor['ethnicity']['black'];
+		}
+		if($actor['ethnicity']['hispanic']){
+			$ethnicities[] = $actor['ethnicity']['hispanic'];
+		}
+		if($actor['ethnicity']['eeurope']){
+			$ethnicities[] = $actor['ethnicity']['eeurope'];
+		}
+		if($actor['ethnicity']['mideast']){
+			$ethnicities[] = $actor['ethnicity']['mideast'];
+		}
+		if($actor['ethnicity']['indian']){
+			$ethnicities[] = $actor['ethnicity']['indian'];
+		}
+	
+		foreach($ethnicities as $ethnicity){
+			$ethnicityOutput .= $ethnicity . ' ';
+		}
+	
+		return $ethnicityOutput;
+	}
 }

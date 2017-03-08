@@ -43,14 +43,14 @@ class ActorController extends BaseController {
 			$actorName = $this->actorProcess->processActorName($actor);
 			
 			/*Build the Output*/
-			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . '" ';
-				$actorList .= 'data-age="' . (int) $actor['physical']['age_range'] . '" ';
+			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . ' ' . $this->actorProcess->processActorEthnicity($actor) . '" ';
 				$actorList .= 'data-first-name="' . $actor['firstname'] . '" ';
 				$actorList .= 'data-last-name="' . $actor['lastname'] . '" ';
 				$actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
+				//$actorList .= 'data-ethnicity="' . $this->actorProcess->processActorEthnicity($actor) . '" ';
+				$actorList .= 'data-audition-type="' . $actor['audition']['mononly'] . '" ';
 				$actorList .= 'data-apprentice="' . $actor['audition']['apprentice'] . '" ';
 				$actorList .= 'data-intern="' . $actor['audition']['intern'] . '" ';
-				$actorList .= 'data-standby="' . $actor['audition']['standby'] . '" ';
 				$actorList .= 'data-availfor="' . $actor['audition']['availfor'] . '" ';
 				$actorList .= 'data-availto="' . $actor['audition']['availto'] . '" ';
 			$actorList .= '>';

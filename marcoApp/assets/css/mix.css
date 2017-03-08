@@ -211,6 +211,46 @@
     border-radius: 2px;
     border: 0;
 }
+.checkbox-group {
+    display: inline-block;
+    padding: .5rem;
+    background: #2a2a2a;
+    margin-left: .75rem;
+    vertical-align: top;
+}
+
+.checkbox {
+    text-align: justify;
+}
+
+.checkbox:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
+
+.checkbox-input,
+.checkbox-label {
+    display: inline-block;
+}
+
+.checkbox-group-label,
+.checkbox-label {
+    color: white;
+    font-family: 'helvetica-neue', arial, sans-serif;
+    font-size: .9rem;
+}
+
+.checkbox-group-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: .5rem;
+}
+
+.checkbox-label {
+    margin-right: .5rem;
+}
+
 
 /* Target Elements
 ---------------------------------------------------------------------- */
