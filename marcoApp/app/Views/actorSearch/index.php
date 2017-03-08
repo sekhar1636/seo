@@ -47,11 +47,6 @@ $ActorController = new \App\Controller\ActorController;
 	    <label class="control-group-label control-text">Intern</label>
 	    <button type="button" class="control control-size" data-toggle="[data-intern=Y]">Enable</button>
 	</fieldset>
-	
-	<fieldset data-filter-group="standby" class="control-group">
-	    <label class="control-group-label control-text">Standby</label>
-	    <button type="button" class="control control-size" data-toggle="[data-standby=Y]">Enable</button>
-	</fieldset>
     
 </form>
 

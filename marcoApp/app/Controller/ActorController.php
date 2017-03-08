@@ -52,25 +52,30 @@ class ActorController extends BaseController {
 				$actorList .= 'data-availto="' . $actor['audition']['availto'] . '" ';
 			$actorList .= '>';
 				$actorList .= '<div class="mix-content">';
-					$actorList .= '<h4>' . $actor['firstname'] . ' ' . $actor['lastname'] . '</h4>';
+					$actorList .= '<h2>' . $actor['firstname'] . ' ' . $actor['lastname'] . '</h2>';
 					
 					if($actorImage){
-						$actorList .= '<img src="' . $actorImage . '" height="130" style="height:130px;">';	
+						$actorList .= '<img src="' . $actorImage . '" height="130" style="height:130px;" class="actorThumb">' . '<br/>';
 					}
 
-					$actorList .= '<ul>';
-						$actorList .= '<li><strong>Age: </strong>' . (int) $actor['physical']['age_range'] . '</li>';
-						$actorList .= '<li><strong>Height: </strong>' . (int) $actor['physical']['ht'] . '</li>';
-						$actorList .= '<li><strong>Audition Type: </strong>'  . $actor['audition']['mononly'] . '</li>';
-						$actorList .= '<li><strong>Availability: </strong>';
-							$actorList .='<ul>';
-								$actorList .= '<li>Apprentice: ' . $this->actorProcess->processYesNoMaybe($actor['audition']['apprentice']) . '</li>';
-								$actorList .= '<li>Internship: ' . $this->actorProcess->processYesNoMaybe($actor['audition']['intern']) . '</li>';
-								$actorList .= '<li>Standbye: ' . $this->actorProcess->processYesNoMaybe($actor['audition']['standby']) . '</li>';
-							$actorList .= '</ul></li>';
-						$actorList .= '<li><strong>Employment availability : </strong>';
-							$actorList .= $actor['audition']['availfor'] . ' to ' . $actor['audition']['availto'] . '</li>';	
-					$actorList .= '</ul>';
+						$actorList .= $this->actorProcess->processAuditionType($actor['audition']['mononly']) . '<br/>';
+						
+						if($actor['audition']['apprentice'] != 'N'){
+							$actorList .= '<strong>Apprentice: </strong>' . $this->actorProcess->processYesNoMaybe($actor['audition']['apprentice']) . '<br/>';
+						}
+
+						if($actor['audition']['intern'] != 'N'){
+							$actorList .= '<strong>Internship: </strong>' . $this->actorProcess->processYesNoMaybe($actor['audition']['intern']) . '<br/>';
+						}
+
+						$actorList .= '<strong>Avail: </strong>' . $this->actorProcess->processDate($actor['audition']['availfor']) . ' to ' . $this->actorProcess->processDate($actor['audition']['availto']) . '<br/>';
+						
+						if ($actorResume = $this->actorProcess->processActorResume($actor)){
+							$actorList .= '<a href="' . $actorResume . '" target="_blank">' . $actor['firstname'] . '\'s Resume</a><br/>';
+						}
+
+						$actorList .= '<a href="' . APP_URL . '?page=actor&actorID=' . $actor['actor_uid'] . '" target="_blank">' . $actor['firstname'] . '\'s Profile</a>';
+	
 				$actorList .= '</div>';
 			$actorList .= '</div>' . PHP_EOL;	
 		}

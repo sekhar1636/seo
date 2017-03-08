@@ -10,6 +10,9 @@ switch($page){
 	case 'actorSearch':
 		require(VIEWS_DIR_PATH . 'actorSearch/index.php');
 		break;
+	case 'actor':
+		require(VIEWS_DIR_PATH . 'actor/index.php');
+		break;
 	default:
 		echo 'You should not be here';
 }
