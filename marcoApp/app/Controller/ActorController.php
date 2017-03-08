@@ -39,6 +39,9 @@ class ActorController extends BaseController {
 			/*Define Actor Image URL*/
 			$actorImage = $this->actorProcess->processActorImage($actor);
 			
+			/*Determine Output Name*/
+			$actorName = $this->actorProcess->processActorName($actor);
+			
 			/*Build the Output*/
 			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . '" ';
 				$actorList .= 'data-age="' . (int) $actor['physical']['age_range'] . '" ';
@@ -52,7 +55,7 @@ class ActorController extends BaseController {
 				$actorList .= 'data-availto="' . $actor['audition']['availto'] . '" ';
 			$actorList .= '>';
 				$actorList .= '<div class="mix-content">';
-					$actorList .= '<h2>' . $actor['firstname'] . ' ' . $actor['lastname'] . '</h2>';
+					$actorList .= '<h2>' . $actorName['main'] . '</h2>';
 					
 					if($actorImage){
 						$actorList .= '<img src="' . $actorImage . '" height="130" style="height:130px;" class="actorThumb">' . '<br/>';
@@ -68,13 +71,13 @@ class ActorController extends BaseController {
 							$actorList .= '<strong>Internship: </strong>' . $this->actorProcess->processYesNoMaybe($actor['audition']['intern']) . '<br/>';
 						}
 
-						$actorList .= '<strong>Avail: </strong>' . $this->actorProcess->processDate($actor['audition']['availfor']) . ' to ' . $this->actorProcess->processDate($actor['audition']['availto']) . '<br/>';
+						$actorList .= '<strong>Available: </strong><br/>' . $this->actorProcess->processDate($actor['audition']['availfor']) . ' to ' . $this->actorProcess->processDate($actor['audition']['availto']) . '<br/>';
 						
 						if ($actorResume = $this->actorProcess->processActorResume($actor)){
-							$actorList .= '<a href="' . $actorResume . '" target="_blank">' . $actor['firstname'] . '\'s Resume</a><br/>';
+							$actorList .= '<a href="' . $actorResume . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actorName['short'] . '\'s Resume</a>';
 						}
 
-						$actorList .= '<a href="' . APP_URL . '?page=actor&actorID=' . $actor['actor_uid'] . '" target="_blank">' . $actor['firstname'] . '\'s Profile</a>';
+						$actorList .= '<a href="' . APP_URL . '?page=actor&actorID=' . $actor['actor_uid'] . '" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actorName['short'] . '\'s Profile</a>';
 	
 				$actorList .= '</div>';
 			$actorList .= '</div>' . PHP_EOL;	

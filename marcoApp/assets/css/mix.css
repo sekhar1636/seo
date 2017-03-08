@@ -1,6 +1,5 @@
 /* Controls
 ---------------------------------------------------------------------- */
-
 .controls {
     padding: 1rem;
     background: #333;
@@ -29,7 +28,7 @@
     width: auto;
     font-size: .9rem;
     padding: 0 1rem;
-    font-family: 'helvetica-neue', arial, sans-serif;
+    font-family: arial, sans-serif;
     font-weight: 700;
 }
 
@@ -132,7 +131,7 @@
     font-size: .9rem;
     color: #333;
     font-weight: bold;
-    font-family: 'helvetica', arial, sans-serif;
+    font-family: arial, sans-serif;
 }
 
 .mixitup-control {
@@ -206,7 +205,7 @@
 }
 
 .text-input-wrapper input {
-    font-family: 'helvetica-neue', arial, sans-serif;
+    font-family: arial, sans-serif;
     font-size: .9rem;
     padding: .5em;
     border-radius: 2px;
@@ -226,7 +225,7 @@
     background: #fff;
     margin-bottom: 1rem;
     position: relative;
-    height: 330px;
+    height: 355px;
 }
 
 .mix:before {
@@ -315,7 +314,7 @@
 
 .mix,
 .gap {
-    width: calc(100%/2 - (((2 - 1) * 1rem) / 2));
+    width: calc(100%/1 - ((1 * 1rem) / 2));
 }
 
 /* 3 Columns */
@@ -323,11 +322,7 @@
 @media screen and (min-width: 541px) {
     .mix,
     .gap {
-        width: calc(100%/3 - (((3 - 1) * 1rem) / 3));
-    }
-
-    .mix.triangle:after {
-        font-size: 2vw;
+		width: calc(100%/2 - (((2 - 1) * 1rem) / 2));
     }
 }
 
@@ -336,11 +331,7 @@
 @media screen and (min-width: 961px) {
     .mix,
     .gap {
-        width: calc(100%/4 - (((4 - 1) * 1rem) / 4));
-    }
-
-    .mix.triangle:after {
-        font-size: 1.5vw;
+        width: calc(100%/3 - (((3 - 1) * 1rem) / 3));
     }
 }
 
@@ -349,11 +340,7 @@
 @media screen and (min-width: 1281px) {
     .mix,
     .gap {
-        width: calc(100%/5 - (((5 - 1) * 1rem) / 5));
-    }
-
-    .mix.triangle:after {
-        font-size: 1.25vw;
+        width: calc(100%/4 - (((4 - 1) * 1rem) / 4));
     }
 }
 
@@ -362,10 +349,6 @@
 @media screen and (min-width: 1401px) {
     .mix,
     .gap {
-        width: calc(100%/6 - (((6 - 1) * 1rem) / 6));
-    }
-
-    .mix.triangle:after {
-        font-size: 1vw;
+        width: calc(100%/5 - (((5 - 1) * 1rem) / 5));
     }
 }

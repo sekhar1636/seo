@@ -5,6 +5,35 @@ class ActorProcess extends BaseProcess {
 	function __construct(){
 	}
 	
+	function processActorName($actor){
+		
+		$actorName = [];
+		
+		if( ($actor['firstname']) && ($actor['lastname']) ){
+			$actorName = [
+				'main'  => $actor['firstname'] . ' ' . $actor['lastname'],
+				'short' => $actor['firstname']
+			];
+		}elseif( ($actor['firstname']) && (empty($actor['lastname'])) ){
+			$actorName = [
+				'main'  => $actor['firstname'],
+				'short' => $actor['firstname']
+			];
+		}elseif( (empty($actor['firstname'])) && ($actor['lastname']) ){
+			$actorName = [
+				'main'  => $actor['lastname'],
+				'short' => $actor['lastname']
+			];
+		}else{
+			$actorName = [
+				'main'  => 'NA',
+				'short' => 'NA',
+			];
+		}
+		
+		return $actorName;
+	}
+	
 	function processDate($date){
 	
 		$output = date('m-d-y', strtotime($date));
@@ -69,10 +98,10 @@ class ActorProcess extends BaseProcess {
 		
 		switch(strtolower($value)){
 			case 'y':
-				$output = 'Song & Monologue';
+				$output = 'Monologue Only';
 				break;
 			case 'n':
-				$output = 'Non-Singing';
+				$output = 'Song & Monologue';
 				break;
 			case 'd':
 				$output = 'Dancer Who Sings';

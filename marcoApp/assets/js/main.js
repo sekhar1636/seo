@@ -1,4 +1,4 @@
-var containerEl = document.querySelector('.container');
+var containerEl = document.querySelector('.actorContainer');
 
 var mixer = mixitup(containerEl, {
 	load: {
