@@ -34,12 +34,50 @@ class ActorProcess extends BaseProcess {
 		return $actorName;
 	}
 	
+	function processActorHeight($actorHeight){
+	
+		/*Initialize*/
+		$actorHeight = (int) $actorHeight;
+		
+		/*Check which group the value falls under*/
+		if($actorHeight < 60){//Under 5ft
+			$output = 'under5';	
+		}elseif( ($actorHeight >= 60)&&($actorHeight < 66) ){//Between 5ft & 5ft 6inch
+			$output = 'bet5and56';
+		}elseif( ($actorHeight >= 66)&&($actorHeight < 72) ){//Between 5ft 6inch & 6ft
+			$output = 'bet56and6';
+		}elseif( ($actorHeight >= 72)&&($actorHeight < 78) ){//Between 6ft & 6ft 5inch
+			$output = 'bet6and66';
+		}elseif($actorHeight >= 78){//6ft 6inch or taller
+			$output = 'over66';
+		}
+		
+		return $output;
+	}
+
 	function processDate($date){
 	
 		$output = date('m-d-y', strtotime($date));
 		
 		return $output;
 	}	
+	
+	function processActorAvailability($actor){
+		
+		$output = '';
+		
+		$today = date('m-d-y');
+		$forDate = $this->processDate($actor['audition']['availfor']);
+		$toDate = $this->processDate($actor['audition']['availto']);
+		
+		if( ($today >= $forDate) && ($today <= $toDate) ){
+			$output = 'Y';
+		}else{
+			$output = 'N';
+		}
+		
+		return $output;
+	}
 		
 	function processYesNoMaybe($value){
 		
@@ -145,6 +183,7 @@ class ActorProcess extends BaseProcess {
 			$ethnicities[] = $actor['ethnicity']['indian'];
 		}
 	
+		/*Loop through and create output*/
 		foreach($ethnicities as $ethnicity){
 			$ethnicityOutput .= $ethnicity . ' ';
 		}

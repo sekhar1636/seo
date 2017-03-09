@@ -9,107 +9,108 @@ $ActorController = new \App\Controller\ActorController;
 	<div class="col-md-4">
 		<form class="controls">
 
-		    <fieldset data-filter-group="gender" class="control-group">
-		        <label class="control-group-label control-text">Gender</label>
-			    <button type="button" class="control control-gender control-text" data-filter="all">All</button>
-			    <button type="button" class="control control-gender control-text" data-filter=".M">Male</button>
-			    <button type="button" class="control control-gender control-text" data-filter=".F">Female</button>
-		    </fieldset><br/>
-
-		    <fieldset data-filter-group="audition-type" class="control-group">
-		        <label class="control-group-label control-text">Audition Type</label>
-			    <button type="button" class="control control-text" data-filter="[data-audition-type=Y]">Monologue Only</button>
-			    <button type="button" class="control control-text" data-filter="[data-audition-type=N]">Song & Monologue</button>
-			    <button type="button" class="control control-text" data-filter="[data-audition-type=D]">Dancer Who Sings</button>
-		    </fieldset><br/>
+		    <div class="filter-group" style="margin-bottom:10px;">
+			    <span class="filter-group-label">Actor Details</span>  
+			    <fieldset data-filter-group="gender" class="control-group">
+			        <label class="control-group-label control-text">Gender</label>
+			        
+				    <button type="button" class="control control-gender control-text" data-filter="all">All</button>
+				    <button type="button" class="control control-gender control-text" data-filter=".M">Male</button>
+				    <button type="button" class="control control-gender control-text" data-filter=".F">Female</button>
+			    </fieldset><br/> 
+			    
+				<fieldset data-filter-group="height-group" class="control-group">
+				    <label class="control-group-label control-text">Height</label>
+	                <select>
+	                    <option value="">--Height--</option>
+	                    <option value="[data-height-group=under5]">Under 5ft</option>
+	                    <option value="[data-height-group=bet5and56]">Between 5ft & 5ft 6inch</option>
+	                    <option value="[data-height-group=bet56and6]">Between 5ft 6inch & 6ft</option>
+	                    <option value="[data-height-group=bet6and66]">Between 6ft & 6ft 6inch</option>
+	                    <option value="[data-height-group=over66]">Over 6ft 6inch</option>
+	                </select>
+	            </fieldset><br/>
+	
+			    <fieldset data-filter-group="audition-type" class="control-group">
+				    <label class="control-group-label control-text">Audition Type</label>
+	                <select>
+	                    <option value="">--Audition Type--</option>
+	                    <option value="[data-audition-type=Y]">Monologue Only</option>
+	                    <option value="[data-audition-type=N]">Song & Monologue</option>
+	                    <option value="[data-audition-type=D]">Dancer Who Sings</option>
+	                </select>
+			    </fieldset><br/>
+	
+			    <!--<fieldset data-filter-group="height" class="control-group">
+			        <label class="control-group-label control-text">Height</label>
+				    <button type="button" class="control control-sort" data-sort="height:desc">Desc</button>
+				    <button type="button" class="control control-sort" data-sort="height:asc">Asc</button>
+			    </fieldset><br/>-->
+		    </div>
 		    
-		   
-		    <!--
-			    Not working
-		    <fieldset data-filter-group="" class="text-input-wrapper">
-		        <input type="text" data-search-attribute="data-first-name" placeholder="Search by First Name"/>
-		    </fieldset>
-		
-		    <fieldset data-filter-group="" class="text-input-wrapper">
-		        <input type="text" data-search-attribute="data-last-name" placeholder="Search by Last Name"/>
-		    </fieldset>
-		    -->
+		    <div class="filter-group" style="margin-bottom:10px;">
+			    <span class="filter-group-label">Availability</span>
+			    
+				<fieldset data-filter-group="apprentice">
+	                <div class="checkbox checkbox-inner">
+	                    <label class="checkbox-label">Apprentice</label>
+	                    <input type="checkbox" value="[data-apprentice=Y]"/>
+	                </div>
+				</fieldset><br/>
+			
+				<fieldset data-filter-group="intern">
+	                <div class="checkbox checkbox-inner">
+	                    <label class="checkbox-label">Intern</label>
+	                    <input type="checkbox" value="[data-intern=Y]"/>
+	                </div>
+				</fieldset><br/>
+	
+				<fieldset data-filter-group="availability">
+	                <div class="checkbox checkbox-inner">
+	                    <label class="checkbox-label">Auditions</label>
+	                    <input type="checkbox" value="[data-availability=Y]"/>
+	                </div>
+				</fieldset><br/>
+		    </div><br/>
 
-		    <fieldset data-filter-group="height" class="control-group">
-		        <label class="control-group-label control-text">Height</label>
-			    <button type="button" class="control control-sort" data-sort="height:desc">Desc</button>
-			    <button type="button" class="control control-sort" data-sort="height:asc">Asc</button>
-		    </fieldset><br/>
-		    
-			<fieldset data-filter-group="apprentice" class="control-group">
-			    <label class="control-group-label control-text">Apprentice</label>
-			    <button type="button" class="control control-size" data-toggle="[data-apprentice=Y]">Enable</button>
-			</fieldset><br/>
-		
-			<fieldset data-filter-group="intern" class="control-group">
-			    <label class="control-group-label control-text">Intern</label>
-			    <button type="button" class="control control-size" data-toggle="[data-intern=Y]">Enable</button>
-			</fieldset><br/>
-
-			<fieldset data-filter-group="ethnicity" class="control-group">
-			    <label class="control-group-label control-text">Ethnicity</label>
-			    <button type="button" class="control" data-filter="all">All</button>
-			    <label class="control-group-label control-text">Native American</label>
-			    <button type="button" class="control" data-toggle=".Na">Native American<</button>
-			    <label class="control-group-label control-text">Asian</label>
-			    <button type="button" class="control control-size" data-toggle=".As">Enable</button>
-			    <label class="control-group-label control-text">White/Caucasian</label>
-			    <button type="button" class="control control-size" data-toggle=".Ca">Enable</button>
-			    <label class="control-group-label control-text">Black/African American</label>
-			    <button type="button" class="control control-size" data-toggle=".Af">Enable</button>
-			    <label class="control-group-label control-text">Hispanic</label>
-			    <button type="button" class="control control-size" data-toggle=".Hi">Enable</button>
-			    <label class="control-group-label control-text">European</label>
-			    <button type="button" class="control control-size" data-toggle=".Ea">Enable</button>
-			    <label class="control-group-label control-text">Middle Eastern</label>
-			    <button type="button" class="control control-size" data-toggle=".Mi">Enable</button>
-			    <label class="control-group-label control-text">Indian</label>
-			    <button type="button" class="control control-size" data-toggle=".In">Enable</button>
-			</fieldset><br/>
-
-<!--
-			<fieldset data-filter-group="ethnicity" cclass="checkbox-group">
-                <label class="checkbox-group-label">Ethnicity</label>
+			<fieldset data-filter-group="ethnicity" class="checkbox-group" data-logic="and">
+				<label class="checkbox-group-label">Ethnicity</label>
+				
                 <div class="checkbox">
-				    <label class="checkbox-label">Native American</label>
-				    <input type="checkbox" value=".Na"/>
+                    <label class="checkbox-label">Native American</label>
+                    <input type="checkbox" value=".Na"/>
                 </div>
-                <div class="checkbox"/>
-				    <label class="checkbox-label">Asian</label>
-				    <input type="checkbox" value=".As"/>
+                <div class="checkbox">
+                    <label class="checkbox-label">Asian</label>
+                    <input type="checkbox" value=".As"/>
                 </div>
-                <div class="checkbox"/>
-				    <label class="checkbox-label"/>White/Caucasion</label>
-				    <input type="checkbox" value=".Ca"/>
+                <div class="checkbox">
+                    <label class="checkbox-label">White/Caucasian</label>
+                    <input type="checkbox" value=".Ca"/>
                 </div>
-                <div class="checkbox"/>
-				    <label class="checkbox-label"/>Black/African American</label>
-				    <input type="checkbox" value=".Af"/>
+                <div class="checkbox">
+                    <label class="checkbox-label">Black/African American</label>
+                    <input type="checkbox" value=".Af"/>
                 </div>
-                <div class="checkbox"/>
-				    <label class="checkbox-label"/>Hispanic</label>
-				    <input type="checkbox" value=".Hi"/>
+                <div class="checkbox">
+                    <label class="checkbox-label">Hispanic</label>
+                    <input type="checkbox" value=".Hi"/>
+                </div>			    
+                <div class="checkbox">
+                    <label class="checkbox-label">European</label>
+                    <input type="checkbox" value=".Ea"/>
+                </div>	
+                <div class="checkbox">
+                    <label class="checkbox-label">Middle Eastern</label>
+                    <input type="checkbox" value=".Mi"/>
+                </div>	
+                <div class="checkbox">
+                    <label class="checkbox-label">Indian</label>
+                    <input type="checkbox" value=".In"/>
                 </div>
-                <div class="checkbox"/>
-				    <label class="checkbox-label"/>European</label>
-				    <input type="checkbox" value=".Ea"/>
-                </div>
-                <div class="checkbox"/>
-				    <label class="checkbox-label"/>Middle Eastern</label>
-				    <input type="checkbox" value=".Mi"/>
-                </div>
-                <div class="checkbox"/>
-				    <label class="checkbox-label">Indian</label>
-				    <input type="checkbox" value=".In"/>
-                </div>
-			</fieldset><br/>
--->	
-		    <button type="reset" class="btn btn-warning">Reset</button><br/>
+			</fieldset>
+
+		    <button type="reset" class="btn btn-warning btn-block">Reset Filters</button>
 		    
 		</form>
 	</div>

@@ -47,12 +47,12 @@ class ActorController extends BaseController {
 				$actorList .= 'data-first-name="' . $actor['firstname'] . '" ';
 				$actorList .= 'data-last-name="' . $actor['lastname'] . '" ';
 				$actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
+				$actorList .= 'data-height-group="' . $this->actorProcess->processActorHeight($actor['physical']['ht']) . '" ';
 				//$actorList .= 'data-ethnicity="' . $this->actorProcess->processActorEthnicity($actor) . '" ';
 				$actorList .= 'data-audition-type="' . $actor['audition']['mononly'] . '" ';
 				$actorList .= 'data-apprentice="' . $actor['audition']['apprentice'] . '" ';
 				$actorList .= 'data-intern="' . $actor['audition']['intern'] . '" ';
-				$actorList .= 'data-availfor="' . $actor['audition']['availfor'] . '" ';
-				$actorList .= 'data-availto="' . $actor['audition']['availto'] . '" ';
+				$actorList .= 'data-availability="' . $this->actorProcess->processActorAvailability($actor) . '" ';
 			$actorList .= '>';
 				$actorList .= '<div class="mix-content">';
 					$actorList .= '<h2>' . $actorName['main'] . '</h2>';

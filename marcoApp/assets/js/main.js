@@ -14,3 +14,6 @@ var mixer = mixitup(containerEl, {
 		limit: 40
 	}
 });
+
+//https://www.kunkalabs.com/mixitup-multifilter/docs/get-started/
+//https://github.com/patrickkunka/mixitup/issues/283

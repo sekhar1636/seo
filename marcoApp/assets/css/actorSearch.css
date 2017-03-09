@@ -10,13 +10,17 @@
     display: inline-block;
     margin-left: .75rem;
     vertical-align: top;
+    margin-bottom: 5px;
+}
+.checkbox-group{
+	margin-bottom: 10px;
 }
 
 .control {
     position: relative;
     display: inline-block;
     width: 2.7rem;
-    height: 2.7rem;
+    height: 25px;
     background: #444;
     cursor: pointer;
     font-size: 0.1px;
@@ -67,7 +71,7 @@
 }
 
 .control-gender[data-filter=".M"] {
-    color: #0000FF;
+    color: #FF000;
 }
 
 .control-gender[data-filter=".F"] {
@@ -211,7 +215,8 @@
     border-radius: 2px;
     border: 0;
 }
-.checkbox-group {
+.checkbox-group,
+.filter-group {
     display: inline-block;
     padding: .5rem;
     background: #2a2a2a;
@@ -230,25 +235,47 @@
 }
 
 .checkbox-input,
-.checkbox-label {
+.checkbox-label,
+.select-label {
     display: inline-block;
 }
 
+.filter-group-label,
 .checkbox-group-label,
-.checkbox-label {
+.checkbox-label,
+.select-label {
     color: white;
-    font-family: 'helvetica-neue', arial, sans-serif;
+    font-family: arial, sans-serif;
     font-size: .9rem;
 }
 
+.filter-group-label,
 .checkbox-group-label {
     font-weight: bold;
     display: block;
     margin-bottom: .5rem;
 }
 
-.checkbox-label {
-    margin-right: .5rem;
+.checkbox-label,
+.select-label {
+    margin-right: 2rem;
+}
+
+.control-group select{
+	font-size:12px;
+}
+
+.checkbox-inner {
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+.select-wrapper label{
+	min-height: 20px;
+	padding-left: 20px;
+	margin-bottom: 0;
+	font-weight: 400;
+	cursor: pointer;
 }
 
 
