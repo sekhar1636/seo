@@ -33,22 +33,31 @@ class ActorProcess extends BaseProcess {
 		
 		return $actorName;
 	}
+
+	function processActorHeight($height){
 	
-	function processActorHeight($actorHeight){
+		$feet = floor(($height/12));
+		$inches = $height - ($feet * 12);
+		$output = $feet."&prime;".$inches."&Prime;";
+		
+		return $output;
+	}	
+
+	function processHeightGroup($height){
 	
 		/*Initialize*/
-		$actorHeight = (int) $actorHeight;
+		$height = (int) $height;
 		
 		/*Check which group the value falls under*/
-		if($actorHeight < 60){//Under 5ft
+		if($height < 60){//Under 5ft
 			$output = 'under5';	
-		}elseif( ($actorHeight >= 60)&&($actorHeight < 66) ){//Between 5ft & 5ft 6inch
+		}elseif( ($height >= 60)&&($height < 66) ){//Between 5ft & 5ft 6inch
 			$output = 'bet5and56';
-		}elseif( ($actorHeight >= 66)&&($actorHeight < 72) ){//Between 5ft 6inch & 6ft
+		}elseif( ($height >= 66)&&($height < 72) ){//Between 5ft 6inch & 6ft
 			$output = 'bet56and6';
-		}elseif( ($actorHeight >= 72)&&($actorHeight < 78) ){//Between 6ft & 6ft 5inch
+		}elseif( ($height >= 72)&&($height < 78) ){//Between 6ft & 6ft 5inch
 			$output = 'bet6and66';
-		}elseif($actorHeight >= 78){//6ft 6inch or taller
+		}elseif($height >= 78){//6ft 6inch or taller
 			$output = 'over66';
 		}
 		
@@ -167,6 +176,31 @@ class ActorProcess extends BaseProcess {
 		}
 	
 		return $ethnicityOutput;
+	}
+	
+	function processActorVocal($value){
+		
+		switch(strtolower($value)){
+			case 's':
+				$output = 'Soprano';
+				break;
+			case 'ms':
+				$output = 'Mezzo';
+				break;
+			case 'a':
+				$output = 'Alto';
+				break;
+			case 't':
+				$output = 'Tenor';
+				break;
+			case 'b':
+				$output = 'Baritone';
+				break;
+			default:
+				$output = 'N/A';
+		}
+		
+		return $output;
 	}
 	
 	function processActorSkills($actor){

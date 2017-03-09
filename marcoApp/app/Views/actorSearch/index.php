@@ -40,6 +40,18 @@ $ActorController = new \App\Controller\ActorController;
 	                    <option value="[data-audition-type=D]">Dancer Who Sings</option>
 	                </select>
 			    </fieldset><br/>
+
+				<fieldset data-filter-group="skills-vocal" class="control-group">
+				    <label class="control-group-label control-text">Vocal Range</label>
+	                <select>
+	                    <option value="">--Vocal Range--</option>
+	                    <option value="[data-skill-vocal=S]">Soprano</option>
+	                    <option value="[data-skill-vocal=MS]">Mezzo</option>
+	                    <option value="[data-skill-vocal=A]">Alto</option>
+	                    <option value="[data-skill-vocal=T]">Tenor</option>
+	                    <option value="[data-skill-vocal=B]">Baritone</option>
+	                </select>
+	            </fieldset><br/>
 	
 			    <!--<fieldset data-filter-group="height" class="control-group">
 			        <label class="control-group-label control-text">Height</label>
@@ -49,7 +61,7 @@ $ActorController = new \App\Controller\ActorController;
 		    </div>
 		    
 		    <div class="filter-group" style="margin-bottom:10px;">
-			    <span class="filter-group-label">Availability</span>
+			    <span class="filter-group-label">Will Consider</span>
 			    
 				<fieldset data-filter-group="apprentice">
 	                <div class="checkbox checkbox-inner">
@@ -113,7 +125,7 @@ $ActorController = new \App\Controller\ActorController;
 			<fieldset data-filter-group="skills" class="checkbox-group" data-logic="and">
 				<label class="checkbox-group-label">Skills</label>
 				<?php
-				$skills = ["vocal","ballet","ballroom","tap","swing","jazz","perc","sax","banjo","piano","drums","cello","clarinet","trombone","trumpet","flute","violin","guitar"];
+				$skills = ["ballet","ballroom","tap","swing","jazz","perc","sax","banjo","piano","drums","cello","clarinet","trombone","trumpet","flute","violin","guitar"];
 				
 				foreach($skills as $skill){
 	                echo '<div class="checkbox">';

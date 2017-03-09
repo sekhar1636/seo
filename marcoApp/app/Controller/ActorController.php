@@ -16,10 +16,29 @@ class ActorController extends BaseController {
 
 	function single(){
 		
+		/*Initialize*/
+		$actor = [];
+		
+		/*Define Actor Object*/
+		$actorObject = $this->actorModel->getByID($this->actorID);
+		
 		if($this->actorID){
-			$actor = $this->actorModel->getByID($this->actorID);
+			$actor = [
+				'active' 		=> TRUE,
+				'object' 		=> $actorObject,
+				'name'   		=> $this->actorProcess->processActorName($actorObject),
+				'height'		=> $this->actorProcess->processActorHeight($actorObject['physical']['ht']),
+				'image'			=> $this->actorProcess->processActorImage($actorObject),
+				'resume'		=> $this->actorProcess->processActorResume($actorObject),
+				'audition_type' => $this->actorProcess->processAuditionType($actorObject['audition']['mononly']),
+				'vocal'  		=> $this->actorProcess->processActorVocal($actorObject['skills']['vocal']),
+				'skills' 		=> $this->actorProcess->processActorSkills($actorObject),
+				'ethnicity' 	=> $this->actorProcess->processActorEthnicity($actorObject),
+			];
 		}else{
-			$actor = 'No Actor by that ID';
+			$actor = [
+				'active' 		=> FALSE,
+			];
 		}
 		
 		return $actor;
@@ -47,12 +66,14 @@ class ActorController extends BaseController {
 				$actorList .= 'data-first-name="' . $actor['firstname'] . '" ';
 				$actorList .= 'data-last-name="' . $actor['lastname'] . '" ';
 				$actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
-				$actorList .= 'data-height-group="' . $this->actorProcess->processActorHeight($actor['physical']['ht']) . '" ';
+				$actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
 				//$actorList .= 'data-ethnicity="' . $this->actorProcess->processActorEthnicity($actor) . '" ';
 				$actorList .= 'data-audition-type="' . $actor['audition']['mononly'] . '" ';
 				$actorList .= 'data-apprentice="' . $actor['audition']['apprentice'] . '" ';
 				$actorList .= 'data-intern="' . $actor['audition']['intern'] . '" ';
 				$actorList .= 'data-availability="' . $this->actorProcess->processActorAvailability($actor) . '" ';
+				$actorList .= 'data-skill-vocal="' . $actor['skills']['vocal'] . '" ';
+				
 			$actorList .= '>';
 				$actorList .= '<div class="mix-content">';
 					$actorList .= '<h2>' . $actorName['main'] . '</h2>';
@@ -71,7 +92,7 @@ class ActorController extends BaseController {
 							$actorList .= '<strong>Internship: </strong>' . $this->actorProcess->processYesNoMaybe($actor['audition']['intern']) . '<br/>';
 						}
 
-						$actorList .= '<strong>Available: </strong><br/>' . $this->actorProcess->processDate($actor['audition']['availfor']) . ' to ' . $this->actorProcess->processDate($actor['audition']['availto']) . '<br/>';
+						$actorList .= '<strong>Employment Availability:</strong><br/>' . $this->actorProcess->processDate($actor['audition']['availfor']) . ' to ' . $this->actorProcess->processDate($actor['audition']['availto']) . '<br/>';
 						
 						if ($actorResume = $this->actorProcess->processActorResume($actor)){
 							$actorList .= '<a href="' . $actorResume . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actorName['short'] . '\'s Resume</a>';
@@ -82,18 +103,6 @@ class ActorController extends BaseController {
 				$actorList .= '</div>';
 			$actorList .= '</div>' . PHP_EOL;	
 		}
-		/*
-			Gender
-			Audition type (Song &Monologue, Dancer Who Sings, Non-Singer)
-			Employment Availability
-			Role Type (ethnicity)
-			Vocal Range
-			Height
-			
-			Dance
-			Instrumental
-			Other Skills	
-		*/	
 
 		return $actorList;
 	}
