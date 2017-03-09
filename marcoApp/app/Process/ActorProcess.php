@@ -154,40 +154,36 @@ class ActorProcess extends BaseProcess {
 	function processActorEthnicity($actor){
 		
 		/*Initialize*/
-		$ethnicities = [];
+		$ethnicityList = [];
 		$ethnicityOutput = '';
 		
-		/*Check each of the Ethnicities*/
-		if($actor['ethnicity']['nativeam']){
-			$ethnicities[] = $actor['ethnicity']['nativeam'];
+		foreach ($actor['ethnicity'] as $key => $ethnicity){
+			if($ethnicity){
+				$ethnicityList[] = $ethnicity;
+			}
 		}
-		if($actor['ethnicity']['asian']){
-			$ethnicities[] = $actor['ethnicity']['asian'];
-		}
-		if($actor['ethnicity']['white']){
-			$ethnicities[] = $actor['ethnicity']['white'];
-		}
-		if($actor['ethnicity']['black']){
-			$ethnicities[] = $actor['ethnicity']['black'];
-		}
-		if($actor['ethnicity']['hispanic']){
-			$ethnicities[] = $actor['ethnicity']['hispanic'];
-		}
-		if($actor['ethnicity']['eeurope']){
-			$ethnicities[] = $actor['ethnicity']['eeurope'];
-		}
-		if($actor['ethnicity']['mideast']){
-			$ethnicities[] = $actor['ethnicity']['mideast'];
-		}
-		if($actor['ethnicity']['indian']){
-			$ethnicities[] = $actor['ethnicity']['indian'];
-		}
-	
-		/*Loop through and create output*/
-		foreach($ethnicities as $ethnicity){
-			$ethnicityOutput .= $ethnicity . ' ';
+		if ($ethnicityList){
+			$ethnicityOutput = implode(" ", $ethnicityList);
 		}
 	
 		return $ethnicityOutput;
+	}
+	
+	function processActorSkills($actor){
+		
+		/*Initialize*/
+		$skillList = [];
+		$skillOutput = '';
+		
+		foreach ($actor['skills'] as $key => $skill){
+			if($skill){
+				$skillList[] = $key;
+			}
+		}
+		if($skillList){
+			$skillOutput = implode(" ", $skillList);
+		}
+		
+		return $skillOutput;
 	}
 }

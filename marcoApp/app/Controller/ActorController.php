@@ -43,7 +43,7 @@ class ActorController extends BaseController {
 			$actorName = $this->actorProcess->processActorName($actor);
 			
 			/*Build the Output*/
-			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . ' ' . $this->actorProcess->processActorEthnicity($actor) . '" ';
+			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . ' ' . $this->actorProcess->processActorEthnicity($actor) . ' ' . $this->actorProcess->processActorSkills($actor) . '" ';
 				$actorList .= 'data-first-name="' . $actor['firstname'] . '" ';
 				$actorList .= 'data-last-name="' . $actor['lastname'] . '" ';
 				$actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';

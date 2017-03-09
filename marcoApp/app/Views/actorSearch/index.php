@@ -109,6 +109,20 @@ $ActorController = new \App\Controller\ActorController;
                     <input type="checkbox" value=".In"/>
                 </div>
 			</fieldset>
+			
+			<fieldset data-filter-group="skills" class="checkbox-group" data-logic="and">
+				<label class="checkbox-group-label">Skills</label>
+				<?php
+				$skills = ["vocal","ballet","ballroom","tap","swing","jazz","perc","sax","banjo","piano","drums","cello","clarinet","trombone","trumpet","flute","violin","guitar"];
+				
+				foreach($skills as $skill){
+	                echo '<div class="checkbox">';
+	                    echo '<label class="checkbox-label">' . ucfirst($skill) . '</label>';
+	                    echo '<input type="checkbox" value=".' . $skill . '"/>';
+	                echo '</div>';
+				}
+				?>
+			</fieldset>
 
 		    <button type="reset" class="btn btn-warning btn-block">Reset Filters</button>
 		    
