@@ -45,7 +45,6 @@ if ($actor['active'] == TRUE){$title = ' | ' . $actor['name']['main'];}else{$tit
 					                <strong>Height: </strong><?php echo $actor['height'];?><br/>
 					                <strong>Weight: </strong><?php echo $actor['object']['physical']['wt'];?> lbs<br/>
 					                <strong>Age: </strong><?php echo $actor['object']['physical']['age_range'];?><br/>
-					                <strong>Role Type: </strong><?php echo $actor['ethnicity'];?>
 				                </div>
 				                <div class="col-sm-7">
 					                <strong>Applied for: </strong><br/>
@@ -61,11 +60,12 @@ if ($actor['active'] == TRUE){$title = ' | ' . $actor['name']['main'];}else{$tit
 			                </div><div class="clearfix"></div><br/>
 			                <div class="row">
 				                <div class="col-sm-12">
-									<strong>Dance: </strong>(yrs) <!--Jazz(1)--><br/>
-									<strong>Instruments: </strong>(yrs)	<!--Jazz(1)--><br/>
-									<strong>Technical Skills: </strong>(yrs) <!--Jazz(1)--><br/>
-									<strong>Levels: </strong> <!--Jazz(1)--><br/>
-									<strong>Other Skills: </strong>(proficient)	<!--Painting, Cabaret, Improv--><br/>
+					                <strong>Role Type: </strong> <?php echo $actor['ethnicity'];?><br/>
+					                <strong>Vocal Range: </strong> <?php echo $actor['vocal'];?><br/>
+									<strong>Dance: </strong> <?php echo $actor['danceSkills'];?><br/>
+									<strong>Instruments: </strong>	<?php echo $actor['instrumentSkills'];?><br/>
+									<strong>Technical Skills: </strong> <?php echo $actor['techSkills'];?><br/><br/>
+									<strong>Other Skills: </strong> <?php echo $actor['miscSkills'];?><br/>
 									<strong>Schools: </strong> <?php echo $actor['object']['roles']['school'];?>
 				                </div>
 			                </div>
@@ -98,9 +98,7 @@ if ($actor['active'] == TRUE){$title = ' | ' . $actor['name']['main'];}else{$tit
 		</div>
 		
 	</div><!--END .container-fluid-->
-	
-	
-	    
+    
 <?php }else{echo 'No Actor by that ID';}?>
 <?php
 /*
@@ -108,6 +106,5 @@ echo '<pre>';
 	var_dump($actor);
 echo '</pre>';	
 */
-?>	
-
+?>
 <?php include VIEWS_DIR_PATH . 'actor/_layouts/main.footer.php';?>

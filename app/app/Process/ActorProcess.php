@@ -5,6 +5,13 @@ class ActorProcess extends BaseProcess {
 	function __construct(){
 	}
 	
+	function processDate($date){
+	
+		$output = date('m-d-y', strtotime($date));
+		
+		return $output;
+	}
+	
 	function processActorName($actor){
 		
 		$actorName = [];
@@ -39,34 +46,6 @@ class ActorProcess extends BaseProcess {
 		$feet = floor(($height/12));
 		$inches = $height - ($feet * 12);
 		$output = $feet."&prime;".$inches."&Prime;";
-		
-		return $output;
-	}	
-
-	function processHeightGroup($height){
-	
-		/*Initialize*/
-		$height = (int) $height;
-		
-		/*Check which group the value falls under*/
-		if($height < 60){//Under 5ft
-			$output = 'under5';	
-		}elseif( ($height >= 60)&&($height < 66) ){//Between 5ft & 5ft 6inch
-			$output = 'bet5and56';
-		}elseif( ($height >= 66)&&($height < 72) ){//Between 5ft 6inch & 6ft
-			$output = 'bet56and6';
-		}elseif( ($height >= 72)&&($height < 78) ){//Between 6ft & 6ft 5inch
-			$output = 'bet6and66';
-		}elseif($height >= 78){//6ft 6inch or taller
-			$output = 'over66';
-		}
-		
-		return $output;
-	}
-
-	function processDate($date){
-	
-		$output = date('m-d-y', strtotime($date));
 		
 		return $output;
 	}	
@@ -106,41 +85,28 @@ class ActorProcess extends BaseProcess {
 
 		return $output;	
 	}
-		
-	function processActorImage($actor){
-		
+	
+	function processHeightGroup($height){
+	
 		/*Initialize*/
-		$actorImage = $actorImageOutput = '';
+		$height = (int) $height;
 		
-		/*Define Actor Image*/
-		$actorImage = ACTOR_IMAGE_PATH . $actor['pix_link'];
-		
-		/*Check if Image Exists*/
-		if (file_exists(BASE_PATH . $actorImage)){
-			$actorImageOutput = BASE_URL . $actorImage;
-		}else{
-			$actorImageOutput = BASE_URL . ACTOR_IMAGE_PATH . 'noImage.png';
+		/*Check which group the value falls under*/
+		if($height < 60){//Under 5ft
+			$output = 'under5';	
+		}elseif( ($height >= 60)&&($height < 66) ){//Between 5ft & 5ft 6inch
+			$output = 'bet5and56';
+		}elseif( ($height >= 66)&&($height < 72) ){//Between 5ft 6inch & 6ft
+			$output = 'bet56and6';
+		}elseif( ($height >= 72)&&($height < 78) ){//Between 6ft & 6ft 5inch
+			$output = 'bet6and66';
+		}elseif($height >= 78){//6ft 6inch or taller
+			$output = 'over66';
 		}
 		
-		return $actorImageOutput;
+		return $output;
 	}
-
-	function processActorResume($actor){
-		
-		/*Initialize*/
-		$actorResume = $actorResumeOutput = '';
-		
-		/*Define Actor Image*/
-		$actorResume = ACTOR_RESUME_PATH . $actor['resume_link'];
-		
-		/*Check if Image Exists*/
-		if (file_exists(BASE_PATH . $actorResume)){
-			$actorResumeOutput = BASE_URL . $actorResume;
-		}
-		
-		return $actorResumeOutput;
-	}
-
+	
 	function processHairColor($value){
 		
 		switch(strtolower($value)){
@@ -219,24 +185,6 @@ class ActorProcess extends BaseProcess {
 		return $output;
 	}
 	
-	function processActorEthnicity($actor){
-		
-		/*Initialize*/
-		$ethnicityList = [];
-		$ethnicityOutput = '';
-		
-		foreach ($actor['ethnicity'] as $key => $ethnicity){
-			if($ethnicity){
-				$ethnicityList[] = $ethnicity;
-			}
-		}
-		if ($ethnicityList){
-			$ethnicityOutput = implode(" ", $ethnicityList);
-		}
-	
-		return $ethnicityOutput;
-	}
-	
 	function processActorVocal($value){
 		
 		switch(strtolower($value)){
@@ -261,20 +209,175 @@ class ActorProcess extends BaseProcess {
 		
 		return $output;
 	}
+                
+	function processEthnicity($value){
+		
+		switch(strtolower($value)){
+			case 'na':
+				$output = 'Native American';
+				break;
+			case 'as':
+				$output = 'Asian';
+				break;
+			case 'ca':
+				$output = 'White/Caucasian';
+				break;
+			case 'af':
+				$output = 'Black/African American';
+				break;
+			case 'hi':
+				$output = 'Hispanic';
+				break;
+			case 'ea':
+				$output = 'European';
+				break;
+			case 'mi':
+				$output = 'Middle Eastern';
+				break;
+			case 'in':
+				$output = 'Indian';
+				break;
+			default:
+				$output = 'N/A';
+		}
+
+		return $output;
+	}
 	
-	function processActorSkills($actor){
+	function processActorImage($actor){
+		
+		/*Initialize*/
+		$actorImage = $actorImageOutput = '';
+		
+		/*Define Actor Image*/
+		$actorImage = ACTOR_IMAGE_PATH . $actor['pix_link'];
+		
+		/*Check if Image Exists*/
+		if (file_exists(BASE_PATH . $actorImage)){
+			$actorImageOutput = BASE_URL . $actorImage;
+		}else{
+			$actorImageOutput = BASE_URL . ACTOR_IMAGE_PATH . 'noImage.png';
+		}
+		
+		return $actorImageOutput;
+	}
+
+	function processActorResume($actor){
+		
+		/*Initialize*/
+		$actorResume = $actorResumeOutput = '';
+		
+		/*Define Actor Image*/
+		$actorResume = ACTOR_RESUME_PATH . $actor['resume_link'];
+		
+		/*Check if Image Exists*/
+		if (file_exists(BASE_PATH . $actorResume)){
+			$actorResumeOutput = BASE_URL . $actorResume;
+		}
+		
+		return $actorResumeOutput;
+	}
+	
+	function processActorEthnicity($actor){
+		
+		/*Initialize*/
+		$ethnicityList = [];
+		$ethnicityOutput = '';
+		
+		foreach ($actor['ethnicity'] as $ethnicity){
+			if($ethnicity){
+				$ethnicityList[] = $ethnicity;
+			}
+		}
+		if ($ethnicityList){
+			$ethnicityOutput = implode(" ", $ethnicityList);
+		}
+	
+		return $ethnicityOutput;
+	}
+	
+	function processEthnicityList($actor,$type){
+		
+		/*Initialize*/
+		$ethnicityList = [];
+		$ethnicityOutput = '';
+		
+		foreach ($actor['ethnicity'] as $ethnicity){
+			if($ethnicity){
+				$ethnicityList['slug'][] = $ethnicity;
+				$ethnicityList['label'][] = $this->processEthnicity($ethnicity);
+			}
+		}
+		if ($ethnicityList){
+			if($type == 'slug'){
+				$ethnicityOutput = implode(" ", $ethnicityList['slug']);
+			}elseif($type == 'label'){
+				$ethnicityOutput = implode(", ", $ethnicityList['label']);	
+			}
+		}
+	
+		return $ethnicityOutput;
+	}
+	
+	function processCoreSkills($skills, $type){
+		
+		/*Initialize*/
+		$list = [];
+		$output = '';
+		
+		foreach ($skills as $key => $skill){
+			if($skill){
+				if(in_array($key, $this->defineSkills($type))){
+					$list[] = ucfirst($key) . '(' . $skill . ')';
+				}
+			}
+		}
+		
+		if($list){
+			$output = implode(", ", $list);
+		}
+		
+		return $output;
+	}
+	
+	function defineSkills($type){
+		
+		switch(strtolower($type)){
+			case 'instrument':
+				$output = ['perc','bass','sax','banjo','piano','drums','cello','clarinet','trombone','trumpet','flute','violin','guitar'];
+				break;
+			case 'dance':
+				$output = ['ballet','mus_thea','ballroom','tap','swing','jazz'];
+				break;
+			default:
+				$output = [];
+		}
+
+		return $output;
+	}
+
+	
+	function processSkillsList($skills, $type = NULL){
 		
 		/*Initialize*/
 		$skillList = [];
 		$skillOutput = '';
 		
-		foreach ($actor['skills'] as $key => $skill){
+		foreach ($skills as $key => $skill){
 			if($skill){
-				$skillList[] = $key;
+				if($type == 'count'){
+					$skillList[] = ucfirst($key) . '(' . $skill . ')';
+				}else{
+					$skillList[] = $key;
+				}
 			}
 		}
 		if($skillList){
-			$skillOutput = implode(" ", $skillList);
+			if(!is_null($type)){
+				$skillOutput = implode(" ", $skillList);
+			}else{
+				$skillOutput = implode(", ", $skillList);
+			}
 		}
 		
 		return $skillOutput;

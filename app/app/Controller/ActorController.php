@@ -24,25 +24,28 @@ class ActorController extends BaseController {
 		
 		if($this->actorID){
 			$actor = [
-				'active' 		=> TRUE,
-				'object' 		=> $actorObject,
-				'name'   		=> $this->actorProcess->processActorName($actorObject),
-				'height'		=> $this->actorProcess->processActorHeight($actorObject['physical']['ht']),
-				'hair'			=> $this->actorProcess->processHairColor($actorObject['physical']['hair']),
-				'eyes'			=> $this->actorProcess->processEyeColor($actorObject['physical']['eye']),
-				'image'			=> $this->actorProcess->processActorImage($actorObject),
-				'resume'		=> $this->actorProcess->processActorResume($actorObject),
-				'audition_type' => $this->actorProcess->processAuditionType($actorObject['audition']['mononly']),
-				'vocal'  		=> $this->actorProcess->processActorVocal($actorObject['skills']['vocal']),
-				'skills' 		=> $this->actorProcess->processActorSkills($actorObject),
-				'ethnicity' 	=> $this->actorProcess->processActorEthnicity($actorObject),
-				'availableFor'	=> $this->actorProcess->processDate($actorObject['audition']['availfor']),
-				'availableTo' 	=> $this->actorProcess->processDate($actorObject['audition']['availto']),
-				'roles' 		=> $this->actorProcess->processActorRoles($actorObject['roles']),
+				'active' 			=> TRUE,
+				'object' 			=> $actorObject,
+				'name'   			=> $this->actorProcess->processActorName($actorObject),
+				'height'			=> $this->actorProcess->processActorHeight($actorObject['physical']['ht']),
+				'hair'				=> $this->actorProcess->processHairColor($actorObject['physical']['hair']),
+				'eyes'				=> $this->actorProcess->processEyeColor($actorObject['physical']['eye']),
+				'image'				=> $this->actorProcess->processActorImage($actorObject),
+				'resume'			=> $this->actorProcess->processActorResume($actorObject),
+				'audition_type' 	=> $this->actorProcess->processAuditionType($actorObject['audition']['mononly']),
+				'vocal'  			=> $this->actorProcess->processActorVocal($actorObject['skills']['vocal']),
+				'instrumentSkills' 	=> $this->actorProcess->processCoreSkills($actorObject['skills'],'instrument'),
+				'danceSkills' 		=> $this->actorProcess->processCoreSkills($actorObject['skills'],'dance'),
+				'techSkills' 		=> $this->actorProcess->processSkillsList($actorObject['techSkills'],'count'),
+				'miscSkills' 		=> $this->actorProcess->processSkillsList($actorObject['miscSkills']),
+				'ethnicity' 		=> $this->actorProcess->processEthnicityList($actorObject,'label'),
+				'availableFor'		=> $this->actorProcess->processDate($actorObject['audition']['availfor']),
+				'availableTo' 		=> $this->actorProcess->processDate($actorObject['audition']['availto']),
+				'roles' 			=> $this->actorProcess->processActorRoles($actorObject['roles']),
 			];
 		}else{
 			$actor = [
-				'active' 		=> FALSE,
+				'active' 			=> FALSE,
 			];
 		}
 		
@@ -66,13 +69,17 @@ class ActorController extends BaseController {
 			/*Determine Output Name*/
 			$actorName = $this->actorProcess->processActorName($actor);
 			
+			/*Build MIX Class*/
+			$mixClass = $actor['physical']['gender'] . ' ';
+				$mixClass .= $this->actorProcess->processEthnicityList($actor,'slug') . ' ';
+				$mixClass .= $this->actorProcess->processSkillsList($actor['skills']);
+			
 			/*Build the Output*/
-			$actorList .= '<div class="mix ' . $actor['physical']['gender'] . ' ' . $this->actorProcess->processActorEthnicity($actor) . ' ' . $this->actorProcess->processActorSkills($actor) . '" ';
+			$actorList .= '<div class="mix ' . $mixClass . '" ';
 				$actorList .= 'data-first-name="' . $actor['firstname'] . '" ';
 				$actorList .= 'data-last-name="' . $actor['lastname'] . '" ';
 				$actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
 				$actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
-				//$actorList .= 'data-ethnicity="' . $this->actorProcess->processActorEthnicity($actor) . '" ';
 				$actorList .= 'data-audition-type="' . $actor['audition']['mononly'] . '" ';
 				$actorList .= 'data-apprentice="' . $actor['audition']['apprentice'] . '" ';
 				$actorList .= 'data-intern="' . $actor['audition']['intern'] . '" ';
