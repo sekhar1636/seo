@@ -1,0 +1,22 @@
+/*.main.M{
+	border-top: .5rem solid #0000FF;
+}
+.main.F{
+	border-top: .5rem solid #FF69B4;
+}*/
+
+.panel-info>.panel-heading.M {
+    color: #FFFFFF;
+    background-color: #0000FF;
+    border-color: #0000FF;
+}
+.panel-info>.panel-heading.F {
+    color: #FFFFFF;
+    background-color: #FF69B4;
+    border-color: #FF69B4;
+}
+.panel-title a,
+.panel-title a:focus,
+.panel-title a:hover{
+	color:#FFFFFF;
+}

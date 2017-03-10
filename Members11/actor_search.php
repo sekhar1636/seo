@@ -91,6 +91,8 @@ use when turn off the link
   <li><a href="Actors/otherskills_search.php">Other Skills</a> (Acrobatics to Standup)</li>
   <li><a href="Actors/role_search.php">Roles Search</a>(get a list of actors that have done the show!)</li>
   <li><a href="Actors/actor_searchlastname.php">Search Actors by Last Name</a> (Looking for an Actor?)</li>
+  <li><a href="../app/?page=actorSearch">NEW! Advanced Combined Actor Search</a></li>
+  
   <BR>
 <!--
   <li><a href="Actors/advanced_actor_search.php">NEW! Advanced Combined Actor Search</a></li>

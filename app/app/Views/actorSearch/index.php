@@ -79,7 +79,7 @@ $ActorController = new \App\Controller\ActorController;
 	
 				<fieldset data-filter-group="availability">
 	                <div class="checkbox checkbox-inner">
-	                    <label class="checkbox-label">Auditions</label>
+	                    <label class="checkbox-label">Employment Availability</label>
 	                    <input type="checkbox" value="[data-availability=Y]"/>
 	                </div>
 				</fieldset><br/>

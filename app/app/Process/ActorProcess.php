@@ -140,6 +140,65 @@ class ActorProcess extends BaseProcess {
 		
 		return $actorResumeOutput;
 	}
+
+	function processHairColor($value){
+		
+		switch(strtolower($value)){
+			case 'au':
+				$output = 'Auburn';
+				break;
+			case 'lb':
+				$output = 'Light Brown';
+				break;
+			case 'db':
+				$output = 'Dark Brown';
+				break;
+			case 'bk':
+				$output = 'Black';
+				break;
+			case 'rd':
+				$output = 'Red';
+				break;
+			case 'bl':
+				$output = 'Blonde';
+				break;
+			case 'gy':
+				$output = 'Grey';
+				break;
+			case 'bd':
+				$output = 'No Hair';
+				break;
+			default:
+				$output = 'White';
+		}
+		
+		return $output;
+	}	
+	
+	function processEyeColor($value){
+		
+		switch(strtolower($value)){
+			case 'bk':
+				$output = 'Black';
+				break;
+			case 'br':
+				$output = 'Brown';
+				break;
+			case 'hz':
+				$output = 'Hazel';
+				break;
+			case 'bl':
+				$output = 'Blue';
+				break;
+			case 'gr':
+				$output = 'Green';
+				break;
+			default:
+				$output = 'N/A';
+		}
+		
+		return $output;
+	}
 	
 	function processAuditionType($value){
 		
@@ -219,5 +278,23 @@ class ActorProcess extends BaseProcess {
 		}
 		
 		return $skillOutput;
+	}
+	
+	function processActorRoles($roles){
+		
+		/*Initialize*/
+		$roleList = [];
+		$i = 0;
+
+		for( $i = 1; $i < 11; $i++ ) {
+			$roleList[] = [
+				'show'      => $roles['show' . $i],
+				'role'      => $roles['role' . $i],
+				'theater'   => $roles['thea' . $i],
+				'director'  => $roles['dir' . $i],
+			];
+		}
+		
+		return $roleList;
 	}
 }

@@ -28,12 +28,17 @@ class ActorController extends BaseController {
 				'object' 		=> $actorObject,
 				'name'   		=> $this->actorProcess->processActorName($actorObject),
 				'height'		=> $this->actorProcess->processActorHeight($actorObject['physical']['ht']),
+				'hair'			=> $this->actorProcess->processHairColor($actorObject['physical']['hair']),
+				'eyes'			=> $this->actorProcess->processEyeColor($actorObject['physical']['eye']),
 				'image'			=> $this->actorProcess->processActorImage($actorObject),
 				'resume'		=> $this->actorProcess->processActorResume($actorObject),
 				'audition_type' => $this->actorProcess->processAuditionType($actorObject['audition']['mononly']),
 				'vocal'  		=> $this->actorProcess->processActorVocal($actorObject['skills']['vocal']),
 				'skills' 		=> $this->actorProcess->processActorSkills($actorObject),
 				'ethnicity' 	=> $this->actorProcess->processActorEthnicity($actorObject),
+				'availableFor'	=> $this->actorProcess->processDate($actorObject['audition']['availfor']),
+				'availableTo' 	=> $this->actorProcess->processDate($actorObject['audition']['availto']),
+				'roles' 		=> $this->actorProcess->processActorRoles($actorObject['roles']),
 			];
 		}else{
 			$actor = [

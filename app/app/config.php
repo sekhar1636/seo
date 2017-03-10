@@ -18,7 +18,7 @@ define('BASE_URL', 'http://strawhat-auditions.com');
 define('BASE_PATH', '/home/strawh5/public_html');
 
 /*Define APP URL & PATH*/
-define('APP_ROOT', '/marcoApp/');
+define('APP_ROOT', '/app/');
 define('APP_URL', BASE_URL . APP_ROOT);
 define('APP_PATH', BASE_PATH . APP_ROOT);
 
