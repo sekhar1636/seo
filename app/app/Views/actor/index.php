@@ -20,7 +20,7 @@ if ($actor['active'] == TRUE){$title = ' | ' . $actor['name']['main'];}else{$tit
 						<h2 class="panel-title">
 							<?php echo $actor['name']['main'];?>
 							<span class="pull-right">
-								<span class="glyphicon glyphicon-earphone"></span>&nbsp;<?php echo $actor['object']['phone'];?>
+								<span class="glyphicon glyphicon-earphone"></span>&nbsp;<?php echo $actor['phone'];?>
 								&nbsp;|&nbsp;
 								<span class="glyphicon glyphicon-envelope"></span>
 									<a href="mailto:<?php echo $actor['object']['email']?>"><?php echo $actor['object']['email']?></a>
@@ -62,9 +62,9 @@ if ($actor['active'] == TRUE){$title = ' | ' . $actor['name']['main'];}else{$tit
 				                <div class="col-sm-12">
 					                <strong>Role Type: </strong> <?php echo $actor['ethnicity'];?><br/>
 					                <strong>Vocal Range: </strong> <?php echo $actor['vocal'];?><br/>
-									<strong>Dance: </strong> <?php echo $actor['danceSkills'];?><br/>
-									<strong>Instruments: </strong>	<?php echo $actor['instrumentSkills'];?><br/>
-									<strong>Technical Skills: </strong> <?php echo $actor['techSkills'];?><br/><br/>
+									<strong>Dance <em>(number of years studied)</em>: </strong> <?php echo $actor['danceSkills'];?><br/>
+									<strong>Instruments <em>(number of years studied)</em>: </strong>	<?php echo $actor['instrumentSkills'];?><br/>
+									<strong>Technical Skills <em>(1 = Beginner, 2 = Good, 3 = Excellent)</em>: </strong><br/><?php echo $actor['techSkills'];?><br/><br/>
 									<strong>Other Skills: </strong> <?php echo $actor['miscSkills'];?><br/>
 									<strong>Schools: </strong> <?php echo $actor['object']['roles']['school'];?>
 				                </div>

@@ -48,7 +48,31 @@ class ActorProcess extends BaseProcess {
 		$output = $feet."&prime;".$inches."&Prime;";
 		
 		return $output;
-	}	
+	}
+	
+	function processPhone($value){
+
+		/*Check for phone number*/
+		if(!isset($value{3})) { return ''; }
+
+		/*Clean Phone Number Value*/
+		$cleanPhone = preg_replace("/[^0-9]/", "", $value);
+		
+		switch(strlen($cleanPhone)) {
+			case 7:
+				return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $cleanPhone);
+				break;
+			case 10:
+				return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $cleanPhone);
+				break;
+			case 11:
+				return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$1($2) $3-$4", $cleanPhone);
+				break;
+			default:
+				return $cleanPhone;
+				break;
+		}
+	}
 	
 	function processActorAvailability($actor){
 		

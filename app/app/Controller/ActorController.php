@@ -32,6 +32,7 @@ class ActorController extends BaseController {
 				'eyes'				=> $this->actorProcess->processEyeColor($actorObject['physical']['eye']),
 				'image'				=> $this->actorProcess->processActorImage($actorObject),
 				'resume'			=> $this->actorProcess->processActorResume($actorObject),
+				'phone'				=> $this->actorProcess->processPhone($actorObject['phone']),
 				'audition_type' 	=> $this->actorProcess->processAuditionType($actorObject['audition']['mononly']),
 				'vocal'  			=> $this->actorProcess->processActorVocal($actorObject['skills']['vocal']),
 				'instrumentSkills' 	=> $this->actorProcess->processCoreSkills($actorObject['skills'],'instrument'),
