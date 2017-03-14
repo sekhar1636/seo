@@ -121,6 +121,8 @@ class ActorModel extends BaseModel {
 				"actor11.email",
 				"actor11.pix_link",
 				"actor11.resume_link",
+				"actor11.url1",
+				"actor11.url2",
 				"audition" => [
 					"audition11.audition_2yr",
 					"audition11.stock_lyr",

@@ -66,7 +66,27 @@ if ($actor['active'] == TRUE){$title = ' | ' . $actor['name']['main'];}else{$tit
 									<strong>Instruments <em>(number of years studied)</em>: </strong>	<?php echo $actor['instrumentSkills'];?><br/>
 									<strong>Technical Skills <em>(1 = Beginner, 2 = Good, 3 = Excellent)</em>: </strong><br/><?php echo $actor['techSkills'];?><br/><br/>
 									<strong>Other Skills: </strong> <?php echo $actor['miscSkills'];?><br/>
-									<strong>Schools: </strong> <?php echo $actor['object']['roles']['school'];?>
+									<strong>Schools: </strong> <?php echo $actor['object']['roles']['school'];?><br/>
+						            <?php
+							        if( ($actor['object']['url1'])||($actor['object']['url2'])){
+							        ?>    
+							            <strong>Web Link(s): </strong><ul>
+							            <?php
+								            if($actor['object']['url1']){
+									            echo '<li><a href="' . $ActorController->addScheme($actor['object']['url1']) . '" target="_blank">';
+									            	echo $actor['object']['url1'];
+									            echo '</a></li>';
+									        }
+								            if($actor['object']['url2']){
+									            echo '<li><a href="' . $ActorController->addScheme($actor['object']['url2']) . '" target="_blank">';
+									            	echo $actor['object']['url2'];
+									            echo '</a></li>';
+									        }
+								        ?>
+							            </ul>
+							        <?php    
+						            }
+						            ?>
 				                </div>
 			                </div>
 		                </div><!--END .col-md-8 col-lg-8-->
