@@ -1,6 +1,6 @@
 <?php
-/*LOAD CONTROLLERS*/
 $ActorController = new \App\Controller\ActorController;
+$ActorProcess = new \App\Process\ActorProcess;
 ?>
 
 <?php include VIEWS_DIR_PATH . 'actorSearch/_layouts/main.header.php';?>
@@ -13,7 +13,6 @@ $ActorController = new \App\Controller\ActorController;
 			    <span class="filter-group-label">Actor Details</span>  
 			    <fieldset data-filter-group="gender" class="control-group">
 			        <label class="control-group-label control-text">Gender</label>
-			        
 				    <button type="button" class="control control-gender control-text" data-filter="all">All</button>
 				    <button type="button" class="control control-gender control-text" data-filter=".M">Male</button>
 				    <button type="button" class="control control-gender control-text" data-filter=".F">Female</button>
@@ -52,12 +51,19 @@ $ActorController = new \App\Controller\ActorController;
 	                    <option value="[data-skill-vocal=B]">Baritone</option>
 	                </select>
 	            </fieldset><br/>
-	
 			    <!--<fieldset data-filter-group="height" class="control-group">
 			        <label class="control-group-label control-text">Height</label>
 				    <button type="button" class="control control-sort" data-sort="height:desc">Desc</button>
 				    <button type="button" class="control control-sort" data-sort="height:asc">Asc</button>
 			    </fieldset><br/>-->
+	            <fieldset data-filter-group="first-name" class="text-input-wrapper">
+				    <label class="control-group-label control-text">First Name</label>
+	                <input type="text" data-search-attribute="data-first-name" placeholder="Type first name here"/>
+	            </fieldset><br/>
+	            <fieldset data-filter-group="last-name" class="text-input-wrapper">
+				    <label class="control-group-label control-text">Last Name</label>
+	                <input type="text" data-search-attribute="data-last-name" placeholder="Type last name here"/>
+	            </fieldset>
 		    </div>
 		    
 		    <div class="filter-group" style="margin-bottom:10px;">
@@ -82,62 +88,84 @@ $ActorController = new \App\Controller\ActorController;
 	                    <label class="checkbox-label">Employment Availability</label>
 	                    <input type="checkbox" value="[data-availability=Y]"/>
 	                </div>
-				</fieldset><br/>
+				</fieldset>
 		    </div><br/>
 
 			<fieldset data-filter-group="ethnicity" class="checkbox-group" data-logic="and">
 				<label class="checkbox-group-label">Ethnicity</label>
-				
-                <div class="checkbox">
-                    <label class="checkbox-label">Native American</label>
-                    <input type="checkbox" value=".Na"/>
-                </div>
-                <div class="checkbox">
-                    <label class="checkbox-label">Asian</label>
-                    <input type="checkbox" value=".As"/>
-                </div>
-                <div class="checkbox">
-                    <label class="checkbox-label">White/Caucasian</label>
-                    <input type="checkbox" value=".Ca"/>
-                </div>
-                <div class="checkbox">
-                    <label class="checkbox-label">Black/African American</label>
-                    <input type="checkbox" value=".Af"/>
-                </div>
-                <div class="checkbox">
-                    <label class="checkbox-label">Hispanic</label>
-                    <input type="checkbox" value=".Hi"/>
-                </div>			    
-                <div class="checkbox">
-                    <label class="checkbox-label">European</label>
-                    <input type="checkbox" value=".Ea"/>
-                </div>	
-                <div class="checkbox">
-                    <label class="checkbox-label">Middle Eastern</label>
-                    <input type="checkbox" value=".Mi"/>
-                </div>	
-                <div class="checkbox">
-                    <label class="checkbox-label">Indian</label>
-                    <input type="checkbox" value=".In"/>
-                </div>
+				<?php
+				$ethnicities = ["Na","As","Ca","Af","Hi","Ea","Mi","In"];	
+				foreach($ethnicities as $race){
+	                echo '<div class="checkbox">';
+	                    echo '<label class="checkbox-label">' . $ActorProcess->processEthnicity($race) . '</label>';
+	                    echo '<input type="checkbox" value=".' . $race . '"/>';
+	                echo '</div>';
+				}
+				?>
 			</fieldset>
 			
-			<fieldset data-filter-group="skills" class="checkbox-group" data-logic="and">
-				<label class="checkbox-group-label">Skills</label>
+			<fieldset data-filter-group="dance" class="checkbox-group" data-logic="and">
+				<label class="checkbox-group-label">Dance</label>
 				<?php
-				$skills = ["ballet","ballroom","tap","swing","jazz","perc","sax","banjo","piano","drums","cello","clarinet","trombone","trumpet","flute","violin","guitar"];
+				$danceSkills = ["ballet","ballroom","tap","swing","jazz"];
 				
-				foreach($skills as $skill){
+				foreach($danceSkills as $danceSkill){
 	                echo '<div class="checkbox">';
-	                    echo '<label class="checkbox-label">' . ucfirst($skill) . '</label>';
-	                    echo '<input type="checkbox" value=".' . $skill . '"/>';
+	                    echo '<label class="checkbox-label">' . ucfirst($danceSkill) . '</label>';
+	                    echo '<input type="checkbox" value=".' . $danceSkill . '"/>';
+	                echo '</div>';
+				}
+				?>
+			</fieldset>
+
+			<fieldset data-filter-group="instrument" class="checkbox-group" data-logic="and">
+				<label class="checkbox-group-label">Instrument</label>
+				<?php
+				$instSkills = ["perc","sax","banjo","piano","drums","cello","clarinet","trombone","trumpet","flute","violin","guitar"];
+				
+				foreach($instSkills as $instSkill){
+	                echo '<div class="checkbox">';
+	                    echo '<label class="checkbox-label">' . ucfirst($instSkill) . '</label>';
+	                    echo '<input type="checkbox" value=".' . $instSkill . '"/>';
+	                echo '</div>';
+				}
+				?>
+			</fieldset>
+
+			<fieldset data-filter-group="tech" class="checkbox-group" data-logic="and">
+				<label class="checkbox-group-label">Technical</label>
+				<?php
+				$techSkills = [
+					"set_design" => "Set Design",
+					"lights" 	 => "Lights",
+					"costume" 	 => "Costume",
+					"box_office" => "Box Office",
+					"props" 	 => "Props",	
+				];	
+				foreach($techSkills as $techKey => $techSkill){
+	                echo '<div class="checkbox">';
+	                    echo '<label class="checkbox-label">' . $techSkill . '</label>';
+	                    echo '<input type="checkbox" value=".' . $techKey . '"/>';
+	                echo '</div>';
+				}
+				?>
+			</fieldset>
+
+			<fieldset data-filter-group="misc" class="checkbox-group" data-logic="and">
+				<label class="checkbox-group-label">Misc</label>
+				<?php
+				$miscSkills = ["shakes","cabaret","improv","mime","standup","acrobatics","juggling","puppetry","asl","painting","combat"];
+
+				foreach($miscSkills as $miscSkill){
+	                echo '<div class="checkbox">';
+	                    echo '<label class="checkbox-label">' . ucfirst($miscSkill) . '</label>';
+	                    echo '<input type="checkbox" value=".' . $miscSkill . '"/>';
 	                echo '</div>';
 				}
 				?>
 			</fieldset>
 
 		    <button type="reset" class="btn btn-warning btn-block">Reset Filters</button>
-		    
 		</form>
 	</div>
 	<div class="col-md-8">

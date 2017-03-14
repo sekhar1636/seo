@@ -62,6 +62,26 @@ class ActorModel extends BaseModel {
 					"skills11.violin",
 					"skills11.guitar"
 				],
+				"techSkills" => [
+					"skills11.set_design",
+					"skills11.lights",
+					"skills11.costume",
+					"skills11.box_office",
+					"skills11.props",
+				],
+				"miscSkills" => [
+					"skills11.shakes",
+					"skills11.cabaret",
+					"skills11.improv",
+					"skills11.mime",
+					"skills11.standup",
+					"skills11.acrobatics",
+					"skills11.juggling",
+					"skills11.puppetry",
+					"skills11.asl",
+					"skills11.painting",
+					"skills11.combat",
+				],
 				"physical" => [
 					"physical11.gender",
 					"physical11.ht",

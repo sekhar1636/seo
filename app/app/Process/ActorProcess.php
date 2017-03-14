@@ -397,7 +397,7 @@ class ActorProcess extends BaseProcess {
 			}
 		}
 		if($skillList){
-			if(!is_null($type)){
+			if(is_null($type)){
 				$skillOutput = implode(" ", $skillList);
 			}else{
 				$skillOutput = implode(", ", $skillList);

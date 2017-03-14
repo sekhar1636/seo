@@ -73,12 +73,14 @@ class ActorController extends BaseController {
 			/*Build MIX Class*/
 			$mixClass = $actor['physical']['gender'] . ' ';
 				$mixClass .= $this->actorProcess->processEthnicityList($actor,'slug') . ' ';
-				$mixClass .= $this->actorProcess->processSkillsList($actor['skills']);
+				$mixClass .= $this->actorProcess->processSkillsList($actor['skills']) . ' ';
+				$mixClass .= $this->actorProcess->processSkillsList($actor['techSkills']) . ' ';
+				$mixClass .= $this->actorProcess->processSkillsList($actor['miscSkills']);
 			
 			/*Build the Output*/
 			$actorList .= '<div class="mix ' . $mixClass . '" ';
-				$actorList .= 'data-first-name="' . $actor['firstname'] . '" ';
-				$actorList .= 'data-last-name="' . $actor['lastname'] . '" ';
+				$actorList .= 'data-first-name="' . strtolower($actor['firstname']) . '" ';
+				$actorList .= 'data-last-name="' . strtolower($actor['lastname']) . '" ';
 				$actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
 				$actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
 				$actorList .= 'data-audition-type="' . $actor['audition']['mononly'] . '" ';
