@@ -33,9 +33,20 @@
                 </div>
                 <div class="portlet-body">
                     <div class="col-md-7">
+                    <form action="/your-server-side-code" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_DhPf707EvWL3bXNGuINEMmWl"
+    data-amount="999"
+    data-name="Demo Site"
+    data-description="Widget"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto">
+  </script>
+</form>
                         <div class="timeline">
                             <!-- TIMELINE ITEM -->
-                            @if(true)
+                            @if(\Auth::user()->actor)
                                 <div class="timeline-item">
                                     <div class="timeline-badge">
                                         <div class="timeline-icon">
@@ -73,7 +84,7 @@
                                                 
                                             </div>
                                             <div class="timeline-body-head-actions">
-                                                <a href="" class="btn btn-danger">Update</a>
+                                                <a href="{{route('actor::getEditProfile')}}" class="btn btn-danger">Update</a>
                                             </div>
                                         </div>
                                         <div class="timeline-body-content">
@@ -86,55 +97,7 @@
                             @endif
                             <!-- END TIMELINE ITEM -->
                             <!-- TIMELINE ITEM -->
-                            @if(true)
-                            <div class="timeline-item">
-                                <div class="timeline-badge">
-                                    <div class="timeline-icon">
-                                        <i class="icon-doc font-green"></i>
-                                    </div>
-                                </div>
-                                <div class="timeline-body activeBox">
-                                 
-                                    <div class="timeline-body-head">
-                                        <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-green">Resume Uploaded</span>
-                                            
-                                        </div>
-                                        <div class="timeline-body-head-actions">
-                                            <a href="javascript:;" class="btn green">Done</a>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-body-content">
-                                        <span class="font-grey-cascade"> PDF file uploaded.
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            @else
-                            <div class="timeline-item">
-                                <div class="timeline-badge">
-                                    <div class="timeline-icon">
-                                        <i class="icon-doc font-red"></i>
-                                    </div>
-                                </div>
-                                <div class="timeline-body inactiveBox">
-                                 
-                                    <div class="timeline-body-head">
-                                        <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-red-intense">Upload Resume</span>
-                                            
-                                        </div>
-                                        <div class="timeline-body-head-actions">
-                                            <a href="" class="btn btn-danger">Update</a>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-body-content">
-                                        <span class="font-grey-cascade"> Upload pdf file
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
+                         
                             <!-- END TIMELINE ITEM -->
                             <!-- TIMELINE ITEM -->
                             <div class="timeline-item">
@@ -147,16 +110,16 @@
                                  
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-red-intense">You have new follower</span>
+                                            <span class="timeline-body-alerttitle font-red-intense">Payment</span>
                                             
                                         </div>
                                         <div class="timeline-body-head-actions">
-                                            <a href="" class="btn btn-danger">Update</a>
+                                            <a href="" class="btn btn-danger">Pay Now</a>
                                         </div>
                                     </div>
                                     <div class="timeline-body-content">
-                                        <span class="font-grey-cascade"> You have new follower
-                                            <a href="javascript:;">Ivan Rakitic</a>
+                                        <span class="font-grey-cascade"> Payment Pending
+                                           
                                         </span>
                                     </div>
                                 </div>

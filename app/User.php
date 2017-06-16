@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+    * One to one relationship with actor table
+    */
+    public function actor()
+    {
+        return $this->hasOne('App\Actor');
+    }
 }

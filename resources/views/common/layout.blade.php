@@ -149,7 +149,7 @@
                                         </li>
                                         <li>
                                             <a href="{{route('getContents')}}">
-                                                <i class="icon-briefcase"></i> Preimum Content
+                                                <i class="icon-briefcase"></i> Premium content
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>

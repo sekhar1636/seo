@@ -17,7 +17,7 @@ Route::get('/faq',['as'=>'getFaq', 'uses'=>'CommonController@getFaq']);
 Route::get('/younger', ['as'=>'getYounger', 'uses'=>'CommonController@getYounger']);
 Route::get('/contact', ['as'=>'getContact', 'uses'=>'CommonController@getContact']);
 Route::post('/contact',['as'=>'postContact', 'uses'=>'CommonController@postContact']);
-Route::get('/preimum_content', ['as'=>'getContents', 'uses'=>'CommonController@getContent']);
+Route::get('/premium_content', ['as'=>'getContents', 'uses'=>'CommonController@getContent']);
 
 
 Route::get('/login', ['as' => 'getLogin', 'uses' =>  "CommonController@getLogin"]);
@@ -48,7 +48,8 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::group(['as' => 'actor::', 'middleware' => 'role:actor'], function ()
 		{
 			Route::get('/', ['as'=>'actorProfile', 'uses'=>'ActorController@getProfile']);
-
+			Route::get('update', ['as'=>'getEditProfile', 'uses'=>'ActorController@getEditProfile']);
+			Route::post('update', ['as'=>'postEditProfile', 'uses'=>'ActorController@postEditProfile']);
 		});
 	});
 	Route::group(['prefix'=>'staff'], function (){
