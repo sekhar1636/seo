@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('/', ['as'=>'actorProfile', 'uses'=>'ActorController@getProfile']);
 			Route::get('update', ['as'=>'getEditProfile', 'uses'=>'ActorController@getEditProfile']);
 			Route::post('update', ['as'=>'postEditProfile', 'uses'=>'ActorController@postEditProfile']);
+			Route::post('password', ['as'=>'postEditPassword', 'uses'=>'ActorController@postEditPassword']);
+			
 		});
 	});
 	Route::group(['prefix'=>'staff'], function (){

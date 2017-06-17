@@ -21,8 +21,8 @@ class Misc
 	];
 
 	public static $genders = [
-		'm' => 'Male',
-		'f' => 'Female',
+		'Male' => 'Male',
+		'Female' => 'Female',
 	];
 
 	public static $auditionType = [
@@ -58,10 +58,10 @@ class Misc
 		'Props'=>'Props'
 	];
 	public static $ethnicity = [
-		'Native Amer.' => 'Native Amer.',
+		'Native Amer' => 'Native Amer',
 		'Asian' => 'Asian',		
-		'White/Caucasian'=>'White/Caucasian',
-		'Black/African Amer.' => 'Black/African Amer.',		
+		'White_Caucasian'=>'White_Caucasian',
+		'Black_African Amer' => 'Black_African Amer',		
 		'Hispanic'=>'Hispanic',
 		'European'=>'European',
 		'Middle Eastern' => 'Middle Eastern',		

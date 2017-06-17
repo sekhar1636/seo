@@ -273,14 +273,83 @@ class CommonController extends Controller
 
 	}
 
+
+	public function prepareData($data){
+
+		if($data){
+			$removeWhitespace = preg_replace('/\s+/', '', $data);
+			$removeComma = str_replace(',', ' ', $removeWhitespace);
+			return $removeComma.' ';
+		}else{
+			return " ";
+		}
+		
+	}
+
 	public function getActors(){
-		dd('asd');
+		$actors = \App\User::join('actors','actors.user_id', '=', 'users.id')
+		->get();
+
+		$actorList = "";
+		/*Loop through the Actors*/
+		foreach($actors as $actor){
+		
+			
+			/*Build MIX Class*/
+			$mixClass = $actor->gender . ' ';
+				$mixClass .= $this->prepareData($actor->ethnicity) . ' ';
+				$mixClass .=$this->prepareData($actor->misc) . ' ';
+				$mixClass .= $this->prepareData($actor->technical) . ' ';
+				$mixClass .= $this->prepareData($actor->dance) . ' ';
+				$mixClass .= $this->prepareData($actor->jobType) . ' ';
+				$mixClass .= $this->prepareData($actor->instrument);
+			
+			/*Build the Output*/
+			$actorList .= '<div class="mix ' . $mixClass . '" ';
+				$actorList .= 'data-first-name="' . $actor->name . '" ';
+				$actorList .= 'data-last-name="' . $actor->name . '" ';
+				// $actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
+				// $actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
+				$actorList .= 'data-audition-type="' . $actor->auditionType . '" ';
+				$actorList .= 'data-skill-vocal="' . $actor->vocalRange . '" ';
+				
+			$actorList .= '>';
+				$actorList .= '<div class="mix-content">';
+					$actorList .= '<h2>' . $actor->name. '</h2>';
+					
+					if($actor->photo_url){
+						$actorList .= '<img src="' . $actor->photo_url . '" height="130" style="height:130px;" class="actorThumb">' . '<br/>';
+					}
+
+						$actorList .= $actor->auditionType . '<br/>';
+						
+						if($actor-> != 'N'){
+							$actorList .= '<strong>Apprentice: </strong>' . $this->actorProcess->processYesNoMaybe($actor['audition']['apprentice']) . '<br/>';
+						}
+
+						// if($actor['audition']['intern'] != 'N'){
+						// 	$actorList .= '<strong>Internship: </strong>' . $this->actorProcess->processYesNoMaybe($actor['audition']['intern']) . '<br/>';
+						// }
+
+						$actorList .= '<strong>Employment Availability:</strong><br/>' . $actor->from. ' to ' . $actor->to. '<br/>';
+						
+						if ($actor->resume_path){
+							$actorList .= '<a href="' . public_path($actor->resume_path) . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actor->name . '\'s Resume</a>';
+						}
+
+						$actorList .= '<a href="#" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actor->name . '\'s Profile</a>';
+	
+				$actorList .= '</div>';
+			$actorList .= '</div>' . PHP_EOL;	
+		}
+
+		return view('actor.actorSearch')->with('actorList', $actorList);
 	}
 	public function getTheater(){
-		dd('theaters');
+		dd('Theater Page Coming Soon');
 	}
 	public function getStaff(){
-		dd('staff');
+		dd('Staff Page Coming Soon');
 	}
 
 

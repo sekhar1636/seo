@@ -33,17 +33,7 @@
                 </div>
                 <div class="portlet-body">
                     <div class="col-md-7">
-                    <form action="/your-server-side-code" method="POST">
-  <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_DhPf707EvWL3bXNGuINEMmWl"
-    data-amount="999"
-    data-name="Demo Site"
-    data-description="Widget"
-    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-    data-locale="auto">
-  </script>
-</form>
+                
                         <div class="timeline">
                             <!-- TIMELINE ITEM -->
                             @if(\Auth::user()->actor)
@@ -59,7 +49,7 @@
                                                 <span class="timeline-body-alerttitle font-green">Profile Information</span>
                                             </div>
                                             <div class="timeline-body-head-actions">
-                                                <a href="javascript:;" class="btn green">Done</a>
+                                                <a href="{{route('actor::getEditProfile')}}" class="btn green">Update</a>
                                             </div>
                                         </div>
                                         <div class="timeline-body-content">

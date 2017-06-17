@@ -13,4 +13,27 @@ class Actor extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function setPhoto($file, $saveDB = true)
+    {
+        // Medium
+
+        // $stream = Image::make($file->getRealPath())
+        //     ->fit(278, 186)
+        //     ->stream('jpg', 80);
+        // $stream = $stream->detach();
+        
+
+        $resumeID =  $this->id . '-medium-' . time() . '.pdf';
+        $resumePath = 'photos/profile-pics/' . $resumeID;
+
+        DataIO::deleteFile($resumePath);
+
+        $this->photo_url = \Config::get("filesystems.parent_url") . $resumePath;
+        $this->photo_path = $resumePath;
+
+        if($saveDB) {
+            $this->save();
+        }
+    }
 }

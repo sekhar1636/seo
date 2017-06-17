@@ -24,6 +24,8 @@ class CreateActorsTable extends Migration
             $table->string('eyes', 20);
             $table->integer('weight');
             $table->string('school', 150);
+            $table->date('from');
+            $table->date('to');
             $table->string('auditionType', 30);
             $table->string('vocalRange', 30);
             $table->string('jobType');
@@ -34,6 +36,8 @@ class CreateActorsTable extends Migration
             $table->string('misc');
             $table->string('photo_path',70)->nullable();
             $table->string('photo_url',150)->nullable();
+
+            $table->string('resume_path',70)->nullable();
 
             $table->foreign('user_id')
                   ->references('id')->on('users')
