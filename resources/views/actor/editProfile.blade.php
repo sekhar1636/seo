@@ -158,24 +158,25 @@
 				                 </div>
 				                <div class="row">
 				                    <div class="col-md-6">
-				                        <div class="form-group" {{ $errors->has("name") ? "has-error":"" }}'>
-				                                <label class="control-label col-md-3">Name</label>
+				                        <div class="form-group" {{ $errors->has("first_name") ? "has-error":"" }}'>
+				                                <label class="control-label col-md-3">First Name</label>
 				                                <div class="col-md-9">
-				                                {!! Form::text('name',@$actor->name, ['class' => 'form-control', 'placeholder' => ' Fullname', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'40']) !!}
-				                                <span class="help-block"> {{ $errors->first("name") }} </span>
+				                                {!! Form::text('first_name',@$actor->first_name, ['class' => 'form-control', 'placeholder' => ' First Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+				                                <span class="help-block"> {{ $errors->first("first_name") }} </span>
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <div class="col-md-6">
+				                        <div class="form-group" {{ $errors->has("last_name") ? "has-error":"" }}'>
+				                                <label class="control-label col-md-3">Last Name</label>
+				                                <div class="col-md-9">
+				                                {!! Form::text('last_name',@$actor->last_name, ['class' => 'form-control', 'placeholder' => ' Last Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+				                                <span class="help-block"> {{ $errors->first("last_name") }} </span>
 				                            </div>
 				                        </div>
 				                    </div>
 
-				                    <div class="col-md-6">
-				                        <div class="form-group" {{ $errors->has("age") ? "has-error":"" }}'>
-				                                <label class="control-label col-md-3">Age</label>
-				                                <div class="col-md-9">
-				                                {!! Form::text('age', @$actor->age, ['class' => 'form-control', 'placeholder' => ' Age', 'required'=>'required', 'digits'=>'true' , 'range'=>'[10,100]','maxlength'=>'3']) !!}
-				                                <span class="help-block"> {{ $errors->first("age") }} </span>
-				                            </div>
-				                        </div>
-				                    </div>
+				                   
 				                   
 				                </div>
 				                <!--/row-->
@@ -235,7 +236,20 @@
 				                            </div>
 				                        </div>
 				                    </div>
-				                    <div class="col-md-6">
+				                     <div class="col-md-6">
+				                        <div class="form-group" {{ $errors->has("age") ? "has-error":"" }}'>
+				                                <label class="control-label col-md-3">Age</label>
+				                                <div class="col-md-9">
+				                                {!! Form::text('age', @$actor->age, ['class' => 'form-control', 'placeholder' => ' Age', 'required'=>'required', 'digits'=>'true' , 'range'=>'[10,100]','maxlength'=>'3']) !!}
+				                                <span class="help-block"> {{ $errors->first("age") }} </span>
+				                            </div>
+				                        </div>
+				                    </div>
+				                   
+				                </div>
+				                <div class="row">
+				                	 <div class="col-md-6">
+
 				                        <div class="form-group" {{ $errors->has("school") ? "has-error":"" }}'>
 				                                <label class="control-label col-md-3">School</label>
 				                                <div class="col-md-9">

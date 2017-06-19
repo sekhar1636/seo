@@ -1,7 +1,7 @@
 
 @extends('common.layout')
 
-@section('title', 'Login In')
+@section('title', 'Login')
 
 @section('style')
 <link href="{{asset('assets/pages/css/login-3.min.css')}}" rel="stylesheet" type="text/css" />

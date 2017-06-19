@@ -206,7 +206,7 @@
                                     <!-- BEGIN PAGE BREADCRUMBS -->
                                     <ul class="page-breadcrumb breadcrumb">
                                         <li>
-                                            <a href="{{route('getIndex')}}">Home</a>
+                                            <a href="{{route('getIndex')}}">Strawhat</a>
                                             <i class="fa fa-circle"></i>
                                         </li>
                                         <li>

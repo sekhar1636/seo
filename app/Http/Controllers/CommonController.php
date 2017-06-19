@@ -293,8 +293,6 @@ class CommonController extends Controller
 		$actorList = "";
 		/*Loop through the Actors*/
 		foreach($actors as $actor){
-		
-			
 			/*Build MIX Class*/
 			$mixClass = $actor->gender . ' ';
 				$mixClass .= $this->prepareData($actor->ethnicity) . ' ';
@@ -306,8 +304,8 @@ class CommonController extends Controller
 			
 			/*Build the Output*/
 			$actorList .= '<div class="mix ' . $mixClass . '" ';
-				$actorList .= 'data-first-name="' . $actor->name . '" ';
-				$actorList .= 'data-last-name="' . $actor->name . '" ';
+				$actorList .= 'data-first-name="' . $actor->first_name . '" ';
+				$actorList .= 'data-last-name="' . $actor->last_name . '" ';
 				// $actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
 				// $actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
 				$actorList .= 'data-audition-type="' . $actor->auditionType . '" ';
@@ -315,17 +313,16 @@ class CommonController extends Controller
 				
 			$actorList .= '>';
 				$actorList .= '<div class="mix-content">';
-					$actorList .= '<h2>' . $actor->name. '</h2>';
-					
+					$actorList .= '<h2>' . $actor->first_name.' '.$actor->last_name. '</h2>';
 					if($actor->photo_url){
 						$actorList .= '<img src="' . $actor->photo_url . '" height="130" style="height:130px;" class="actorThumb">' . '<br/>';
 					}
 
 						$actorList .= $actor->auditionType . '<br/>';
 						
-						if($actor-> != 'N'){
-							$actorList .= '<strong>Apprentice: </strong>' . $this->actorProcess->processYesNoMaybe($actor['audition']['apprentice']) . '<br/>';
-						}
+						// if($actor-> != 'N'){
+						// 	$actorList .= '<strong>Apprentice: </strong>' . $this->actorProcess->processYesNoMaybe($actor['audition']['apprentice']) . '<br/>';
+						// }
 
 						// if($actor['audition']['intern'] != 'N'){
 						// 	$actorList .= '<strong>Internship: </strong>' . $this->actorProcess->processYesNoMaybe($actor['audition']['intern']) . '<br/>';
@@ -334,10 +331,9 @@ class CommonController extends Controller
 						$actorList .= '<strong>Employment Availability:</strong><br/>' . $actor->from. ' to ' . $actor->to. '<br/>';
 						
 						if ($actor->resume_path){
-							$actorList .= '<a href="' . public_path($actor->resume_path) . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actor->name . '\'s Resume</a>';
+							$actorList .= '<a href="' . public_path($actor->resume_path) . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actor->last_name . '\'s Resume</a>';
 						}
-
-						$actorList .= '<a href="#" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actor->name . '\'s Profile</a>';
+						$actorList .= '<a href="#" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actor->last_name . '\'s Profile</a>';
 	
 				$actorList .= '</div>';
 			$actorList .= '</div>' . PHP_EOL;	

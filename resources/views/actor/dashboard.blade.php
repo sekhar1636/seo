@@ -22,6 +22,18 @@
 <div class="page-content-inner">
     <div class="row">
         <div class="col-md-12">
+            <div class="alert alert-danger {{{ Session::has('error_message')? '' : 'display-hide' }}}">            
+                <button class="close" data-close="alert"></button>
+                <span>
+                    {!! Session::has('error_message') ? Session::pull('error_message') : 'Please correct your fields.' !!}
+                </span>
+            </div>
+            <div class="alert alert-success {{{ Session::has('success_message') ? '' : 'display-hide' }}}">
+                <button class="close" data-close="alert"></button>
+                <span>
+                    {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!}
+                </span>
+            </div>
             <div class="portlet light portlet-fit ">
                 <div class="portlet-title">
                     <div class="caption">
@@ -90,31 +102,60 @@
                          
                             <!-- END TIMELINE ITEM -->
                             <!-- TIMELINE ITEM -->
-                            <div class="timeline-item">
-                                <div class="timeline-badge">
-                                    <div class="timeline-icon">
-                                        <i class="icon-credit-card font-red"></i>
-                                    </div>
-                                </div>
-                                <div class="timeline-body inactiveBox">
-                                 
-                                    <div class="timeline-body-head">
-                                        <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-red-intense">Payment</span>
-                                            
-                                        </div>
-                                        <div class="timeline-body-head-actions">
-                                            <a href="" class="btn btn-danger">Pay Now</a>
+                            @if(\Auth::user()->payment_status == 1)
+                                <div class="timeline-item">
+                                    <div class="timeline-badge">
+                                        <div class="timeline-icon">
+                                            <i class="icon-credit-card font-green"></i>
                                         </div>
                                     </div>
-                                    <div class="timeline-body-content">
-                                        <span class="font-grey-cascade"> Payment Pending
-                                           
-                                        </span>
+                                    <div class="timeline-body activeBox">
+                                     
+                                        <div class="timeline-body-head">
+                                            <div class="timeline-body-head-caption">
+                                                <span class="timeline-body-alerttitle font-green">Payment</span>
+                                                
+                                            </div>
+                                            <div class="timeline-body-head-actions">
+                                                <a href="javascript:;" class="btn btn-success">Done</a>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Payment Completed
+                                               
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- END TIMELINE ITEM -->
+                                <!-- END TIMELINE ITEM -->
+                            @else
+                                 <div class="timeline-item">
+                                    <div class="timeline-badge">
+                                        <div class="timeline-icon">
+                                            <i class="icon-credit-card font-red"></i>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-body inactiveBox">
+                                     
+                                        <div class="timeline-body-head">
+                                            <div class="timeline-body-head-caption">
+                                                <span class="timeline-body-alerttitle font-red-intense">Payment</span>
+                                                
+                                            </div>
+                                            <div class="timeline-body-head-actions">
+                                                <a href="{{route('actor::getActorPayment')}}" class="btn btn-danger">Pay Now</a>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Payment Pending
+                                               
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END TIMELINE ITEM -->
+                            @endif
+                            
                         </div>
 
                     </div>

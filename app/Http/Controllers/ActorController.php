@@ -6,37 +6,24 @@ use Illuminate\Http\Request;
 
 class ActorController extends Controller
 {
-    public function getProfile(){
-    	// \Stripe\Stripe::setApiKey("sk_test_zeE2PThsOCW3262KjaYFQg9T");
-//     	if(\Stripe\Plan::retrieve("golsd")){
-    // 	dd('asd');
-    // }else{
-    // 	dd('ddasd');
-    // }
-
-    //     	\Stripe\Plan::create(array(
-    // 		  "amount" => 2000,
-    // 		  "interval" => "month",
-    //  		  "interval_count"=> 3,
-    // 		  "name" => "Amazing Gold Plan",
-    // 		  "currency" => "usd",
-    // 		  "id" => "gold")
-    // 		);
-
-
+    public function index(){
+        if(\Auth::user()->actor && \Auth::user()->payment_status){
+            return redirect()->route('actor::getEditProfile');
+        }
     	return view('actor.dashboard');
     }
-    public function getEditProfile(){
+    public function edit(){
     	if(\Auth::user()->actor){
             return view('actor.editProfile')->with('actor',\Auth::user()->actor);
     	}
     	return view('actor.editProfile');
     }
-    public function postEditProfile(Request $request){
+    public function update(Request $request){
     	$validator = \Validator::make($request->all(),
             [
                 "resume"=>"mimes:pdf|max:10000",
-                'name' => "required|max:40|min:3",
+                'first_name' => "required|max:20|min:3",
+                'last_name' => "required|max:20|min:3",
                 'age'=>'required|max:3|min:1',
                 'gender'=>'required|max:7',
                 'height'=>'required|max:4',
@@ -69,7 +56,8 @@ class ActorController extends Controller
         }
         	
     	$actor->user_id = \Auth::user()->id;
-        $actor->name = $request->get('name');
+        $actor->first_name = $request->get('first_name');
+        $actor->last_name = $request->get('last_name');
         $actor->age = $request->get('age');
         $actor->gender = $request->get('gender');
         $actor->height = $request->get('height');
@@ -96,7 +84,7 @@ class ActorController extends Controller
             }
         }else{
            if($actor->save()){
-                 return redirect()->back()->with('success_message', 'Profile Data Successfully Created');
+                 return redirect()->route('actor::actorProfile')->with('success_message', 'Profile Data Successfully Created');
             }
         }
         
@@ -134,5 +122,23 @@ class ActorController extends Controller
         }
 
     }
+
+    /**
+    * TODO : Dummy payment just chaning payment status for now
+    * Will update with proper payment system in future
+    */
+    public function payment(){
+        if(\Auth::user()->payment_status == 1){
+            return redirect()->back()->with('success_message', 'Payment completed');
+        }else{
+            \Auth::user()->payment_status = 1;
+            if(\Auth::user()->save()){
+                return redirect()->back()->with('success_message', 'Payment completed');
+            }else{
+                return redirect()->back()->with('error_message', 'Payment not completed please try again.');
+            }
+        }
+    }
+
 
 }

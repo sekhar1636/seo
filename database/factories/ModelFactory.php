@@ -21,12 +21,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
         'role'=>'actor',
+        'payment_status'=>'1'
     ];
 });
 
 $factory->define(App\Actor::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->firstName($gender = null|'male'|'female'),
+        'last_name' => $faker->lastName($gender = null|'male'|'female'),
         'age' => $faker->numberBetween($min = 10, $max = 100),
         'gender' => $faker->randomElement($array = array ('Male','Female')) ,
        	'height'=>$faker->numberBetween($min = 10, $max = 100),

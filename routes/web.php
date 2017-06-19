@@ -47,11 +47,11 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::group(['prefix'=>'actor'], function (){
 		Route::group(['as' => 'actor::', 'middleware' => 'role:actor'], function ()
 		{
-			Route::get('/', ['as'=>'actorProfile', 'uses'=>'ActorController@getProfile']);
-			Route::get('update', ['as'=>'getEditProfile', 'uses'=>'ActorController@getEditProfile']);
-			Route::post('update', ['as'=>'postEditProfile', 'uses'=>'ActorController@postEditProfile']);
+			Route::get('/', ['as'=>'actorProfile', 'uses'=>'ActorController@index']);
+			Route::get('update', ['as'=>'getEditProfile', 'uses'=>'ActorController@edit']);
+			Route::post('update', ['as'=>'postEditProfile', 'uses'=>'ActorController@update']);
 			Route::post('password', ['as'=>'postEditPassword', 'uses'=>'ActorController@postEditPassword']);
-			
+			Route::get('payment', ['as'=>'getActorPayment', 'uses'=>'ActorController@payment']);
 		});
 	});
 	Route::group(['prefix'=>'staff'], function (){
