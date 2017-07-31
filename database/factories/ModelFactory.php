@@ -12,6 +12,14 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Faq::class, function (Faker\Generator $faker) {
+    return [
+        'question' => $faker->sentence,
+        'answer'=> $faker->paragraph,
+		'_type'=>$faker->randomElement($array = array ("Application","Selection","Members","Audition"))
+    ];
+});
+
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -31,10 +39,11 @@ $factory->define(App\Actor::class, function (Faker\Generator $faker) {
         'last_name' => $faker->lastName($gender = null|'male'|'female'),
         'age' => $faker->numberBetween($min = 10, $max = 100),
         'gender' => $faker->randomElement($array = array ('Male','Female')) ,
-       	'height'=>$faker->numberBetween($min = 10, $max = 100),
-       	'hair'=>$faker->word,
-       	'eyes'=>$faker->word,
-       	'weight'=>$faker->randomDigit,
+       	'feet'=>$faker->numberBetween($min = 1, $max = 8),
+        'inch'=>$faker->numberBetween($min = 1, $max = 12),
+       	'hair'=>$faker->randomElement($array = array ('Black','Brown')),
+       	'eyes'=>$faker->randomElement($array = array ('Black','Brown')),
+       	'weight'=>$faker->numberBetween($min = 70, $max = 400),
        	'photo_url' => $faker->imageUrl($width = 200, $height = 200),
         'from'=> $faker->date($format = 'Y-m-d'),
         'to'=>$faker->date($format='Y-m-d'),

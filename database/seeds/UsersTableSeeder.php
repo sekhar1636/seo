@@ -38,5 +38,14 @@ class UsersTableSeeder extends Seeder
         	$theater->role = 'theater';
         	$theater->save();
         }
+		$adminCount = \App\User::where('email', 'admin@admin.com')->count();
+        if($adminCount == 0){
+        	$admin = new \App\User;
+        	$admin->name = "Administrator";
+        	$admin->email = "admin@admin.com";
+        	$admin->password = bcrypt('pass1234');
+        	$admin->role = 'admin';
+        	$admin->save();
+        }
     }
 }

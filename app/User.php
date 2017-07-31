@@ -34,5 +34,13 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Actor');
     }
+	
+	public function delete()
+    {
+        // delete related actor 
+        $this->actor()->delete();
+        // delete the user
+        return parent::delete();
+    }
 
 }

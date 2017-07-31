@@ -20,6 +20,32 @@ class Misc
 		'1' => 'Yes',	
 	];
 
+	public static $feet = [
+		'1' => '1 ft',
+		'2' => '2 ft',	
+		'3' => '3 ft',	
+		'4' => '4 ft',	
+		'5' => '5 ft',	
+		'6' => '6 ft',	
+		'7' => '7 ft',	
+		'8' => '8 ft',	
+	];
+
+	public static $inch = [
+		'1' => '1 inches',
+		'2' => '2 inches',	
+		'3' => '3 inches',	
+		'4' => '4 inches',	
+		'5' => '5 inches',	
+		'6' => '6 inches',	
+		'7' => '7 inches',	
+		'8' => '8 inches',	
+		'9' => '9 inches',	
+		'10' => '10 inches',	
+		'11' => '11 inches',	
+		'12' => '12 inches',		
+	];
+
 	public static $genders = [
 		'Male' => 'Male',
 		'Female' => 'Female',
@@ -93,6 +119,33 @@ class Misc
 		'Asl' => 'Asl',		
 		'Painting'=>'Painting',
 		'Combat' => 'Combat'
+	];
+
+	public static $eyes = [
+		'Black' => 'Black',
+		'Blue' => 'Blue',		
+		'Brown'=>'Brown',
+		'Gray' => 'Gray',		
+		'Green'=>'Green',
+		'Hazel' => 'Hazel',
+		'Pink' => 'Pink',		
+		'Maroon'=>'Maroon',
+	];
+
+	public static $hair = [
+		'Brown' => 'Brown',
+		'Black' => 'Black',		
+		'White'=>'White',
+		'Sandy' => 'Sandy',		
+		'Red' => 'Red',
+		'Blond' => 'Blond',		
+		'Blue'=>'Blue',
+		'Green' => 'Green',
+		'Orange' => 'Orange',		
+		'Pink'=>'Pink',
+		'Red' => 'Red',
+		'Purple' => 'Purple',		
+		'Blue'=>'Blue',
 	];
 
 	public static function arrayInsertBefore($key, array &$array, $new_key, $new_value) {

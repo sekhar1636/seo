@@ -11,7 +11,7 @@ var mixer = mixitup(containerEl, {
 		enable: true
 	},
 	pagination: {
-		limit: 40
+		limit: 39
 	}
 });
 

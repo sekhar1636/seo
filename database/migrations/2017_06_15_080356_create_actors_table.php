@@ -20,7 +20,8 @@ class CreateActorsTable extends Migration
             $table->string('last_name', 20);
             $table->integer('age');
             $table->string('gender', 7);
-            $table->string('height', 4);
+            $table->integer('feet');
+            $table->integer('inch');
             $table->string('hair', 20);
             $table->string('eyes', 20);
             $table->integer('weight');
@@ -37,6 +38,9 @@ class CreateActorsTable extends Migration
             $table->string('misc');
             $table->string('photo_path',70)->nullable();
             $table->string('photo_url',150)->nullable();
+
+            $table->string('precrop_path',70)->nullable();
+            $table->string('precrop_url',150)->nullable();
 
             $table->string('resume_path',70)->nullable();
 

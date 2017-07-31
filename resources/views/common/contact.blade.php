@@ -4,78 +4,29 @@
 
 @section('style')
 	<link href="{{asset('assets/pages/css/contact.min.css')}}" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .c-content-contact-1>.row .c-body{
+            margin:0;
+        }
+    </style>
 @endsection
 
 @section('js')
-    <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
-    <script src="{{asset('assets/global/plugins/gmaps/gmaps.min.js')}}" type="text/javascript"></script>
-	<script src="{{asset('assets/pages/scripts/contact.min.js')}}" type="text/javascript"></script>
+   
+	
     <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="js/additional-methods.min.js"></script>
     <script src="{{asset('js/main.js')}}" type="text/javascript"></script>
+<!--  <script src="{{asset('assets/pages/scripts/contact.js')}}" type="text/javascript"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPDYloTScp0aDYyniEhynWLrbDM2HDkVQ&callback=initMap"
+  type="text/javascript"></script> -->
 
+       
 @endsection
 @section('content')
  <!-- BEGIN PAGE CONTENT INNER -->
 <div class="page-content-inner">
-    <div class="c-content-contact-1 c-opt-1">
-        <div class="row" data-auto-height=".c-height">
-            <div class="col-lg-8 col-md-6 c-desktop"></div>
-            <div class="col-lg-4 col-md-6">
-                <div class="c-body">
-                    <div class="c-section">
-                        <h3>Strawhat</h3>
-                    </div>
-                    <div class="c-section">
-                        <div class="c-content-label uppercase bg-blue">Address</div>
-                        <p>StrawHat Auditions, #315, 1771  
-                            <br/>Post Road East,
-                            <br/>Westport, CT 06880</p>
-                    </div>
-                    <div class="c-section">
-                        <div class="c-content-label uppercase bg-blue">Contacts</div>
-                        <p>
-                             203-254-8572
-                            <br/>
-                            
-                    </div>
-                    <div class="c-section">
-                        <div class="c-content-label uppercase bg-blue">Email</div>
-                        <p>
-                             info@strawhat-auditions.com
-                            <br/>
-                    </div>
-                    <div class="c-section">
-                        <div class="c-content-label uppercase bg-blue">Social</div>
-                        <br/>
-                        <ul class="c-content-iconlist-1 ">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-youtube-play"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-linkedin"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 615px;"></div>
-    </div>
+    
     <div class="c-content-feedback-1 c-option-1">
         <div class="row">
         <div class="col-md-7">
@@ -130,6 +81,65 @@
                         <a style="margin-top: 10px;" href="{{route('getFaq')}}"><button class="btn grey-cararra font-dark">Visit Now</button></a>
                     </div>
                 </div>
+
+                <div class="c-content-contact-1 c-opt-1" style="margin:0;">
+                    <div class="row" data-auto-height=".c-height" style="margin:0;">
+                       
+                     
+                            <div class="c-body">
+                                <div class="c-section">
+                                    <h3>Strawhat</h3>
+                                </div>
+                                <div class="c-section">
+                                    <div class="c-content-label uppercase bg-blue">Address</div>
+                                    <p>StrawHat Auditions, #315, 1771  
+                                        <br/>Post Road East,
+                                        <br/>Westport, CT 06880</p>
+                                </div>
+                                <div class="c-section">
+                                    <div class="c-content-label uppercase bg-blue">Contacts</div>
+                                    <p>
+                                         203-254-8572
+                                        <br/>
+                                        
+                                </div>
+                                <div class="c-section">
+                                    <div class="c-content-label uppercase bg-blue">Email</div>
+                                    <p>
+                                         info@strawhat-auditions.com
+                                        <br/>
+                                </div>
+                                <div class="c-section">
+                                    <div class="c-content-label uppercase bg-blue">Social</div>
+                                    <br/>
+                                    <ul class="c-content-iconlist-1 ">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-youtube-play"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        
+                    </div>
+       <!--  <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 615px;"></div> -->
+    </div>
                 
             </div>
             

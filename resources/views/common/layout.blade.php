@@ -53,9 +53,10 @@
                         <div class="page-header-top">
                             <div class="container-fluid">
                                 <!-- BEGIN LOGO -->
-                                <div class="page-logo">
-                                    <a href="index.html">
-                                        <img src="{{asset('assets/layouts/layout3/img/logo-default.jpg')}}" alt="logo" class="logo-default">
+                                <div class="page-logo" style="width:330px;">
+                                    <a href="{{route('getIndex')}}" style="font-size: 20px; text-transform: uppercase;text-decoration: none;">
+                                        <img src="{{asset('images/straw99.gif')}}" alt="Strawhat Auditions" style="width: 81px;
+                                        margin-top: 5px; " class="logo-default"> Strawhat Auditions
                                     </a>
                                 </div>
                                 <!-- END LOGO -->
@@ -68,7 +69,13 @@
                                     <!-- END TOP NAVIGATION MENU -->
                                 <div class="top-menu  pull-right">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default">{{Auth::user()->name}}</button>
+                                        <button type="button" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>  
+                                            @if(Auth::user()->actor)
+                                                {{Auth::user()->actor->first_name}} {{Auth::user()->actor->last_name}}
+                                            @else
+                                                {{Auth::user()->name}}
+                                            @endif
+                                        </button>
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                             <i class="fa fa-angle-down"></i>
                                         </button>
@@ -189,6 +196,8 @@
                         <!-- BEGIN CONTENT -->
                         <div class="page-content-wrapper">
                             <!-- BEGIN CONTENT BODY -->
+                            
+                            @if(\Route::getCurrentRoute()->uri != '/')
                             <!-- BEGIN PAGE HEAD-->
                             <div class="page-head">
                                 <div class="container-fluid">
@@ -199,12 +208,14 @@
                                     <!-- END PAGE TITLE -->
                                 </div>
                             </div>
+                            @endif
                             <!-- END PAGE HEAD-->
                             <!-- BEGIN PAGE CONTENT BODY -->
                              <div class="page-content">
                                 <div class="container-fluid">
                                     <!-- BEGIN PAGE BREADCRUMBS -->
-                                    <ul class="page-breadcrumb breadcrumb">
+
+                                   <!--  <ul class="page-breadcrumb breadcrumb">
                                         <li>
                                             <a href="{{route('getIndex')}}">Strawhat</a>
                                             <i class="fa fa-circle"></i>
@@ -212,7 +223,7 @@
                                         <li>
                                             <span>@yield('title')</span>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 
                                 @yield('content')
                                
@@ -234,12 +245,25 @@
                     <div class="page-prefooter">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-4 col-sm-6 col-xs-12 footer-block">
+                                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
                                     <h2>About</h2>
                                     <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam dolore. </p>
                                 </div>
+                                <div class="col-md-3 col-sm-6 col-xs12 footer-block">
+                                    <h2>Subscribe Email</h2>
+                                    <div class="subscribe-form">
+                                        <form action="javascript:;">
+                                            <div class="input-group">
+                                                <input type="text" placeholder="mail@email.com" class="form-control">
+                                                <span class="input-group-btn">
+                                                    <button class="btn" type="submit">Submit</button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                                
-                                <div class="col-md-4 col-sm-6 col-xs-12 footer-block">
+                                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
                                     <h2>Follow Us On</h2>
                                     <ul class="social-icons">
                                         
@@ -255,7 +279,7 @@
                                        
                                     </ul>
                                 </div>
-                                <div class="col-md-4 col-sm-6 col-xs-12 footer-block">
+                                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
                                     <h2>Contacts</h2>
                                     <address class="margin-bottom-40"> Phone: 800 123 3456
                                         <br> Email:
@@ -269,7 +293,7 @@
                     <!-- BEGIN INNER FOOTER -->
                     <div class="page-footer">
                         <div class="container-fluid"> {{ date('Y') }} &copy;
-                            <a target="_blank" href="http://keenthemes.com">Arkotech Solution Pvt Ltd</a>
+                            <a target="_blank" href="http://keenthemes.com">Strawhat-Auditions</a>
                         </div>
                     </div>
                     <div class="scroll-to-top">

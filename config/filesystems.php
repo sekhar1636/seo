@@ -65,4 +65,6 @@ return [
 
     ],
 
+    'url'=>'http://localhost/strawhat/app/public/',
+
 ];
