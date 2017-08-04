@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+	use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -42,5 +44,6 @@ class User extends Authenticatable
         // delete the user
         return parent::delete();
     }
+	
 
 }

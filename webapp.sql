@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2017 at 03:20 PM
+-- Generation Time: Aug 04, 2017 at 05:27 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -63,6 +63,21 @@ CREATE TABLE `actors` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `content_pages`
+--
+
+CREATE TABLE `content_pages` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slideshow_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `faqs`
 --
 
@@ -80,106 +95,106 @@ CREATE TABLE `faqs` (
 --
 
 INSERT INTO `faqs` (`id`, `question`, `answer`, `_type`, `created_at`, `updated_at`) VALUES
-(1, 'Magnam at consequatur ratione aliquid aspernatur blanditiis facilis eligendi.', 'Omnis in quo tenetur voluptatum qui error perferendis. Officiis culpa numquam et dolores dolor sint officiis. Possimus qui nam culpa cupiditate. Qui nihil magni qui repudiandae adipisci sed.', 'Audition', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(2, 'Voluptas molestias nihil quos itaque vel fugit.', 'Minima sit modi ex. Enim esse velit ut iste.', 'Members', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(3, 'Quisquam et dolore mollitia recusandae.', 'Ut officia at inventore repellendus est delectus aut. Ut voluptatem fuga odio non aut itaque quod culpa.', 'Members', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(4, 'Repellat corrupti ducimus quidem eum dolorum numquam.', 'Et assumenda rerum numquam suscipit qui officia. Et aut eveniet dolores omnis officiis harum. Et temporibus perspiciatis id aut at qui. Maxime nihil aut omnis iure illo.', 'Audition', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(5, 'Quia harum error voluptas dolor.', 'Corporis sed ullam et consequuntur consequatur consequatur. Doloribus necessitatibus earum doloremque.', 'Application', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(6, 'Reprehenderit quidem voluptas non soluta recusandae.', 'Perspiciatis blanditiis aut et sed eos. Eum animi perspiciatis et labore accusamus. Eum autem libero hic. Exercitationem dolor quasi distinctio eveniet corrupti quia.', 'Selection', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(7, 'Amet maxime labore impedit accusantium.', 'Distinctio dolores dolorum atque assumenda cumque. Consectetur vitae necessitatibus voluptate magnam quidem quasi sit. Quos quaerat qui exercitationem aliquam possimus. Vel voluptatum corrupti quasi dicta nostrum possimus dolor.', 'Selection', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(8, 'Aliquid temporibus dicta iusto velit consequuntur facere soluta.', 'Sunt vel natus iste ratione repudiandae accusantium voluptatem. Accusantium at fuga impedit hic hic. Molestiae totam tempora ipsa culpa perspiciatis est. Adipisci est aut facilis molestiae. Laudantium nisi asperiores delectus provident minima.', 'Audition', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(9, 'Iusto sint tempora sint maxime consequuntur reiciendis.', 'Est et omnis ex. Ipsum ut optio nam ut totam. Odit aperiam aperiam voluptates aut vel et. Hic itaque facilis provident fugiat numquam eum beatae.', 'Audition', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(10, 'Vel distinctio illo nam eius deleniti.', 'Sed ut voluptatum pariatur cum sunt fugiat. Qui molestiae sit adipisci accusantium. Odit ut occaecati id rem delectus voluptatem. Et harum aut ut ratione.', 'Audition', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(11, 'Et amet sunt nam sint omnis placeat.', 'Voluptatem officia praesentium quisquam expedita pariatur dolorem officia. Alias fugiat voluptas beatae expedita. Error ex temporibus repudiandae quis voluptatem quos. Libero aut sint perspiciatis ipsum ipsa est molestiae.', 'Audition', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(12, 'Perferendis omnis repellat harum doloribus.', 'Qui porro aspernatur minus fugit. Quidem cumque voluptatem laboriosam. Aut sequi iusto soluta quo recusandae natus unde.', 'Application', '2017-07-26 07:34:54', '2017-07-26 07:34:54'),
-(13, 'Aut quia fugiat cum ut voluptatem voluptatem natus.', 'Autem debitis alias et ut voluptatem atque rerum. Error maiores voluptates placeat provident doloremque a. Culpa culpa ipsa dolorem tempore ratione reprehenderit et. Inventore aut odio aut aut est accusamus iusto placeat.', 'Selection', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(14, 'Error necessitatibus voluptatem labore non eaque repellat aut.', 'Voluptatum voluptatum iste omnis sed quia voluptate autem. Quam id ad sit inventore modi animi dolorum. Amet exercitationem consequatur sed velit aut quidem. Quod et pariatur fugiat quos. Vel optio nisi occaecati minima quia maiores consequatur.', 'Application', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(15, 'Molestiae ab non ipsam sint.', 'Assumenda et voluptatem vel nihil. Natus quia eum illo velit atque consequatur rerum. Nemo velit illo magnam et odit quia occaecati.', 'Selection', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(16, 'Fuga cum ut suscipit quod nisi unde.', 'Non sunt architecto laudantium alias eligendi minus. Ullam ut quae aut possimus ut impedit. Tenetur autem sequi libero. Enim perferendis laboriosam ut.', 'Selection', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(17, 'Ut dolores harum error mollitia.', 'Et omnis libero sunt ipsum non enim sed in. Dignissimos omnis voluptas quasi iusto. In iste excepturi asperiores corrupti adipisci quia officiis.', 'Application', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(18, 'Alias deserunt eum voluptas voluptate fugit aperiam dolorem.', 'Distinctio et voluptate id id sed dolores dolor. Laudantium voluptate itaque vel veritatis ut. Et omnis beatae reprehenderit excepturi.', 'Audition', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(19, 'Est fugit consequatur accusamus quia tenetur aperiam excepturi necessitatibus.', 'Porro maxime minus dicta aut qui iste. Eos officia alias eaque sint tempore voluptas hic. Dignissimos minima placeat et hic quia qui fuga.', 'Selection', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(20, 'Temporibus placeat provident esse id.', 'Dolores quibusdam quis est. Quo nihil ratione qui labore. Pariatur rerum molestias ut sint expedita quas assumenda molestias. Quas doloremque aliquid incidunt provident. Sed sint maiores aliquid tempore enim qui laboriosam.', 'Selection', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(21, 'Pariatur et doloremque consequuntur quam rerum quas.', 'Asperiores aut cumque vel non nesciunt eaque consequatur architecto. Aliquam aut minus ipsa earum doloribus unde. Possimus illo eos voluptatum architecto. Ut nihil consequatur aliquam maxime eos voluptates iste.', 'Audition', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(22, 'Eligendi quam sunt consequuntur aut maxime.', 'A illo est nihil est sapiente porro. Est ipsa est ea libero. Aperiam possimus fugit ratione nam autem voluptatum iste.', 'Audition', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(23, 'Qui dignissimos consequatur reiciendis consequatur fugit.', 'Et ut sed est. Quaerat repellat voluptas et aut dolores illum. Molestiae expedita molestiae enim. Sit voluptatibus cum labore praesentium ut esse et cupiditate.', 'Audition', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(24, 'Iusto vel sunt iste tempore.', 'Voluptatem et assumenda doloribus omnis. Sit in rerum aspernatur omnis accusamus quaerat beatae sed. Iure ullam veniam praesentium et voluptatibus sint. Perferendis delectus tempora ipsum consectetur dignissimos distinctio molestias. Eum nulla corrupti doloribus.', 'Selection', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(25, 'Ullam necessitatibus ut enim hic aut.', 'Neque dolorem non ea illo modi voluptas. Sunt architecto voluptas debitis molestias. Eum id eos modi facilis possimus aut deleniti ea.', 'Members', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(26, 'Et aut iure dolores nisi autem earum dicta minima.', 'Exercitationem esse modi provident. Quia vel natus quo dignissimos sit recusandae maiores. Consequatur impedit sit inventore. Asperiores sint et non omnis expedita omnis. Ut possimus hic ratione.', 'Application', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(27, 'Odit officiis perspiciatis praesentium dolorum et sint dicta.', 'Mollitia provident laudantium assumenda suscipit similique tempore et qui. Doloremque voluptas suscipit est veniam nisi quia. Magnam excepturi aut pariatur voluptas tempore sit quibusdam. Debitis qui rerum dolorem voluptas assumenda.', 'Selection', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(28, 'Magni aut quae itaque ducimus.', 'Aut modi ea eos voluptatem velit reprehenderit est. Quia distinctio eum impedit enim et. Cum consequuntur provident delectus. Autem doloremque ipsam et ut cumque doloribus accusamus.', 'Members', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(29, 'Aut sint commodi magnam nihil nostrum.', 'Animi laudantium cupiditate error sed. Vel facere asperiores provident hic amet ut non. Aut itaque quia voluptatem sed sunt omnis temporibus.', 'Application', '2017-07-26 07:34:55', '2017-07-26 07:34:55'),
-(30, 'Voluptates iste et qui sit.', 'Repellendus consequatur et nam pariatur. Eum quasi cumque beatae quis voluptatibus. Quam eum sit quas aut. Aut molestiae mollitia vitae ut aut cupiditate quasi.', 'Audition', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(31, 'Iste iste et voluptatum voluptas.', 'Consequatur quia fugit quibusdam consequatur fugit distinctio consectetur. Iure dolores suscipit laboriosam. Blanditiis eaque aut qui perspiciatis et aliquid quia reprehenderit. Voluptas est tenetur dolor eum et. Qui culpa at officiis voluptas.', 'Audition', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(32, 'Cum amet alias quidem consequuntur.', 'Corrupti aut dignissimos quas rerum rerum ipsam sequi. Est aut nemo perferendis ut aut et impedit. Eum impedit voluptate autem nobis molestias.', 'Application', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(33, 'Perferendis perferendis omnis velit asperiores.', 'Amet veritatis possimus iste aut rerum quod cupiditate. Consequatur et dolore ut laboriosam consequuntur voluptatem. Et quod iure facilis ut.', 'Audition', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(34, 'Sit sint nobis ullam nobis id ullam.', 'Recusandae et necessitatibus beatae sed ut eos illo. Accusamus eveniet provident id recusandae occaecati debitis quas. Dignissimos sit id nihil expedita aspernatur aperiam. Eos sequi tempore necessitatibus qui.', 'Application', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(35, 'Nihil quaerat culpa minima molestiae.', 'Perspiciatis expedita maiores omnis quis. Necessitatibus modi a sed totam libero accusamus. Non sed distinctio neque ut quod. Natus dolores minima porro dolorum eius.', 'Audition', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(36, 'Esse non eaque et.', 'Harum dicta iste quo sint incidunt. Maiores et molestias perspiciatis. Architecto in qui quaerat perferendis consectetur quos voluptatem quod.', 'Selection', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(37, 'Sit non incidunt cum natus distinctio.', 'Et quam corporis quia quas. Debitis qui laborum aut omnis eos. Autem natus ut consectetur quibusdam officia esse. Illum explicabo qui praesentium illum consequatur natus eligendi.', 'Members', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(38, 'Quod dolor totam ullam rerum.', 'Dolore quia rerum minus ut vel laboriosam accusantium. Iure amet quo omnis quia odio. Placeat est qui laborum id architecto id et amet. Ut voluptatem qui et enim mollitia unde.', 'Application', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(39, 'Suscipit distinctio fuga voluptatibus est exercitationem.', 'Eum dolores quia ut sit vel consequatur. Et perspiciatis eum dolor sit enim ea rerum odio. Labore natus optio modi iste ipsa.', 'Application', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(40, 'Consequatur natus qui perspiciatis alias fugit.', 'Eius aut cumque non amet. Quae consequatur hic rerum eius porro. Sit et dignissimos asperiores accusantium numquam. Hic voluptatum pariatur cumque quis aut.', 'Selection', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(41, 'Voluptatem ut minima numquam et aut.', 'Dolorem cum expedita et eaque modi earum. Dolorum repellat est quaerat eos a vero.', 'Application', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(42, 'Et quasi qui omnis aliquam.', 'Voluptate sapiente reiciendis repellendus dolorum eaque ipsa dolorem quae. Minima in fugit optio odit tenetur rerum. Maxime possimus in sint delectus impedit aperiam.', 'Selection', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(43, 'Possimus quia quos atque dolor ut porro nostrum.', 'Qui quibusdam amet velit tempore consequatur beatae assumenda quas. Sunt eligendi nobis ab esse. Ipsa ut vel soluta quisquam explicabo ut.', 'Application', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(44, 'In beatae est optio rerum ad.', 'Ex ut eos maxime minima. Sapiente eum consequatur voluptate corporis ut ut laboriosam ullam. Veritatis corrupti et fuga est mollitia quo.', 'Audition', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(45, 'Saepe aspernatur unde autem commodi nihil repellat occaecati dignissimos.', 'Omnis libero qui voluptates rerum praesentium enim. Fuga asperiores quia aut et quae magnam. Cupiditate omnis quaerat corrupti neque maiores reprehenderit. Quia voluptatem nisi cumque rerum molestias qui.', 'Audition', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(46, 'Aliquam sit rem ut vel.', 'Repellat dolorum deserunt unde error odio. Voluptatem ducimus autem illo. Autem asperiores iure voluptas fuga. Ea eum culpa error unde incidunt aut iste ut.', 'Members', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(47, 'Repellat tenetur aut porro voluptas.', 'Praesentium et soluta dolore ab laudantium repellendus tempore sit. Sed consequatur soluta consequatur dolores sint qui. Placeat sit ipsam blanditiis. Perferendis blanditiis vitae est omnis commodi. Impedit laudantium deleniti voluptates assumenda.', 'Application', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(48, 'Sit ipsam consequuntur iste.', 'Quo commodi et ut. Rerum ratione earum harum dolorem neque in consequatur inventore. Laboriosam ab iste veritatis molestiae doloremque esse quis vero. Numquam praesentium nostrum porro molestias expedita corrupti eos. In hic rerum iusto perferendis officia ex.', 'Application', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(49, 'Voluptatem ipsum nihil dolor dignissimos distinctio sit deserunt.', 'Tenetur voluptates deserunt eveniet id nam dolore dolores. Quibusdam et exercitationem ut cumque. Vel sit soluta quos odit delectus.', 'Selection', '2017-07-26 07:34:56', '2017-07-26 07:34:56'),
-(50, 'Voluptatibus aliquam quas consectetur explicabo quam est.', 'Tempore amet quos reiciendis harum ratione dolorem. Rem non aperiam consequatur suscipit aliquam molestias asperiores ut. Magni aut sit sit.', 'Members', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(51, 'Vero possimus voluptas earum dolor non.', 'Rem veritatis optio quas ut. Itaque incidunt architecto accusantium. Voluptatibus ipsam voluptas fugit eaque tempore.', 'Audition', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(52, 'Veritatis quasi omnis pariatur quam porro ut officiis.', 'Ut perspiciatis labore pariatur delectus. Qui excepturi repellendus sequi est sed nobis blanditiis.', 'Selection', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(53, 'Corporis et voluptatibus qui sint quasi saepe.', 'Quisquam cum ut expedita enim. Id voluptatem officiis laboriosam non quaerat. Dolorem et non occaecati iste saepe tenetur. Nostrum perferendis magni a.', 'Selection', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(54, 'Eum voluptatem voluptates unde sapiente unde enim nihil quaerat.', 'A esse libero repellat iure numquam non fugiat. Ipsa nemo est amet praesentium qui voluptas.', 'Audition', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(55, 'Voluptatem unde sit et esse rerum omnis.', 'Consectetur commodi laboriosam molestias quia. Quas ipsa in rerum deleniti. Saepe veritatis sed accusantium quibusdam.', 'Members', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(56, 'Vero debitis cupiditate omnis veniam natus.', 'Saepe eos voluptate qui aut velit quia a. Maxime qui et magnam. Fugit sunt unde laudantium itaque nam. Sequi doloribus quisquam aut repellat earum et reiciendis.', 'Members', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(57, 'Sed et ut ullam sunt possimus consequatur.', 'Voluptas non non quam dolorem. Fugit sit autem qui fuga totam beatae velit. Nostrum reiciendis quisquam totam dolorem dolores rem. Ut ut ex quis ut non.', 'Members', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(58, 'Quis aut adipisci consequatur accusantium aut autem officiis.', 'Aut qui a et. Quo id amet consectetur. Voluptatum beatae possimus ea vitae minima. Et quas natus atque quam. Quasi consectetur in eos facere sint.', 'Members', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(59, 'Facilis modi atque quas esse exercitationem maiores.', 'Sit magnam nam reiciendis quibusdam illo fugiat eos maxime. Soluta fugiat hic omnis aut labore. Dolor excepturi nesciunt enim.', 'Members', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(60, 'Facilis sed et sequi maxime qui similique qui.', 'Alias accusantium illum aut ipsam alias illo vitae. Ipsam nostrum consequatur ut consequatur debitis ratione. Laboriosam id architecto provident adipisci qui commodi. Laborum officia nihil repellat.', 'Audition', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(61, 'Possimus illo ad fugiat.', 'Veritatis quo et neque sed sint quia. Qui dicta et iusto sint reprehenderit. Ratione non nisi et. Aut consequatur atque aut dolorum illum et eum nulla. Ut qui soluta soluta vel corrupti.', 'Application', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(62, 'Cum eos pariatur sit reprehenderit.', 'Vel incidunt enim aliquam tempora. Voluptatem sint et magnam voluptatum sed quia vel. Minus blanditiis corrupti totam nobis aut sit nisi libero. Omnis asperiores occaecati accusamus consequuntur.', 'Application', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(63, 'Quia magnam enim pariatur numquam.', 'Molestiae et mollitia iure non. Qui ea fuga ad consequatur qui. Consequatur est rerum numquam laudantium quo quas et.', 'Audition', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(64, 'Ut aut fugiat non praesentium ex ex.', 'Dignissimos et et ullam ut sequi harum. Non et autem minima voluptatum sit maxime. Perspiciatis accusamus omnis rerum ex velit perspiciatis eius.', 'Application', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(65, 'Fugit itaque ipsam voluptas cum quis atque quae.', 'Est facilis est excepturi earum. Quibusdam optio culpa ut quod. Qui quis reprehenderit dolore molestiae. Omnis dolorem sed mollitia dolores vitae.', 'Audition', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(66, 'Doloremque est ut in aut accusantium.', 'Ratione vero facere consequatur illum et doloribus aliquid. Recusandae tempora minima qui ab eaque fugiat. Officia magnam cum placeat eos et corrupti. Nihil voluptatem numquam omnis similique. Necessitatibus nihil tempora voluptate optio cum impedit optio.', 'Audition', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(67, 'Nisi odio consequatur aut natus ipsam.', 'Minus sed molestiae ut reiciendis dicta et excepturi. Ducimus quibusdam aut hic nihil voluptatem autem.', 'Selection', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(68, 'Praesentium numquam recusandae labore aut sed dolorum eos.', 'Similique aut alias quo aut. Aut soluta impedit dolorem libero ipsa adipisci sit. Accusantium voluptates est in debitis.', 'Application', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(69, 'Voluptates recusandae id fugit temporibus possimus.', 'Sapiente id deleniti cum et minus error inventore. Eos facilis excepturi et. Pariatur et tenetur consectetur consequatur autem neque. Vel fugit temporibus alias repudiandae.', 'Members', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(70, 'Nemo dolores magnam consequatur non earum quis sunt corrupti.', 'Voluptas illum est est aut et et corrupti. Eos beatae veritatis beatae quas. Et eum facilis cum quae atque sint. Provident laboriosam inventore et magnam.', 'Application', '2017-07-26 07:34:57', '2017-07-26 07:34:57'),
-(71, 'Accusantium qui quo et perferendis est nisi.', 'Magnam provident voluptatem cupiditate numquam. Voluptatem est libero quia occaecati iure vel eaque. Accusamus et molestias tempore qui qui. Dignissimos quidem quis vero tempore.', 'Members', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(72, 'Ut magni quia sit id aspernatur.', 'Nihil non in eaque in unde veritatis. Consectetur inventore eaque quis neque. Nisi reprehenderit sunt ex ut earum eos.', 'Members', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(73, 'Quia sit commodi inventore laboriosam voluptates quaerat aspernatur.', 'Nihil at iusto quidem necessitatibus mollitia nemo quod. Sint atque aliquid sit eveniet nihil voluptas a. Tempore voluptas dolor sunt unde.', 'Audition', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(74, 'Qui eveniet et et sunt aut eos.', 'Ratione reprehenderit quidem exercitationem porro et cupiditate explicabo. Omnis iusto qui laborum iusto et voluptas aut. Sunt quisquam aut corporis fuga esse dolorem. Voluptatem quo rem reiciendis et consequuntur. Et asperiores sed facere voluptatem in natus.', 'Selection', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(75, 'Sed repellat cupiditate voluptas qui veniam et expedita.', 'Harum eius voluptate iure atque. Ducimus neque itaque recusandae totam sed id. Minima et sunt magni id animi.', 'Application', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(76, 'Voluptas eos cupiditate dolorem natus necessitatibus.', 'Vitae officiis iusto quas modi laudantium. Voluptatem fugiat minus iusto facilis. Enim optio sed odio quia velit distinctio.', 'Audition', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(77, 'Ullam unde sunt a.', 'Omnis et sapiente itaque dolorem non. Officia sit reiciendis adipisci rerum quia eum esse maxime. Et dolorem occaecati ullam. Aut rerum veniam ut.', 'Application', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(78, 'Quasi est veritatis odit ut excepturi.', 'Consequuntur ea sit explicabo cupiditate. Sapiente sed deserunt totam quia.', 'Selection', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(79, 'Expedita est et deleniti quaerat quas impedit.', 'Quibusdam iure ipsam illo odit. Recusandae sunt quis quasi ea. Iusto et eligendi eius officia autem consequuntur. Quae eius omnis quisquam.', 'Members', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(80, 'Natus nemo sit eveniet.', 'Atque ducimus nemo quibusdam eum corporis quia laudantium. Dicta error necessitatibus iste eveniet eveniet. Nihil maiores consequatur excepturi ut officia. Libero quisquam corrupti sit assumenda.', 'Application', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(81, 'Incidunt quia vel sequi aut provident.', 'Adipisci sint consequatur deserunt ut modi eum. Natus voluptates quo quam. Velit esse dolor adipisci non doloremque sit dolor. Voluptatem placeat et ab ipsum quod voluptatem dolores tempora.', 'Members', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(82, 'Non iure dolorem quam sunt.', 'Ipsam recusandae quasi eos ut qui consequatur. Hic sed fugit et dicta.', 'Application', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(83, 'Voluptas saepe facere inventore voluptatem quasi quis.', 'Tempora laboriosam est ratione laudantium et placeat vero. Blanditiis libero sit voluptas nihil ea. Alias totam quod voluptatem voluptas. Error eius ea commodi.', 'Application', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(84, 'Et explicabo deserunt ut veniam.', 'Sed et sunt libero molestiae. Consequatur rerum eos eum rem. In labore et est distinctio reiciendis sint voluptatem.', 'Audition', '2017-07-26 07:34:58', '2017-07-26 07:34:58'),
-(85, 'Maxime molestiae maiores non asperiores alias quidem.', 'Tempora impedit accusantium explicabo aut quasi consequuntur. Reiciendis dolores sed nostrum aliquam. Beatae id est eveniet voluptas. Eos reprehenderit voluptatibus quibusdam voluptatum dignissimos.', 'Members', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(86, 'Sapiente dolorum delectus iusto perspiciatis ipsam laborum natus.', 'Alias veritatis ex quidem. Tempora impedit et occaecati explicabo id sit. Sit quia voluptatem culpa sed. Quia quis reprehenderit ab.', 'Members', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(87, 'Dolores consequatur aut voluptatem dolorem.', 'Earum rerum in non et delectus. Voluptates quo ducimus ad ratione. Sed molestiae aut vel iure occaecati est quia.', 'Selection', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(88, 'Corrupti dolorem commodi non veritatis repellat totam non.', 'Qui qui magni vitae eum a. Officia et rem nostrum dignissimos ad ipsam. Et animi non ratione qui ea dolorem. Impedit laudantium optio architecto consectetur esse accusantium.', 'Selection', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(89, 'Similique sit nihil autem suscipit beatae nobis.', 'A aut cum rem aperiam qui iusto. Et porro eveniet qui ut quam dolorum. Odit sunt deserunt ut quis est iste. Suscipit id voluptas nulla et eius voluptatem quis.', 'Selection', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(90, 'Doloribus sed quis quibusdam qui veniam.', 'Cupiditate quis quis laudantium blanditiis accusantium veritatis. Ipsam totam atque culpa fugit amet.', 'Selection', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(91, 'Recusandae sit voluptatibus voluptatem.', 'Voluptas id assumenda temporibus voluptatum fugit est autem. Nobis possimus debitis veniam qui. Et aliquam velit odit est consequatur voluptatum. Sint perferendis quis soluta.', 'Members', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(92, 'Exercitationem ipsam consequatur consectetur excepturi expedita nulla accusantium.', 'Explicabo quo et voluptatum. Itaque sapiente impedit distinctio beatae quas perspiciatis. A consequuntur ratione quam suscipit error enim. In quis repellendus animi porro.', 'Members', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(93, 'Rem dignissimos doloribus ullam.', 'Cum in delectus qui. Impedit nihil eum odit repudiandae tempora ipsum tempore. Aut sint quidem rem aut est.', 'Audition', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(94, 'Accusantium veritatis et a id.', 'Autem alias in cupiditate cumque dignissimos aut. Asperiores reiciendis in saepe officiis dolores numquam voluptates. Et ipsa a voluptatem deserunt nulla. Eveniet est eos fugit est laboriosam fuga. Accusamus ipsum animi rem quia et itaque.', 'Members', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(95, 'Et dolor non quis architecto id nostrum sunt.', 'Aspernatur praesentium in vel repellat. Tenetur vero accusantium commodi quam necessitatibus.', 'Application', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(96, 'Perferendis nihil nulla sed rerum explicabo qui sint.', 'Nulla sit incidunt dolor eos. Similique dolor deserunt maxime sint quia rem. Molestiae aliquam animi ea laborum velit accusamus.', 'Selection', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(97, 'Est tempore assumenda facilis quisquam quidem ut.', 'Porro eum amet tenetur qui consequatur saepe ipsam occaecati. Praesentium natus ab distinctio fuga. A qui corporis qui assumenda quis dignissimos pariatur.', 'Selection', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(98, 'Qui recusandae enim nihil delectus.', 'Aut dignissimos quo unde. Quibusdam et delectus natus ducimus vel molestiae officiis. Natus illum doloribus molestiae sapiente. Expedita omnis dolore est.', 'Application', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(99, 'Dolor dolores qui dicta natus velit qui explicabo.', 'Nobis ad unde tenetur beatae dolorem excepturi. Aut quia ut quas consequatur laboriosam. Voluptatem dignissimos aut similique. Dolor id est nesciunt ipsam autem recusandae.', 'Audition', '2017-07-26 07:34:59', '2017-07-26 07:34:59'),
-(100, 'Est aut non nihil aut.', 'Facere debitis quae provident impedit non. Quia veniam ut iure nostrum et recusandae. Ipsum excepturi ex ut eum. Delectus aut vero temporibus sequi nam.', 'Members', '2017-07-26 07:34:59', '2017-07-26 07:34:59');
+(1, 'Laudantium nemo distinctio deserunt.', 'Cum facilis laborum voluptatem velit. Corrupti autem et quod explicabo. Id unde molestiae perspiciatis.', 'Members', '2017-08-03 06:50:26', '2017-08-03 06:50:26'),
+(2, 'Rem officia consequuntur neque aspernatur.', 'Eum delectus quia sunt recusandae rerum officiis quidem quo. Quas voluptates corporis voluptates. Et eaque earum et.', 'Audition', '2017-08-03 06:50:26', '2017-08-03 06:50:26'),
+(3, 'Modi nemo et nulla ea neque.', 'Qui sit sint maiores quos consequatur. Vel maxime omnis ut doloremque nesciunt. Autem porro hic enim repellat commodi modi optio.', 'Selection', '2017-08-03 06:50:26', '2017-08-03 06:50:26'),
+(4, 'Accusamus eligendi et eum similique.', 'Assumenda qui vitae fugiat qui porro. Iste dignissimos atque perspiciatis unde. Tenetur laborum molestias dolore quam ea. Quam autem deleniti sed molestiae modi assumenda magnam.', 'Selection', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(5, 'Nulla necessitatibus asperiores velit vero voluptatem.', 'Numquam enim cumque velit est ea assumenda molestiae. Et deserunt quam nisi provident. Repellendus quisquam recusandae est a et. Fugiat consequatur vitae ipsum id porro eveniet.', 'Application', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(6, 'Placeat quia reiciendis ab quaerat ipsam et aliquid.', 'Qui veniam voluptate praesentium est consequatur in non. Praesentium consectetur doloremque necessitatibus in delectus quis. Nesciunt ab ut iure voluptatum possimus commodi placeat.', 'Application', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(7, 'Minima non sit voluptatum.', 'Facere est nam et qui impedit vitae. Commodi beatae hic voluptatem hic.', 'Selection', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(8, 'Vero aperiam eligendi omnis adipisci.', 'Sapiente perspiciatis laboriosam nihil. Doloremque et accusamus hic voluptatem iure in nesciunt. Atque nostrum temporibus quod facere impedit.', 'Application', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(9, 'Quia dolor a unde quibusdam.', 'Amet quia ducimus aut explicabo beatae autem et. Illo quia sunt laboriosam aut eaque consequatur. Et iste harum qui voluptatem neque animi.', 'Audition', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(10, 'Et delectus ut sit architecto consectetur reprehenderit quo.', 'Nihil et voluptatum et reiciendis. Qui quo omnis nulla quis velit qui adipisci veniam. Ut commodi porro blanditiis quam voluptate numquam. Quo voluptatum officiis distinctio blanditiis minima.', 'Members', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(11, 'Recusandae enim accusamus ut iure consequatur.', 'Veritatis aut consequatur placeat ut quas. Sunt recusandae aut maiores officia sunt quia autem. Et eveniet est sed nihil rem. Inventore quia odio doloremque qui.', 'Application', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(12, 'Veniam qui ipsam ullam nulla.', 'Quasi debitis numquam deserunt qui voluptas et voluptatem. Rerum voluptatem suscipit quis et praesentium. Non omnis qui et consequatur. Sint dicta quibusdam quisquam velit.', 'Members', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(13, 'Excepturi consequatur ex modi et mollitia amet distinctio.', 'Impedit quos quis porro quo. Vero repudiandae saepe fugit et mollitia sunt repudiandae. Illum corporis quae aspernatur eaque quia architecto recusandae.', 'Members', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(14, 'Voluptas harum illo et vero ut nostrum delectus.', 'Laudantium non quasi id sit quod earum. Ipsam nihil ut qui. Dolorem non natus laborum amet ea ullam quam.', 'Application', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(15, 'Nobis exercitationem aut qui facere dolore est consequatur.', 'Quisquam sed ut quidem maiores excepturi sed qui. Non non fugiat eos non ut. Rerum quae et occaecati alias. Harum dolores iure qui molestiae fugiat velit assumenda. Labore nostrum neque sunt consequatur neque sed.', 'Members', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(16, 'Aut quae inventore deleniti architecto doloribus dolorem.', 'Consectetur qui exercitationem eum quae repudiandae. Et omnis sed a quis molestiae facere.', 'Selection', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(17, 'Cupiditate et non eos aspernatur.', 'Atque dolore ut dolores saepe earum voluptas ut. Porro recusandae ratione dicta velit et. Perspiciatis aut ut vitae rerum explicabo ut doloremque.', 'Application', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(18, 'Et sunt repellendus eveniet commodi consectetur natus deleniti est.', 'Et inventore itaque consequatur soluta totam totam esse iusto. Velit repellat aut ad consequatur distinctio. Occaecati repellendus praesentium est deserunt debitis.', 'Selection', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(19, 'Quia et occaecati sed harum tempora placeat.', 'Ab corrupti ut eius eum et odit. Ea vitae enim non ab modi. Eos non dolore sed.', 'Selection', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(20, 'Ut accusantium itaque hic repellat qui dolor.', 'Provident non tenetur voluptatem. Officia omnis excepturi recusandae voluptas animi. Ut et cum earum aut.', 'Audition', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(21, 'Ducimus aperiam cupiditate similique.', 'Pariatur voluptate quia velit voluptas maiores. Inventore repellendus animi laboriosam. Cumque quia voluptatem tenetur nisi.', 'Members', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(22, 'Distinctio ut quo commodi odit cum.', 'Rerum veniam minus adipisci sapiente vitae. Eos sed est consequatur sed nesciunt dolorem et. Quia iure dicta eum voluptatem nisi. Quo sint dolorum accusamus voluptate quia esse.', 'Members', '2017-08-03 06:50:27', '2017-08-03 06:50:27'),
+(23, 'Quisquam odio dolorem commodi tempore.', 'Illo et ut omnis ex. Repellat quidem quos perferendis commodi nobis asperiores fugiat. Similique molestiae amet sint ea. Ea et voluptas eligendi eius itaque. Dolor aperiam nulla quos dolor porro molestias est.', 'Selection', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(24, 'Rerum commodi sed optio architecto suscipit rem.', 'Eligendi voluptatem consequuntur assumenda illo rerum eveniet magni. Eligendi occaecati reiciendis excepturi ea doloremque. Cum delectus sit voluptatem non.', 'Audition', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(25, 'Nulla mollitia illum et sunt.', 'Aut vel earum enim esse voluptate quia. Vel necessitatibus pariatur officia mollitia ex ut aspernatur. Temporibus odit voluptatum debitis. Sequi quia quod est qui culpa minus exercitationem assumenda.', 'Audition', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(26, 'Accusamus id saepe et voluptatem qui.', 'Rerum magni nihil veritatis dolor sit et sequi. Est exercitationem accusamus praesentium adipisci corporis fugiat.', 'Members', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(27, 'Veniam ad aspernatur officia repellendus at eos illum.', 'Et nisi eum quae necessitatibus. Accusamus quos placeat provident fugit et ex. Nulla culpa praesentium itaque.', 'Members', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(28, 'Repellendus sit soluta inventore dolores veniam eum.', 'Eos qui eius possimus sint et blanditiis sint amet. Ut repudiandae et et sed. Dolor nesciunt nulla officia sed eveniet dolor quis iure. Nobis eius veritatis aut labore sit eos.', 'Application', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(29, 'Quaerat vero earum provident.', 'Amet sit inventore labore qui assumenda error quam. At esse molestiae amet hic laboriosam blanditiis voluptas.', 'Audition', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(30, 'Voluptatibus beatae eius eum qui soluta esse.', 'Explicabo corporis alias nulla ipsum reprehenderit nisi voluptatem. Et magni ea pariatur nemo nulla et repellendus enim. Quia commodi nostrum molestiae occaecati accusantium autem illo. Doloribus dolore quo qui reprehenderit quis hic.', 'Audition', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(31, 'Ipsum dicta magni aut autem dicta adipisci.', 'Alias repudiandae temporibus facilis aut dolorem. Quibusdam sunt praesentium quo sit. Amet nam maxime aut aliquam ut. Qui et culpa provident nulla cupiditate. Unde dolores accusamus excepturi quam consectetur explicabo.', 'Application', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(32, 'Et laborum consequatur iste pariatur incidunt velit odit.', 'Provident voluptatem eos omnis omnis nemo. Velit iste ut provident. Sapiente laborum cum quia eius.', 'Selection', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(33, 'Aut sequi hic in aut.', 'Illum molestiae iure iste sunt. Reprehenderit quam voluptas doloremque. Culpa quia error vel saepe in.', 'Audition', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(34, 'Hic eos est nulla perspiciatis suscipit perferendis aperiam.', 'Nihil aut nisi sunt esse omnis accusantium. Et aut reprehenderit facilis facere ab. Error et omnis rerum placeat dolorum atque.', 'Selection', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(35, 'Et qui quos et sint fugiat ipsa.', 'Distinctio qui dicta quia doloremque numquam. Nemo ab ratione officiis. Et eum ut voluptatum repellat molestias similique. Ut pariatur corrupti quis quidem sed.', 'Audition', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(36, 'Ullam nobis repudiandae aut quia cupiditate error.', 'Quisquam quae soluta blanditiis velit rem in. Delectus sequi perferendis harum ut commodi quaerat culpa. Totam voluptatem cum voluptas unde non officia.', 'Selection', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(37, 'Doloremque accusamus quaerat exercitationem expedita cupiditate.', 'Ut similique et fuga doloribus aperiam. At velit qui sit dolore officia labore. Molestiae perferendis mollitia harum quis. Mollitia accusamus non voluptatem velit sapiente non consequatur quam.', 'Members', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(38, 'Molestiae id quas molestiae similique ipsum ut iste.', 'Voluptas consequatur cupiditate qui ad ullam quo. Voluptate tempore debitis sed non quia odio qui debitis. Est voluptas alias ea qui est quidem cupiditate.', 'Selection', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(39, 'Nemo est commodi quam ea mollitia est autem.', 'Deserunt omnis dolores nesciunt maxime. Ad praesentium optio iure fugit. Aut id laudantium modi dolores sunt.', 'Selection', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(40, 'Incidunt consequatur libero omnis suscipit reprehenderit omnis expedita.', 'Magnam iure in eligendi modi dolorum beatae distinctio. Qui quia dolores perspiciatis tempore. Optio corrupti dolor officia reiciendis sunt saepe.', 'Selection', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(41, 'Et voluptas dolores quae non.', 'Nihil corporis nisi dicta reiciendis magnam. Nisi modi non ut molestiae maxime maiores ipsa. Officiis blanditiis unde quis repellendus nostrum assumenda sint. Ut voluptatem distinctio doloremque.', 'Application', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(42, 'Saepe sed fugit voluptatum minima.', 'Quo harum fugiat ut nam. Vel est voluptatibus atque commodi mollitia accusamus quidem hic. Dolor illo sed aliquam quia. Ut sit aliquam ex temporibus ut.', 'Selection', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(43, 'Exercitationem natus quidem iure eligendi eveniet libero fuga.', 'Atque sequi quis ad delectus corporis sit iste. Voluptas asperiores tempora asperiores quis. Nam reprehenderit qui tempora blanditiis voluptatibus minus aspernatur earum.', 'Audition', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(44, 'Soluta at eum nobis veritatis.', 'Sapiente autem nostrum alias. Sed laborum unde reprehenderit totam nobis enim est neque. Reiciendis velit non vitae eum et. Doloribus quia totam sed facere officiis magni.', 'Application', '2017-08-03 06:50:28', '2017-08-03 06:50:28'),
+(45, 'Rerum quia dolor repudiandae reprehenderit.', 'Consequatur ea reprehenderit maxime velit. Aperiam exercitationem ut qui asperiores aut. Qui est et accusantium repudiandae quasi et.', 'Members', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(46, 'Ducimus tempora minus sint qui.', 'Et nulla qui ut ex minus ducimus asperiores. In ut amet debitis totam natus temporibus. Ipsam cum voluptas asperiores.', 'Selection', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(47, 'Tenetur adipisci quo accusamus ipsam quo.', 'Aperiam et quia sint quia saepe voluptate qui. Non quas fugit dolorum repellat tempora aut enim voluptatem.', 'Members', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(48, 'Dolor aut officiis repellat mollitia est dolor.', 'Aut cum aut aut quod quae dolor molestiae temporibus. Natus voluptate doloribus aperiam mollitia. Sint dolorem impedit unde et voluptate.', 'Selection', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(49, 'Doloribus minus voluptas qui mollitia fugit blanditiis tenetur nulla.', 'Corrupti excepturi aspernatur enim nobis maiores non odio molestiae. Et natus qui minus voluptates. Architecto culpa est cumque dicta voluptatibus est. Eveniet nemo saepe culpa nulla molestias qui.', 'Selection', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(50, 'Atque voluptas omnis autem facilis aspernatur.', 'Quaerat repudiandae dolores sed est quo. Non et minus quae atque debitis fuga delectus. Repudiandae accusantium quia dolor aut.', 'Selection', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(51, 'Et ad et quidem.', 'Non adipisci consequatur et quae ipsa ad. Ut dolores perferendis officiis rerum aut. Quas itaque voluptas assumenda. Laborum iusto aliquam dolorum ut placeat repellat excepturi.', 'Members', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(52, 'Quas velit molestias tempora iusto.', 'Culpa nihil ullam autem. Eius provident explicabo ut quia. Molestiae explicabo voluptatem et magnam. Quibusdam nisi reiciendis vel dolorum qui.', 'Members', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(53, 'Amet eligendi fuga iusto eum consequuntur.', 'Tempore id eos qui quis consequatur. Porro aperiam optio amet optio quisquam. Est rerum est qui repellendus.', 'Members', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(54, 'Aut repellendus nesciunt expedita aperiam.', 'Dolores et voluptatem pariatur sit porro alias ut. Animi voluptas voluptatum fuga praesentium architecto ducimus qui consequuntur. Ut ducimus beatae dignissimos tempore eum blanditiis.', 'Members', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(55, 'Quisquam illum earum voluptatem.', 'Ad nihil rem esse dolores. Odit suscipit ab ut in. Eum voluptatem est qui aut quia. Aliquid sed rerum possimus vel velit. Incidunt eum neque totam rerum aut.', 'Audition', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(56, 'Qui nisi et fugit.', 'Provident inventore aspernatur maxime sed. Corporis qui voluptates voluptas quaerat vero dolorum distinctio quisquam. Architecto provident ipsum id suscipit. Tempora explicabo distinctio unde voluptas id nulla accusantium. Ut fuga qui mollitia delectus non dolor voluptatem.', 'Audition', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(57, 'Autem deleniti nihil sed quod deserunt error.', 'Ex unde praesentium qui laboriosam soluta. Sequi iste dignissimos aut placeat et autem. Doloremque ut aut amet.', 'Application', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(58, 'Sit rerum omnis at quis.', 'Omnis deleniti molestias doloribus quisquam magnam dolores aperiam. Sed quae repellendus repellendus laborum nam. Alias fuga nobis ut minus quisquam.', 'Application', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(59, 'Sunt vitae esse et nihil perspiciatis laboriosam.', 'Expedita molestiae sint consectetur cum nam beatae autem magnam. Praesentium perspiciatis et omnis vel aliquam quis alias porro. Reprehenderit reprehenderit sequi consequatur est.', 'Application', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(60, 'Quis adipisci unde velit nihil blanditiis.', 'Omnis enim qui sapiente porro quam ullam. Nostrum laudantium ipsum aut maxime quisquam sit quis ex. Nostrum saepe sed quis enim quibusdam magni. Iusto omnis vel dolore sit dolor. Quidem quas vel dolorem dolorem ut.', 'Audition', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(61, 'Quia quia cum vero illo commodi.', 'Illum enim rerum sit veniam aut fugit cupiditate et. Id corrupti est laudantium rerum non. Iusto aut exercitationem earum est. Est sed nihil debitis aperiam quos cum laudantium ad.', 'Selection', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(62, 'Rem eos reprehenderit unde fugiat.', 'Mollitia esse et molestiae sit. Illum placeat nostrum eligendi voluptatem earum. Et fugiat temporibus libero quibusdam autem debitis corrupti.', 'Selection', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(63, 'Minus soluta beatae rerum aliquid excepturi voluptates quo optio.', 'Ducimus dolores laboriosam placeat ipsa. Laudantium deleniti doloremque consequatur aut consequatur. Aperiam quae dolorem vel veniam aut. Sed nobis deleniti corrupti temporibus alias aut.', 'Selection', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(64, 'Deserunt nesciunt impedit iste temporibus blanditiis.', 'Et corporis aut atque sed quos voluptatem quis. Id atque vero iusto laudantium modi optio officia. Et perspiciatis facere harum quia iure porro sint. Quis quos impedit est error et in corporis qui.', 'Audition', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(65, 'Animi aspernatur quo id ex et a.', 'Ea sunt tenetur molestias non voluptatem saepe occaecati cumque. Rem totam animi cum omnis similique necessitatibus. A qui nemo iusto et minima voluptatem adipisci.', 'Selection', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(66, 'Totam saepe aperiam odio inventore tenetur autem rem ut.', 'Quis enim voluptas quia incidunt quis voluptates nobis. Et qui eligendi possimus suscipit. Eius ab temporibus tenetur est deleniti expedita.', 'Application', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(67, 'Cum et hic et aliquid exercitationem laboriosam.', 'Ipsum unde ratione esse nobis. Odit nulla quisquam voluptatem qui. Modi autem libero dolores commodi ex autem aliquid.', 'Members', '2017-08-03 06:50:29', '2017-08-03 06:50:29'),
+(68, 'Iste accusamus ex aut doloribus atque corrupti.', 'Quisquam qui odit illum consequatur quis aperiam. Vero est sit dicta. Quis optio dicta omnis nobis. Facilis est quaerat optio corporis.', 'Application', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(69, 'Voluptatibus totam omnis aut at voluptatem facere.', 'Corrupti cumque quam modi optio dolorem. Odio ratione voluptatem sit ipsam officiis non hic. Rem rerum expedita aut illo non porro.', 'Selection', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(70, 'Dolorum omnis ad et nihil nemo ipsa ipsum.', 'Qui enim reiciendis pariatur ut. Voluptatum reprehenderit dolorem ea blanditiis ipsam.', 'Application', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(71, 'Adipisci numquam magnam consectetur amet veniam dolor ab.', 'Repellendus reprehenderit nostrum repellendus delectus. Rerum at et rerum autem vel quisquam qui. Magni est velit rerum necessitatibus veritatis. Saepe explicabo accusantium vel hic quia repellat.', 'Members', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(72, 'Praesentium quidem accusantium voluptates eum.', 'Ipsa aliquid nostrum quis ratione in voluptates sed. Doloremque ut consequuntur occaecati et. Dolorem ipsa et suscipit molestiae accusamus. Molestiae dolorem numquam harum officiis excepturi sit.', 'Audition', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(73, 'Rerum delectus et nam voluptates officiis voluptate qui corporis.', 'Voluptas reprehenderit necessitatibus minus molestiae. Cum sunt culpa qui aut ut non. Aut iste deleniti rem qui provident at. Sed et labore sed eum vero.', 'Selection', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(74, 'Sit labore error nam harum.', 'Vel quia commodi maxime praesentium magni voluptatem. Dolorem saepe eligendi ab voluptatum. Aliquam ut illo ipsam sequi consequuntur. Veniam aliquid debitis tempore quos perferendis quia quod.', 'Members', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(75, 'Odit a et debitis odio laborum voluptatem laudantium.', 'Incidunt facere sequi minus quaerat. Optio eum doloremque nobis nihil dignissimos. Repellendus facilis dolores est numquam molestiae laudantium. Voluptas id iste amet sint qui fuga.', 'Members', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(76, 'Ullam aspernatur provident nisi maiores ratione sed.', 'Omnis facilis repellat suscipit magnam vero quam recusandae. Exercitationem ad ut vitae neque eum alias dolores. Autem cumque quidem quos tempora deleniti et. Unde recusandae ut quam debitis. In rerum voluptatum itaque laborum et.', 'Members', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(77, 'Neque aperiam ex ut dolor.', 'At nam harum possimus sunt excepturi. Nulla commodi facilis sed tempore quam. Laudantium est praesentium provident.', 'Selection', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(78, 'Neque quia enim qui esse accusantium.', 'Autem ex omnis illo tenetur. Blanditiis rerum dolore aut nostrum deserunt soluta laborum. Voluptatem laudantium doloremque quia a dolorum laudantium voluptatem.', 'Members', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(79, 'Error nulla vel possimus.', 'Vel ex quibusdam debitis ea. Quo nisi ex vitae occaecati exercitationem voluptatem sed tempore. Ipsam fugiat et doloribus ab officia ex. Assumenda ut labore libero odit.', 'Application', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(80, 'Tenetur est neque eum quos.', 'Velit cumque fuga ab ipsam. Vero repellendus est atque omnis necessitatibus molestias. Et veritatis sed voluptas ut non sunt totam voluptas. Illum et natus id ea corporis.', 'Selection', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(81, 'Provident magnam nemo dolor ea.', 'Dolor molestiae commodi at sed nobis aspernatur necessitatibus. Eaque in asperiores ut officia modi voluptates. Quos ut officia modi rerum.', 'Application', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(82, 'Voluptas ea aut vel alias molestiae dolorum officia ea.', 'Quibusdam error est optio atque. Enim enim tempore et nemo dolor non. Qui quia quae perspiciatis enim magnam. Non vel numquam impedit atque molestiae et aut.', 'Audition', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(83, 'Facere est et non consequuntur qui omnis.', 'Qui accusantium dolore facilis aspernatur odit non quod sunt. Voluptatem et eos nesciunt repellat earum suscipit. Voluptatem beatae corrupti qui ut qui tenetur corporis. Suscipit est omnis itaque vel numquam sit.', 'Audition', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(84, 'Vitae rerum esse alias ducimus blanditiis vel commodi aut.', 'Alias corrupti ullam qui ullam. Ipsa harum aut quisquam necessitatibus. Voluptatibus deleniti ut asperiores est aut qui sit nihil.', 'Audition', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(85, 'Voluptas amet suscipit molestiae incidunt repudiandae neque eius necessitatibus.', 'Ut fugit officiis quia inventore tempore repellendus doloremque. Itaque et quis iure sed a. Quis repellat ut ut iste sed.', 'Members', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(86, 'Et consequuntur aut voluptatem debitis dignissimos minus ipsam officia.', 'A excepturi error quo occaecati vel ad minus. Sunt voluptates voluptatem iure provident quam quia. Illum qui est enim id non sapiente. Qui modi ex autem et vel in laudantium.', 'Selection', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(87, 'Et a porro amet doloribus.', 'In aliquam voluptatem sunt tempora. Earum ratione quia eligendi ducimus eos facere. Quo minus consequatur modi expedita dolorum quae id.', 'Members', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(88, 'Reiciendis libero sint minima voluptatibus occaecati.', 'In reiciendis aut blanditiis distinctio natus beatae optio. Omnis asperiores maiores et omnis quae aut rerum. Enim omnis beatae earum consequuntur neque. Ipsam fugiat voluptas hic voluptatem.', 'Audition', '2017-08-03 06:50:30', '2017-08-03 06:50:30'),
+(89, 'Libero omnis sequi aut minus ad est explicabo.', 'Voluptas saepe eius et accusantium consectetur sed consectetur. Voluptas aut dolorum dolorem distinctio ut maiores. Officiis maiores fugiat nemo assumenda. Et iure vero rerum rem consequuntur amet.', 'Application', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(90, 'Explicabo aspernatur occaecati fugiat molestias voluptatem odio id.', 'Repellat molestiae dolore soluta optio molestiae. Non nam quae ipsam. Excepturi quia quod illo iste quo labore impedit.', 'Audition', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(91, 'Debitis nihil perferendis voluptas natus consectetur.', 'Consequatur sequi maiores aut adipisci rem nihil. Ut dolores voluptatibus omnis ipsum aliquam ex.', 'Selection', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(92, 'Aliquam laudantium ad et fugiat nam labore sunt voluptatibus.', 'Qui voluptatem sit aut minus. Laboriosam illo laudantium iure deleniti. Quisquam tempora voluptatem alias vero animi animi sed. Neque quibusdam dolor accusamus.', 'Selection', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(93, 'Est vero sint dolorum aut et.', 'Corrupti autem at dolores recusandae autem. Perspiciatis dicta eligendi qui ad ut et. Accusantium ad officia dolor omnis non reiciendis accusamus velit. Veritatis quis facilis aut magni eos consequatur qui.', 'Selection', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(94, 'Omnis magni consequatur neque expedita voluptatibus et accusantium natus.', 'Enim saepe in quia vitae. Vel incidunt officia aut dolor fugit est. Dolores qui et et voluptatem quas voluptate dolores. Culpa itaque dolorem quo quia voluptas deleniti ratione.', 'Application', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(95, 'Cumque nobis laudantium dolores aut atque.', 'Quos consequuntur et optio sunt. Accusamus iure nisi assumenda. Ut placeat optio aliquam ducimus quia aut architecto.', 'Audition', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(96, 'Quae odio laboriosam est cumque omnis accusamus.', 'Inventore aut repudiandae veritatis sit ea ut sed. Odit quia incidunt explicabo magni ut. Corrupti distinctio et est ut. Vitae corporis voluptatem excepturi labore.', 'Application', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(97, 'Ab id accusantium porro deleniti necessitatibus reiciendis sed.', 'Assumenda quae quia fugiat modi asperiores enim. Labore illo et rerum. Sapiente natus temporibus quo et commodi. Quisquam fugit nisi vitae omnis.', 'Audition', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(98, 'Quia dignissimos nulla est explicabo exercitationem nulla inventore quia.', 'Incidunt ipsum ea et. Corporis est rem eos assumenda corporis voluptatem possimus. Eos veniam maiores vitae ex iste.', 'Members', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(99, 'Et et dolor quia animi et.', 'Autem cumque exercitationem perferendis illo aliquam. Incidunt sit rerum magnam quo aliquam dolorum rerum. Sed omnis voluptatum corrupti. Ut iste ut id.', 'Application', '2017-08-03 06:50:31', '2017-08-03 06:50:31'),
+(100, 'Sapiente modi sit aut veniam repudiandae mollitia minus perferendis.', 'Esse porro ipsa consequuntur id sunt ipsam. Similique aut nemo ad cum nostrum consectetur. Ab nisi eum id nemo veniam magni nesciunt. Quos qui possimus quo nesciunt cupiditate quia consectetur.', 'Application', '2017-08-03 06:50:31', '2017-08-03 06:50:31');
 
 -- --------------------------------------------------------
 
@@ -198,11 +213,13 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(18, '2014_10_12_000000_create_users_table', 1),
-(19, '2017_06_15_080356_create_actors_table', 1),
-(20, '2017_07_21_132605_create_faqs_table', 1),
-(21, '2017_07_26_070347_create_slideshows_table', 1),
-(22, '2017_07_26_072609_create_slides_table', 1);
+(29, '2014_10_12_000000_create_users_table', 1),
+(30, '2017_06_15_080356_create_actors_table', 1),
+(31, '2017_07_21_132605_create_faqs_table', 1),
+(32, '2017_07_26_070347_create_slideshows_table', 1),
+(33, '2017_07_26_072609_create_slides_table', 1),
+(34, '2017_07_28_100856_create_content_pages_table', 1),
+(35, '2017_08_03_114630_create_subscriptions_table', 1);
 
 -- --------------------------------------------------------
 
@@ -220,13 +237,6 @@ CREATE TABLE `slides` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `slides`
---
-
-INSERT INTO `slides` (`id`, `slideshow_id`, `title`, `description`, `path`, `created_at`, `updated_at`) VALUES
-(3, 1, 'Test Slide', 'Test Slide test description', 'slides/slideshow_1_1501072905.png', '2017-07-26 07:41:45', '2017-07-26 07:41:45');
-
 -- --------------------------------------------------------
 
 --
@@ -241,12 +251,24 @@ CREATE TABLE `slideshows` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `slideshows`
+-- Table structure for table `subscriptions`
 --
 
-INSERT INTO `slideshows` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Home Slideshow', 1, '2017-07-26 07:35:50', '2017-07-26 07:35:50');
+CREATE TABLE `subscriptions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stripe_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stripe_plan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `trial_ends_at` timestamp NULL DEFAULT NULL,
+  `ends_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -260,6 +282,10 @@ CREATE TABLE `users` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `stripe_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `card_brand` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `card_last_four` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trial_ends_at` timestamp NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `payment_status` tinyint(1) NOT NULL DEFAULT '0',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -271,111 +297,111 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `status`, `payment_status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'actor', 'actor@actor.com', '$2y$10$wqF28Oxq2Rb8WaJsw27Bf.gAapkr4MNDnBe4QlHYCziWMgsUIZQW2', 'actor', 1, 0, NULL, '2017-07-26 07:34:14', '2017-07-26 07:34:14'),
-(2, 'actor', 'staff@staff.com', '$2y$10$5WP07frQO09Nn3kA6qbDkuMKVVEZwhZjeSa2Fr9MOfrwO8BTpjXOG', 'staff', 1, 0, NULL, '2017-07-26 07:34:14', '2017-07-26 07:34:14'),
-(3, 'theater', 'theater@theater.com', '$2y$10$9S3K0joOqb6RMl26yATHE.zGfjCYFUzV3n1gpVG2RNN/zj6oLJNCe', 'theater', 1, 0, NULL, '2017-07-26 07:34:14', '2017-07-26 07:34:14'),
-(4, 'Administrator', 'admin@admin.com', '$2y$10$FkuoOUw.maa6agP5o.xMh.W86Vaa99KNvPtKjj52VtPSK22jOrbKO', 'admin', 1, 0, NULL, '2017-07-26 07:34:14', '2017-07-26 07:34:14'),
-(5, 'Beryl Hills', 'brown.asha@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '39d2whLTaL', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(6, 'Elmore Bernhard', 'hartmann.ambrose@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'Ff2uLBcDVt', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(7, 'Constantin Padberg', 'murray.cora@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '93nHKtKR7d', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(8, 'Onie Hoppe', 'spinka.lisette@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'GTgyNeyCaC', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(9, 'Dr. Morgan Schumm', 'miller.joelle@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'cjDDMm12eT', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(10, 'Ms. Ashly Mayer V', 'remington77@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'YMqfDIizRw', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(11, 'Dr. Larue Mertz', 'chelsey.kulas@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'R4hkDZRPuR', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(12, 'Graciela Schaden', 'connie.deckow@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'fELx4iGNfL', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(13, 'Weldon Ferry', 'josiane56@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'WjVdlPDKZm', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(14, 'Dr. Rudy Greenfelder IV', 'syble23@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 's5l6rPPewN', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(15, 'Miss Evangeline Pagac Jr.', 'nico10@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'k32avYIaxZ', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(16, 'Roy Cremin MD', 'leonor.boyle@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '5bypOGf1oz', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(17, 'Prof. Domenica Jones', 'tanner98@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'OlyyQ45obj', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(18, 'Gaylord Wilderman', 'torp.lauretta@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '8IKCr3NexB', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(19, 'Dr. Terrill Kuphal DVM', 'wanda56@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'AnOlwTtYeF', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(20, 'Prof. Rosendo Daugherty II', 'littel.heath@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'WEyKuUXhQJ', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(21, 'Alene Romaguera', 'kstehr@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'znQwhy7rNE', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(22, 'Fay Lehner', 'vbernhard@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'U6GYr5hlbm', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(23, 'Ottilie Prohaska', 'nkoelpin@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '9amF5TZDFh', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(24, 'Nelle Schuster DDS', 'calista.paucek@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '5gYWCuQroY', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(25, 'Shea Harvey', 'eve.trantow@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'SmTXjTURKw', '2017-07-26 07:34:15', '2017-07-26 07:34:15'),
-(26, 'Freeman Bosco Sr.', 'morar.jaiden@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'I5md4Q9w7m', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(27, 'Dr. Jaycee D\'Amore Sr.', 'aking@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'NgWNcUlEtN', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(28, 'Mr. Lorenza Stiedemann PhD', 'roel.hickle@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'ILoZlVm8cf', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(29, 'Jordane Mante', 'lewis.goodwin@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'JHz5msb2eB', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(30, 'Zoila Watsica', 'witting.adah@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'Gl9hi21QME', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(31, 'Cicero Smitham', 'camille38@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'ecW8LVWICn', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(32, 'Miss Abigail Dibbert', 'hmclaughlin@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'awqyQJc32P', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(33, 'Saul Effertz', 'macy43@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'BmsGjh4Fp3', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(34, 'Adelia Barrows III', 'gideon96@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'jz7GnK0mRJ', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(35, 'Tavares Toy', 'rwalker@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '1WiAedW3Mp', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(36, 'Mrs. Lina Feeney DVM', 'forrest.reynolds@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'HtREDaGgY0', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(37, 'Ms. Deborah Macejkovic', 'kwillms@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'NGddamWRtL', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(38, 'Mr. Monty Weber', 'hagenes.jesus@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'yuz7DSIVSl', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(39, 'Edythe Schmidt', 'abigayle08@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'JCKwsIvoDW', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(40, 'Cody Bahringer', 'jmante@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'Ba59FSxshp', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(41, 'Miss Brenna Ruecker IV', 'hudson.justina@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'MTaAuw9f1c', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(42, 'Ahmad Zulauf', 'corwin.chelsie@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'YmBq6NBT6q', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(43, 'Christ Mraz', 'kenyatta.conroy@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'AFIXQP9v0m', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(44, 'Dr. Talon Waters', 'schinner.lacey@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'dtrb5BZ0V3', '2017-07-26 07:34:16', '2017-07-26 07:34:16'),
-(45, 'Dr. Mafalda Williamson', 'raymundo84@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'twjdmxSup3', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(46, 'Garret Crooks', 'mkunze@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '2iTcvcFa9h', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(47, 'Dr. Eldred Muller', 'ahintz@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'QNMScwFhvC', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(48, 'Josefina McKenzie', 'romaguera.laverna@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'nDh2wjae85', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(49, 'Dr. Daniela Dibbert', 'cmoen@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'bqQ9ewamPK', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(50, 'Prof. Dewitt Kuvalis', 'eokon@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'sgCLj3yebF', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(51, 'Delia Reilly', 'srosenbaum@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'UAysJqyxsx', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(52, 'Dr. Richie Schulist', 'levi10@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'OLk4hBDGQz', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(53, 'Adell Johnston', 'hortense99@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'DztdLrqWvd', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(54, 'Octavia O\'Conner', 'kutch.mandy@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'IBpWVEEXxp', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(55, 'Tiana Emmerich', 'krystina.orn@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'd8tBSk2qKn', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(56, 'Dr. Osvaldo Ernser', 'wharris@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'CrlDgKLWkd', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(57, 'Mr. Ahmed Jacobson PhD', 'dakota.breitenberg@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '4sA9MPYPjU', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(58, 'Easton Blick', 'maximo25@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '1UzvUoE2Fi', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(59, 'Jacinthe Hahn', 'kkuphal@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '0Xvyu0W1fZ', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(60, 'Alvis Nikolaus', 'river.abernathy@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '3oyRyAcsEX', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(61, 'Dr. Brandi Ortiz', 'lukas.connelly@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '7oQnDA06Wb', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(62, 'Miss Izabella Considine', 'huel.jaylin@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'GzdNMQsiOD', '2017-07-26 07:34:17', '2017-07-26 07:34:17'),
-(63, 'Brant McDermott', 'zita51@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'VlbQzaUsk5', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(64, 'Forrest Konopelski', 'bechtelar.nellie@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'BFuveOpgQy', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(65, 'Eusebio DuBuque', 'karianne.romaguera@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'N70FR12srq', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(66, 'Elijah Hermiston', 'uzemlak@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '7iV2qHwcLW', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(67, 'Susana Sporer', 'fritsch.jaycee@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'BuPZjOmaR7', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(68, 'Dr. Danielle Treutel V', 'yoshiko.robel@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'FOvSMRLvet', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(69, 'Kari Cole III', 'vivien.kreiger@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'Rla0lYRomN', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(70, 'Miss Alysa Koss', 'jedidiah87@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'TfB1KBu5AM', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(71, 'Ray Weimann', 'hyman95@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'U2bD4DA7DK', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(72, 'Gerhard Von', 'felton78@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'kZHnaBZJeo', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(73, 'Reyna Kunde MD', 'brielle.davis@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'fRS4tZfDBR', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(74, 'Chaya Beahan', 'delpha.halvorson@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'bCtEojU20c', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(75, 'Ewald Glover', 'josefina.leuschke@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'g77xaHzSlw', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(76, 'Cornell Schultz', 'brigitte.raynor@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'j5nIRhvXIq', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(77, 'Daniela Collins', 'cartwright.roselyn@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'q0T7vNwsV9', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(78, 'Ole Pagac', 'amanda27@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'gQT8t6QRD5', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(79, 'Nels Kilback', 'heber.parisian@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'ndO21ETHbx', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(80, 'Johnpaul Stoltenberg', 'little.marjolaine@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'A7ZfvAeESo', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(81, 'Reyna Harber', 'samara64@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '5m4aLeWMpu', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(82, 'Herman Farrell', 'velma62@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'SrDAPGmM7b', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(83, 'Mr. Adolph Friesen', 'ncollier@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'TnCsZabPcr', '2017-07-26 07:34:18', '2017-07-26 07:34:18'),
-(84, 'Trace Feil Jr.', 'ytorphy@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '6y4InMUeh7', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(85, 'Franz Mosciski', 'raina49@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'l2Lpdwx2Vm', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(86, 'Allan O\'Keefe', 'ashly.goyette@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'Nz4Mn0sb35', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(87, 'Henderson Kihn', 'walter.ethyl@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'RMn8Ug27kq', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(88, 'Carol Schmidt DVM', 'alindgren@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'KLxCxKUZTg', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(89, 'Katelynn Ratke', 'carter.abe@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'ODVqWzH3Yf', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(90, 'Georgiana Romaguera', 'greenfelder.eva@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'w8PtF99Bkz', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(91, 'Chanel Eichmann DVM', 'mclaughlin.lonny@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'wzO00L9YHP', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(92, 'Terrence Frami', 'balistreri.jaeden@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'zF1gehNpUR', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(93, 'Prof. Juliet Swift PhD', 'mdavis@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'ZI02tTJyuW', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(94, 'Prof. Shemar Haag', 'vgoldner@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'wf0WUvECfa', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(95, 'Lois Kub IV', 'lemuel03@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '42Z46xB1l0', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(96, 'Mrs. Mattie Kutch', 'demond.abshire@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '8kgOFlrSVK', '2017-07-26 07:34:19', '2017-07-26 07:34:19'),
-(97, 'Grady Paucek', 'brakus.esther@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'EGjVUfXz8p', '2017-07-26 07:34:20', '2017-07-26 07:34:20'),
-(98, 'Graham McLaughlin', 'heidenreich.verlie@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'FE5Cn273JX', '2017-07-26 07:34:20', '2017-07-26 07:34:20'),
-(99, 'Kenna Weissnat', 'julie.lynch@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'KG9eewMk6s', '2017-07-26 07:34:20', '2017-07-26 07:34:20'),
-(100, 'Aurelio Doyle', 'elton58@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'uu7LSNOyRM', '2017-07-26 07:34:20', '2017-07-26 07:34:20'),
-(101, 'Kaitlyn Anderson', 'scarlett.simonis@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, '8HDqqJNR6M', '2017-07-26 07:34:20', '2017-07-26 07:34:20'),
-(102, 'Chauncey Lindgren DDS', 'gregoria59@example.net', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'KKCIXzGS9y', '2017-07-26 07:34:20', '2017-07-26 07:34:20'),
-(103, 'Miss Marcella Hamill', 'hermann.fidel@example.org', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'RZJcWbXbcu', '2017-07-26 07:34:20', '2017-07-26 07:34:20'),
-(104, 'Astrid Ritchie', 'darien.windler@example.com', '$2y$10$K1CPBpg15ms9VbbKzaNsdezmhQHLfer4hhdr5M4sqSWFUg4aanDba', 'actor', 1, 1, 'T6PSq0y1Gy', '2017-07-26 07:34:20', '2017-07-26 07:34:20');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `stripe_id`, `card_brand`, `card_last_four`, `trial_ends_at`, `status`, `payment_status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'actor', 'actor@actor.com', '$2y$10$7xv81W5DJG2MVGYeEo6D8.4DclJBGV2E/.VUM3S6QaWBUejZqo.Xa', 'actor', NULL, NULL, NULL, NULL, 1, 0, 'SaCGIAubXK2sZM4Vo2G583CjBsZmoWOshNozZeZuCiv7B2ZWdZdGP9lRWxL4', '2017-08-03 06:49:51', '2017-08-04 07:38:26'),
+(2, 'actor', 'staff@staff.com', '$2y$10$EPgiz2L6PaFGr1IYJaLyCO5ipyZaf9yDOpeikXbFigE4N7TCH.b86', 'staff', NULL, NULL, NULL, NULL, 1, 0, NULL, '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(3, 'theater', 'theater@theater.com', '$2y$10$mFT0VYdNo8QONBgIWBk0duNTcRuIQ47DjntMO20pbaci5nizO28p2', 'theater', NULL, NULL, NULL, NULL, 1, 0, NULL, '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(4, 'Administrator', 'admin@admin.com', '$2y$10$8Y1832AqXt.svg7LbuGvseETZA6eIb9/LwAELYY4Tgyf6S4zu4gdO', 'admin', NULL, NULL, NULL, NULL, 1, 0, 'hhgolIdSriS8SZkQGIyfLhNpa675aOsnLcLeo0F5YfwF0HQ0mYPOCnFmnITq', '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(5, 'Jany Auer', 'flesch@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'UhWdqxvUIz', '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(6, 'Tiffany Goldner', 'francisca82@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'IXCkOHt5tk', '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(7, 'Dennis Crona', 'judy06@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'NRlCR4arCq', '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(8, 'Mr. Michel Sporer', 'alford54@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'itxbcBAezG', '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(9, 'Loraine O\'Kon', 'mayra13@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'O9Wki881Qv', '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(10, 'Elyssa Cormier', 'predovic.romaine@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '8Cl3nL4rXy', '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(11, 'Ana Nikolaus', 'earline.gulgowski@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'Ly0sFqUWCO', '2017-08-03 06:49:51', '2017-08-03 06:49:51'),
+(12, 'Prof. Penelope Emmerich', 'marques.zieme@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '7nfTBx0NNA', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(13, 'Maeve Lakin', 'xwiza@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '6LgAYpeIMv', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(14, 'Nyah Bogan', 'haylee25@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'bcUpReSxX4', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(15, 'Dr. Crawford Lowe IV', 'hester.hermann@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'H8snuVzODG', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(16, 'Arlie Lynch', 'hmurray@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '85vQ5Cq3zn', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(17, 'Daija McLaughlin', 'beaulah81@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'AyCnKp0cKV', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(18, 'Tatum Hagenes', 'bo.vonrueden@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'EVbiwcnbdW', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(19, 'Clifford Little', 'brown.boyle@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '1VXjDr5u6N', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(20, 'Luis Paucek', 'zelma67@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'Y5aPdxjSYq', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(21, 'Rico Reinger', 'clint.carroll@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'vATPzwwUqk', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(22, 'Stephen O\'Kon', 'xupton@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '4vgoMQRgbS', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(23, 'Dr. Teresa Schroeder II', 'mills.sigurd@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '7wUkrLj3Hi', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(24, 'Keara Rowe', 'janie89@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'X1u64fbtXV', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(25, 'Cathrine Durgan', 'nya78@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'JRQ1LuwVR9', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(26, 'Lauren Marks Jr.', 'grady.gibson@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'uIVJk61kh5', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(27, 'Deangelo Pollich', 'wdeckow@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'jcNTu5q2Im', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(28, 'Mariane Runte', 'zberge@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'luUNShE7uz', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(29, 'Wendell Deckow', 'fay.finn@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'ubGeRryldW', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(30, 'Camylle Thompson', 'leda00@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'JHYpvlJKE4', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(31, 'Roy VonRueden', 'hugh88@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'tvVZoYJndJ', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(32, 'Clarissa Heathcote', 'ireynolds@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'X70MUOaSCK', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(33, 'Mattie Terry', 'king.shaniya@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'PemDalIz7n', '2017-08-03 06:49:52', '2017-08-03 06:49:52'),
+(34, 'Mr. Rupert Will DVM', 'khalil.pagac@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '6whtF5tjyK', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(35, 'Neva Dietrich', 'nromaguera@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'DewKaLgfov', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(36, 'Dewitt Ebert', 'ikemmer@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'EbLjmuBEYJ', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(37, 'Alene Littel', 'prosacco.ally@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'VQgwmbphLr', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(38, 'Dr. Daron Zemlak', 'rutherford.jude@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'P8TKHGkxFD', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(39, 'Prof. Kyra Hudson III', 'xziemann@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'v82V6OQfyJ', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(40, 'Loma Thiel', 'lorna.wilderman@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'sXyXPtteMq', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(41, 'Jessica Hyatt', 'cummings.jerry@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '5llvynoBRi', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(42, 'Ross Zulauf', 'alverta71@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '3BgliyT02E', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(43, 'Filomena Davis Sr.', 'frankie97@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'vR9WpH6bpx', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(44, 'Dr. Dean Miller', 'abshire.gaylord@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '2E2K4FhbeK', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(45, 'Milton Fay', 'llang@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'tDIdOa3HCx', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(46, 'Dr. Natalia Mills', 'trevion.schmitt@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '7RtKdVd8ap', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(47, 'Ines Rempel', 'reilly.melvin@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'sScTxsHxAI', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(48, 'Rhea Connelly', 'arvel.larson@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'sw1j3qRTBl', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(49, 'Flavie Kunze DVM', 'jayden.hickle@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'xaDWZtviE6', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(50, 'Fleta Willms', 'frami.frieda@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'SKm2ObfJKN', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(51, 'Aiden Lang', 'kuhn.zachery@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'IeJ8HsLvYb', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(52, 'Mrs. Mallie Schiller', 'aida48@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'SvyYRCcYgG', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(53, 'Nicklaus Becker', 'cruickshank.lorna@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'NHjN5DfuHf', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(54, 'Waino Kessler', 'hintz.jammie@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'mCiIJ8iW0f', '2017-08-03 06:49:53', '2017-08-03 06:49:53'),
+(55, 'Hardy Runte', 'xzavier54@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'OT90IT64wp', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(56, 'Samantha Veum', 'hailey42@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'oyldBE0tEQ', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(57, 'Colten Crona', 'bashirian.delbert@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'kt4KZgoHpW', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(58, 'Mr. Buck Kilback PhD', 'schneider.rae@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '6mDAnHuXOv', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(59, 'Lauretta Dach', 'auer.arne@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'eNpelXZBOU', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(60, 'Audreanne Ritchie DVM', 'nikolaus.kali@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'IPiPEUBKD9', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(61, 'Amie Wolf', 'johnpaul33@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'mz07zEsesQ', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(62, 'Destiney Buckridge DDS', 'ullrich.estel@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'D87563O0qL', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(63, 'Justina Graham', 'ghettinger@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'FqKIje4yz0', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(64, 'Meredith Monahan', 'ndooley@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'g6l7nYu2Pu', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(65, 'Michale Schaefer', 'samir.schmitt@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '5ViIhWafQs', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(66, 'Ms. Laurianne O\'Hara', 'gerhard.hammes@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'HlTKD2jc6D', '2017-08-03 06:49:54', '2017-08-03 06:49:54'),
+(67, 'Prof. Devonte Smitham PhD', 'mcglynn.mittie@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '1aHFUt0XnQ', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(68, 'Britney Price', 'srodriguez@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'MpNkoRmrKr', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(69, 'Bud Kuhic', 'ohyatt@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'hcQnbI2U5B', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(70, 'Viola Schroeder', 'megane91@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'xap5OMw5cr', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(71, 'Eleanora Jacobi PhD', 'jstroman@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'gDIJlS6ss1', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(72, 'Dominique Greenholt DDS', 'klemke@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'qXj0No4Nxd', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(73, 'Ahmed Hayes', 'amaya34@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'ij31kTc6IA', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(74, 'Prof. Winfield Barrows Sr.', 'jgutkowski@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'jRu8eIjx9e', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(75, 'Mazie Koelpin', 'senger.hortense@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '1iwZ44d2E5', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(76, 'Dariana Smitham', 'emily93@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'X0oPfhRD0S', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(77, 'Marjory Conn', 'cassandra29@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'KemjMLtRMK', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(78, 'Amalia Johns', 'veum.monserrate@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'Mvu00jlYv7', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(79, 'Alessandro Kemmer', 'lkoelpin@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '3F23zRtQsF', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(80, 'Mrs. Bridgette Becker DVM', 'iohara@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'V7K4oXP0xp', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(81, 'Araceli Keeling', 'tboehm@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'yzGMse5Ml9', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(82, 'Prof. Aletha Lindgren', 'tatyana.gaylord@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'NI5YsaDB2q', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(83, 'Ms. Sydnee Eichmann II', 'nestor76@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'EazOiR4Qgp', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(84, 'Taryn Kuhic', 'amorissette@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'lttaShack0', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(85, 'Virginia Cartwright', 'yhilll@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'IRc3FUy6d0', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(86, 'Kraig Jerde IV', 'pnolan@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'rJadITJmPs', '2017-08-03 06:49:55', '2017-08-03 06:49:55'),
+(87, 'Prof. Cody D\'Amore IV', 'tromp.florida@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'xwncurrKB5', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(88, 'Darius Stroman', 'jaqueline13@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'bOPWmy5Cpu', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(89, 'Zackary Gorczany', 'ernie26@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'FfLTXv7TvL', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(90, 'Prof. Urban Murphy V', 'sipes.rico@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 't2weUDygEA', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(91, 'Watson Marquardt III', 'dameon.mohr@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'xkO3p8hqEW', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(92, 'Miss Daniela Boyle DVM', 'terry.emilia@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '0Sm49FvNDn', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(93, 'Bernadine Watsica', 'zstark@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'a9Tg3UhS07', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(94, 'Clemens Little', 'herman.jacklyn@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '85IYHLaszp', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(95, 'Dr. Pasquale Kihn', 'vernie.hermiston@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'iIY5SxAMM8', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(96, 'Claudine Prosacco', 'laney.borer@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'E4ULl15S6Q', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(97, 'Miss Drew Smitham DDS', 'tobin.funk@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'XM0oNXlsfn', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(98, 'Loraine Wolff', 'lzulauf@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'XZuOpx9QCw', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(99, 'Prof. Lucious Walter Sr.', 'rogahn.tara@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'TAdJuUdPPi', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(100, 'Devante Lehner', 'briana.schimmel@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'RImlWzwKpQ', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(101, 'Kurtis Jerde', 'bahringer.clarissa@example.com', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'lZ9BvGerHI', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(102, 'Prof. Rickie Bartoletti I', 'brando.boyle@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'QjU9H1a7gH', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(103, 'Dr. Ava Heller V', 'jlowe@example.net', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, '12SPlBYzW8', '2017-08-03 06:49:56', '2017-08-03 06:49:56'),
+(104, 'Mr. Carmine Hintz', 'stroman.sonya@example.org', '$2y$10$qWD1M6oXAKrKWQFmpmyILuQsnh8dZGxVZ0wqs/MJe9qHCXkeUZvdG', 'actor', NULL, NULL, NULL, NULL, 1, 1, 'Tx5p6uENyb', '2017-08-03 06:49:56', '2017-08-03 06:49:56');
 
 --
 -- Indexes for dumped tables
@@ -387,6 +413,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `status`, `payme
 ALTER TABLE `actors`
   ADD PRIMARY KEY (`id`),
   ADD KEY `actors_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `content_pages`
+--
+ALTER TABLE `content_pages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `content_pages_slideshow_id_foreign` (`slideshow_id`);
 
 --
 -- Indexes for table `faqs`
@@ -414,6 +447,12 @@ ALTER TABLE `slideshows`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -429,6 +468,11 @@ ALTER TABLE `users`
 ALTER TABLE `actors`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `content_pages`
+--
+ALTER TABLE `content_pages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `faqs`
 --
 ALTER TABLE `faqs`
@@ -437,17 +481,22 @@ ALTER TABLE `faqs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `slides`
 --
 ALTER TABLE `slides`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `slideshows`
 --
 ALTER TABLE `slideshows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -462,6 +511,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `actors`
   ADD CONSTRAINT `actors_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `content_pages`
+--
+ALTER TABLE `content_pages`
+  ADD CONSTRAINT `content_pages_slideshow_id_foreign` FOREIGN KEY (`slideshow_id`) REFERENCES `slideshows` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `slides`

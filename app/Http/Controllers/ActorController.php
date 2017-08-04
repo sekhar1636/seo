@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Stripe\Stripe as Stripe;
+use \Stripe\Plan as StripePlan;
+use App\User;
 
 class ActorController extends Controller
 {
@@ -143,16 +146,28 @@ class ActorController extends Controller
     * Will update with proper payment system in future
     */
     public function payment(){
-        if(\Auth::user()->payment_status == 1){
-            return redirect()->back()->with('success_message', 'Payment completed');
-        }else{
-            \Auth::user()->payment_status = 1;
-            if(\Auth::user()->save()){
-                return redirect()->back()->with('success_message', 'Payment completed');
-            }else{
-                return redirect()->back()->with('error_message', 'Payment not completed please try again.');
-            }
+		$user = User::find(\Auth::user()->id);
+		if($user->subscribed('main')){
+			return redirect()->route('actor::actorProfile')->with('success_message', 'Already Subscribed');
+		}else{
+			Stripe::setApiKey(env('STRIPE_SECRET'));
+			$planList = StripePlan::all();
+			$data = $planList->data;
+			foreach($data as $key=>$value){
+				$selectOptions[] = array('id'=>$value->id,'name'=>$value->name);
+			}
+			return view('actor.payment')->with("selectOptions",$selectOptions);
+		}
+		
+    }
+	
+	public function paymentStore(Request $request){
+		$user = User::find(\Auth::user()->id);
+		$user->newSubscription('main', $request->subscription)->create($request->token);
+        if ($user->subscribed('main')) {
+			   return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully subscribed.');
         }
+		return redirect()->back()->with('error_message', 'Oops there is something error with your input');
     }
 
 
@@ -254,6 +269,8 @@ class ActorController extends Controller
         }else{
             return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
         }
-    }
+    }	
+	
+	
 
 }

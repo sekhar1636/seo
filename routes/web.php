@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('update', ['as'=>'postEditProfile', 'uses'=>'ActorController@update']);
 			Route::post('password', ['as'=>'postEditPassword', 'uses'=>'ActorController@postEditPassword']);
 			Route::get('payment', ['as'=>'getActorPayment', 'uses'=>'ActorController@payment']);
+			Route::post('payment', ['as'=>'storeActorPayment', 'uses'=>'ActorController@paymentStore']);
 			Route::post('photo/update', ['as'=>'postPhotoUpdate', 'uses'=>'ActorController@postPhotoUpdate']);
 			Route::post('photo/crop', ['as'=>'postCropPhotoUpdate', 'uses'=>'ActorController@postCropPhotoUpdate']);
 			Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'ActorController@getDeletePhoto']);
@@ -106,6 +107,11 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('contentpagesDataTable/', ['as'=>'adminContentPagesDataTable', 'uses'=>'AdminController@contentPagesDataTable']);
 			Route::get('contentpage/{id}/edit', ['as'=>'adminContentPageEdit', 'uses'=>'AdminController@contentPageEdit']);
 			Route::patch('contentpage/{id}', ['as'=>'adminContentPageUpdate', 'uses'=>'AdminController@contentPageUpdate']);
+			
+			Route::get('subscriptions/', ['as'=>'adminSubscriptions', 'uses'=>'AdminController@subscriptions']);
+			Route::get('subscriptionsDataTable/', ['as'=>'adminSubscriptionsDataTable', 'uses'=>'AdminController@subscriptionsDataTable']);
+			Route::post('subscription/addPlan', ['as'=>'adminSubscriptionStorePlan', 'uses'=>'AdminController@subscriptionStorePlan']);
+			Route::get('subscription/{id}/deletePlan', ['as'=>'adminSubscriptionDeletePlan', 'uses'=>'AdminController@subscriptionDestroy']);
 		});
 	});
 	

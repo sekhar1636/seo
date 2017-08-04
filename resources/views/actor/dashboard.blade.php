@@ -102,7 +102,7 @@
                          
                             <!-- END TIMELINE ITEM -->
                             <!-- TIMELINE ITEM -->
-                            @if(\Auth::user()->payment_status == 1)
+                            @if(\Auth::user()->subscribed('main') == 1)
                                 <div class="timeline-item">
                                     <div class="timeline-badge">
                                         <div class="timeline-icon">
