@@ -8,7 +8,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Strawhat | @yield('title')</title>
+        <title>StrawHat | @yield('title')</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content=" " name="description" />
@@ -55,8 +55,8 @@
                                 <!-- BEGIN LOGO -->
                                 <div class="page-logo" style="width:330px;">
                                     <a href="{{route('getIndex')}}" style="font-size: 20px; text-transform: uppercase;text-decoration: none;">
-                                        <img src="{{asset('assets/images/straw99.gif')}}" alt="Strawhat Auditions" style="width: 81px;
-                                        margin-top: 5px; " class="logo-default"> Strawhat Auditions
+                                        <img src="{{asset('assets/images/straw99.gif')}}" alt="StrawHat Auditions" style="width: 81px;
+                                        margin-top: 5px; " class="logo-default"> StrawHat Auditions
                                     </a>
                                 </div>
                                 <!-- END LOGO -->
@@ -69,20 +69,42 @@
                                     <!-- END TOP NAVIGATION MENU -->
                                 <div class="top-menu  pull-right">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>  
-                                            @if(Auth::user()->actor)
-                                                {{Auth::user()->actor->first_name}} {{Auth::user()->actor->last_name}}
-                                            @else
-                                                {{Auth::user()->name}}
-                                            @endif
-                                        </button>
+                                        
+                                    @if(Auth::user()->role=="actor")
+                                    <a href="{{route('actor::actorProfile')}}" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>
+                                        @if(Auth::user()->actor)
+                                        	{{Auth::user()->actor->first_name}} {{Auth::user()->actor->last_name}}
+                                        @else
+                                        	{{Auth::user()->name}}
+                                        @endif
+                                    </a> 
+                                    @elseif(Auth::user()->role == "theater")
+                                    <a href="{{route('actor::theaterProfile')}}" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>
+                                        @if(Auth::user()->theater)
+                                        	{{Auth::user()->actor->first_name}} {{Auth::user()->actor->last_name}}
+                                        @else
+                                        	{{Auth::user()->name}}
+                                        @endif
+                                    </a> 
+                                    @elseif(Auth::user()->role =="staff")
+                                    <a href="{{route('actor::staffProfile')}}" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>
+                                        @if(Auth::user()->staff)
+                                        	{{Auth::user()->actor->first_name}} {{Auth::user()->actor->last_name}}
+                                        @else
+                                        	{{Auth::user()->name}}
+                                        @endif
+                                    </a> 
+                                    @endif
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                             <i class="fa fa-angle-down"></i>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
                                             @if(Auth::user()->role == "actor")
                                                 <li>
-                                                    <a href="{{route('actor::actorProfile')}}"> My Profile </a>
+                                                    <a href="{{route('actor::actorProfile')}}"> Dashboard </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('actor::getEditProfile')}}"> My Profile </a>
                                                 </li>
                                             @elseif(Auth::user()->role == "theater")
                                                 <li>
@@ -217,7 +239,7 @@
 
                                    <!--  <ul class="page-breadcrumb breadcrumb">
                                         <li>
-                                            <a href="{{route('getIndex')}}">Strawhat</a>
+                                            <a href="{{route('getIndex')}}">StrawHat</a>
                                             <i class="fa fa-circle"></i>
                                         </li>
                                         <li>
@@ -293,7 +315,7 @@
                     <!-- BEGIN INNER FOOTER -->
                     <div class="page-footer">
                         <div class="container-fluid"> {{ date('Y') }} &copy;
-                            <a target="_blank" href="http://keenthemes.com">Strawhat-Auditions</a>
+                            <a target="_blank" href="http://keenthemes.com">StrawHat-Auditions</a>
                         </div>
                     </div>
                     <div class="scroll-to-top">

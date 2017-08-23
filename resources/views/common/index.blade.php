@@ -16,7 +16,7 @@
     <!-- BEGIN CONTENT HEADER -->
     <div class="row margin-bottom-40 about-header">
         <div class="col-md-12">
-            <h1>About Strawhat</h1>
+            <h1>About StrawHat</h1>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                             <h3 style="color:#fff;">Actors, Singers, Dancers, Musicians, Staff, Tech, Design... All 3 Days! 

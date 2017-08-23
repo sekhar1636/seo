@@ -8,7 +8,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Strawhat | @yield('title')</title>
+        <title>StrawHat | @yield('title')</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content=" " name="description" />
@@ -55,8 +55,8 @@
                                 <!-- BEGIN LOGO -->
                                 <div class="page-logo" style="width:330px;">
                                     <a href="{{route('getIndex')}}" style="font-size: 20px; text-transform: uppercase;text-decoration: none;">
-                                        <img src="{{asset('assets/images/straw99.gif')}}" alt="Strawhat Auditions" style="width: 81px;
-                                        margin-top: 5px; " class="logo-default"> Strawhat Auditions
+                                        <img src="{{asset('assets/images/straw99.gif')}}" alt="StrawHat Auditions" style="width: 81px;
+                                        margin-top: 5px; " class="logo-default"> StrawHat Auditions
                                     </a>
                                 </div>
                                 <!-- END LOGO -->
@@ -196,7 +196,7 @@
 
                                    <!--  <ul class="page-breadcrumb breadcrumb">
                                         <li>
-                                            <a href="{{route('getIndex')}}">Strawhat</a>
+                                            <a href="{{route('getIndex')}}">StrawHat</a>
                                             <i class="fa fa-circle"></i>
                                         </li>
                                         <li>
@@ -272,7 +272,7 @@
                     <!-- BEGIN INNER FOOTER -->
                     <div class="page-footer">
                         <div class="container-fluid"> {{ date('Y') }} &copy;
-                            <a target="_blank" href="http://keenthemes.com">Strawhat-Auditions</a>
+                            <a target="_blank" href="http://keenthemes.com">StrawHat-Auditions</a>
                         </div>
                     </div>
                     <div class="scroll-to-top">

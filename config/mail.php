@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => array('address' => 'mail@algoflux.com', 'name' => 'Strawhat'),
+    'from' => array('address' => 'mail@algoflux.com', 'name' => 'StrawHat'),
 
     /*
     |--------------------------------------------------------------------------

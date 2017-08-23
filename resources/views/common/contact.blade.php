@@ -111,7 +111,7 @@
                      
                             <div class="c-body">
                                 <div class="c-section">
-                                    <h3>Strawhat</h3>
+                                    <h3>StrawHat</h3>
                                 </div>
                                 <div class="c-section">
                                     <div class="c-content-label uppercase bg-blue">Address</div>
