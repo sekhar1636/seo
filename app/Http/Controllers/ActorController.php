@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Stripe\Stripe as Stripe;
 use \Stripe\Plan as StripePlan;
 use App\User;
+use App\Product;
+use App\Membership;
+use App\MembershipPeriod;
+use App\Payment;
 
 class ActorController extends Controller
 {
@@ -14,11 +18,52 @@ class ActorController extends Controller
     \Server Dashboard 
     */
     public function index(){
-        if(\Auth::user()->actor && \Auth::user()->payment_status){
+        if(\Auth::user()->actor && \Auth::user()->subscription){
             return redirect()->route('actor::getEditProfile');
         }
     	return view('actor.dashboard');
     }
+	
+	public function products(){
+		$products = Product::latest()->orderBy('id', 'desc')->get();
+		return view("actor.products",compact('products'));
+    }
+	
+	public function productBuy(Request $request){
+		$description = "Products Invoice: ";
+		$totalPrice = 0;
+		$size = sizeof($request->products);
+		for($i=0; $i<$size; $i++){
+			$product = Product::findOrFail($request->products[$i]);
+			$totalPrice = $totalPrice + $product->price;
+			$description.= "\nProduct: ".$product->name." Price: ".$product->price;
+		}
+		$totalPrice = $totalPrice*100;
+		\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
+		$result = \Stripe\Charge::create(array(
+								  "amount" => $totalPrice,
+								  "currency" => "usd",
+								  "source" => $request->token,
+								  "description" => $description
+								));
+		
+		if(!isset($result->status)){
+			return redirect()->back()->with('error_message', 'Something went wrong. Error:'.$result->type);
+		}else{
+			for($i=0; $i<$size; $i++){
+				$product = Product::findOrFail($request->products[$i]);
+				$payment = new Payment;
+				$payment->user_id = \Auth::user()->id;
+				$payment->transaction_id = $request->token;
+				$payment->product_id = $product->id;
+				$payment->price = $product->price;
+				$payment->save();
+			}
+			return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully bought products.');
+		}
+		
+    }
+	
     public function edit(){
         $weight = [];
         $age = [];
@@ -109,7 +154,7 @@ class ActorController extends Controller
     }
 
     public function uploadResume($actor,$file, $name){
-        $destinationPath = 'resume'; // upload path
+        $destinationPath = 'assets/files'; // upload path
         $extension = $file->getClientOriginalExtension();
         $fileName = $name.rand(11111,99999).'.'.$extension; // renameing image
         $file->move(public_path($destinationPath), $fileName);
@@ -150,25 +195,64 @@ class ActorController extends Controller
 		if($user->subscribed('main')){
 			return redirect()->route('actor::actorProfile')->with('success_message', 'Already Subscribed');
 		}else{
-			Stripe::setApiKey(env('STRIPE_SECRET'));
-			$planList = StripePlan::all();
-			$data = $planList->data;
-			foreach($data as $key=>$value){
-				$selectOptions[] = array('id'=>$value->id,'name'=>$value->name);
-			}
-			return view('actor.payment')->with("selectOptions",$selectOptions);
+			$membershipPeriods = MembershipPeriod::latest()->orderBy('id', 'desc')->get();
+			$products = Product::latest()->orderBy('id', 'desc')->get();
+			return view('actor.payment')->with('products',$products)->with('membershipPeriods',$membershipPeriods);
 		}
 		
     }
 	
 	public function paymentStore(Request $request){
-		$user = User::find(\Auth::user()->id);
-		$user->newSubscription('main', $request->subscription)->create($request->token);
-        if ($user->subscribed('main')) {
-			   return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully subscribed.');
-        }
-		return redirect()->back()->with('error_message', 'Oops there is something error with your input');
+		$request->all();
+		$description = "";
+		$totalPrice = 0;
+		$membershipPeriod = MembershipPeriod::findOrFail($request->subscription);
+		$totalPrice = $totalPrice + $membershipPeriod->price;
+		$description.= "StrawHat Subscription\nPlan: ".$membershipPeriod->name." Price: ".$membershipPeriod->price;
+		$size = sizeof($request->products);
+		for($i=0; $i<$size; $i++){
+			$product = Product::findOrFail($request->products[$i]);
+			$totalPrice = $totalPrice + $product->price;
+			$description.= "\nProduct: ".$product->name." Price: ".$product->price;
+		}
+		$totalPrice = $totalPrice*100;
+		\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
+		$result = \Stripe\Charge::create(array(
+								  "amount" => $totalPrice,
+								  "currency" => "usd",
+								  "source" => $request->token,
+								  "description" => $description
+								));
+		
+		if(!isset($result->status)){
+			return redirect()->back()->with('error_message', 'Something went wrong. Error:'.$result->type);
+		}else{
+			$membership = new Membership;
+			$membership->membership_period_id = $membershipPeriod->id;
+			$membership->user_id = \Auth::user()->id;
+			$membership->save();
+			
+			//save the payment details for subscription
+			$payment = new Payment;
+			$payment->user_id = \Auth::user()->id;
+			$payment->transaction_id = $request->token;
+			$payment->membership_period_id = $membershipPeriod->id;
+			$payment->price = $membershipPeriod->price;
+			$payment->save();
+			
+			for($i=0; $i<$size; $i++){
+				$product = Product::findOrFail($request->products[$i]);
+				$payment = new Payment;
+				$payment->user_id = \Auth::user()->id;
+				$payment->transaction_id = $request->token;
+				$payment->product_id = $product->id;
+				$payment->price = $product->price;
+				$payment->save();
+			}
+			return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully subscribed.');
+		}
     }
+	
 
 
     /*
@@ -194,7 +278,7 @@ class ActorController extends Controller
  
         $actor = \App\Actor::where('user_id', \Auth::user()->id)->first(); 
         
-        $destinationPath = 'photos'; // upload path
+        $destinationPath = 'assets/photos'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = \Auth::user()->name.rand(11111,99999).'.'.$extension; // renameing image
@@ -202,7 +286,7 @@ class ActorController extends Controller
 
 
         $actor->precrop_path = $destinationPath.'/'.$fileName; 
-        $actor->precrop_url = config('filesystems.url').$destinationPath.'/'.$fileName; 
+        $actor->precrop_url = $destinationPath.'/'.$fileName; 
         
         if($actor->update()){
             return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
@@ -241,13 +325,13 @@ class ActorController extends Controller
 
         $actor = \App\Actor::where('user_id', \Auth::user()->id)->first(); 
         
-        $destinationPath = 'photos'; // upload path
+        $destinationPath = 'assets/photos'; // upload path
       
         $fileName = \Auth::user()->name.rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName; 
     
         $actor->photo_path = $originalPath;
-        $actor->photo_url = config('filesystems.url').$originalPath; 
+        $actor->photo_url = $originalPath; 
          header('Content-type: image/jpeg');
         imagejpeg($dst_r,public_path().'/'.$originalPath,$jpeg_quality);
         if($actor->update()){

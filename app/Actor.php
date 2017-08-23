@@ -25,7 +25,7 @@ class Actor extends Model
         
 
         $resumeID =  $this->id . '-medium-' . time() . '.pdf';
-        $resumePath = 'photos/profile-pics/' . $resumeID;
+        $resumePath = 'assets/photos/profile-pics/' . $resumeID;
 
         DataIO::deleteFile($resumePath);
 

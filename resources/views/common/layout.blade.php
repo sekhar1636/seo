@@ -29,7 +29,7 @@
         <link href="{{asset('assets/layouts/layout3/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" id="style_color" />
         <link href="{{asset('assets/layouts/layout3/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
 
-        <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">
 
         @yield('style')
 
@@ -55,7 +55,7 @@
                                 <!-- BEGIN LOGO -->
                                 <div class="page-logo" style="width:330px;">
                                     <a href="{{route('getIndex')}}" style="font-size: 20px; text-transform: uppercase;text-decoration: none;">
-                                        <img src="{{asset('images/straw99.gif')}}" alt="Strawhat Auditions" style="width: 81px;
+                                        <img src="{{asset('assets/images/straw99.gif')}}" alt="Strawhat Auditions" style="width: 81px;
                                         margin-top: 5px; " class="logo-default"> Strawhat Auditions
                                     </a>
                                 </div>

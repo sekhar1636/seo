@@ -53,9 +53,12 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('password', ['as'=>'postEditPassword', 'uses'=>'ActorController@postEditPassword']);
 			Route::get('payment', ['as'=>'getActorPayment', 'uses'=>'ActorController@payment']);
 			Route::post('payment', ['as'=>'storeActorPayment', 'uses'=>'ActorController@paymentStore']);
+			Route::get('products', ['as'=>'actorProducts', 'uses'=>'ActorController@products']);
 			Route::post('photo/update', ['as'=>'postPhotoUpdate', 'uses'=>'ActorController@postPhotoUpdate']);
 			Route::post('photo/crop', ['as'=>'postCropPhotoUpdate', 'uses'=>'ActorController@postCropPhotoUpdate']);
 			Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'ActorController@getDeletePhoto']);
+			Route::get('products', ['as'=>'products', 'uses'=>'ActorController@products']);
+			Route::post('product/buy', ['as'=>'buyProduct', 'uses'=>'ActorController@productBuy']);
 		});
 	});
 	Route::group(['prefix'=>'staff'], function (){
@@ -95,13 +98,23 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('slideshow/{id}/addslide', ['as'=>'adminSlideshowStoreSlide', 'uses'=>'AdminController@slideshowStoreSlide']);
 			Route::get('slideshow/{id}/slidesDataTable', ['as'=>'adminSlideshowSlidesDataTable', 'uses'=>'AdminController@slideshowSlidesDataTable']);
 			Route::get('slideshow/{id}/deleteslide', ['as'=>'adminSlideshowDeleteSlide', 'uses'=>'AdminController@slideshowDestroySlide']);
+			Route::get('slideshow/{id}/editslide', ['as'=>'adminSlideshowEditSlide', 'uses'=>'AdminController@slideshowEditSlide']);
+			Route::patch('slideshow/{id}/editslide', ['as'=>'adminSlideshowUpdateSlide', 'uses'=>'AdminController@slideshowUpdateSlide']);
 			
 			Route::get('users/', ['as'=>'adminUsers', 'uses'=>'AdminController@users']);
 			Route::post('user/', ['as'=>'adminUserStore', 'uses'=>'AdminController@userStore']);
 			Route::get('user/{id}/delete', ['as'=>'adminUserDelete', 'uses'=>'AdminController@userDestroy']);
 			Route::get('user/{id}/edit', ['as'=>'adminUserEdit', 'uses'=>'AdminController@userEdit']);
 			Route::patch('user/{id}', ['as'=>'adminUserUpdate', 'uses'=>'AdminController@userUpdate']);
+			
+			Route::match(array('POST', 'PUT'),'actor/{id}', ['as'=>'adminActorUpdate', 'uses'=>'AdminController@actorUpdate']);
+			Route::post('actor/{id}/photo', ['as'=>'actorPhotoUpdate', 'uses'=>'AdminController@actorPhotoUpdate']);
+			Route::post('actor/{id}/cropPhoto', ['as'=>'actorCropPhoto', 'uses'=>'AdminController@postCropPhotoUpdate']);
+			Route::get('actor/{id}/deletePhoto', ['as'=>'actorPhotoDelete', 'uses'=>'AdminController@actorPhotoDelete']);
+			
 			Route::get('usersDataTable/', ['as'=>'adminUsersDataTable', 'uses'=>'AdminController@UsersDataTable']);
+			Route::get('userPaymentDataTable/{id}', ['as'=>'adminUserPaymentDataTable', 'uses'=>'AdminController@userPaymentDatatable']);
+			Route::get('userTransactionDetails/{id}', ['as'=>'adminUserTransactionDetails', 'uses'=>'AdminController@userTransactionDetails']);
 			
 			Route::get('contentpages/', ['as'=>'adminContentPages', 'uses'=>'AdminController@contentPages']);
 			Route::get('contentpagesDataTable/', ['as'=>'adminContentPagesDataTable', 'uses'=>'AdminController@contentPagesDataTable']);
@@ -111,7 +124,15 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('subscriptions/', ['as'=>'adminSubscriptions', 'uses'=>'AdminController@subscriptions']);
 			Route::get('subscriptionsDataTable/', ['as'=>'adminSubscriptionsDataTable', 'uses'=>'AdminController@subscriptionsDataTable']);
 			Route::post('subscription/addPlan', ['as'=>'adminSubscriptionStorePlan', 'uses'=>'AdminController@subscriptionStorePlan']);
-			Route::get('subscription/{id}/deletePlan', ['as'=>'adminSubscriptionDeletePlan', 'uses'=>'AdminController@subscriptionDestroy']);
+			Route::get('subscription/{id}/edit', ['as'=>'adminSubscriptionEdit', 'uses'=>'AdminController@subscriptionEdit']);
+			Route::patch('subscription/{id}', ['as'=>'adminSubscriptionUpdate', 'uses'=>'AdminController@subscriptionUpdate']);
+			
+			Route::get('products/', ['as'=>'adminProducts', 'uses'=>'AdminController@products']);
+			Route::get('productsDataTable/', ['as'=>'adminProductsDataTable', 'uses'=>'AdminController@productsDataTable']);
+			Route::post('product/', ['as'=>'adminProductStore', 'uses'=>'AdminController@productStore']);
+			Route::get('product/{id}/edit', ['as'=>'adminProductEdit', 'uses'=>'AdminController@productEdit']);
+			Route::patch('product/{id}', ['as'=>'adminProductUpdate', 'uses'=>'AdminController@productUpdate']);
+			Route::get('product/{id}/deleteproduct', ['as'=>'adminProductDelete', 'uses'=>'AdminController@productDestroy']);
 		});
 	});
 	

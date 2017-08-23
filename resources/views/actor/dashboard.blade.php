@@ -102,7 +102,7 @@
                          
                             <!-- END TIMELINE ITEM -->
                             <!-- TIMELINE ITEM -->
-                            @if(\Auth::user()->subscribed('main') == 1)
+                            @if(\Auth::user()->subscription == 1)
                                 <div class="timeline-item">
                                     <div class="timeline-badge">
                                         <div class="timeline-icon">
@@ -113,17 +113,15 @@
                                      
                                         <div class="timeline-body-head">
                                             <div class="timeline-body-head-caption">
-                                                <span class="timeline-body-alerttitle font-green">Payment</span>
+                                                <span class="timeline-body-alerttitle font-green">Buy products</span>
                                                 
                                             </div>
                                             <div class="timeline-body-head-actions">
-                                                <a href="javascript:;" class="btn btn-success">Done</a>
+                                                <a href="{{route('actor::products')}}" class="btn btn-success">Buy Products</a>
                                             </div>
                                         </div>
                                         <div class="timeline-body-content">
-                                            <span class="font-grey-cascade"> Payment Completed
-                                               
-                                            </span>
+                                            <span class="font-grey-cascade"> Buy other products</span>
                                         </div>
                                     </div>
                                 </div>

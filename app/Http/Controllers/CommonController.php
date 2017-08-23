@@ -12,6 +12,8 @@ use Input;
 use Session;
 use Socialite;
 use Validator;
+use App\Slideshow;
+use App\Slide;
 
 class CommonController extends Controller
 {
@@ -30,7 +32,8 @@ class CommonController extends Controller
 
 	/* Get route map to /younger */
 	public function getYounger(){
-		return view('common.younger');
+		$slides = Slide::latest()->where("slideshow_id","=",2)->orderBy('id', 'desc')->get();
+		return view('common.younger',compact('slides'));
 	}
 
 	public function getContent(){
@@ -39,7 +42,8 @@ class CommonController extends Controller
 
 	/* Get route map to /contact */
 	public function getContact(){
-		return view('common.contact');
+		$slides = Slide::latest()->where("slideshow_id","=",3)->orderBy('id', 'desc')->get();
+		return view('common.contact',compact('slides'));
 	}
 
 	/*Post route map to /contact*/
@@ -323,7 +327,7 @@ class CommonController extends Controller
                 if($actor->photo_url){
 					$actorList .= '<img src="' . $actor->photo_url . '" />';
 				}else{
-					$actorList .= '<img src="' . asset('images/photos/default-medium.jpg') . '" />';
+					$actorList .= '<img src="' . asset('assets/images/photos/default-medium.jpg') . '" />';
 				}
                 $actorList .=  '</a>';
                 $actorList .=  '</div>';

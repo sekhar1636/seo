@@ -5,9 +5,18 @@
 @section('style')
 	<link href="{{asset('assets/pages/css/faq.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
+
 @section('content')
 <!-- BEGIN PAGE CONTENT INNER -->
 <div class="page-content-inner">
+
+
+
+
+
+
+
+
     <div class="faq-page faq-content-1">
         
         <div class="faq-content-container">

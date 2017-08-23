@@ -66,9 +66,9 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/2.0.4/js/Jcrop.min.js"></script>
 
-<script type="text/javascript" src="{{asset('js/jquery.validate.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 
-<script type="text/javascript" src="{{asset('js/additional-methods.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/js/additional-methods.min.js')}}"></script>
 
 
 
@@ -196,7 +196,7 @@
 
                     <div class="profile-userpic">
 
-                        <img src="{{isset($actor->photo_url) ? $actor->photo_url : asset('images/photos/default-medium.jpg')}}" class="img-responsive" alt=""> </div>
+                        <img src="{{isset($actor->photo_url) ? asset($actor->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive" alt=""> </div>
 
                     <!-- END SIDEBAR USERPIC -->
 
@@ -900,7 +900,7 @@
 
                                         @if(isset(\Auth::user()->actor->precrop_url))
 
-                                        	<img src="{{\Auth::user()->actor->precrop_url}}" width="500" height="500" id="cropbox" />
+                                        	<img src="{{asset(\Auth::user()->actor->precrop_url)}}" width="500" height="500" id="cropbox" />
 
 
 
@@ -940,7 +940,7 @@
 
 					                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
 
-					                                        <img src="{{ isset($slider->photo_url) ? $slider->photo_url : asset('/images/photos/default-medium.jpg') }}" alt="{{ @$slider->name }}" />
+					                                        <img src="{{ isset($slider->photo_url) ? $slider->photo_url : asset('assets/images/photos/default-medium.jpg') }}" alt="{{ @$slider->name }}" />
 
 					                                    
 

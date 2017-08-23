@@ -10,8 +10,8 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{asset('search/main.css')}}">
-    <link rel="stylesheet" href="{{asset('search/actorSearch.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/search/main.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/search/actorSearch.css')}}">
 
     <!--[if lt IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -151,9 +151,9 @@
 	</div>
 </div>
 
-    <script src="{{asset('search/mixitup.min.js')}}"></script>
-    <script src="{{asset('search/mixitup-pagination.min.js')}}"></script>
-    <script src="{{asset('search/mixitup-multifilter.min.js')}}"></script>
-    <script src="{{asset('search/main.js')}}"></script>
+    <script src="{{asset('assets/search/mixitup.min.js')}}"></script>
+    <script src="{{asset('assets/search/mixitup-pagination.min.js')}}"></script>
+    <script src="{{asset('assets/search/mixitup-multifilter.min.js')}}"></script>
+    <script src="{{asset('assets/search/main.js')}}"></script>
   </body>
 </html>

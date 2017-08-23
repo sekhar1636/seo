@@ -8,9 +8,9 @@
 @endsection
 
 @section('js')
-<script type="text/javascript" src="{{asset('js/jquery.validate.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/additional-methods.min.js')}}"></script>
-<script src="{{asset('js/main.js')}}" type="text/javascript"></script>
+<script type="text/javascript" src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/js/additional-methods.min.js')}}"></script>
+<script src="{{asset('assets/js/main.js')}}" type="text/javascript"></script>
 
 @endsection
 @section('content')
