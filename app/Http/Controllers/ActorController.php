@@ -275,8 +275,12 @@ class ActorController extends Controller
                 ->withInput()
                 ->with('tabactive', 'active');
         }
- 
-        $actor = \App\Actor::where('user_id', \Auth::user()->id)->first(); 
+		
+		if(\Auth::user()->Actor){
+            $actor = \App\Actor::where('user_id',\Auth::user()->id)->first();
+        }else{
+            $actor = new \App\Actor;
+        }
         
         $destinationPath = 'assets/photos'; // upload path
         $file = $request->file('photo');
@@ -287,12 +291,26 @@ class ActorController extends Controller
 
         $actor->precrop_path = $destinationPath.'/'.$fileName; 
         $actor->precrop_url = $destinationPath.'/'.$fileName; 
-        
-        if($actor->update()){
-            return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+		
+		if(\Auth::user()->Actor){
+			
+            if($actor->update()){
+				return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+			}else{
+				return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+			}
+			
         }else{
-            return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+			$actor->user_id = \Auth::user()->id; 
+            if($actor->save()){
+				return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+			}else{
+				return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+			}
+			
         }
+        
+        
            
     }
 

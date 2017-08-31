@@ -894,7 +894,7 @@
 
                                     <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2">
 
-                                        @if(\Auth::user()->Actor)
+                                       
 
 
 
@@ -986,11 +986,6 @@
 
                                         	@endif
 
-                                        @else
-
-                                        	<h3>Please upload profile info first.</h3>
-
-                                        @endif
 
                                     </div>
 

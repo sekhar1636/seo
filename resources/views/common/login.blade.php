@@ -11,7 +11,13 @@
 <script type="text/javascript" src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/additional-methods.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}" type="text/javascript"></script>
-
+<script type="text/javascript">
+$(document).keypress(function (e) {
+  if (e.which == 13) {
+    $('.login-form').submit();
+  }
+});
+</script>
 @endsection
 @section('content')
 <div class="content col-md-4 col-md-offset-4 box-setting">

@@ -14,6 +14,7 @@ use Socialite;
 use Validator;
 use App\Slideshow;
 use App\Slide;
+use App\Faq;
 
 class CommonController extends Controller
 {
@@ -27,7 +28,11 @@ class CommonController extends Controller
 
 	/* Get route map to /faq */
 	public function getFaq(){
-		return view('common.faq');
+		$faq['application'] = Faq::where('_type', '=', "Application")->get();
+		$faq['audition'] = Faq::where('_type', '=', "Audition")->get();
+		$faq['members'] = Faq::where('_type', '=', "Members")->get();
+		$faq['selection'] = Faq::where('_type', '=', "Selection")->get();
+		return view('common.faq',compact('faq'));
 	}
 
 	/* Get route map to /younger */

@@ -955,7 +955,7 @@ function initTable(tableId, data) {
 
                                     <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2">
 
-                                        @if($actor)
+                                       
 
 
 
@@ -1047,11 +1047,6 @@ function initTable(tableId, data) {
 
                                         	@endif
 
-                                        @else
-
-                                        	<h3>Please upload profile info first.</h3>
-
-                                        @endif
 
                                     </div>
 

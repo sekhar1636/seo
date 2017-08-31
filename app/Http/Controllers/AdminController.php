@@ -494,6 +494,13 @@ class AdminController extends Controller
 		
 		$user = User::findOrFail($id);
         $actor = $user->actor;
+		
+		
+		if($user->actor){
+            $actor = \App\Actor::where('user_id',$id)->first();
+        }else{
+            $actor = new \App\Actor;
+        }
         
         $destinationPath = 'assets/photos'; // upload path
         $file = $request->file('photo');
@@ -504,12 +511,23 @@ class AdminController extends Controller
 
         $actor->precrop_path = $destinationPath.'/'.$fileName; 
         $actor->precrop_url = $destinationPath.'/'.$fileName; 
-        
-        if($actor->update()){
-            return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+		
+		if($user->actor){
+            if($actor->update()){
+				return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+			}else{
+				return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+			}
         }else{
-            return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+			$actor->user_id = $id;
+            if($actor->save()){
+				return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+			}else{
+				return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+			}
         }
+        
+        
            
     }
 	

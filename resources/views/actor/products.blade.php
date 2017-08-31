@@ -287,6 +287,43 @@ $(document).ready(function() {
                   <input type="text" class="form-control" data-stripe="cvc" />
                 </div>
               </div>
+              
+              
+              
+              <div class="form-group">
+                <label class="col-xs-3 control-label">Address</label>
+                <div class="col-xs-5">
+                  <input type="text" class="form-control" data-stripe="address_line1" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-xs-3 control-label">City</label>
+                <div class="col-xs-2">
+                  <input type="text" class="form-control" placeholder="Enter City" data-stripe="address_city" />
+                </div>
+                <label class="col-xs-1 control-label">Zip</label>
+                <div class="col-xs-2">
+                  <input type="text" class="form-control" placeholder="Enter Zip Code" data-stripe="address_zip" />
+                </div>
+                
+              </div>
+              <div class="form-group">
+                <label class="col-xs-3 control-label">State</label>
+                <div class="col-xs-2">
+                  <input type="text" class="form-control" placeholder="Enter State" data-stripe="address_state" />
+                </div>
+                <label class="col-xs-1 control-label">Country</label>
+                <div class="col-xs-2">
+                  <input type="text" class="form-control" placeholder="Enter Country" data-stripe="address_country" />
+                </div>
+              </div>
+              
+              
+              
+              
+              
+              
+              
               <div class="form-group">
                 <div class="col-xs-9 col-xs-offset-3">
                   <button type="submit" class="btn btn-primary">Make Payment</button>
