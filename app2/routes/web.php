@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/verifyemail/{token}',['as'=>'getEmail', 'uses'=>'Auth\RegisterController@verify']);
 //Static pages common for all users
 Route::get('/', ['as'=>'getIndex', 'uses'=>'CommonController@getIndex']);
 Route::get('/faq',['as'=>'getFaq', 'uses'=>'CommonController@getFaq']);
@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::group(['as' => 'actor::', 'middleware' => 'role:actor'], function ()
 		{
 			Route::get('/', ['as'=>'actorProfile', 'uses'=>'ActorController@index']);
+			Route::post('/actorprofiletrigger',['as'=>'actorProfileTrigger', 'uses'=>'ActorController@mail']);
 			Route::get('update', ['as'=>'getEditProfile', 'uses'=>'ActorController@edit']);
 			Route::post('update', ['as'=>'postEditProfile', 'uses'=>'ActorController@update']);
 			Route::post('password', ['as'=>'postEditPassword', 'uses'=>'ActorController@postEditPassword']);

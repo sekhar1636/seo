@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Jobs\SendVerificationEmail;
 
 class ActorController extends Controller
 {
@@ -14,8 +16,27 @@ class ActorController extends Controller
         if(\Auth::user()->actor && \Auth::user()->payment_status){
             return redirect()->route('actor::getEditProfile');
         }
-    	return view('actor.dashboard');
+
+        return view('actor.dashboard');
     }
+
+    public function mail()
+    {
+        $user_id = \Auth::user()->id;
+        dd($user_id);
+        $user_det = User::where('id',$user_id)->get();
+        foreach($user_det as $val)
+        {
+            if($val['verified']==0)
+            {
+                dispatch(new SendVerificationEmail($val['email']));
+            }
+        }
+
+            dispatch(new SendVerificationEmail($user_det));
+            return redirect()->route('actor::actorProfile')->with('success_message', 'Mail Sent Successfully');
+    }
+
     public function edit(){
         $weight = [];
         $age = [];

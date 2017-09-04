@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Jobs\SendVerificationEmail;
 use App;
 use Auth;
 use Input;
@@ -144,9 +145,12 @@ class CommonController extends Controller
 		$user->email = $request->get('user');
 		$user->password = bcrypt($request->get('password'));
 		$user->role = $request->get('role');
+        $user->email_token = base64_encode($request->get('user'));
 		$user->status = 1;
 		if($user->save()){
 			//TODO : Sent Registration Email Here
+            dispatch(new SendVerificationEmail($user));
+
 			$authenticate = array(
 			    'email' => $request->get('user'),
 			    'password' => $request->get('password'),

@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Profile Information Updated
-                                               
+
                                             </span>
                                         </div>
                                     </div>
@@ -152,6 +152,32 @@
                                             </span>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="timeline-badge">
+                                        <div class="timeline-icon">
+                                            <i class="icon-credit-card font-red"></i>
+                                        </div>
+                                    </div>
+                                <div class="timeline-body activeBox">
+                                    <div class="timeline-body-head">
+                                        <div class="timeline-body-head-caption">
+                                            <span class="timeline-body-alerttitle font-green">Account Information</span>
+                                        </div>
+                                        <form method="POST" action="{{ route('actor::actorProfileTrigger') }}">
+                                            {{ csrf_field() }}
+                                        <div class="timeline-body-head-actions">
+                                            <button type="submit" class="btn green">Verify</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Verification done.
+
+                                            </span>
+                                    </div>
+                                </div>
                                 </div>
                                 <!-- END TIMELINE ITEM -->
                             @endif
