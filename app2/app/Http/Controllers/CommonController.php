@@ -209,18 +209,18 @@ class CommonController extends Controller
             $imediate = $this->check_in_range($actor->from, $actor->to, date('Y-m-d'), date('Y-m-d'));
             if($imediate) $mixClass .= $this->prepareData("Immediate") . ' ';
 
-            $sd = date("d-M-Y", strtotime("third monday".date("Y-05")));
-            $ed = date("d-M-Y", strtotime("first monday ".date("Y-09")));
+            $sd = date("Y-m-d", strtotime("third monday".date("Y-05")));
+            $ed = date("Y-m-d", strtotime("first monday ".date("Y-09")));
             $summer = $this->check_in_range($actor->from, $actor->to, $sd, $ed);
             if($summer) $mixClass .= $this->prepareData("Summer") . ' ';
 
-            $fd = date("d-M-Y", strtotime("first monday ".date("Y-09")));
-            $fed = date("25-12-Y");
+            $fd = date("Y-m-d", strtotime("first monday ".date("Y-09")));
+            $fed = date("Y-12-25");
             $fall = $this->check_in_range($actor->from, $actor->to, $fd, $fed);
             if($fall) $mixClass .= $this->prepareData("Fall") . ' ';
 
-            $ny = date("d-M-Y", strtotime("+1 year".date("Y-01-01")));
-            $eny = date("d-M-Y", strtotime("+1 year".date("Y-12-31")));
+            $ny = date("Y-m-d", strtotime("+1 year".date("Y-01-01")));
+            $eny = date("Y-m-d", strtotime("+1 year".date("Y-12-31")));
             $next_year = $this->check_in_range($actor->from, $actor->to, $ny, $eny);
             if($next_year) $mixClass .= $this->prepareData("Next Year") . ' ';
 
