@@ -66,8 +66,7 @@ class Misc
 	];
 	public static $jobTypes = [
 		'Apprentice' => 'Apprentice',
-		'Intern' => 'Intern',		
-		'Employment Availability'=>'Employment Availability'
+		'Intern' => 'Intern',
 	];
 	public static $dance = [
 		'Ballet' => 'Ballet',
@@ -148,6 +147,13 @@ class Misc
 		'Blue'=>'Blue',
 	];
 
+	public static $employee_availability = [
+	    1 => 'Immediate',
+        2 => 'Summer',
+        3 => 'Fall',
+        4 => 'Next Year'
+    ];
+
 	public static function arrayInsertBefore($key, array &$array, $new_key, $new_value) {
 		if (array_key_exists($key, $array)) {
 			$new = array();
@@ -183,6 +189,7 @@ class Misc
 	 */
 	public static function handleDatatable($options)
 	{
+
 		// initializing the response
 		$responseData = [];
 

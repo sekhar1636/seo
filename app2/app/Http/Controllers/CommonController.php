@@ -13,6 +13,7 @@ use Input;
 use Session;
 use Socialite;
 use Validator;
+use App\User;
 
 class CommonController extends Controller
 {
@@ -36,37 +37,6 @@ class CommonController extends Controller
 
 	public function getContent(){
 		return view('common.content');
-	}
-
-	/* Get route map to /contact */
-	public function getContact(){
-		return view('common.contact');
-	}
-
-	/*Post route map to /contact*/
-	public function postContact(Request $request){
-		$validator = \Validator::make($request->all(),
-            [
-                'username' => "required|max:50|min:3",
-                'description'=>'required|max:600',
-                'mail'=>'required|email'
-            ]
-        );
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator->errors())
-                ->withInput();
-        }
-        $user = "";
-        try {
-            \Mail::send('email.contact', ['name'=>$request->get('username'),'email'=>$request->get('mail') ,'description'=>$request->get('description') ], function ($m) use ($user) {
-                $m->to('qundeelahmad@gmail.com')->subject('User Contact');
-            });
-            return redirect()->back()->with('success_message', 'Feedback successfully sent');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error_message', 'Unable to send feedback please wait.');
-        }
 	}
 
 	//Get function of login page
@@ -118,94 +88,29 @@ class CommonController extends Controller
 		}
 	}
 
-	//Get function for signup
-	public function getSignup(){
-		return view('common.register');
-	}
-	public function postSignup(Request $request){
-		
-		$validator = Validator::make($request->all(),
-			[
-				'name' => "required|max:60",
-				'user' => "required|unique:users,email|email|max:100",
-				'password' => "min:6|required|max:15",
-				'role' => "required|max:30",
-			]
-		);
-		if ($validator->fails()) {
-			return redirect()
-				->back()
-				->withErrors($validator->errors())
-				->with('error_message', 'Invalid data please provide complete data.')
-				->withInput(\Input::except('password'));
-		}	
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param $token
+     * @return \Illuminate\Http\Response
+     */
 
-		$user = new \App\User;
-		$user->name = $request->get('name');
-		$user->email = $request->get('user');
-		$user->password = bcrypt($request->get('password'));
-		$user->role = $request->get('role');
-        $user->email_token = base64_encode($request->get('user'));
-		$user->status = 1;
-		if($user->save()){
-			//TODO : Sent Registration Email Here
-            dispatch(new SendVerificationEmail($user));
-
-			$authenticate = array(
-			    'email' => $request->get('user'),
-			    'password' => $request->get('password'),
-			    'status'=>1
-		   	);
-			if (Auth::attempt($authenticate)) {
-				if(Auth::user()->role == 'actor'){
-					return redirect()->route('actor::actorProfile');
-				}else if(Auth::user()->role == 'theater'){
-					return redirect()->route('theater::theaterProfile');
-				}else if(Auth::user()->role == 'staff'){
-					return redirect()->route('staff::staffProfile');
-				}else{
-					dd('No User Exist');
-				}
-			} else {
-				return redirect()
-						->back()->with('error_message', 'Incorrect credentials or account not approved yet.');
-			}
-		}else{
-			return redirect()
-					->back()->with('error_message', 'Invalid input fields');
-		}		
-
-	}
-
-	//Get Route Of PAssword Recover
-	public function getForgot(){
-		return view('common.forgot');
-	}
-
-	//Post Route Of Password Recover
-	public function postForgot(Request $request){
-		$validator = Validator::make($request->all(),
-			[
-				'mail' => "required|email|exists:users,email",
-			]
-		);
-		if ($validator->fails()) {
-			return redirect()
-				->back()
-				->withErrors($validator->errors())
-				->with('error_message', 'Invalid data please provide complete data.')
-				->withInput(\Input::except('password'));
-		}	
-		$user  = \App\User::where('email', $request->get('mail'))->first();
-		try {
-            \Mail::send('email.forgot', ['id'=>$user->id,'token'=> $user->remember_token,'name'=>$user->username ], function ($m) use ($user) {
-                $m->to($user->email)->subject('Reset Password');
-            });
-            return redirect()->back()->with('success_message', 'Please check email to reset password');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error_message', 'Unable to send forgot email please wait.');
+        public function verify($token)
+        {
+            $user = User::where('email_token', $token)->first();
+            if($user['verified'] == 0)
+            {
+                $user->verified = 1;
+                if($user->save())
+                {
+                    return view('email.emailconfirm',['user'=>$user]);
+                }
+            }
+            else
+            {
+                return view('email.alreadyverified');
+            }
         }
-	}
 
 
 	// public function getRole(){
@@ -246,39 +151,7 @@ class CommonController extends Controller
 	// 	}	
 	// }
 
-	public function getReset($id, $token){
-		$expire = \App\User::where('id', $id)->where('remember_token', $token)->count();
-		if($expire == 0){
-			return redirect()->route('getLogin')->with('error_message', 'Reset password link expired.');
-		}
-		return view('common.reset');
-	}
-	public function postReset(Request $request,$id, $token){
-		$validator = Validator::make($request->all(),
-			[
-				'password' => "required|min:6|max:15",
-				'password_confirmation'=>'required|min:6|max:15|same:password'
-			]
-		);
-		if ($validator->fails()) {
-			return redirect()
-				->back()
-				->withErrors($validator->errors())
-				->with('error_message', 'Invalid data please provide complete data.')
-				->withInput(\Input::except('password'));
-		}
-		$user = \App\User::where('id', $id)->where('remember_token', $token)->first();
-		if($user){
-			$user->password = bcrypt($request->get('password'));
-			$user->remember_token = str_random(60);
-			$user->save();
-	
-			return redirect()->route('getLogin')->with('success_message', 'Password successfully updated. Please login!');
-		}else{
-			return redirect()->route('getLogin')->with('error_message', 'Reset password link expired.');
-		}
 
-	}
 
 
 	public function prepareData($data){
@@ -293,78 +166,121 @@ class CommonController extends Controller
 		
 	}
 
-	public function getActors(){
-		$actors = \App\User::join('actors','actors.user_id', '=', 'users.id')
-		->where('payment_status',1)
-		->get();
+    public function check_in_range($start_date, $end_date, $start_lookup, $end_lookup)
+    {
+        // Convert to timestamp
 
-		$actorList = "";
-		/*Loop through the Actors*/
-		foreach($actors as $actor){
-			/*Build MIX Class*/
-			$mixClass = $actor->gender . ' ';
-				$mixClass .= $this->prepareData($actor->ethnicity) . ' ';
-				$mixClass .=$this->prepareData($actor->misc) . ' ';
-				$mixClass .= $this->prepareData($actor->technical) . ' ';
-				$mixClass .= $this->prepareData($actor->dance) . ' ';
-				$mixClass .= $this->prepareData($actor->jobType) . ' ';
-				$mixClass .= $this->prepareData($actor->instrument);
+        $begin = new \DateTime($start_date);
+        $end = new \DateTime($end_date);
+        $daterange = new \DatePeriod($begin, new \DateInterval('P1D'), $end);
+        $start_ts = strtotime($start_lookup);
+        $end_ts = strtotime($end_lookup);
+        foreach($daterange as $date) {
+            $user_ts = strtotime($date->format('Y-m-d'));
+            // Check that user date is between start & end
+           if(($user_ts >= $start_ts) && ($user_ts <= $end_ts)) return true;
+        }
 
-				$actorList .= '<div class="mix ' . $mixClass . '" ';
-				$actorList .= 'data-first-name="' . $actor->first_name . '" ';
-				$actorList .= 'data-last-name="' . $actor->last_name . '" ';
-				// $actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
-				// $actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
-				$actorList .= 'data-audition-type="' . preg_replace('/\s+/', '', $actor->auditionType)  . '" ';
-				$actorList .= 'data-skill-vocal="' . preg_replace('/\s+/', '', $actor->vocalRange) . '" ';
-				
-				$actorList .= '>';
-			
-				$actorList .=  '<div class="col-md-4">';
-                $actorList .=  ' <div class="tile-container">';
-                $actorList .=  '<div class="tile-thumbnail">';
-                 $actorList .=  '<a href="javascript:;">';
-                if($actor->photo_url){
-					$actorList .= '<img src="' . $actor->photo_url . '" />';
-				}else{
-					$actorList .= '<img src="' . asset('images/photos/default-medium.jpg') . '" />';
-				}
-                $actorList .=  '</a>';
-                $actorList .=  '</div>';
-                $actorList .=  '<div class="tile-title">';
-                $actorList .=  '<h3>';
-                	$actorList .=  '<a href="javascript:;">'. $actor->first_name.' '.$actor->last_name.'</a>';
-                        $actorList .=  '</h3>';
-                        $actorList .=  '<div class="tile-desc">';
-	                        $actorList .=  '<p>';
-	                                $actorList .=  $actor->auditionType;
-	                        $actorList .=  '</p>';
-	                        $actorList .=  '<p>Employment Availability:';
-	                                $actorList .=  $actor->from. ' to ' . $actor->to;
-	                               
-	                        $actorList .=  '</p>';
-                        $actorList .=  '</div>';
+        return false;
 
-                        if ($actor->resume_path){
-							$actorList .= '<a href="' . public_path($actor->resume_path) . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actor->last_name . '\'s Resume</a>';
-						}
-						$actorList .= '<a href="'.route('getActorView', $actor->user_id).'" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actor->last_name . '\'s Profile</a>';
-
-                        $actorList .=  '</div>';
-                        $actorList .=  '</div>';
-                    $actorList .=  '</div>'; 
-           
+    }
 
 
-                $actorList .= '</div>' . PHP_EOL;	
-			
-			/*Build the Output*/
-		}
 
-		return view('actor.actorSearch1')->with('actorList', $actorList);
-	}
+    public function getActors(){
+        $actors = \App\User::join('actors','actors.user_id', '=', 'users.id')
+            ->where('payment_status',1)
+            ->get();
 
-	/**
+        $actorList = "";
+        /*Loop through the Actors*/
+        foreach($actors as $actor){
+            /*Build MIX Class*/
+            $mixClass = $actor->gender . ' ';
+            $mixClass .= $this->prepareData($actor->ethnicity) . ' ';
+            $mixClass .=$this->prepareData($actor->misc) . ' ';
+            $mixClass .= $this->prepareData($actor->technical) . ' ';
+            $mixClass .= $this->prepareData($actor->dance) . ' ';
+            $mixClass .= $this->prepareData($actor->jobType) . ' ';
+            $mixClass .= $this->prepareData($actor->instrument) . '';
+
+            //contion for employment availability
+            //imediate
+            $imediate = $this->check_in_range($actor->from, $actor->to, date('Y-m-d'), date('Y-m-d'));
+            if($imediate) $mixClass .= $this->prepareData("Immediate") . ' ';
+
+            $sd = date("d-M-Y", strtotime("third monday".date("Y-05")));
+            $ed = date("d-M-Y", strtotime("first monday ".date("Y-09")));
+            $summer = $this->check_in_range($actor->from, $actor->to, $sd, $ed);
+            if($summer) $mixClass .= $this->prepareData("Summer") . ' ';
+
+            $fd = date("d-M-Y", strtotime("first monday ".date("Y-09")));
+            $fed = date("25-12-Y");
+            $fall = $this->check_in_range($actor->from, $actor->to, $fd, $fed);
+            if($fall) $mixClass .= $this->prepareData("Fall") . ' ';
+
+            $ny = date("d-M-Y", strtotime("+1 year".date("Y-01-01")));
+            $eny = date("d-M-Y", strtotime("+1 year".date("Y-12-31")));
+            $next_year = $this->check_in_range($actor->from, $actor->to, $ny, $eny);
+            if($next_year) $mixClass .= $this->prepareData("Next Year") . ' ';
+
+            $actorList .= '<div class="mix ' . $mixClass . '" ';
+            $actorList .= 'data-first-name="' . $actor->first_name . '" ';
+            $actorList .= 'data-last-name="' . $actor->last_name . '" ';
+            // $actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
+            // $actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
+            $actorList .= 'data-audition-type="' . preg_replace('/\s+/', '', $actor->auditionType)  . '" ';
+            $actorList .= 'data-skill-vocal="' . preg_replace('/\s+/', '', $actor->vocalRange) . '" ';
+
+            $actorList .= '>';
+
+            $actorList .=  '<div class="col-md-4">';
+            $actorList .=  ' <div class="tile-container">';
+            $actorList .=  '<div class="tile-thumbnail">';
+            $actorList .=  '<a href="javascript:;">';
+            if($actor->photo_url){
+                $actorList .= '<img src="' . $actor->photo_url . '" />';
+            }else{
+                $actorList .= '<img src="' . asset('images/photos/default-medium.jpg') . '" />';
+            }
+            $actorList .=  '</a>';
+            $actorList .=  '</div>';
+            $actorList .=  '<div class="tile-title">';
+            $actorList .=  '<h3>';
+            $actorList .=  '<a href="javascript:;">'. $actor->first_name.' '.$actor->last_name.'</a>';
+            $actorList .=  '</h3>';
+            $actorList .=  '<div class="tile-desc">';
+            $actorList .=  '<p>';
+            $actorList .=  $actor->auditionType;
+            $actorList .=  '</p>';
+            $actorList .=  '<p>Employment Availability:';
+            $actorList .=  $actor->from. ' to ' . $actor->to;
+
+            $actorList .=  '</p>';
+            $actorList .=  '</div>';
+
+            if ($actor->resume_path){
+                $actorList .= '<a href="' . public_path($actor->resume_path) . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actor->last_name . '\'s Resume</a>';
+            }
+            $actorList .= '<a href="'.route('getActorView', $actor->user_id).'" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actor->last_name . '\'s Profile</a>';
+
+            $actorList .=  '</div>';
+            $actorList .=  '</div>';
+            $actorList .=  '</div>';
+
+
+
+            $actorList .= '</div>' . PHP_EOL;
+
+            /*Build the Output*/
+        }
+                return view('actor.actorSearch1')->with(
+                        'actorList',$actorList
+                    );
+    }
+
+
+    /**
 	* Get Function To View Actor Profile
 	*/
 	public function view($id){

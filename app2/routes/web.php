@@ -10,26 +10,26 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/verifyemail/{token}',['as'=>'getEmail', 'uses'=>'Auth\RegisterController@verify']);
+Route::get('/verifyemail/{token}',['as'=>'getEmail', 'uses'=>'CommonController@verify']);
 //Static pages common for all users
 Route::get('/', ['as'=>'getIndex', 'uses'=>'CommonController@getIndex']);
 Route::get('/faq',['as'=>'getFaq', 'uses'=>'CommonController@getFaq']);
 Route::get('/younger', ['as'=>'getYounger', 'uses'=>'CommonController@getYounger']);
-Route::get('/contact', ['as'=>'getContact', 'uses'=>'CommonController@getContact']);
-Route::post('/contact',['as'=>'postContact', 'uses'=>'CommonController@postContact']);
+Route::get('/contact', ['as'=>'getContact', 'uses'=>'StrawContactController@getContact']);
+Route::post('/contact',['as'=>'postContact', 'uses'=>'StrawContactController@postContact']);
 Route::get('/premium_content', ['as'=>'getContents', 'uses'=>'CommonController@getContent']);
 
 
 Route::get('/login', ['as' => 'getLogin', 'uses' =>  "CommonController@getLogin"]);
 Route::post('/login', ['uses' =>  "CommonController@authenticate"]);
-Route::get('/signup', ['as' => 'getSignup', 'uses' =>  "CommonController@getSignup"]);
-Route::post('/signup', ['uses' =>  "CommonController@postSignup"]);
+Route::get('/signup', ['as' => 'getSignup', 'uses' =>  "SignupController@getSignup"]);
+Route::post('/signup', ['uses' =>  "SignupController@postSignup"]);
 
 
-Route::get('/forgot', ['as' => 'getForgot', 'uses' =>  "CommonController@getForgot"]);
-Route::post('/forgot', ['uses' =>  "CommonController@postForgot"]);
-Route::get('reset/{id}/{token}', ['as'=>'getReset', 'uses'=>'CommonController@getReset']);
-Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'CommonController@postReset']);
+Route::get('/forgot', ['as' => 'getForgot', 'uses' =>  "ForgotController@getForgot"]);
+Route::post('/forgot', ['uses' =>  "ForgotController@postForgot"]);
+Route::get('reset/{id}/{token}', ['as'=>'getReset', 'uses'=>'StrawResetController@getReset']);
+Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'StrawResetController@postReset']);
 
 
 Route::group(['middleware' => ['auth']], function () {

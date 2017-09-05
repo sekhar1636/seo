@@ -16,25 +16,25 @@ class ActorController extends Controller
         if(\Auth::user()->actor && \Auth::user()->payment_status){
             return redirect()->route('actor::getEditProfile');
         }
-
-        return view('actor.dashboard');
+        $verify = '';
+        if(\Auth::user()->verified == 1)
+        {
+            $verify = 1;
+        }
+        else
+        {
+            $verify = 0;
+        }
+        return view('actor.dashboard')->with([
+            'verify' => $verify
+        ]);
     }
 
     public function mail()
     {
-        $user_id = \Auth::user()->id;
-        dd($user_id);
-        $user_det = User::where('id',$user_id)->get();
-        foreach($user_det as $val)
-        {
-            if($val['verified']==0)
-            {
-                dispatch(new SendVerificationEmail($val['email']));
-            }
-        }
-
-            dispatch(new SendVerificationEmail($user_det));
-            return redirect()->route('actor::actorProfile')->with('success_message', 'Mail Sent Successfully');
+        $user = \Auth::user();
+        dispatch(new SendVerificationEmail($user));
+        return redirect()->route('actor::actorProfile')->with('success_message', 'Mail Sent Successfully');
     }
 
     public function edit(){
@@ -225,7 +225,7 @@ class ActorController extends Controller
         $src = \Auth::user()->actor->precrop_url;
  
         $exploded = explode('.',$src);
-        $ext = $exploded[count($exploded) - 1]; 
+        $ext = $exploded[count($exploded) - 1];
 
         $img_r = "";
         if (preg_match('/jpg|jpeg/i',$ext))

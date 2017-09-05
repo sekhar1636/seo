@@ -45,9 +45,35 @@
                 </div>
                 <div class="portlet-body">
                     <div class="col-md-7">
-                
+
                         <div class="timeline">
                             <!-- TIMELINE ITEM -->
+                            @if(@$verify == 0)
+                            <div class="timeline-item">
+                                <div class="timeline-badge">
+                                    <div class="timeline-icon">
+                                        <i class="icon-question font-green"></i>
+                                    </div>
+                                </div>
+                                <div class="timeline-body activeBox">
+                                    <div class="timeline-body-head">
+                                        <div class="timeline-body-head-caption">
+                                            <span class="timeline-body-alerttitle font-green">Account Information</span>
+                                        </div>
+                                        <form method="POST" action="{{ route('actor::actorProfileTrigger') }}">
+                                            {{ csrf_field() }}
+                                            <div class="timeline-body-head-actions">
+                                                <button type="submit" class="btn green">Verify</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Verify Your Account By clicking Verify.
+
+                                            </span>
+                                    </div>
+                                </div>
+                @endif
                             @if(\Auth::user()->actor)
                                 <div class="timeline-item">
                                     <div class="timeline-badge">
@@ -154,30 +180,7 @@
                                     </div>
                                 </div>
 
-                                <div class="timeline-item">
-                                    <div class="timeline-badge">
-                                        <div class="timeline-icon">
-                                            <i class="icon-credit-card font-red"></i>
-                                        </div>
-                                    </div>
-                                <div class="timeline-body activeBox">
-                                    <div class="timeline-body-head">
-                                        <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-green">Account Information</span>
-                                        </div>
-                                        <form method="POST" action="{{ route('actor::actorProfileTrigger') }}">
-                                            {{ csrf_field() }}
-                                        <div class="timeline-body-head-actions">
-                                            <button type="submit" class="btn green">Verify</button>
-                                        </div>
-                                        </form>
-                                    </div>
-                                    <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">Verification done.
 
-                                            </span>
-                                    </div>
-                                </div>
                                 </div>
                                 <!-- END TIMELINE ITEM -->
                             @endif

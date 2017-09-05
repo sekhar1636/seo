@@ -1,4 +1,15 @@
-@extends('layouts.app')
+@extends('admin.layout')
+
+@section('title', 'Email Verified')
+
+@section('style')
+
+@endsection
+
+@section('js')
+
+
+@endsection
 @section('content')
     <div class="container">
         <div class="row">
@@ -6,7 +17,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Registration Confirmed</div>
                 <div class="panel-body">
-                    Your Email is successfully verified. Click here to <a href=”{{ URL::to('/login') }}”>login</a>
+                    Your Email is successfully verified. Click here to <a href="{{route('getLogin')}}">login</a>
                 </div>
             </div>
         </div>
