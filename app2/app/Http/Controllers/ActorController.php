@@ -163,7 +163,8 @@ class ActorController extends Controller
     * TODO : Dummy payment just chaning payment status for now
     * Will update with proper payment system in future
     */
-    public function payment(){
+    public function payment()
+    {
         if(\Auth::user()->payment_status == 1){
             return redirect()->back()->with('success_message', 'Payment completed');
         }else{
@@ -275,6 +276,149 @@ class ActorController extends Controller
         }else{
             return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
         }
+    }
+    /**for preparing data**/
+    public function prepareData($data){
+
+        if($data){
+            $removeWhitespace = preg_replace('/\s+/', '', $data);
+            $removeComma = str_replace(',', ' ', $removeWhitespace);
+            return $removeComma.' ';
+        }else{
+            return " ";
+        }
+
+    }
+
+    /**for checking date comparision and return**/
+    public function check_in_range($start_date, $end_date, $start_lookup, $end_lookup)
+    {
+        // Convert to timestamp
+
+        $begin = new \DateTime($start_date);
+        $end = new \DateTime($end_date);
+        $daterange = new \DatePeriod($begin, new \DateInterval('P1D'), $end);
+        $start_ts = strtotime($start_lookup);
+        $end_ts = strtotime($end_lookup);
+        foreach($daterange as $date) {
+            $user_ts = strtotime($date->format('Y-m-d'));
+            // Check that user date is between start & end
+            if(($user_ts >= $start_ts) && ($user_ts <= $end_ts)) return true;
+        }
+
+        return false;
+
+    }
+
+    /**getting Actors from db**/
+    public function getActors()
+    {
+        $actors = \App\User::join('actors','actors.user_id', '=', 'users.id')
+            ->where('payment_status',1)
+            ->get();
+
+        $actorList = "";
+        /*Loop through the Actors*/
+        foreach($actors as $actor)
+        {
+            /*Build MIX Class*/
+            $mixClass = $actor->gender . ' ';
+            $mixClass .= $this->prepareData($actor->ethnicity) . ' ';
+            $mixClass .=$this->prepareData($actor->misc) . ' ';
+            $mixClass .= $this->prepareData($actor->technical) . ' ';
+            $mixClass .= $this->prepareData($actor->dance) . ' ';
+            $mixClass .= $this->prepareData($actor->jobType) . ' ';
+            $mixClass .= $this->prepareData($actor->instrument) . '';
+
+            //contion for employment availability
+            //imediate
+            $imediate = $this->check_in_range($actor->from, $actor->to, date('Y-m-d'), date('Y-m-d'));
+            if($imediate) $mixClass .= $this->prepareData("Immediate") . ' ';
+
+            //for getting summer
+            $sd = date("Y-m-d", strtotime("third monday".date("Y-05")));
+            $ed = date("Y-m-d", strtotime("first monday ".date("Y-09")));
+            $summer = $this->check_in_range($actor->from, $actor->to, $sd, $ed);
+            if($summer) $mixClass .= $this->prepareData("Summer") . ' ';
+
+            //for getting fall
+            $fd = date("Y-m-d", strtotime("first monday ".date("Y-09")));
+            $fed = date("Y-12-25");
+            $fall = $this->check_in_range($actor->from, $actor->to, $fd, $fed);
+            if($fall) $mixClass .= $this->prepareData("Fall") . ' ';
+
+            //for getting next year
+            $ny = date("Y-m-d", strtotime("+1 year".date("Y-01-01")));
+            $eny = date("Y-m-d", strtotime("+1 year".date("Y-12-31")));
+            $next_year = $this->check_in_range($actor->from, $actor->to, $ny, $eny);
+            if($next_year) $mixClass .= $this->prepareData("Next Year") . ' ';
+
+            $actorList .= '<div class="mix ' . $mixClass . '" ';
+            $actorList .= 'data-first-name="' . $actor->first_name . '" ';
+            $actorList .= 'data-last-name="' . $actor->last_name . '" ';
+            // $actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
+            // $actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
+            $actorList .= 'data-audition-type="' . preg_replace('/\s+/', '', $actor->auditionType)  . '" ';
+            $actorList .= 'data-skill-vocal="' . preg_replace('/\s+/', '', $actor->vocalRange) . '" ';
+
+            $actorList .= '>';
+
+            $actorList .=  '<div class="col-md-4">';
+            $actorList .=  ' <div class="tile-container">';
+            $actorList .=  '<div class="tile-thumbnail">';
+            $actorList .=  '<a href="javascript:;">';
+
+            if($actor->photo_url)
+            {
+                $actorList .= '<img src="' . $actor->photo_url . '" />';
+            }
+
+            else
+            {
+                $actorList .= '<img src="' . asset('images/photos/default-medium.jpg') . '" />';
+            }
+            $actorList .=  '</a>';
+            $actorList .=  '</div>';
+            $actorList .=  '<div class="tile-title">';
+            $actorList .=  '<h3>';
+            $actorList .=  '<a href="javascript:;">'. $actor->first_name.' '.$actor->last_name.'</a>';
+            $actorList .=  '</h3>';
+            $actorList .=  '<div class="tile-desc">';
+            $actorList .=  '<p>';
+            $actorList .=  $actor->auditionType;
+            $actorList .=  '</p>';
+            $actorList .=  '<p>Employment Availability:';
+            $actorList .=  $actor->from. ' to ' . $actor->to;
+
+            $actorList .=  '</p>';
+            $actorList .=  '</div>';
+
+            if ($actor->resume_path)
+            {
+                $actorList .= '<a href="' . public_path($actor->resume_path) . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actor->last_name . '\'s Resume</a>';
+            }
+            $actorList .= '<a href="'.route('getActorView', $actor->user_id).'" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actor->last_name . '\'s Profile</a>';
+
+            $actorList .=  '</div>';
+            $actorList .=  '</div>';
+            $actorList .=  '</div>';
+            $actorList .= '</div>' . PHP_EOL;
+
+            /*Build the Output*/
+        }
+        return view('actor.actorSearch1')->with(
+            'actorList',$actorList
+        );
+    }
+
+
+    /**
+     * Get Function To View Actor Profile
+     */
+    public function view($id)
+    {
+        $actor = \App\User::findOrFail($id);
+        return view('actor.profileView')->with('actor', $actor);
     }
 
 }

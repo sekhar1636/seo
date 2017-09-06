@@ -19,6 +19,9 @@ Route::get('/contact', ['as'=>'getContact', 'uses'=>'StrawContactController@getC
 Route::post('/contact',['as'=>'postContact', 'uses'=>'StrawContactController@postContact']);
 Route::get('/premium_content', ['as'=>'getContents', 'uses'=>'CommonController@getContent']);
 
+Route::get('/content/{slug}', ['as'=>'getStaticPage', 'uses'=>'StaticPageController@index']);
+Route::get('/content/{slug}/edit',['as'=>'staticPageEdit', 'uses'=>'StaticPageController@edit']);
+Route::post('/content/{slug}',['uses'=>'StaticPageController@update']);
 
 Route::get('/login', ['as' => 'getLogin', 'uses' =>  "CommonController@getLogin"]);
 Route::post('/login', ['uses' =>  "CommonController@authenticate"]);
@@ -34,10 +37,10 @@ Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'StrawResetControll
 
 Route::group(['middleware' => ['auth']], function () {
 
-	Route::get('/actors', ['as'=>'getActors', 'uses'=>'CommonController@getActors']);
-	Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'CommonController@view']);
-	Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'CommonController@getTheater']);
-	Route::get('/staffs', ['as'=>'getStaffs', 'uses'=>'CommonController@getStaff']);
+	Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
+	Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@view']);
+	Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'TheaterController@getTheater']);
+	Route::get('/staffs', ['as'=>'getStaffs', 'uses'=>'StaffController@getStaff']);
 
 	// Route::get('/role', ['as'=>'getRole', 'uses'=>'CommonController@getRole']);
 	// Route::post('/role', ['as'=>'postRole', 'uses'=>'CommonController@postRole']);
@@ -102,7 +105,14 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('user/{id}/edit', ['as'=>'adminUserEdit', 'uses'=>'AdminController@userEdit']);
 			Route::patch('user/{id}', ['as'=>'adminUserUpdate', 'uses'=>'AdminController@userUpdate']);
 			Route::get('usersDataTable/', ['as'=>'adminUsersDataTable', 'uses'=>'AdminController@UsersDataTable']);
+
+            Route::get('/subscription',['as'=>'adminSubView', 'uses'=>'SubscriptionPackageController@index']);
+            Route::get('/subscription/create',['as'=>'adminSubCreate', 'uses'=>'SubscriptionPackageController@create']);
+            Route::post('/subscription',['uses'=>'SubscriptionPackageController@store']);
+            Route::get('/subscription/{id}/edit',['as'=>'adminSubEdit','uses'=>'SubscriptionPackageController@edit']);
+            Route::post('/subscription/{id}',['uses'=>'SubscriptionPackageController@update']);
 		});
 	});
-	
+
+
 });

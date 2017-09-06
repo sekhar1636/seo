@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 
 class TheaterController extends Controller
 {
-    public function getProfile(){
+    public function getProfile()
+    {
     	dd("Theater Profile");
+    }
+
+    public function getTheater()
+    {
+        dd('Theater Page Coming Soon');
     }
 }

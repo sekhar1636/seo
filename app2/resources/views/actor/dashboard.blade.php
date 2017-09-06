@@ -153,6 +153,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                                 <!-- END TIMELINE ITEM -->
                             @else
                                  <div class="timeline-item">

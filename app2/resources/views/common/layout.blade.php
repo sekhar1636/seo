@@ -178,7 +178,6 @@
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-
                                     </ul>
                                 </div>
                                 <!-- END MEGA MENU -->
@@ -286,6 +285,13 @@
                                         <a href="mailto:info@metronic.com">xyz@abc.com</a>
                                     </address>
                                 </div>
+                                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+                                    <h2>Static Pages</h2>
+                                    @foreach(\App\StaticPage::orderby('id')->get() as $val)
+
+                                            <a style="color: #a2abb7;" href="{{ URL::to('/content/'.$val['slug']) }}">{{ $val['page_title'] }}</a><br>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -325,7 +331,6 @@
         <script type="text/javascript">
              Metronic.init(); // init metronic core componets
         </script>
-
         @yield('js')
     
     </body>
