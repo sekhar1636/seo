@@ -112,6 +112,9 @@
         <form class="controls">
             <div class="col-lg-4">
                 <div class="search-filter ">
+                    <div class="row">
+                        <button type="reset" class="btn grey bold uppercase btn-block">Reset Filters</button>
+                    </div>
                     <div class="search-label uppercase">Gender</div>
                     <fieldset data-filter-group="gender" class="control-group">
                         <a  class="btn btn-default" data-filter="all">All</a>
@@ -174,6 +177,17 @@
                         @endforeach 
                     </fieldset>
 
+                    <div class="search-label uppercase">Employee Availability</div>
+                    <fieldset data-filter-group="employeeavailability" class="checkbox-group" data-logic="and">
+                        @foreach(\App\Misc::$employee_availability as $key=>$e)
+                            <label class="mt-checkbox mt-checkbox-outline"> {{$e}}
+                                <input type="checkbox" value=".{{preg_replace('/\s+/', '', $e)}}"/>
+
+                                <span></span>
+                            </label>
+                        @endforeach
+                    </fieldset>
+
                    
 
                     <div class="search-label uppercase">Dance</div>
@@ -217,9 +231,6 @@
                         @endforeach 
                     </fieldset>
 
-                    <div class="row">
-                        <button type="reset" class="btn grey bold uppercase btn-block">Reset Search</button>
-                    </div>
                 </div>
             </div>
             </form>

@@ -15,6 +15,7 @@ use Validator;
 use App\Slideshow;
 use App\Slide;
 use App\Faq;
+use App\Jobs\SendVerificationMail;
 
 class CommonController extends Controller
 {
@@ -77,7 +78,7 @@ class CommonController extends Controller
         }
 	}
 
-	//Get function of login page
+        //Get function of login page
 	public function getLogin(Request $request)
 	{	
 		if(Auth::check()){
@@ -156,6 +157,9 @@ class CommonController extends Controller
 		$user->status = 1;
 		if($user->save()){
 			//TODO : Sent Registration Email Here
+
+            dispatch(new SendVerificationMail($user));
+
 			$authenticate = array(
 			    'email' => $request->get('user'),
 			    'password' => $request->get('password'),
@@ -286,96 +290,30 @@ class CommonController extends Controller
 	}
 
 
-	public function prepareData($data){
 
-		if($data){
-			$removeWhitespace = preg_replace('/\s+/', '', $data);
-			$removeComma = str_replace(',', ' ', $removeWhitespace);
-			return $removeComma.' ';
-		}else{
-			return " ";
-		}
-		
-	}
+        /*email verify*/
+    public function verify($token)
+    {
+        $user = User::where('email_token', $token)->first();
+        if($user['verified'] == 0)
+        {
+            $user->verified = 1;
+            if($user->save())
+            {
+                return view('email.emailconfirm',['user'=>$user]);
+            }
+        }
+        else
+        {
+            return view('email.alreadyverified');
+        }
+    }
 
-	public function getActors(){
-		$actors = \App\User::join('actors','actors.user_id', '=', 'users.id')
-		->where('payment_status',1)
-		->get();
-
-		$actorList = "";
-		/*Loop through the Actors*/
-		foreach($actors as $actor){
-			/*Build MIX Class*/
-			$mixClass = $actor->gender . ' ';
-				$mixClass .= $this->prepareData($actor->ethnicity) . ' ';
-				$mixClass .=$this->prepareData($actor->misc) . ' ';
-				$mixClass .= $this->prepareData($actor->technical) . ' ';
-				$mixClass .= $this->prepareData($actor->dance) . ' ';
-				$mixClass .= $this->prepareData($actor->jobType) . ' ';
-				$mixClass .= $this->prepareData($actor->instrument);
-
-				$actorList .= '<div class="mix ' . $mixClass . '" ';
-				$actorList .= 'data-first-name="' . $actor->first_name . '" ';
-				$actorList .= 'data-last-name="' . $actor->last_name . '" ';
-				// $actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
-				// $actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
-				$actorList .= 'data-audition-type="' . preg_replace('/\s+/', '', $actor->auditionType)  . '" ';
-				$actorList .= 'data-skill-vocal="' . preg_replace('/\s+/', '', $actor->vocalRange) . '" ';
-				
-				$actorList .= '>';
-			
-				$actorList .=  '<div class="col-md-4">';
-                $actorList .=  ' <div class="tile-container">';
-                $actorList .=  '<div class="tile-thumbnail">';
-                 $actorList .=  '<a href="javascript:;">';
-                if($actor->photo_url){
-					$actorList .= '<img src="' . $actor->photo_url . '" />';
-				}else{
-					$actorList .= '<img src="' . asset('assets/images/photos/default-medium.jpg') . '" />';
-				}
-                $actorList .=  '</a>';
-                $actorList .=  '</div>';
-                $actorList .=  '<div class="tile-title">';
-                $actorList .=  '<h3>';
-                	$actorList .=  '<a href="javascript:;">'. $actor->first_name.' '.$actor->last_name.'</a>';
-                        $actorList .=  '</h3>';
-                        $actorList .=  '<div class="tile-desc">';
-	                        $actorList .=  '<p>';
-	                                $actorList .=  $actor->auditionType;
-	                        $actorList .=  '</p>';
-	                        $actorList .=  '<p>Employment Availability:';
-	                                $actorList .=  $actor->from. ' to ' . $actor->to;
-	                               
-	                        $actorList .=  '</p>';
-                        $actorList .=  '</div>';
-
-                        if ($actor->resume_path){
-							$actorList .= '<a href="' . public_path($actor->resume_path) . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actor->last_name . '\'s Resume</a>';
-						}
-						$actorList .= '<a href="'.route('getActorView', $actor->user_id).'" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actor->last_name . '\'s Profile</a>';
-
-                        $actorList .=  '</div>';
-                        $actorList .=  '</div>';
-                    $actorList .=  '</div>'; 
-           
-
-
-                $actorList .= '</div>' . PHP_EOL;	
-			
-			/*Build the Output*/
-		}
-
-		return view('actor.actorSearch1')->with('actorList', $actorList);
-	}
 
 	/**
 	* Get Function To View Actor Profile
 	*/
-	public function view($id){
-		$actor = \App\User::findOrFail($id);
-		return view('actor.profileView')->with('actor', $actor);
-	}
+
 
 	public function getTheater(){
 		dd('Theater Page Coming Soon');

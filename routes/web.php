@@ -25,6 +25,7 @@ Route::post('/login', ['uses' =>  "CommonController@authenticate"]);
 Route::get('/signup', ['as' => 'getSignup', 'uses' =>  "CommonController@getSignup"]);
 Route::post('/signup', ['uses' =>  "CommonController@postSignup"]);
 
+Route::get('/content/{slug}', ['as'=>'getStaticPage', 'uses'=>'StaticPageController@index']);
 
 Route::get('/forgot', ['as' => 'getForgot', 'uses' =>  "CommonController@getForgot"]);
 Route::post('/forgot', ['uses' =>  "CommonController@postForgot"]);
@@ -33,9 +34,8 @@ Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'CommonController@p
 
 
 Route::group(['middleware' => ['auth']], function () {
-
-	Route::get('/actors', ['as'=>'getActors', 'uses'=>'CommonController@getActors']);
-	Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'CommonController@view']);
+    Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
+	Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@view']);
 	Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'CommonController@getTheater']);
 	Route::get('/staffs', ['as'=>'getStaffs', 'uses'=>'CommonController@getStaff']);
 
@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::group(['as' => 'actor::', 'middleware' => 'role:actor'], function ()
 		{
 			Route::get('/', ['as'=>'actorProfile', 'uses'=>'ActorController@index']);
+            Route::post('/actorprofiletrigger',['as'=>'actorProfileTrigger', 'uses'=>'ActorController@mail']);
 			Route::get('update', ['as'=>'getEditProfile', 'uses'=>'ActorController@edit']);
 			Route::post('update', ['as'=>'postEditProfile', 'uses'=>'ActorController@update']);
 			Route::post('password', ['as'=>'postEditPassword', 'uses'=>'ActorController@postEditPassword']);
@@ -133,7 +134,12 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('product/{id}/edit', ['as'=>'adminProductEdit', 'uses'=>'AdminController@productEdit']);
 			Route::patch('product/{id}', ['as'=>'adminProductUpdate', 'uses'=>'AdminController@productUpdate']);
 			Route::get('product/{id}/deleteproduct', ['as'=>'adminProductDelete', 'uses'=>'AdminController@productDestroy']);
-		});
+
+			Route::get('/content/{slug}',['as'=>'getStaticPage','uses'=>'StaticPageController@index']);
+            Route::get('/content/{slug}/edit',['as'=>'staticPageEdit', 'uses'=>'StaticPageController@edit']);
+            Route::post('/content/{slug}',['as'=>'updateStaticPage','uses'=>'StaticPageController@update']);
+
+        });
 	});
 	
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductVariant;
 use Illuminate\Http\Request;
 use Stripe\Stripe as Stripe;
 use \Stripe\Plan as StripePlan;
@@ -10,6 +11,7 @@ use App\Product;
 use App\Membership;
 use App\MembershipPeriod;
 use App\Payment;
+use App\Jobs\SendVerificationMail;
 
 class ActorController extends Controller
 {
@@ -28,7 +30,14 @@ class ActorController extends Controller
 		$products = Product::latest()->orderBy('id', 'desc')->get();
 		return view("actor.products",compact('products'));
     }
-	
+
+    public function mail()
+    {
+        $user = \Auth::user();
+        dispatch(new SendVerificationMail($user));
+        return redirect()->route('actor::actorProfile')->with('success_message', 'Mail Sent Successfully');
+    }
+
 	public function productBuy(Request $request){
 		$description = "Products Invoice: ";
 		$totalPrice = 0;
@@ -190,14 +199,21 @@ class ActorController extends Controller
     * TODO : Dummy payment just chaning payment status for now
     * Will update with proper payment system in future
     */
-    public function payment(){
+    public function payment()
+    {
 		$user = User::find(\Auth::user()->id);
-		if($user->subscribed('main')){
+		if($user->subscribed('main'))
+		{
 			return redirect()->route('actor::actorProfile')->with('success_message', 'Already Subscribed');
-		}else{
-			$membershipPeriods = MembershipPeriod::latest()->orderBy('id', 'desc')->get();
-			$products = Product::latest()->orderBy('id', 'desc')->get();
-			return view('actor.payment')->with('products',$products)->with('membershipPeriods',$membershipPeriods);
+		}
+		else
+        {
+			$membershipPeriods = MembershipPeriod::latest()->where('type','Actor')->orderBy('id', 'desc')->get();
+			$products = Product::orderBy('id', 'desc')->get();
+            //$products = Product::findorfail(2);
+            //$n = $products->product_variant;
+            //dd($n);
+            return view('actor.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods]);
 		}
 		
     }
@@ -210,11 +226,19 @@ class ActorController extends Controller
 		$totalPrice = $totalPrice + $membershipPeriod->price;
 		$description.= "StrawHat Subscription\nPlan: ".$membershipPeriod->name." Price: ".$membershipPeriod->price;
 		$size = sizeof($request->products);
-		for($i=0; $i<$size; $i++){
-			$product = Product::findOrFail($request->products[$i]);
-			$totalPrice = $totalPrice + $product->price;
-			$description.= "\nProduct: ".$product->name." Price: ".$product->price;
-		}
+		if($size){
+            foreach($request->products AS $product){
+                $varid = $product['varid'];
+                $proid = $product['proid'];
+                if($proid){
+                    $product = Product::findOrFail($proid);
+                    $varient = ProductVariant::findorFail($varid);
+                    $totalPrice = $totalPrice + $varient['price'];
+                    $description.= "\nProduct: ".$product->name." ".$varient['product_variant']." Price: ".$varient['price'];
+                }
+            }
+        }
+
 		$totalPrice = $totalPrice*100;
 		\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
 		$result = \Stripe\Charge::create(array(
@@ -239,21 +263,156 @@ class ActorController extends Controller
 			$payment->membership_period_id = $membershipPeriod->id;
 			$payment->price = $membershipPeriod->price;
 			$payment->save();
-			
-			for($i=0; $i<$size; $i++){
-				$product = Product::findOrFail($request->products[$i]);
+
+
+
+			foreach($request->products AS $product){
+                $varid = $product['varid'];
+                $proid = $product['proid'];
+
+                $product = Product::findOrFail($proid);
 				$payment = new Payment;
 				$payment->user_id = \Auth::user()->id;
 				$payment->transaction_id = $request->token;
-				$payment->product_id = $product->id;
+				$payment->product_id = $varid;
 				$payment->price = $product->price;
 				$payment->save();
 			}
 			return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully subscribed.');
 		}
     }
-	
+    /**for preparing data**/
+    public function prepareData($data){
 
+        if($data){
+            $removeWhitespace = preg_replace('/\s+/', '', $data);
+            $removeComma = str_replace(',', ' ', $removeWhitespace);
+            return $removeComma.' ';
+        }else{
+            return " ";
+        }
+
+    }
+
+    /**for checking date comparision and return**/
+    public function check_in_range($start_date, $end_date, $start_lookup, $end_lookup)
+    {
+        // Convert to timestamp
+
+        $begin = new \DateTime($start_date);
+        $end = new \DateTime($end_date);
+        $daterange = new \DatePeriod($begin, new \DateInterval('P1D'), $end);
+        $start_ts = strtotime($start_lookup);
+        $end_ts = strtotime($end_lookup);
+        foreach($daterange as $date) {
+            $user_ts = strtotime($date->format('Y-m-d'));
+            // Check that user date is between start & end
+            if(($user_ts >= $start_ts) && ($user_ts <= $end_ts)) return true;
+        }
+
+        return false;
+
+    }
+        /*getting actors in actor view*/
+    public function getActors(){
+        $actors = \App\User::join('actors','actors.user_id', '=', 'users.id')
+            ->where('payment_status',1)
+            ->get();
+
+        $actorList = "";
+        /*Loop through the Actors*/
+        foreach($actors as $actor){
+            /*Build MIX Class*/
+            $mixClass = $actor->gender . ' ';
+            $mixClass .= $this->prepareData($actor->ethnicity) . ' ';
+            $mixClass .=$this->prepareData($actor->misc) . ' ';
+            $mixClass .= $this->prepareData($actor->technical) . ' ';
+            $mixClass .= $this->prepareData($actor->dance) . ' ';
+            $mixClass .= $this->prepareData($actor->jobType) . ' ';
+            $mixClass .= $this->prepareData($actor->instrument). ' ';
+
+            //contion for employment availability
+            //imediate
+            $imediate = $this->check_in_range($actor->from, $actor->to, date('Y-m-d'), date('Y-m-d'));
+            if($imediate) $mixClass .= $this->prepareData("Immediate") . ' ';
+
+            //for getting summer
+            $sd = date("Y-m-d", strtotime("third monday".date("Y-05")));
+            $ed = date("Y-m-d", strtotime("first monday ".date("Y-09")));
+            $summer = $this->check_in_range($actor->from, $actor->to, $sd, $ed);
+            if($summer) $mixClass .= $this->prepareData("Summer") . ' ';
+
+            //for getting fall
+            $fd = date("Y-m-d", strtotime("first monday ".date("Y-09")));
+            $fed = date("Y-12-25");
+            $fall = $this->check_in_range($actor->from, $actor->to, $fd, $fed);
+            if($fall) $mixClass .= $this->prepareData("Fall") . ' ';
+
+            //for getting next year
+            $ny = date("Y-m-d", strtotime("+1 year".date("Y-01-01")));
+            $eny = date("Y-m-d", strtotime("+1 year".date("Y-12-31")));
+            $next_year = $this->check_in_range($actor->from, $actor->to, $ny, $eny);
+            if($next_year) $mixClass .= $this->prepareData("Next Year") . ' ';
+
+            $actorList .= '<div class="mix ' . $mixClass . '" ';
+            $actorList .= 'data-first-name="' . $actor->first_name . '" ';
+            $actorList .= 'data-last-name="' . $actor->last_name . '" ';
+            // $actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
+            // $actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
+            $actorList .= 'data-audition-type="' . preg_replace('/\s+/', '', $actor->auditionType)  . '" ';
+            $actorList .= 'data-skill-vocal="' . preg_replace('/\s+/', '', $actor->vocalRange) . '" ';
+
+            $actorList .= '>';
+
+            $actorList .=  '<div class="col-md-4">';
+            $actorList .=  ' <div class="tile-container">';
+            $actorList .=  '<div class="tile-thumbnail">';
+            $actorList .=  '<a href="javascript:;">';
+            if($actor->photo_url){
+                $actorList .= '<img src="' . $actor->photo_url . '" />';
+            }else{
+                $actorList .= '<img src="' . asset('assets/images/photos/default-medium.jpg') . '" />';
+            }
+            $actorList .=  '</a>';
+            $actorList .=  '</div>';
+            $actorList .=  '<div class="tile-title">';
+            $actorList .=  '<h3>';
+            $actorList .=  '<a href="javascript:;">'. $actor->first_name.' '.$actor->last_name.'</a>';
+            $actorList .=  '</h3>';
+            $actorList .=  '<div class="tile-desc">';
+            $actorList .=  '<p>';
+            $actorList .=  $actor->auditionType;
+            $actorList .=  '</p>';
+            $actorList .=  '<p>Employment Availability:';
+            $actorList .=  $actor->from. ' to ' . $actor->to;
+
+            $actorList .=  '</p>';
+            $actorList .=  '</div>';
+
+            if ($actor->resume_path){
+                $actorList .= '<a href="' . public_path($actor->resume_path) . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actor->last_name . '\'s Resume</a>';
+            }
+            $actorList .= '<a href="'.route('getActorView', $actor->user_id).'" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actor->last_name . '\'s Profile</a>';
+
+            $actorList .=  '</div>';
+            $actorList .=  '</div>';
+            $actorList .=  '</div>';
+
+
+
+            $actorList .= '</div>' . PHP_EOL;
+
+            /*Build the Output*/
+        }
+
+        return view('actor.actorSearch1')->with('actorList', $actorList);
+    }
+
+    /** View user */
+    public function view($id){
+        $actor = \App\User::findOrFail($id);
+        return view('actor.profileView')->with('actor', $actor);
+    }
 
     /*
     |Post function to upload images

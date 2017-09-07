@@ -255,12 +255,16 @@ $(document).ready(function() {
                               <div class="form-group">
                                 <label class="col-xs-3 control-label">{{$product->name}}</label>
                                 <div class="col-xs-5">
-                                <span class="form-control-plaintext form-control">Price: {{$product->price}}</span>
+                                    <select name="products[{{$product->id}}][varid]" class="form-control">
+                                        @foreach($product->product_variant as $val)
+                                        <option value="{{ $val['id'] }}">{{ $val['product_variant'] ? 'Variant: '.$val['product_variant'] : 'No variant'}} {{ $val['price'] ? 'Price:'.$val['price'] : ' '  }}</option>
+                                        @endforeach
+                                    </select>
                     
                                 <p class="product-description">{!!html_entity_decode($product->description)!!}</p>
                                 <span class="button-checkbox">
                                     <button type="button" class="btn" data-color="primary">Add to Cart</button>
-                                    <input type="checkbox" class="hidden" name="products[]" value="{{$product->id}}" />
+                                    <input type="checkbox" class="hidden" name="products[{{$product->id}}][proid]" value="{{$product->id}}" />
                                 </span>
                                <!--<h2 class="buy-product btn"><a href="{{route('actor::buyProduct',$product->id)}}">Buy</a></h2>-->
                                 </div>

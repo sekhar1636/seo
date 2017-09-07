@@ -29,6 +29,7 @@ $('#subscription-table').DataTable({
             {data: 'id'},
             {data: 'name'},
             {data: 'price'},
+            {data: 'type'},
             {data: 'start_date'},
 			{data: 'end_date'},
 			{data: 'status'},
@@ -81,6 +82,7 @@ $(document).ready(function() {
                           <td>ID</td>
                           <td>Name</td>
                           <td>Price</td>
+                          <td>Type</td>
                           <td>Start Date</td>
                           <td>End Date</td>
                           <td>Status</td>
@@ -108,8 +110,14 @@ $(document).ready(function() {
                         <p class="help-block">{{ $errors->first('price', ':message') }}</p>
                       </div>
                     </div>
-                    
-                    
+
+                    <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                      {{ Form::label('type_lab', 'Type', ['class' => 'col-lg-2 control-label'] )  }}
+                      <div class="col-lg-10">
+                        {{  Form::select('type', ['Actor'=>'Actor', 'Theater'=>'Theater', 'Staff' => 'Staff'],null, array('class' => 'form-control', 'placeholder'=>'Select Type', 'required'=>'required')) }}
+                        <p class="help-block">{{ $errors->first('type', ':message') }}</p>
+                      </div>
+                    </div>
                     
                     
                     <div class="form-group{{ ($errors->has('start_date')||$errors->has('end_date')) ? ' has-error' : '' }}"> {{ Form::label('from', 'Date', ['class' => 'col-lg-2 control-label']) }}

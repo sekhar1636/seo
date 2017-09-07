@@ -668,6 +668,7 @@ class AdminController extends Controller
                 "price"=>"required",
 				'start_date' => "required",
 				'end_date' => "required",
+                'type' => "required",
 				'name' => "required",
             ]
         );
@@ -682,6 +683,7 @@ class AdminController extends Controller
 			$membershipPeriod = new MembershipPeriod;
 			$membershipPeriod->name = $request->get('name');
 			$membershipPeriod->price = $request->get('price');
+            $membershipPeriod->type = $request->get('type');
 			$membershipPeriod->start_date = date("Y-m-d",strtotime($request->get('start_date')));
 			$membershipPeriod->end_date = date("Y-m-d",strtotime($request->get('end_date')));
 			$membershipPeriod->save();
