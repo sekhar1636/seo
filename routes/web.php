@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/verifyemail/{token}',['as'=>'getEmail', 'uses'=>'CommonController@verify']);
 //Static pages common for all users
 Route::get('/', ['as'=>'getIndex', 'uses'=>'CommonController@getIndex']);
 Route::get('/faq',['as'=>'getFaq', 'uses'=>'CommonController@getFaq']);
