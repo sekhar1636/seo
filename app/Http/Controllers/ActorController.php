@@ -23,7 +23,18 @@ class ActorController extends Controller
         if(\Auth::user()->actor && \Auth::user()->subscription){
             return redirect()->route('actor::getEditProfile');
         }
-    	return view('actor.dashboard');
+        $verify = '';
+        if(\Auth::user()->verified == 1)
+        {
+            $verify = 1;
+        }
+        else
+        {
+            $verify = 0;
+        }
+        return view('actor.dashboard')->with([
+            'verify' => $verify
+        ]);
     }
 	
 	public function products(){
