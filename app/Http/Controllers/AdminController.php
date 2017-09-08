@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductVariant;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Facades\Datatables;
 use Stripe\Stripe as Stripe;
@@ -752,7 +753,6 @@ class AdminController extends Controller
 		$validator = \Validator::make($request->all(),
             [
                 "name"=>"required|min:5",
-				'price' => "required",
             ]
         );
 		
@@ -763,7 +763,22 @@ class AdminController extends Controller
 				->with('tabactive', 'active')
                 ->withInput();
         }else{
-			Product::create(request(['name','price','description']));
+            $prod = new Product;
+            $prod->name = $request->name;
+            $prod->price = "0";
+            $prod->description = $request->description;
+            $prod->save();
+
+            foreach($request->varient as $val)
+            {
+                $new = new ProductVariant;
+                $new->product_id = $prod->id;
+                $new->product_variant = $val['name'];
+                $new->price = $val['price'];
+                $new->save();
+            }
+
+
 			return redirect()->back()->with('success_message', 'Product added successfully.');
 		}
     }
@@ -771,14 +786,19 @@ class AdminController extends Controller
 	public function productEdit($id){
 		
 		$product = Product::findOrFail($id);
-		return view('admin.productEdit',compact('product'));
+		$variant = $product->product_variant;
+		return view('admin.productEdit')->with([
+		    'product' => $product,
+            'variant' => $variant
+        ]);
     }
 	
 	public function productUpdate(Request $request, $id){
+
     	$validator = \Validator::make($request->all(),
             [
                 "name"=>"required|min:5",
-				'price' => "required",
+				//'price' => "required",
             ]
         );
 		
@@ -790,10 +810,44 @@ class AdminController extends Controller
         }else{
 			$product = Product::findOrFail($id);
 			$product->name = $request['name'];
-			$product->price = $request['price'];
+			$product->price = "0";
 			$product->description = $request['description'];
 			$product->status = $request['status'];
 			$product->save();
+
+			$iddetect = [];
+			$prod = ProductVariant::where('product_id',$id)->get();
+			$product_old = [];
+            foreach($prod as $val)
+            {
+                $product_old[] = $val['id'];
+            }
+
+			if($request->varient) {
+                foreach ($request->varient as $val) {
+                    if (!empty($val['id'])) {
+                        $iddetect[] = $val['id'];
+                        $prod = ProductVariant::findorFail($val['id']);
+                        $prod->product_variant = $val['name'];
+                        $prod->price = $val['price'];
+                        $prod->save();
+                    } else {
+                        $product_new = new ProductVariant;
+                        $product_new->product_variant = $val['name'];
+                        $product_new->price = $val['price'];
+                        $product_new->product_id = $id;
+                        $product_new->save();
+                    }
+                }
+                $collection = collect($product_old);
+                $diff = $collection->diff($iddetect);
+
+                $del = $diff->all();
+                ProductVariant::wherein('id',$del)->where('product_id',$id)->delete();
+            }
+
+
+
 			return redirect()->route('admin::adminProducts')->with('success_message', 'Product updated successfully.');
 		}
     }

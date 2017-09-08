@@ -26,7 +26,7 @@ $('#products-table').DataTable({
             {data: 'id'},
             {data: 'name'},
             //{data: 'description'},
-            {data: 'price'},
+            //{data: 'price'},
 			{data: 'status'},
 			{data: 'action', name: 'action', orderable: false, searchable: false}
         ]
@@ -37,6 +37,20 @@ $(document).ready(function() {
 	  code : "{{ $errors->first('answer', ':message') }}",
 	  height:200,
 	});
+    var count  = $('.tab_hid').attr('value');
+	$('#add_variant').click(function(){
+        var id = count;
+        $('#varianttable').append('<tr><td>'+ '<input type="text" value="" name="varient['+id+'][name]">' +'</td><td>'+ '<input type="text" value="" name="varient['+id+'][price]">' +'</td><td><input type="button" id="rem['+id+']" value="remove" class="btn btn-xs btn-primary remove"/></td></tr>');
+        count++;
+
+    });
+
+	$('#varianttable').on('click','.remove',function(){
+	    $(this).parents('tr').remove();
+    });
+
+
+
 });
 </script>
 
@@ -78,7 +92,7 @@ $(document).ready(function() {
                   <td>ID</td>
                   <td>Name</td>
                   <!--<td>Description</td>-->
-                  <td>Price</td>
+                  <!--<td>Price</td>-->
                   <td>Status</td>
                   <td>Action</td>
                   </tr>
@@ -95,7 +109,7 @@ $(document).ready(function() {
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
                         {{ Form::label('name', 'Name', ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
+                        <div class="col-lg-7">
                         {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter Name','required'=>'required',  'minlength'=>'3']) }}
                         <p class="help-block">{{ $errors->first('name', ':message') }}</p>
                         </div>
@@ -109,15 +123,7 @@ $(document).ready(function() {
                             <p class="help-block">{{ $errors->first('description', ':message') }}</p>
                         </div>
                     </div>
-                    
-                    <!-- input Area -->
-                    <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
-                        {{ Form::label('price', 'Price', ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                        {{ Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Enter Price','required'=>'required']) }}
-                        <p class="help-block">{{ $errors->first('price', ':message') }}</p>
-                        </div>
-                    </div>
+
                     
                     <!-- Select With One Default -->
                     <div class="form-group{{ $errors->has('_type') ? ' has-error' : '' }}">
@@ -127,9 +133,32 @@ $(document).ready(function() {
                             <p class="help-block">{{ $errors->first('status', ':message') }}</p>
                         </div>
                     </div>
-                    
-                   
-                    
+
+                        <div class="form-group{{ $errors->has('_type') ? ' has-error' : '' }}">
+                        {{ Form::label('prvarent', 'Product Varient', ['class' => 'col-lg-2 control-label'] )  }}
+                        <div class="col-lg-7">
+                            <table class="table table-bordered" id="varianttable">
+                                <thead>
+                                <tr>
+                                    <th class="col-lg-6">Varient Name</th>
+                                    <th class="col-lg-3">Price</th>
+                                    <th class=""> <input type="button" value="ADD" class="btn btn-xs btn-primary" id="add_variant"> </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><input type="text" class="col-lg-8" value="" name="varient[0][name]"></td>
+                                    <td><input type="text" class="col-sm-8" value="" name="varient[0][price]"></td>
+                                    <td><input type="button" id="rem[0]" value="remove" class="btn btn-xs btn-primary" disabled />
+                                </tr>
+                                </tbody>
+                                <input type="hidden" value="1" name="data" class="tab_hid">
+                            </table>
+                        </div>
+                    </div>
+
+
+
                     
                     <!-- Submit Button -->
                     <div class="form-group">

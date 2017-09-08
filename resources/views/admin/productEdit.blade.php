@@ -20,6 +20,18 @@ $(document).ready(function() {
 	  code : "{{ $errors->first('description', ':message') }}",
 	  height:200,
 	});
+
+	var count  = $('.tab_hid').attr('value');
+    $('#add_variant').click(function(){
+        var id = count;
+        $('#varianttable').append('<tr><td>'+ '<input type="text" class="col-lg-8" value="" name="varient['+id+'][name]">' +'</td><td>'+ '<input type="text" class="col-sm-8" value="" name="varient['+id+'][price]">' +'</td><td><input type="button" id="rem['+id+']" value="remove" class="btn btn-xs btn-primary remove"/></td></tr>');
+        count++;
+
+    });
+
+    $('#varianttable').on('click','.remove',function(){
+        $(this).parents('tr').remove();
+    });
 });
 </script>
 
@@ -71,15 +83,6 @@ $(document).ready(function() {
                         </div>
                     </div>
                     
-                    <!-- input Area -->
-                    <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
-                        {{ Form::label('price', 'Price', ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                        {{ Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Enter Price','required'=>'required']) }}
-                        <p class="help-block">{{ $errors->first('price', ':message') }}</p>
-                        </div>
-                    </div>
-                    
                     <!-- Select With One Default -->
                     <div class="form-group{{ $errors->has('_type') ? ' has-error' : '' }}">
                         {{ Form::label('status', 'Status', ['class' => 'col-lg-2 control-label'] )  }}
@@ -88,9 +91,34 @@ $(document).ready(function() {
                             <p class="help-block">{{ $errors->first('status', ':message') }}</p>
                         </div>
                     </div>
-                    
-                   
-                    
+                        <div class="form-group{{ $errors->has('_type') ? ' has-error' : '' }}">
+                            {{ Form::label('prvarent', 'Product Varient', ['class' => 'col-lg-2 control-label'] )  }}
+                        <div class="col-lg-7">
+                            <table class="table table-bordered" id="varianttable">
+                                <thead>
+                                <tr>
+                                    <th class="col-lg-6">Varient Name</th>
+                                    <th class="col-lg-3">Price</th>
+                                    <th class=""> <input type="button" value="ADD" class="btn btn-xs btn-primary" id="add_variant"> </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php $init = 0; ?>
+                                @foreach($variant as $val)
+                                <tr>
+
+                                    <td><input type="text" class="col-lg-8" value="{{ $val['product_variant'] }}" name="varient[{{ $init }}][name]"></td>
+                                    <td><input type="text" class="col-sm-8" value="{{ $val['price'] }}" name="varient[{{ $init }}][price]"></td>
+                                    <input type="hidden" name="varient[{{ $init }}][id]" value="{{ $val['id'] }}">
+                                    <td><input type="button"  value="remove" class="btn btn-xs btn-primary remove" />
+                                </tr>
+                                <?php $init++; ?>
+                                @endforeach
+                                </tbody>
+                                <input type="hidden" value="{{ $init }}" name="data" class="tab_hid">
+                            </table>
+                        </div>
+                        </div>
                     
                     <!-- Submit Button -->
                     <div class="form-group">
