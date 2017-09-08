@@ -16,6 +16,7 @@ use App\Slideshow;
 use App\Slide;
 use App\Faq;
 use App\Jobs\SendVerificationMail;
+use App\User;
 
 class CommonController extends Controller
 {
