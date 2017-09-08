@@ -154,6 +154,7 @@ class CommonController extends Controller
 		$user->email = $request->get('user');
 		$user->password = bcrypt($request->get('password'));
 		$user->role = $request->get('role');
+        $user->email_token = base64_encode($request->get('user'));
 		$user->status = 1;
 		if($user->save()){
 			//TODO : Sent Registration Email Here
