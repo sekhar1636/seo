@@ -320,7 +320,47 @@ class AdminController extends Controller
             })
 			->make(true);
     }
-	
+
+    public function actorsDataTable(){
+        $users = User::latest()->where('role','actor')->orderBy('id', 'desc');
+        return Datatables::of($users)
+            ->addColumn('action', function ($user) {
+                $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                return $action;
+            })
+            ->editColumn('status', function ($user) {
+                return ($user->status)? "Active" : "De-Activated";
+            })
+            ->editColumn('payment_status', function ($user) {
+                return ($user->payment_status)? "Yes" : "No";
+            })
+            ->make(true);
+    }
+    public function staffDataTable()
+    {
+        $users = User::latest()->where('role','staff')->orderBy('id', 'desc');
+        return Datatables::of($users)->addColumn('action', function($user){
+            $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+            $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            return $action;
+        })->editColumn('status', function ($user) {
+            return ($user->status)? "Active" : "De-Activated";
+        })->make(true);
+    }
+
+    public function theaterDataTable()
+    {
+        $users = User::latest()->where('role','theater')->orderBy('id', 'desc');
+        return Datatables::of($users)->addColumn('action', function($user){
+            $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+            $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            return $action;
+        })->editColumn('status', function ($user) {
+            return ($user->status)? "Active" : "De-Activated";
+        })->make(true);
+    }
+
 	public function userDestroy($id){
     	$user = User::find($id);
 		$user->delete();
@@ -339,7 +379,13 @@ class AdminController extends Controller
 		if($user->role == 'actor'){
 			//\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
 //			return \Stripe\Charge::all(array("customer"=>"cus_BATTZrHSA1uhHo"));
-			return view('admin.actorEdit')->with('actor',$user->actor)->with('weight', $weight)->with('age', $age)->with('id',$id)->with("user",$user);
+			return view('admin.actorEdit')->with([
+			    'actor' => $user->actor,
+                'weight' => $weight,
+                'age' => $age,
+                'id' => $id,
+                'user' => $user
+            ]);
 		}
 		return view('admin.userEdit',compact('user'));
     }

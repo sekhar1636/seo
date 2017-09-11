@@ -79,7 +79,7 @@
                                         @endif
                                     </a> 
                                     @elseif(Auth::user()->role == "theater")
-                                    <a href="{{route('actor::theaterProfile')}}" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>
+                                    <a href="{{route('theater::theaterProfile')}}" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>
                                         @if(Auth::user()->theater)
                                         	{{Auth::user()->actor->first_name}} {{Auth::user()->actor->last_name}}
                                         @else
@@ -158,11 +158,37 @@
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{route('getActors')}}">
+                                        <li class="menu-dropdown">
+                                            <a href="javascript:;">
                                                 <i class="icon-users"></i> Actors
                                                 <span class="arrow"></span>
                                             </a>
+                                            <ul class="dropdown-menu pull-left">
+                                                <li>
+                                                    <a href="{{route('getActors')}}">Registerd Actors</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">How it Works</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Instructions</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Audition Types</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Criteria</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Headshot Advice</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Resume Advice</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('getSignup')}}">Register</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                         <li>
                                             <a href="{{route('getStaffs')}}">
@@ -177,12 +203,6 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{route('getContents')}}">
-                                                <i class="icon-briefcase"></i> Premium content
-                                                <span class="arrow"></span>
-                                            </a>
-                                        </li>
-                                        <li>
                                             <a href="{{route('getFaq')}}">
                                                 <i class="icon-question"></i> FAQ
                                                 <span class="arrow"></span>
@@ -193,6 +213,20 @@
                                                 <i class="icon-info"></i> Younger
                                                 <span class="arrow"></span>
                                             </a>
+                                        </li>
+                                        <li class="menu-dropdown">
+                                            <a href="javascript:;">
+                                                <i class="icon-briefcase"></i> More
+                                                <span class="arrow"></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-left">
+                                                    <li>
+                                                        <a href="#">About StrawHat</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Kiristi & Jay Bios</a>
+                                                    </li>
+                                            </ul>
                                         </li>
                                         <li>
                                             <a href="{{route('getContact')}}">

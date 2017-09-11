@@ -18,6 +18,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    protected $table = 'users';
+
     protected $fillable = [
          'email', 'password','role', 'status', 'photo_path', 'photo_url', 'email_token'
     ];
@@ -37,6 +40,13 @@ class User extends Authenticatable
     public function actor()
     {
         return $this->hasOne('App\Actor');
+    }
+    /**
+     * One to one relationship with theater table
+     */
+    public function theater()
+    {
+        return $this->hasOne('App\Theater','user_id');
     }
 	
 	public function delete()

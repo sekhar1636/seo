@@ -9,6 +9,7 @@ class Actor extends Model
     /**
 	* Reverse relationship to user one to one
     */
+    protected $table = 'actors';
     public function user()
     {
         return $this->belongsTo('App\User');

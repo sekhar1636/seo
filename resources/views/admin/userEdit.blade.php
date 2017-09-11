@@ -47,7 +47,7 @@
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         {{ Form::label('name', 'Name', ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
-                        {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter Name','required'=>'required',  'minlength'=>'3']) }}
+                        {{ Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Enter Name','required'=>'required',  'minlength'=>'3']) }}
                         <p class="help-block">{{ $errors->first('name', ':message') }}</p>
                         </div>
                     </div>

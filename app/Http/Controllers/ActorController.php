@@ -53,11 +53,20 @@ class ActorController extends Controller
 		$description = "Products Invoice: ";
 		$totalPrice = 0;
 		$size = sizeof($request->products);
-		for($i=0; $i<$size; $i++){
-			$product = Product::findOrFail($request->products[$i]);
-			$totalPrice = $totalPrice + $product->price;
-			$description.= "\nProduct: ".$product->name." Price: ".$product->price;
+		if($size)
+		{
+		foreach($request->products as $prod){
+            $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
+            $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
+            if($proid && $varid) {
+                $product = Product::findOrFail($proid);
+                $varient = ProductVariant::findorFail($varid);
+                $totalPrice = $totalPrice + $varient['price'];
+                $description .= "\nProduct: " . $product->name . " Price: " . $varient['price'];
+            }
 		}
+
+        }
 		$totalPrice = $totalPrice*100;
 		\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
 		$result = \Stripe\Charge::create(array(
@@ -70,21 +79,26 @@ class ActorController extends Controller
 		if(!isset($result->status)){
 			return redirect()->back()->with('error_message', 'Something went wrong. Error:'.$result->type);
 		}else{
-			for($i=0; $i<$size; $i++){
-				$product = Product::findOrFail($request->products[$i]);
-				$payment = new Payment;
+            foreach($request->products as $prod){
+                $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
+                $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
+                if($proid && $varid){
+                $product = Product::findOrFail($proid);
+                $varient = ProductVariant::findorFail($varid);
+                $payment = new Payment;
 				$payment->user_id = \Auth::user()->id;
 				$payment->transaction_id = $request->token;
 				$payment->product_id = $product->id;
-				$payment->price = $product->price;
+				$payment->price = $varient['price'];
 				$payment->save();
+                }
 			}
 			return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully bought products.');
 		}
 		
     }
 	
-    public function edit(){
+    public function edit($id){
         $weight = [];
         $age = [];
         for ($i=1; $i <= 100 ; $i++) { 
@@ -236,19 +250,20 @@ class ActorController extends Controller
 		$membershipPeriod = MembershipPeriod::findOrFail($request->subscription);
 		$totalPrice = $totalPrice + $membershipPeriod->price;
 		$description.= "StrawHat Subscription\nPlan: ".$membershipPeriod->name." Price: ".$membershipPeriod->price;
-		$size = sizeof($request->products);
-		if($size){
-            foreach($request->products AS $product){
-                $varid = $product['varid'];
-                $proid = $product['proid'];
-                if($proid){
+		/*$size = sizeof($request->products);
+
+		if($request->products){
+            foreach($request->products AS $prod){
+                $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
+                $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
+                if($proid && $varid){
                     $product = Product::findOrFail($proid);
                     $varient = ProductVariant::findorFail($varid);
                     $totalPrice = $totalPrice + $varient['price'];
                     $description.= "\nProduct: ".$product->name." ".$varient['product_variant']." Price: ".$varient['price'];
                 }
             }
-        }
+        }*/
 
 		$totalPrice = $totalPrice*100;
 		\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
@@ -276,19 +291,25 @@ class ActorController extends Controller
 			$payment->save();
 
 
+            /*if($request->products)
+            {
+                foreach($request->products AS $prod){
+                $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
+                $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
 
-			foreach($request->products AS $product){
-                $varid = $product['varid'];
-                $proid = $product['proid'];
+                if($varid && $proid) {
+                    $product = Product::findOrFail($proid);
+                    $varient = Product::findOrFail($varid);
 
-                $product = Product::findOrFail($proid);
-				$payment = new Payment;
-				$payment->user_id = \Auth::user()->id;
-				$payment->transaction_id = $request->token;
-				$payment->product_id = $varid;
-				$payment->price = $product->price;
-				$payment->save();
+                    $payment = new Payment;
+                    $payment->user_id = \Auth::user()->id;
+                    $payment->transaction_id = $request->token;
+                    $payment->product_id = (!empty($product['id'])) ? $product['id'] : '0';
+                    $payment->price = (!empty($varient['price'])) ? $varient['price'] : '0';
+                    $payment->save();
+                }
 			}
+            }*/
 			return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully subscribed.');
 		}
     }

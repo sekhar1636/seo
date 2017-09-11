@@ -73,6 +73,13 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::group(['as' => 'theater::', 'middleware' => 'role:theater'], function ()
 		{
 			Route::get('/', ['as'=>'theaterProfile', 'uses'=>'TheaterController@getProfile']);
+			Route::get('/products', ['as'=>'theaterProducts', 'uses'=>'TheaterController@products']);
+			Route::post('products/buy',['as'=>'buyProduct', 'uses'=>'TheaterController@productbuy']);
+            Route::post('/theaterprofiletrigger',['as'=>'theaterProfileTrigger', 'uses'=>'TheaterController@mail']);
+            Route::get('update', ['as'=>'getEditProfile', 'uses'=>'TheaterController@edit']);
+            Route::post('update', ['as'=>'postEditProfile', 'uses'=>'TheaterController@update']);
+            Route::get('payment', ['as'=>'getTheaterPayment', 'uses'=>'TheaterController@payment']);
+            Route::post('payment', ['as'=>'storeTheaterPayment', 'uses'=>'TheaterController@paymentStore']);
 		});
 	});
 	
@@ -114,6 +121,9 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('actor/{id}/deletePhoto', ['as'=>'actorPhotoDelete', 'uses'=>'AdminController@actorPhotoDelete']);
 			
 			Route::get('usersDataTable/', ['as'=>'adminUsersDataTable', 'uses'=>'AdminController@UsersDataTable']);
+            Route::get('actorsDataTable/', ['as'=>'adminActorDataTable', 'uses'=>'AdminController@actorsDataTable']);
+            Route::get('staffDataTable/', ['as'=>'adminStaffDataTable', 'uses'=>'AdminController@staffDataTable']);
+            Route::get('theaterDataTable/', ['as'=>'adminTheaterDataTable', 'uses'=>'AdminController@theaterDataTable']);
 			Route::get('userPaymentDataTable/{id}', ['as'=>'adminUserPaymentDataTable', 'uses'=>'AdminController@userPaymentDatatable']);
 			Route::get('userTransactionDetails/{id}', ['as'=>'adminUserTransactionDetails', 'uses'=>'AdminController@userTransactionDetails']);
 			

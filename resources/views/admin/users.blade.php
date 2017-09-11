@@ -32,12 +32,59 @@ $('#faq-table').DataTable({
 			{data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
+$('#actor-table').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: '{{route("admin::adminActorDataTable")}}',
+    columns: [
+        {data: 'id'},
+        {data: 'name'},
+        {data: 'email'},
+        {data: 'role'},
+        {data: 'payment_status'},
+        {data: 'status'},
+        {data: 'action', name: 'action', orderable: false, searchable: false}
+    ]
+});
+$('#theater-table').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: '{{route("admin::adminTheaterDataTable")}}',
+    columns: [
+        {data: 'id'},
+        {data: 'name'},
+        {data: 'email'},
+        {data: 'payment_status'},
+        {data: 'stripe_id'},
+        {data: 'status'},
+        {data: 'action', name: 'action', orderable: false, searchable: false}
+    ]
+});
+
+$('#staff-table').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: '{{route("admin::adminStaffDataTable")}}',
+    columns: [
+        {data: 'id'},
+        {data: 'name'},
+        {data: 'email'},
+        {data: 'stripe_id'},
+        {data: 'status'},
+        {data: 'action', name: 'action', orderable: false, searchable: false}
+    ]
+});
 
 $(document).ready(function() {
 	$('#editor').summernote({
 	  code : "{{ $errors->first('answer', ':message') }}",
 	  height:200,
 	});
+
+
+
+
+
 });
 </script>
 
@@ -67,6 +114,9 @@ $(document).ready(function() {
                 <ul class="nav nav-tabs">
                   <li {{{  (Session::has('tabactive') ? '' : 'class=active') }}}> <a href="#tab_1_1" data-toggle="tab">Users List</a> </li>
                   <li {{{  (Session::has('tabactive') ? 'class=active' : '') }}}> <a href="#tab_1_2" data-toggle="tab">Create New User</a> </li>
+                    <li {{{  (Session::has('tabactive') ? 'class=active' : '') }}}> <a href="#tab_1_3" data-toggle="tab">Actors List</a> </li>
+                    <li {{{  (Session::has('tabactive') ? 'class=active' : '') }}}> <a href="#tab_1_4" data-toggle="tab">Theaters List</a> </li>
+                    <li {{{  (Session::has('tabactive') ? 'class=active' : '') }}}> <a href="#tab_1_5" data-toggle="tab">Staff List</a> </li>
                 </ul>
               </div>
               <div class="portlet-body">
@@ -138,8 +188,51 @@ $(document).ready(function() {
                     </div>
                     {{ Form::close() }}
                   </div>
-                  <!-- END TAB --> 
-                  
+                  <!-- END TAB -->
+                    <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_3">
+                        <table id="actor-table" class="table">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Name</td>
+                                <td>Email</td>
+                                <td>Subscription</td>
+                                <td>Check/Hard copy</td>
+                                <td>Audition</td>
+                                <td>Active</td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_4">
+                        <table id="theater-table" class="table">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Company Name</td>
+                                <td>Email</td>
+                                <td>Subscription</td>
+                                <td>Products Purchased</td>
+                                <td>Active</td>
+                                <td>Action</td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_5">
+                        <table id="staff-table" class="table">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Name</td>
+                                <td>Email</td>
+                                <td>Subscription</td>
+                                <td>Active</td>
+                                <td>Action</td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
               </div>
             </div>
