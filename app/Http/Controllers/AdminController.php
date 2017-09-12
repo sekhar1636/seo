@@ -10,7 +10,7 @@ use \Stripe\Plan as StripePlan;
 use Stripe\Error\Card;
 use Carbon\Carbon;
 use DB;
-
+use App\StaticPage;
 use App\Faq;
 use App\User;
 use App\Slideshow;
@@ -642,17 +642,18 @@ class AdminController extends Controller
     	return view("admin.content_pages");
     }
 	
-	public function contentPagesDataTable(){
-		// Using Eloquent
-		//return Datatables::eloquent(Faq::query())->make(true);
-		$contentPages = ContentPage::latest()->with('slideshow')->orderBy('id', 'desc');
-		return Datatables::of($contentPages)
-            ->addColumn('action', function ($contentPage) {
-                $action = '<a href="'.route('admin::adminContentPageEdit', $contentPage->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-				return $action;
-            })->make(true);
-    	
+    public function contentPagesDataTable(){
+            // Using Eloquent
+            //return Datatables::eloquent(Faq::query())->make(true);
+            $contentPages = StaticPage::latest()->orderBy('id', 'desc');
+            return Datatables::of($contentPages)
+                ->addColumn('action', function ($contentPage) {
+                    $action = '<a href="'.route('admin::staticPageEdit', $contentPage->slug).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                    return $action;
+                })->make(true);
+
     }
+
 	
 	public function contentPageEdit($id){
 		$contentPage = ContentPage::with('slideshow')->findOrFail($id);

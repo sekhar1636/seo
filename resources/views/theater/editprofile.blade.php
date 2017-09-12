@@ -1,12 +1,6 @@
-
-
 @extends('common.layout')
 
-
-
 @section('title', 'Edit Profile')
-
-
 
 @section('style')
 
@@ -150,8 +144,6 @@
 
 @section('content')
 
-
-
     <!-- BEGIN PAGE CONTENT INNER -->
 
     <div class="page-content-inner">
@@ -196,7 +188,7 @@
 
                         <div class="profile-userpic">
 
-                            <img src="{{isset($theater->photo_url) ? asset($theater->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive" alt=""> </div>
+                            <img src="{{isset($theater[0]['photo_url']) ? asset($theater[0]['photo_url']) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive" alt=""> </div>
 
                         <!-- END SIDEBAR USERPIC -->
 
@@ -204,7 +196,7 @@
 
                         <div class="profile-usertitle">
 
-                            <div class="profile-usertitle-name"> {{\Auth::user()->theater('name')}}</div>
+                            <div class="profile-usertitle-name"> {{\Auth::user()->name}}</div>
 
                         </div>
 
@@ -290,15 +282,15 @@
 
                                     <ul class="nav nav-tabs">
 
-                                        <li >
+                                        <li {{ (Session::has('tabactive') ? '' : 'class=active') }} >
 
                                             <a href="#tab_1_1" data-toggle="tab">Personal Information</a>
 
                                         </li>
 
-                                        <li {{{  (Session::has('tabactive') ? 'class=active' : '') }}}>
+                                        <li {{  (Session::has('tabactive') ? 'class=active' : '') }}>
 
-                                            <a href="#tab_1_2" data-toggle="tab">Change Display Picture</a>
+                                            <a href="#tab_1_2" data-toggle="tab">Change Profile Picture</a>
 
                                         </li>
 
@@ -307,8 +299,6 @@
                                             <a href="#tab_1_3" data-toggle="tab">Change Password</a>
 
                                         </li>
-
-
 
                                     </ul>
 
@@ -320,7 +310,7 @@
 
                                         <!-- PERSONAL INFO TAB -->
 
-                                        <div class="tab-pane {{{  (Session::has('tabactive') ? '' : 'active') }}}" id="tab_1_1">
+                                        <div class="tab-pane {{  (Session::has('tabactive') ? '' : 'active') }}" id="tab_1_1">
 
                                             <div class="portlet-body form">
 
@@ -344,11 +334,11 @@
 
                                                         @if(isset($theater))
 
-                                                            <input type="hidden" name="method" value="PUT"/>
+                                                            <input type="hidden" name="tes" value="PUT"/>
 
                                                         @else
 
-                                                            <input type="hidden" name="method" value="POST"/>
+                                                            <input type="hidden" name="tes" value="POST"/>
 
                                                         @endif
 
@@ -362,11 +352,11 @@
 
                                                                 <div class="form-group" {{ $errors->has("company_name") ? "has-error":"" }}'>
 
-                                                                <label class="control-label col-md-3">Theater Name</label>
+                                                                <label class="control-label col-md-3">Company Name</label>
 
                                                                 <div class="col-md-9">
 
-                                                                    {!! Form::text('company_name',@$theater->company_name, ['class' => 'form-control', 'placeholder' => ' Theater Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                                    {!! Form::text('company_name',@$theater[0]['company_name'], ['class' => 'form-control', 'placeholder' => 'Comapany Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
 
                                                                     <span class="help-block"> {{ $errors->first("company_name") }} </span>
 
@@ -375,324 +365,58 @@
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-md-6">
 
-                                                            <div class="form-group" {{ $errors->has("email") ? "has-error":"" }}'>
 
-                                                            <label class="control-label col-md-3">Email</label>
 
-                                                            <div class="col-md-9">
+                                            </div>
 
-                                                                {!! Form::text('email',@$theater->email, ['class' => 'form-control', 'placeholder' => 'Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
 
-                                                                <span class="help-block"> {{ $errors->first("email") }} </span>
 
-                                                            </div>
+                                            <div class="row">
 
-                                                        </div>
+                                                <div class="col-md-6">
+
+                                                    <div class="form-group" {{ $errors->has("email") ? "has-error":"" }}'>
+
+                                                    <label class="control-label col-md-3">Email</label>
+
+                                                    <div class="col-md-9">
+
+                                                        {!! Form::text('email',@$theater[0]['email'], ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+
+                                                        <span class="help-block"> {{ $errors->first("email") }} </span>
 
                                                     </div>
 
+                                                </div>
 
+                                            </div>
+
+
+
+                                    </div>
 
                                     <!--/row-->
 
 
                             <!--/row-->
 
-                            <div class="row">
 
-                                <div class="col-md-6">
-
-
-                            </div>
-
-                            <!--/span-->
-
-                            <div class="col-md-6">
-
-
-                        </div>
-
-                        <!--/span-->
-
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <h3 class="form-section">Additional Information</h3>
+            </div>
 
             <!--/row-->
 
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="form-group" {{ $errors->has("auditionType") ? "has-error":"" }}'>
-
-                    <label class="control-label col-md-3">Audition Type</label>
-
-                    <div class="col-md-9">
-
-                        {!! Form::select('auditionType',['' => 'Select Audition Type'] +App\Misc::$auditionType, @$actor->auditionType, ['in' => 'App\Misc::$auditionType',  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
-
-                        <span class="help-block"> {{ $errors->first("auditionType") }} </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-6">
-
-                <div class="form-group" {{ $errors->has("vocalRange") ? "has-error":"" }}'>
-
-                <label class="control-label col-md-3">Vocal Range</label>
-
-                <div class="col-md-9">
-
-                    {!! Form::select('vocalRange',['' => 'Select Vocal Range'] +App\Misc::$vocalRange, @$actor->vocalRange, ['in' => 'App\Misc::$vocalRange',  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
-
-                    <span class="help-block"> {{ $errors->first("vocalRange") }} </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-
-
-
-
-    </div>
-
-    <div class="row">
-
-
-
-        <div class="col-md-6">
-
-            <div class="form-group" {{ $errors->has("jobType") ? "has-error":"" }}'>
-
-            <label for="multiple" class="control-label col-md-3" >Job Types</label>
-
-            <div class="col-md-9">
-
-                {!! Form::select('jobType[]',App\Misc::$jobTypes, isset($actor->jobType) ? explode(',', $actor->jobType): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
-
-                <span class="help-block"> {{ $errors->first("jobType") }} </span>
-
-            </div>
-
-        </div>
-
-    </div>
 
     <!--/span-->
-
-    <div class="col-md-6">
-
-        <div class="form-group" {{ $errors->has("dance") ? "has-error":"" }}'>
-
-        <label for="multiple" class="control-label col-md-3">Dances</label>
-
-        <div class="col-md-9">
-
-            {!! Form::select('dance[]',App\Misc::$dance, isset($actor->dance) ? explode(',', $actor->dance): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
-
-            <span class="help-block"> {{ $errors->first("dance") }} </span>
-
-        </div>
-
-    </div>
-
-    </div>
-
-    <!--/span-->
-
-    </div>
-
-    <!--/row-->
-
-    <div class="row">
-
-        <div class="col-md-6">
-
-            <div class="form-group" {{ $errors->has("technical") ? "has-error":"" }}'>
-
-            <label for="multiple" class="control-label col-md-3" >Technicals</label>
-
-            <div class="col-md-9">
-
-                {!! Form::select('technical[]',App\Misc::$technical, isset($actor->technical) ? explode(',', $actor->technical): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
-
-                <span class="help-block"> {{ $errors->first("technical") }} </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!--/span-->
-
-    <div class="col-md-6">
-
-        <div class="form-group" {{ $errors->has("instrument") ? "has-error":"" }}'>
-
-        <label for="multiple" class="control-label col-md-3" >Instruments</label>
-
-        <div class="col-md-9">
-
-            {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor->instrument) ? explode(',', $actor->instrument): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
-
-            <span class="help-block"> {{ $errors->first("instrument") }} </span>
-
-        </div>
-
-    </div>
-
-    </div>
-
-    <!--/span-->
-
-
-
-    </div>
-
-    <!--/row-->
-
-    <div class="row">
-
-
-
-        <div class="col-md-6">
-
-            <div class="form-group" {{ $errors->has("misc") ? "has-error":"" }}'>
-
-            <label for="multiple" class="control-label col-md-3">Misc</label>
-
-            <div class="col-md-9">
-
-                {!! Form::select('misc[]',App\Misc::$misc, isset($actor->misc) ? explode(',', $actor->misc): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
-
-                <span class="help-block"> {{ $errors->first("misc") }} </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!--/span-->
-
-    <div class="col-md-6">
-
-        <div class="form-group">
-
-            <label class="control-label col-md-3">Employement Availbility</label>
-
-            <div class="col-md-9">
-
-                <div class="input-group input-large date-picker input-daterange" data-date="2012/11/10" data-date-format="yyyy/mm/dd">
-
-                    {!! Form::text('from', @$actor->from, ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required', 'readonly']) !!}
-
-
-
-                    <span class="input-group-addon"> to </span>
-
-                    {!! Form::text('to', @$actor->to, ['class' => 'form-control', 'placeholder' => 'To', 'required'=>'required', 'readonly']) !!} </div>
-
-                <!-- /input-group -->
-
-                <span class="help-block"> {{ $errors->first("from") }} {{ $errors->first("to") }} </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    </div>
 
     <!--/row-->
 
 
+    <!--/span-->
 
-    <h3 class="form-section">Resume</h3>
+    <!--/row-->
 
-    <div class="row">
-
-        <div class="col-md-9">
-
-            <div class="form-group">
-
-                <label class="control-label col-md-3">Resume (Optional)</label>
-
-                <div class="col-md-3">
-
-                    <div class="fileinput fileinput-new" data-provides="fileinput">
-
-                        <div class="input-group input-large">
-
-                            <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
-
-                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
-
-
-
-                                <span class="fileinput-filename"> {{isset($actor->resume_path) ? 'Resume exist' : ''}}</span>
-
-                            </div>
-
-                            <span class="input-group-addon btn default btn-file">
-
-                                                        <span class="fileinput-new"> Select file </span>
-
-                                                        <span class="fileinput-exists"> Change </span>
-
-                                                        <input type="file" name="resume"> </span>
-
-                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
-
-                        </div>
-
-                    </div>
-
-                    <span class="help-block"> {{ $errors->first("resume") }} </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    </div>
+    <!--/row-->
 
     <div class="form-actions">
 
@@ -728,25 +452,26 @@
 
     </div>
 
+
     <!-- END PERSONAL INFO TAB -->
 
     <!-- CHANGE AVATAR TAB -->
 
-    <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2">
+    <div class="tab-pane {{  (Session::has('tabactive') ? 'active' : '') }}" id="tab_1_2">
 
 
 
 
 
-        @if(isset(\Auth::user()->actor->precrop_url))
+        @if(isset($theater[0]['precrop_url']))
 
-            <img src="{{asset(\Auth::user()->actor->precrop_url)}}" width="500" height="500" id="cropbox" />
+            <img src="{{asset($theater[0]['precrop_url'])}}" width="500" height="500" id="cropbox" />
 
 
 
             <!-- This is the form that our event handler fills -->
 
-            <form style="margin-top: 30px;" action="{{route('actor::postCropPhotoUpdate')}}" method="post" onsubmit="return checkCoords();">
+            <form style="margin-top: 30px;" action="{{route('theater::postCropPhotoUpdate')}}" method="post" onsubmit="return checkCoords();">
 
                 {{csrf_field()}}
 
@@ -760,13 +485,13 @@
 
                 <input type="submit" value="Crop Image" class="btn btn-large btn-inverse" />
 
-                <a href="{{route('actor::getDeletePhoto')}}" class="btn btn-large btn-danger" >Delete Picture</a>
+                <a href="{{route('theater::getDeletePhoto')}}" class="btn btn-large btn-danger" >Delete Picture</a>
 
             </form>
 
         @else
 
-            <form action="{{route('actor::postPhotoUpdate')}}" enctype="multipart/form-data" role="form" method="POST">
+            <form action="{{route('theater::postPhotoUpdate')}}" enctype="multipart/form-data" role="form" method="POST">
 
                 {{csrf_field()}}
 
@@ -835,7 +560,7 @@
 
     <div class="tab-pane" id="tab_1_3">
 
-        <form action="{{route('actor::postEditPassword')}}" class="form-validate-auto" method="POST">
+        <form action="{{route('theater::postEditPassword')}}" class="form-validate-auto" method="POST">
 
             <div class="form-group" {{ $errors->has("password") ? "has-error":"" }}'>
 

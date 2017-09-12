@@ -46,7 +46,12 @@ class User extends Authenticatable
      */
     public function theater()
     {
-        return $this->hasOne('App\Theater','user_id');
+        return $this->hasOne('App\Theater');
+    }
+
+    public function staff()
+    {
+        return $this->hasOne();
     }
 	
 	public function delete()

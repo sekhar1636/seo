@@ -24,9 +24,7 @@ $('#content-page-table').DataTable({
         ajax: '{{route("admin::adminContentPagesDataTable")}}',
         columns: [
             {data: 'id'},
-            {data: 'title'},
-            {data: 'description'},
-			{data: 'slideshow.name',"defaultContent": "No Slideshow"},
+            {data: 'page_title'},
 			{data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
@@ -76,9 +74,7 @@ $(document).ready(function() {
                   <tr>
                   <td>id</td>
                   <td>Title</td>
-                  <td>Description</td>
-                  <td>SlideShow</td>
-                  <td>Action</td>
+                 <td>Action</td>
                   </tr>
                   </thead>
                   </table>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actor;
 use App\ProductVariant;
 use Illuminate\Http\Request;
 use Stripe\Stripe as Stripe;
@@ -12,6 +13,7 @@ use App\Membership;
 use App\MembershipPeriod;
 use App\Payment;
 use App\Jobs\SendVerificationMail;
+use Carbon\Carbon;
 
 class ActorController extends Controller
 {
@@ -20,6 +22,7 @@ class ActorController extends Controller
     \Server Dashboard 
     */
     public function index(){
+
         if(\Auth::user()->actor && \Auth::user()->subscription){
             return redirect()->route('actor::getEditProfile');
         }
@@ -68,7 +71,7 @@ class ActorController extends Controller
 
         }
 		$totalPrice = $totalPrice*100;
-		\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
+		Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
 		$result = \Stripe\Charge::create(array(
 								  "amount" => $totalPrice,
 								  "currency" => "usd",
@@ -98,7 +101,7 @@ class ActorController extends Controller
 		
     }
 	
-    public function edit($id){
+    public function edit(){
         $weight = [];
         $age = [];
         for ($i=1; $i <= 100 ; $i++) { 
@@ -107,8 +110,9 @@ class ActorController extends Controller
         for ($i=75; $i <= 400 ; $i++) { 
             $weight[$i] = $i .' lbs';
         }
-    	if(\Auth::user()->actor){
-            return view('actor.editProfile')->with('actor',\Auth::user()->actor)->with('weight', $weight)->with('age', $age);
+        $actor = Actor::where('user_id',\Auth::user()->id)->get();
+    	if(!empty($actor[0])){
+            return view('actor.editProfile')->with('actor',$actor)->with('weight', $weight)->with('age', $age);
     	}
         
     	return view('actor.editProfile')->with('weight', $weight)->with('age', $age);
@@ -145,12 +149,20 @@ class ActorController extends Controller
                 ->withErrors($validator->errors())
                 ->withInput();
         }
-        if($request->get('method') == "PUT"){
-            $actor = \App\Actor::where('user_id',\Auth::user()->id)->first();
-        }else{
-            $actor = new \App\Actor;
+
+        if($request->tes == "PUT")
+        {
+            $actor = Actor::where('user_id',\Auth::user()->id)->first();
         }
-        	
+        else
+        {
+            $actor = new Actor;
+
+        }
+
+        $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
+        $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
+
     	$actor->user_id = \Auth::user()->id;
         $actor->first_name = $request->get('first_name');
         $actor->last_name = $request->get('last_name');
@@ -162,8 +174,8 @@ class ActorController extends Controller
         $actor->eyes = $request->get('eyes');
         $actor->weight = $request->get('weight');
         $actor->school = $request->get('school');
-        $actor->from = $request->get('from');
-        $actor->to = $request->get('to');
+        $actor->from = $from_date;
+        $actor->to = $to_date;
         $actor->auditionType = $request->get('auditionType');
         $actor->vocalRange = $request->get('vocalRange');
         $actor->jobType = implode(',', $request->get('jobType'));
@@ -299,7 +311,7 @@ class ActorController extends Controller
 
                 if($varid && $proid) {
                     $product = Product::findOrFail($proid);
-                    $varient = Product::findOrFail($varid);
+                    $varient = ProductVariant::findOrFail($varid);
 
                     $payment = new Payment;
                     $payment->user_id = \Auth::user()->id;

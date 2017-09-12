@@ -80,7 +80,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update', ['as'=>'postEditProfile', 'uses'=>'TheaterController@update']);
             Route::get('payment', ['as'=>'getTheaterPayment', 'uses'=>'TheaterController@payment']);
             Route::post('payment', ['as'=>'storeTheaterPayment', 'uses'=>'TheaterController@paymentStore']);
-		});
+            Route::post('photo/update', ['as'=>'postPhotoUpdate', 'uses'=>'TheaterController@postPhotoUpdate']);
+            Route::post('photo/crop', ['as'=>'postCropPhotoUpdate', 'uses'=>'TheaterController@postCropPhotoUpdate']);
+            Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'TheaterController@getDeletePhoto']);
+            Route::post('password', ['as'=>'postEditPassword', 'uses'=>'TheaterController@postEditPassword']);
+
+        });
 	});
 	
 	Route::group(['prefix'=>'admin'], function (){

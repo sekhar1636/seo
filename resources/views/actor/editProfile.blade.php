@@ -74,7 +74,12 @@
 
 <script type="text/javascript">
 
- 
+    $(document).ready(function() {
+        $('.input-daterange input').each(function() {
+            $(this).datepicker({
+            });
+        });
+    });
 
   $(function(){
     $('#cropbox').Jcrop({ 
@@ -196,7 +201,7 @@
 
                     <div class="profile-userpic">
 
-                        <img src="{{isset($actor->photo_url) ? asset($actor->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive" alt=""> </div>
+                        <img src="{{isset($actor[0]['photo_url']) ? asset($actor[0]['photo_url']) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive" alt=""> </div>
 
                     <!-- END SIDEBAR USERPIC -->
 
@@ -344,11 +349,11 @@
 
 			                        @if(isset($actor))
 
-			                        	<input type="hidden" name="method" value="PUT"/>
+			                        	<input type="hidden" name="tes" value="PUT"/>
 
 			                        @else
 
-			                        	<input type="hidden" name="method" value="POST"/>
+			                        	<input type="hidden" name="tes" value="POST"/>
 
 			                        @endif
 
@@ -366,7 +371,7 @@
 
 				                                <div class="col-md-9">
 
-				                                {!! Form::text('first_name',@$actor->first_name, ['class' => 'form-control', 'placeholder' => ' First Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+				                                {!! Form::text('first_name',@$actor[0]['first_name'], ['class' => 'form-control', 'placeholder' => ' First Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("first_name") }} </span>
 
@@ -384,7 +389,7 @@
 
 				                                <div class="col-md-9">
 
-				                                {!! Form::select('age',$age, @$actor->age, [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
+				                                {!! Form::select('age',$age, @$actor[0]['age'], [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("age") }} </span>
 
@@ -410,7 +415,7 @@
 
 				                                <div class="col-md-9">
 
-				                                {!! Form::text('last_name',@$actor->last_name, ['class' => 'form-control', 'placeholder' => ' Last Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+				                                {!! Form::text('last_name',@$actor[0]['last_name'], ['class' => 'form-control', 'placeholder' => ' Last Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("last_name") }} </span>
 
@@ -428,7 +433,7 @@
 
 				                                <div class="col-md-9">
 
-				                                {!! Form::select('hair',\App\Misc::$hair, @$actor->hair, [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
+				                                {!! Form::select('hair',\App\Misc::$hair, @$actor[0]['hair'], [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("Hair") }} </span>
 
@@ -452,7 +457,7 @@
 
 				                            <div class="col-md-9">
 
-				                               {!! Form::select('gender',['' => 'Select Gender'] +App\Misc::$genders, @$actor->gender, ['in' => 'App\Misc::$genders',  'required' => 'required', 'maxlength' => '7', 'class' => 'form-control  account-type-select']) !!}
+				                               {!! Form::select('gender',['' => 'Select Gender'] +App\Misc::$genders, @$actor[0]['gender'], ['in' => 'App\Misc::$genders',  'required' => 'required', 'maxlength' => '7', 'class' => 'form-control  account-type-select']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("gender") }} </span>
 
@@ -472,7 +477,7 @@
 
 				                                <div class="col-md-9">
 
-				                                {!! Form::select('eyes',\App\Misc::$eyes, @$actor->eyes, [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
+				                                {!! Form::select('eyes',\App\Misc::$eyes, @$actor[0]['eyes'], [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("eyes") }} </span>
 
@@ -500,13 +505,13 @@
 
 				                        
 
-				                                	{!! Form::select('feet',[''=>'Feet']+App\Misc::$feet, @$actor->feet, ['required' => 'required',  'class' => 'newSelect']) !!}
+				                                	{!! Form::select('feet',[''=>'Feet']+App\Misc::$feet, @$actor[0]['feet'], ['required' => 'required',  'class' => 'newSelect']) !!}
 
 				                       
 
 				                      
 
-					                                {!! Form::select('inch',[''=>'inch']+App\Misc::$inch, @$actor->inch, ['required' => 'required',  'class' => 'newSelect']) !!}
+					                                {!! Form::select('inch',[''=>'inch']+App\Misc::$inch, @$actor[0]['inch'], ['required' => 'required',  'class' => 'newSelect']) !!}
 
 					                  
 
@@ -528,7 +533,7 @@
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('ethnicity[]',App\Misc::$ethnicity, isset($actor->ethnicity) ? explode(',', $actor->ethnicity): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('ethnicity[]',App\Misc::$ethnicity, isset($actor[0]['ethnicity']) ? explode(',', $actor[0]['ethnicity']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("ethnicity") }} </span>
 
@@ -554,7 +559,7 @@
 
 				                                <div class="col-md-9">
 
-				                                {!! Form::select('weight',$weight, @$actor->weight, [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
+				                                {!! Form::select('weight',$weight, @$actor[0]['weight'], [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("weight") }} </span>
 
@@ -574,7 +579,7 @@
 
 				                                <div class="col-md-9">
 
-				                                {!! Form::text('school', @$actor->school, ['class' => 'form-control', 'placeholder' => 'School', 'required'=>'required','maxlength'=>'150', 'minlength'=>'3']) !!}
+				                                {!! Form::text('school', @$actor[0]['school'], ['class' => 'form-control', 'placeholder' => 'School', 'required'=>'required','maxlength'=>'150', 'minlength'=>'3']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("school") }} </span>
 
@@ -610,7 +615,7 @@
 
 				                            <div class="col-md-9">
 
-				                               {!! Form::select('auditionType',['' => 'Select Audition Type'] +App\Misc::$auditionType, @$actor->auditionType, ['in' => 'App\Misc::$auditionType',  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
+				                               {!! Form::select('auditionType',['' => 'Select Audition Type'] +App\Misc::$auditionType, @$actor[0]['auditionType'], ['in' => 'App\Misc::$auditionType',  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("auditionType") }} </span>
 
@@ -628,7 +633,7 @@
 
 				                            <div class="col-md-9">
 
-				                               {!! Form::select('vocalRange',['' => 'Select Vocal Range'] +App\Misc::$vocalRange, @$actor->vocalRange, ['in' => 'App\Misc::$vocalRange',  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
+				                               {!! Form::select('vocalRange',['' => 'Select Vocal Range'] +App\Misc::$vocalRange, @$actor[0]['vocalRange'], ['in' => 'App\Misc::$vocalRange',  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("vocalRange") }} </span>
 
@@ -658,7 +663,7 @@
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('jobType[]',App\Misc::$jobTypes, isset($actor->jobType) ? explode(',', $actor->jobType): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('jobType[]',App\Misc::$jobTypes, isset($actor[0]['jobType']) ? explode(',', $actor[0]['jobType']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("jobType") }} </span>
 
@@ -678,7 +683,7 @@
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('dance[]',App\Misc::$dance, isset($actor->dance) ? explode(',', $actor->dance): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('dance[]',App\Misc::$dance, isset($actor[0]['dance']) ? explode(',', $actor[0]['dance']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("dance") }} </span>
 
@@ -704,7 +709,7 @@
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('technical[]',App\Misc::$technical, isset($actor->technical) ? explode(',', $actor->technical): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('technical[]',App\Misc::$technical, isset($actor[0]['technical']) ? explode(',', $actor[0]['technical']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("technical") }} </span>
 
@@ -724,7 +729,7 @@
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor->instrument) ? explode(',', $actor->instrument): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor[0]['instrument']) ? explode(',', $actor[0]['instrument']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("instrument") }} </span>
 
@@ -754,7 +759,7 @@
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('misc[]',App\Misc::$misc, isset($actor->misc) ? explode(',', $actor->misc): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('misc[]',App\Misc::$misc, isset($actor[0]['misc']) ? explode(',', $actor[0]['misc']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("misc") }} </span>
 
@@ -776,13 +781,13 @@
 
 	                                        <div class="input-group input-large date-picker input-daterange" data-date="2012/11/10" data-date-format="yyyy/mm/dd">
 
-	                                        	{!! Form::text('from', @$actor->from, ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required', 'readonly']) !!}
+	                                        	{!! Form::text('from', \Carbon\Carbon::parse(@$actor[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required', 'readonly']) !!}
 
 	                                            
 
 	                                            <span class="input-group-addon"> to </span>
 
-	                                            {!! Form::text('to', @$actor->to, ['class' => 'form-control', 'placeholder' => 'To', 'required'=>'required', 'readonly']) !!} </div>
+	                                            {!! Form::text('to', \Carbon\Carbon::parse(@$actor[0]['to'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'required'=>'required','readonly']) !!} </div>
 
 	                                        <!-- /input-group -->
 
@@ -822,7 +827,7 @@
 
 
 
-                                                        <span class="fileinput-filename"> {{isset($actor->resume_path) ? 'Resume exist' : ''}}</span>
+                                                        <span class="fileinput-filename"> {{isset($actor[0]['resume_path']) ? 'Resume exist' : ''}}</span>
 
                                                     </div>
 

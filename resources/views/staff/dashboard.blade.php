@@ -1,7 +1,7 @@
 
 @extends('common.layout')
 
-@section('title', 'Theater Dashboard')
+@section('title', 'Staff Dashboard')
 
 @section('style')
     <style type="text/css">
@@ -74,7 +74,7 @@
                                             </div>
                                         </div>
                                         @endif
-                                        @if(\Auth::user()->theater)
+                                        @if(\Auth::user()->actor)
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
                                                     <div class="timeline-icon">
@@ -128,63 +128,7 @@
 
                                         <!-- END TIMELINE ITEM -->
                                         <!-- TIMELINE ITEM -->
-                                        @if(\Auth::user()->payment_status == 1)
-                                            <div class="timeline-item">
-                                                <div class="timeline-badge">
-                                                    <div class="timeline-icon">
-                                                        <i class="icon-credit-card font-green"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="timeline-body activeBox">
 
-                                                    <div class="timeline-body-head">
-                                                        <div class="timeline-body-head-caption">
-                                                            <span class="timeline-body-alerttitle font-green">Payment</span>
-
-                                                        </div>
-                                                        <div class="timeline-body-head-actions">
-                                                            <a href="javascript:;" class="btn btn-success">Done</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="timeline-body-content">
-                                            <span class="font-grey-cascade"> Payment Completed
-
-                                            </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    </div>
-                                    <!-- END TIMELINE ITEM -->
-                                @else
-                                    <div class="timeline-item">
-                                        <div class="timeline-badge">
-                                            <div class="timeline-icon">
-                                                <i class="icon-credit-card font-red"></i>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-body inactiveBox">
-
-                                            <div class="timeline-body-head">
-                                                <div class="timeline-body-head-caption">
-                                                    <span class="timeline-body-alerttitle font-red-intense">Payment</span>
-
-                                                </div>
-                                                <div class="timeline-body-head-actions">
-                                                    <a href="{{route('theater::getTheaterPayment')}}" class="btn btn-danger">Pay Now</a>
-                                                </div>
-                                            </div>
-                                            <div class="timeline-body-content">
-                                            <span class="font-grey-cascade"> Payment Pending
-
-                                            </span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                            </div>
-                            <!-- END TIMELINE ITEM -->
-                            @endif
 
                         </div>
 

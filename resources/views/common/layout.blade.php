@@ -80,16 +80,16 @@
                                     </a> 
                                     @elseif(Auth::user()->role == "theater")
                                     <a href="{{route('theater::theaterProfile')}}" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>
-                                        @if(Auth::user()->theater)
-                                        	{{Auth::user()->actor->first_name}} {{Auth::user()->actor->last_name}}
+                                        @if(Auth::user()->role=="theater")
+                                        	{{Auth::user()->name}}
                                         @else
                                         	{{Auth::user()->name}}
                                         @endif
                                     </a> 
                                     @elseif(Auth::user()->role =="staff")
-                                    <a href="{{route('actor::staffProfile')}}" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>
-                                        @if(Auth::user()->staff)
-                                        	{{Auth::user()->actor->first_name}} {{Auth::user()->actor->last_name}}
+                                    <a href="{{route('staff::staffProfile')}}" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>
+                                        @if(Auth::user()->role="staff")
+                                        	{{Auth::user()->name}}
                                         @else
                                         	{{Auth::user()->name}}
                                         @endif
@@ -108,7 +108,10 @@
                                                 </li>
                                             @elseif(Auth::user()->role == "theater")
                                                 <li>
-                                                    <a href="{{route('theater::theaterProfile')}}"> My Profile </a>
+                                                    <a href="{{route('theater::getEditProfile')}}"> My Profile </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('theater::theaterProfile')}}"> Dashboard </a>
                                                 </li>
                                             @elseif(Auth::user()->role =="staff")
                                                 <li>
@@ -168,22 +171,22 @@
                                                     <a href="{{route('getActors')}}">Registerd Actors</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">How it Works</a>
+                                                    <a href="{{route('getStaticPage',['slug'=>'howitworks'])}}">How it Works</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Instructions</a>
+                                                    <a href="{{route('getStaticPage',['slug'=>'instructions'])}}">Instructions</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Audition Types</a>
+                                                    <a href="{{route('getStaticPage',['slug'=>'auditiontypes'])}}">Audition Types</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Criteria</a>
+                                                    <a href="{{route('getStaticPage',['slug'=>'criteria'])}}">Criteria</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Headshot Advice</a>
+                                                    <a href="{{route('getStaticPage',['slug'=>'headshot'])}}">Headshot Advice</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Resume Advice</a>
+                                                    <a href="{{route('getStaticPage',['slug'=>'resumeadvice'])}}">Resume Advice</a>
                                                 </li>
                                                 <li>
                                                     <a href="{{route('getSignup')}}">Register</a>
