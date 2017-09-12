@@ -356,7 +356,7 @@
 
                                                                 <div class="col-md-9">
 
-                                                                    {!! Form::text('company_name',@$theater[0]['company_name'], ['class' => 'form-control', 'placeholder' => 'Comapany Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                                    {!! Form::text('company_name',@isset($theater[0]['company_name']) ? $theater[0]['company_name'] : null , ['class' => 'form-control', 'placeholder' => 'Comapany Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
 
                                                                     <span class="help-block"> {{ $errors->first("company_name") }} </span>
 
@@ -382,7 +382,7 @@
 
                                                     <div class="col-md-9">
 
-                                                        {!! Form::text('email',@$theater[0]['email'], ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                        {!! Form::text('email',@isset($theater[0]['email']) ? $theater[0]['email'] : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
 
                                                         <span class="help-block"> {{ $errors->first("email") }} </span>
 
