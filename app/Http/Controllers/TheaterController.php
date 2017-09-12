@@ -98,7 +98,7 @@ class TheaterController extends Controller
 
         $theaterid = \Auth::user()->id;
         $theater = Theater::where('user_id',$theaterid)->get();
-        return view('theater.editProfile')->with(['theater'=>$theater]);
+        return view('theater.editprofile')->with(['theater'=>$theater]);
 
     }
 
