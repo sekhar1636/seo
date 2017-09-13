@@ -154,6 +154,26 @@
                                             </div>
                                     </div>
                                     <!-- END TIMELINE ITEM -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <div class="timeline-icon">
+                                                <i class="icon-picture font-red"></i>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-body inactiveBox">
+
+                                            <div class="timeline-body-head">
+                                                <div class="timeline-body-head-caption">
+                                                    <span class="timeline-body-alerttitle font-red">Photo And Resume</span>
+
+                                                </div>
+                                            </div>
+                                            <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Send in a check and a Hard Copy of your Resume & Photo
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @else
                                     <div class="timeline-item">
                                         <div class="timeline-badge">
@@ -183,27 +203,9 @@
 
                             </div>
                             <!-- END TIMELINE ITEM -->
+
                             @endif
-                            <div class="timeline-item">
-                                <div class="timeline-badge">
-                                    <div class="timeline-icon">
-                                        <i class="icon-picture font-red"></i>
-                                    </div>
-                                </div>
-                                <div class="timeline-body inactiveBox">
 
-                                    <div class="timeline-body-head">
-                                        <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-red">Photo And Resume</span>
-
-                                        </div>
-                                    </div>
-                                    <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">Send in a check and a Hard Copy of your Resume & Photo
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         </div>
