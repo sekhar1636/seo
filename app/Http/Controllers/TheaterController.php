@@ -12,6 +12,7 @@ use App\User;
 use App\Membership;
 use App\MembershipPeriod;
 use App\Payment;
+use App\SubscriptionPackage;
 
 
 class TheaterController extends Controller
@@ -265,6 +266,7 @@ class TheaterController extends Controller
 
     public function payment()
     {
+
         $user = User::find(\Auth::user()->id);
         if($user->subscribed('main'))
         {
@@ -283,6 +285,17 @@ class TheaterController extends Controller
 
     public function paymentStore(Request $request){
         $request->all();
+        $validator = \Validator::make($request,
+            [
+                'subscription' => "required",
+            ]
+        );
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors())
+                ->withInput();
+        }
         $description = "";
         $totalPrice = 0;
         $membershipPeriod = MembershipPeriod::findOrFail($request->subscription);
@@ -331,6 +344,42 @@ class TheaterController extends Controller
             $payment->price = $membershipPeriod->price;
             $payment->save();
 
+            //subscription table
+            $subes = SubscriptionPackage::where('user_id',\Auth::user()->id)->get();
+
+            if(isset($subes[0])) {
+                $sub = SubscriptionPackage::findorFail($subes[0]->id);
+
+                if (!empty($sub)) {
+                    $sub->name = $membershipPeriod->name;
+                    $sub->stripe_id = $result->id;
+                    $sub->stripe_plan = $membershipPeriod->type;
+                    $sub->quantity = 1;
+                    $sub->trial_ends_at = $membershipPeriod->start_date;
+                    $sub->ends_at = $membershipPeriod->end_date;
+                    $sub->save();
+
+                }
+            }
+            else
+            {
+
+                $stripe_sub = new SubscriptionPackage;
+                $stripe_sub->user_id = \Auth::user()->id;
+                $stripe_sub->name = $membershipPeriod->name;
+                $stripe_sub->stripe_id = $result->id;
+                $stripe_sub->stripe_plan = $membershipPeriod->type;
+                $stripe_sub->quantity = 1;
+                $stripe_sub->trial_ends_at = $membershipPeriod->start_date;
+                $stripe_sub->ends_at = $membershipPeriod->end_date;
+                $stripe_sub->save();
+
+            }
+
+            //user table
+            $use = User::findorFail(\Auth::user()->id);
+            $use->payment_status = 1;
+            $use->save();
 
             if($request->products)
             {

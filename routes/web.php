@@ -32,11 +32,11 @@ Route::post('/forgot', ['uses' =>  "CommonController@postForgot"]);
 Route::get('reset/{id}/{token}', ['as'=>'getReset', 'uses'=>'CommonController@getReset']);
 Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'CommonController@postReset']);
 
+Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
+Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@view']);
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
-	Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@view']);
-	Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'CommonController@getTheater']);
+    Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'CommonController@getTheater']);
 	Route::get('/staffs', ['as'=>'getStaffs', 'uses'=>'CommonController@getStaff']);
 
 	// Route::get('/role', ['as'=>'getRole', 'uses'=>'CommonController@getRole']);
@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'ActorController@getDeletePhoto']);
 			Route::get('products', ['as'=>'products', 'uses'=>'ActorController@products']);
 			Route::post('product/buy', ['as'=>'buyProduct', 'uses'=>'ActorController@productBuy']);
+			Route::post('updaterole',['as'=>'updateUsersRole','uses'=>'ActorController@userroles']);
 		});
 	});
 	Route::group(['prefix'=>'staff'], function (){

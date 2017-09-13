@@ -257,6 +257,14 @@
 
                             </li>
 
+							<li>
+
+								<a href="#tab_1_4" data-toggle="tab">
+
+									<i class="icon-layers"></i> Roles </a>
+
+							</li>
+
                         </ul>
 
                     </div>
@@ -313,7 +321,11 @@
 
                                     </li>
 
-                                 
+									<li>
+
+										<a href="#tab_1_4" data-toggle="tab">Roles</a>
+
+									</li>
 
                                 </ul>
 
@@ -533,7 +545,7 @@
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('ethnicity[]',App\Misc::$ethnicity, isset($actor[0]['ethnicity']) ? explode(',', $actor[0]['ethnicity']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('ethnicity[]',App\Misc::$ethnicity, isset($actor[0]['ethnicity']) ? $actor[0]['ethnicity'] : null, ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("ethnicity") }} </span>
 
@@ -1090,6 +1102,39 @@
 
                                     <!-- END CHANGE PASSWORD TAB -->
 
+							 <!--Start Role Tab-->
+							 <div class="tab-pane" id="tab_1_4">
+								 <form action="{{route('actor::updateUsersRole')}}" class="form-validate-auto" method="POST">
+									 {{csrf_field()}}
+									 <div class="row">
+										 <div class="col-md-6">
+
+											 <div class="form-group" {{ $errors->has("roles_chosen") ? "has-error":"" }}'>
+
+											 <label for="Roles" class="control-label col-md-3">Roles</label>
+
+											 <div class="col-md-9">
+
+												 {!! Form::select('roles_chosen[]',App\Misc::$accountTypes, $rol, ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "roles"]) !!}
+
+												 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+
+											 </div>
+
+										 </div>
+
+										 <div class="margin-top-20">
+
+											 <button type="submit" class="btn green"> Roles </button>
+
+
+
+										 </div>
+							 </div>
+
+								 </form>
+							 </div>
+							 <!--End role tab-->
                                 </div>
 
                             </div>

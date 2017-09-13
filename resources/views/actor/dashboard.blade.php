@@ -52,24 +52,23 @@
                                     <div class="timeline-item">
                                         <div class="timeline-badge">
                                             <div class="timeline-icon">
-                                                <i class="icon-question font-green"></i>
+                                                <i class="icon-question font-red"></i>
                                             </div>
                                         </div>
-                                        <div class="timeline-body activeBox">
+                                        <div class="timeline-body inactiveBox">
                                             <div class="timeline-body-head">
                                                 <div class="timeline-body-head-caption">
-                                                    <span class="timeline-body-alerttitle font-green">Account Information</span>
+                                                    <span class="timeline-body-alerttitle font-red">Verify Email Address</span>
                                                 </div>
                                                 <form method="POST" action="{{ route('actor::actorProfileTrigger') }}">
                                                     {{ csrf_field() }}
                                                     <div class="timeline-body-head-actions">
-                                                        <button type="submit" class="btn green">Verify</button>
+                                                        <button type="submit" class="btn red">Resend Email</button>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">Verify Your Account By clicking Verify.
-
+                                            <span class="font-grey-cascade">If you do not receive an email within the next 15 minutes, resend the verification
                                             </span>
                                             </div>
                                         </div>
@@ -185,6 +184,27 @@
                             </div>
                             <!-- END TIMELINE ITEM -->
                             @endif
+                            <div class="timeline-item">
+                                <div class="timeline-badge">
+                                    <div class="timeline-icon">
+                                        <i class="icon-picture font-red"></i>
+                                    </div>
+                                </div>
+                                <div class="timeline-body inactiveBox">
+
+                                    <div class="timeline-body-head">
+                                        <div class="timeline-body-head-caption">
+                                            <span class="timeline-body-alerttitle font-red">Photo And Resume</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Send in a check and a Hard Copy of your Resume & Photo
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         </div>
 

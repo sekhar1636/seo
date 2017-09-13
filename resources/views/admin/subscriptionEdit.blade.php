@@ -61,30 +61,32 @@ $(document).ready(function() {
                     
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}"> {{ Form::label('name', 'Name', ['class' => 'col-lg-2 control-label']) }}
-                      <div class="col-lg-10"> {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter Plan Name','required'=>'required',  'minlength'=>'3']) }}
+                      <div class="col-lg-10"> {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter Plan Name','required'=>'required',  'minlength'=>'3', $membershipPeriod->status ? '' : 'readonly']) }}
                         <p class="help-block">{{ $errors->first('name', ':message') }}</p>
                       </div>
                     </div>
                     
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}"> {{ Form::label('price', 'Price', ['class' => 'col-lg-2 control-label']) }}
-                      <div class="col-lg-10"> {{ Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Enter Price','required'=>'required']) }}
+                      <div class="col-lg-10"> {{ Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Enter Price','required'=>'required', $membershipPeriod->status ? '' : 'readonly']) }}
                         <p class="help-block">{{ $errors->first('price', ':message') }}</p>
                       </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+
+                  @if($membershipPeriod->status == 1)
+                      <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                       {{ Form::label('type_lab', 'Type', ['class' => 'col-lg-2 control-label'] )  }}
                       <div class="col-lg-10">
                         {{  Form::select('type', ['Actor'=>'Actor', 'Theater'=>'Theater', 'Staff' => 'Staff'],null, array('class' => 'form-control', 'placeholder'=>'Select Type', 'required'=>'required')) }}
                         <p class="help-block">{{ $errors->first('type', ':message') }}</p>
                       </div>
                     </div>
-                    
+                    @endif
                     
                     <div class="form-group{{ ($errors->has('start_date')||$errors->has('end_date')) ? ' has-error' : '' }}"> {{ Form::label('from', 'Date', ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-10">
-                    <div class="input-group input-large date-picker input-daterange" data-date="2012/11/10" data-date-format="yyyy-mm-dd"> 
+                    <div class="input-group input-large date-picker {{ $membershipPeriod->status ? 'input-daterange' : '' }}" data-date="2012/11/10" data-date-format="yyyy-mm-dd">
                     {!! Form::text('start_date', null, ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required', 'readonly']) !!}
                     <span class="input-group-addon"> to </span> 
                     {!! Form::text('end_date', null, ['class' => 'form-control', 'placeholder' => 'To', 'required'=>'required', 'readonly']) !!}

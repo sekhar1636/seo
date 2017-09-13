@@ -162,13 +162,13 @@
                                             </a>
                                         </li>
                                         <li class="menu-dropdown">
-                                            <a href="javascript:;">
+                                            <a href="javascript:; {{ route('getActors') }}">
                                                 <i class="icon-users"></i> Actors
                                                 <span class="arrow"></span>
                                             </a>
                                             <ul class="dropdown-menu pull-left">
                                                 <li>
-                                                    <a href="{{route('getActors')}}">Registerd Actors</a>
+                                                    <a href="{{route('getActors')}}">Actors</a>
                                                 </li>
                                                 <li>
                                                     <a href="{{route('getStaticPage',['slug'=>'howitworks'])}}">How it Works</a>
@@ -224,10 +224,10 @@
                                             </a>
                                             <ul class="dropdown-menu pull-left">
                                                     <li>
-                                                        <a href="#">About StrawHat</a>
+                                                        <a href="{{ route('getStaticPage',['slug'=>'aboutstrawhat']) }}">About StrawHat</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#">Kiristi & Jay Bios</a>
+                                                        <a href="{{ route('getStaticPage',['slug'=>'kirstijaybios']) }}">Kiristi & Jay Bios</a>
                                                     </li>
                                             </ul>
                                         </li>

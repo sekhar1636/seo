@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actor;
 use App\ProductVariant;
+use App\SubscriptionPackage;
 use Illuminate\Http\Request;
 use Stripe\Stripe as Stripe;
 use \Stripe\Plan as StripePlan;
@@ -23,9 +24,6 @@ class ActorController extends Controller
     */
     public function index(){
 
-        if(\Auth::user()->actor && \Auth::user()->subscription){
-            return redirect()->route('actor::getEditProfile');
-        }
         $verify = '';
         if(\Auth::user()->verified == 1)
         {
@@ -110,12 +108,19 @@ class ActorController extends Controller
         for ($i=75; $i <= 400 ; $i++) { 
             $weight[$i] = $i .' lbs';
         }
-        $actor = Actor::where('user_id',\Auth::user()->id)->get();
+        $uid = \Auth::user()->id;
+        $actor = Actor::where('user_id',$uid)->get();
+        $roles = User::findorFail($uid);
+        $rol = explode(',',$roles->roles_chosen);
     	if(!empty($actor[0])){
-            return view('actor.editProfile')->with('actor',$actor)->with('weight', $weight)->with('age', $age);
+            return view('actor.editProfile')->with('actor',$actor)->with('weight', $weight)->with('age', $age)->with('rol',$rol);
     	}
         
-    	return view('actor.editProfile')->with('weight', $weight)->with('age', $age);
+    	return view('actor.editProfile')->with([
+    	    'weight'=>$weight,
+            'age'=>$age,
+            'rol'=>$rol
+        ]);
     }
     public function update(Request $request){
     	$validator = \Validator::make($request->all(),
@@ -232,6 +237,14 @@ class ActorController extends Controller
 
     }
 
+    public function userroles(Request $request)
+    {
+        $user = User::findorFail(\Auth::user()->id);
+        $user->roles_chosen = implode(',', $request->roles_chosen);
+        $user->save();
+
+        return redirect()->route('actor::actorProfile')->with('success_message', 'user roles Successfully Created');
+    }
     /**
     * TODO : Dummy payment just chaning payment status for now
     * Will update with proper payment system in future
@@ -279,13 +292,27 @@ class ActorController extends Controller
 
 		$totalPrice = $totalPrice*100;
 		\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
+		try{
 		$result = \Stripe\Charge::create(array(
 								  "amount" => $totalPrice,
 								  "currency" => "usd",
 								  "source" => $request->token,
 								  "description" => $description
 								));
-		
+
+        } catch (\Stripe\Error\Card $e) {
+            return redirect()->back()->with('error_message',$e->getMessage());
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            return redirect()->back()->with('error_message','Kindly Refresh the Page.!');
+        } catch (\Stripe\Error\Authentication $e) {
+            return redirect()->back()->with('error_message',$e->getMessage());
+        } catch (\Stripe\Error\ApiConnection $e) {
+            return redirect()->back()->with('error_message',$e->getMessage());
+        } catch (\Stripe\Error\Base $e) {
+            return redirect()->back()->with('error_message',$e->getMessage());
+        } catch (Exception $e) {
+            return redirect()->back()->with('error_message',$e->getMessage());
+        }
 		if(!isset($result->status)){
 			return redirect()->back()->with('error_message', 'Something went wrong. Error:'.$result->type);
 		}else{
@@ -302,6 +329,42 @@ class ActorController extends Controller
 			$payment->price = $membershipPeriod->price;
 			$payment->save();
 
+			//subscription table
+            $subes = SubscriptionPackage::where('user_id',\Auth::user()->id)->get();
+
+            if(isset($subes[0])) {
+                $sub = SubscriptionPackage::findorFail($subes[0]->id);
+
+                if (!empty($sub)) {
+                    $sub->name = $membershipPeriod->name;
+                    $sub->stripe_id = $result->id;
+                    $sub->stripe_plan = $membershipPeriod->type;
+                    $sub->quantity = 1;
+                    $sub->trial_ends_at = $membershipPeriod->start_date;
+                    $sub->ends_at = $membershipPeriod->end_date;
+                    $sub->save();
+
+                }
+            }
+            else
+            {
+
+                $stripe_sub = new SubscriptionPackage;
+                $stripe_sub->user_id = \Auth::user()->id;
+                $stripe_sub->name = $membershipPeriod->name;
+                $stripe_sub->stripe_id = $result->id;
+                $stripe_sub->stripe_plan = $membershipPeriod->type;
+                $stripe_sub->quantity = 1;
+                $stripe_sub->trial_ends_at = $membershipPeriod->start_date;
+                $stripe_sub->ends_at = $membershipPeriod->end_date;
+                $stripe_sub->save();
+
+            }
+
+            //user table
+            $use = User::findorFail(\Auth::user()->id);
+            $use->payment_status = 1;
+            $use->save();
 
             /*if($request->products)
             {
