@@ -285,12 +285,12 @@ class TheaterController extends Controller
 
     public function paymentStore(Request $request){
         $request->all();
-        $validator = \Validator::make($request,
+        $validator = \Validator::make($request->all(),
             [
                 'subscription' => "required",
             ]
         );
-        if ($validator->fails()) {
+        if($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())

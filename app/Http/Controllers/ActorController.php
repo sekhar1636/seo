@@ -25,7 +25,9 @@ class ActorController extends Controller
     public function index(){
 
         $verify = '';
-        if(\Auth::user()->verified == 1)
+        $user = \Auth::user()->verified;
+        $user_id = \Auth::user()->id;
+        if($user == 1)
         {
             $verify = 1;
         }
@@ -33,8 +35,25 @@ class ActorController extends Controller
         {
             $verify = 0;
         }
+        $hardcop = Actor::select('hardcopy_status')->where('user_id',$user_id)->get();
+
+        $mytime = \Carbon\Carbon::now();
+        $today_date = $mytime->toDateString();
+
+        $mem_date = Membership::select('membership_period_id')->where('user_id',$user_id)->get();
+
+        if(isset($mem_date))
+        {
+            $mem_id = $mem_date[0]['membership_period_id'];
+            $memb_date = MembershipPeriod::findorfail($mem_id);
+            dd($memb_date->end_date);
+        }
+        $hardcopy = (!empty($hardcop[0]['hardcopy_status'])) ? $hardcop[0]['hardcopy_status'] : 0;
+
+
         return view('actor.dashboard')->with([
-            'verify' => $verify
+            'verify' => $verify,
+            'hardcopy' => $hardcopy
         ]);
     }
 	

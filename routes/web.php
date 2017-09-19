@@ -155,6 +155,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/content/{slug}/edit',['as'=>'staticPageEdit', 'uses'=>'StaticPageController@edit']);
             Route::post('/content/{slug}',['as'=>'updateStaticPage','uses'=>'StaticPageController@update']);
 
+            Route::post('/hardcopysubmit/{id}', ['as'=>'hardCopyUpdate','uses'=>'AdminController@hardcopy']);
+
+            Route::get('audition/',['as' => 'audition', 'uses'=>'AdminController@audition']);
         });
 	});
 	

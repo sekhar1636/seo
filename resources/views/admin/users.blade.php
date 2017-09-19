@@ -32,13 +32,14 @@ $('#faq-table').DataTable({
 			{data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
+
 $('#actor-table').DataTable({
     processing: true,
     serverSide: true,
     ajax: '{{route("admin::adminActorDataTable")}}',
     columns: [
         {data: 'id'},
-        {data: 'name'},
+        {data: 'actor.first_name'},
         {data: 'email'},
         {data: 'role'},
         {data: 'payment_status'},

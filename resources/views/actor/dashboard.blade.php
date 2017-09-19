@@ -95,7 +95,7 @@
                                             </span>
                                                     </div>
                                                 </div>
-                                            </div>
+
                                         @else
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
@@ -120,7 +120,7 @@
                                             </span>
                                                     </div>
                                                 </div>
-                                            </div>
+
                                         @endif
                                     <!-- END TIMELINE ITEM -->
                                         <!-- TIMELINE ITEM -->
@@ -154,6 +154,7 @@
                                             </div>
                                     </div>
                                     <!-- END TIMELINE ITEM -->
+                                    @if(@$hardcopy == 0)
                                     <div class="timeline-item">
                                         <div class="timeline-badge">
                                             <div class="timeline-icon">
@@ -174,6 +175,29 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
+                                    @if(@$hardcopy==1)
+                                        <div class="timeline-item">
+                                            <div class="timeline-badge">
+                                                <div class="timeline-icon">
+                                                    <i class="icon-picture font-red"></i>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-body inactiveBox">
+
+                                                <div class="timeline-body-head">
+                                                    <div class="timeline-body-head-caption">
+                                                        <span class="timeline-body-alerttitle font-red">Incomplete</span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Issue with your paperwork, a StrawHat representative will be reaching out to you shortly
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 @else
                                     <div class="timeline-item">
                                         <div class="timeline-badge">

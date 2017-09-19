@@ -295,8 +295,6 @@ function initTable(tableId, data) {
 
                             </li>
 
-                           
-
                             <li>
 
                                 <a href="#tab_1_2"  data-toggle="tab">
@@ -312,6 +310,14 @@ function initTable(tableId, data) {
                                     <i class="icon-key"></i> Actor Invoices </a>
 
                             </li>
+
+							<li>
+
+								<a href="#tab_1_4" data-toggle="tab">
+
+									<i class="icon-key"></i> Paper Work </a>
+
+							</li>
 
                         </ul>
 
@@ -351,24 +357,29 @@ function initTable(tableId, data) {
 
                                 <ul class="nav nav-tabs">
 
-                                    <li >
+                                    <li {{  (Session::has('tabactive') ? '' : 'class=active'  ) }}>
 
                                         <a href="#tab_1_1" data-toggle="tab">Personal Information</a>
 
                                     </li>
 
-                                    <li {{{  (Session::has('tabactive') ? 'class=active' : '') }}}>
+                                    <li {{  (Session::has('tabactive') ? 'class=active' : '') }}>
 
                                         <a href="#tab_1_2" data-toggle="tab">Change Profile Picture</a>
 
                                     </li>
 
-                                    <li>
+                                    <li {{  (Session::has('tabactive') ? 'class=active' : '') }}>
 
                                         <a href="#tab_1_3" data-toggle="tab">Actor Invoices</a>
 
                                     </li>
 
+									<li {{  (Session::has('tabactive') ? 'class=active' : '') }}>
+
+										<a href="#tab_1_4" data-toggle="tab">Paper Work</a>
+
+									</li>
                                  
 
                                 </ul>
@@ -381,7 +392,7 @@ function initTable(tableId, data) {
 
                                     <!-- PERSONAL INFO TAB -->
 
-                                    <div class="tab-pane {{{  (Session::has('tabactive') ? '' : 'active') }}}" id="tab_1_1">
+                                    <div class="tab-pane {{  (Session::has('tabactive') ? '' : 'active') }}" id="tab_1_1">
 
                                          <div class="portlet-body form">
 
@@ -1051,6 +1062,48 @@ function initTable(tableId, data) {
                                     </div>
 
                                     <!-- END CHANGE AVATAR TAB -->
+ <div class="tab-pane" id="tab_1_4">
+	 <form action="{{route('admin::hardCopyUpdate',$id)}}" enctype="multipart/form-data" role="form" method="POST">
+
+		 {{csrf_field()}}
+
+		 <div class="form-group clearfix {{ $errors->has('photo') ? 'has-error' : '' }}">
+
+			 <!--  <label class="control-label col-md-3">Photo</label> -->
+
+			 <div class="col-md-9">
+
+				 <label for="Roles" class="control-label col-md-3">Roles</label>
+
+				 <div class="col-md-9">
+
+					 {!! Form::select('hardcopy',[0 => 'Pending', 1 => 'Incomplete', 2 => 'Received'], @$actor->hardcopy_status ? $actor->hardcopy_status : 0, ['required' => 'required',  'class' => 'form-control', 'id' => "hardcp"]) !!}
+
+					 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+
+				 </div>
+
+			 </div>
+
+			 <div class="margin-top-20">
+
+				 <button type="submit" class="btn green"> Submit </button>
+
+
+
+			 </div>
+
+
+
+
+			 </div>
+	 </form>
+		 </div>
+
+
+
+
+
 
                                     <!-- CHANGE PASSWORD TAB -->
 

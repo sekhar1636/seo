@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actor;
 use App\ProductVariant;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Facades\Datatables;
@@ -322,7 +323,8 @@ class AdminController extends Controller
     }
 
     public function actorsDataTable(){
-        $users = User::latest()->where('role','actor')->orderBy('id', 'desc');
+        $users = User::with('actor')->where('role','actor')->orderBy('id', 'desc')->select('users.*');;
+
         return Datatables::of($users)
             ->addColumn('action', function ($user) {
                 $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
@@ -336,7 +338,19 @@ class AdminController extends Controller
                 return ($user->payment_status)? "Yes" : "No";
             })
             ->make(true);
+
+
     }
+
+    /*public function actorsDataTable()
+    {
+        $actors = Actor::select(['id','first_name','last_name'])->orderBy('user_id','desc');
+        return Datatables::of($actors)
+            ->addColumn('email', function() {
+                $email = User::select('email')->orderBy('id','desc');
+                return $email;
+            })->make(true);
+    }*/
     public function staffDataTable()
     {
         $users = User::latest()->where('role','staff')->orderBy('id', 'desc');
@@ -384,7 +398,8 @@ class AdminController extends Controller
                 'weight' => $weight,
                 'age' => $age,
                 'id' => $id,
-                'user' => $user
+                'user' => $user,
+
             ]);
 		}
 		return view('admin.userEdit',compact('user'));
@@ -899,10 +914,26 @@ class AdminController extends Controller
 			return redirect()->route('admin::adminProducts')->with('success_message', 'Product updated successfully.');
 		}
     }
-	
+
+    public function hardcopy($id, Request $request)
+    {
+        $actors = Actor::select('id')->where('user_id', $id)->get();
+        $actor_id = $actors[0]['id'];
+        $act_upd = Actor::findorfail($actor_id);
+        $act_upd->hardcopy_status = $request->hardcopy;
+        $act_upd->save();
+        return redirect()->back()->with('success_message', 'Updated Successfully');
+    }
+
 	public function productDestroy($id){
 		$product = Product::findOrFail($id);
 		$product->delete();
 		return redirect()->back()->with('success_message', 'Product deleted successfully.');	
+    }
+
+    public function audition()
+    {
+        $actor = Actor::select('user_id')->get();
+        dd($actor);
     }
 }
