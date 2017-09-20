@@ -10,3 +10,8 @@ Thumbs.db
 vendor/*
 .env
 public/assets/photos/
+.idea/Site-Strawhat.iml
+.idea/blade.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
