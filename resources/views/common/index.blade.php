@@ -15,7 +15,7 @@
  <!-- BEGIN PAGE CONTENT INNER -->
 <div class="page-content-inner">
     <!-- BEGIN CONTENT HEADER -->
-    @if($slideshows)
+    @if(@$slideshows)
        @php
        $val = count($slideshows);
        $j = 0;
