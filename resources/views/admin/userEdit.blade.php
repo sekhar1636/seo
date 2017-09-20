@@ -87,8 +87,20 @@
                             <p class="help-block">{{ $errors->first('status', ':message') }}</p>
                         </div>
                     </div>
-                    
-                    
+
+                    <div class="form-group">
+                            <label for="subscription_status" class="col-lg-2 control-label">Subscription Status</label>
+                            @if(@$subsciption_expiry)
+                             <div class="col-lg-10 {{ $subsciption_expiry > date('Y-m-d')?"text-success":"text-danger" }}">
+                                {{ $subsciption_expiry > date('Y-m-d')?"Active":"Expired" }} (Expiry {{$subsciption_expiry}})
+                             </div>
+                            @else
+                             <div class="col-lg-10">
+                                Not Subscribed
+                             </div>
+                            @endif
+                    </div>
+
                     <!-- Submit Button -->
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">

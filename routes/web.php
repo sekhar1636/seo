@@ -63,10 +63,22 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('updaterole',['as'=>'updateUsersRole','uses'=>'ActorController@userroles']);
 		});
 	});
+
 	Route::group(['prefix'=>'staff'], function (){
 		Route::group(['as' => 'staff::', 'middleware' => 'role:staff'], function ()
 		{
 			Route::get('/', ['as'=>'staffProfile', 'uses'=>'StaffController@getProfile']);
+            Route::get('/products', ['as'=>'staffProducts', 'uses'=>'StaffController@products']);
+            Route::post('products/buy',['as'=>'buyProduct', 'uses'=>'StaffController@productbuy']);
+            Route::post('/staffprofiletrigger',['as'=>'staffProfileTrigger', 'uses'=>'StaffController@mail']);
+            Route::get('update', ['as'=>'getEditProfile', 'uses'=>'StaffController@edit']);
+            Route::post('update', ['as'=>'postEditProfile', 'uses'=>'StaffController@update']);
+            Route::get('payment', ['as'=>'getStaffPayment', 'uses'=>'StaffController@payment']);
+            Route::post('payment', ['as'=>'storeStaffPayment', 'uses'=>'StaffController@paymentStore']);
+            Route::post('photo/update', ['as'=>'postPhotoUpdate', 'uses'=>'StaffController@postPhotoUpdate']);
+            Route::post('photo/crop', ['as'=>'postCropPhotoUpdate', 'uses'=>'StaffController@postCropPhotoUpdate']);
+            Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'StaffController@getDeletePhoto']);
+            Route::post('password', ['as'=>'postEditPassword', 'uses'=>'StaffController@postEditPassword']);
 		});
 	});
 
@@ -158,6 +170,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/hardcopysubmit/{id}', ['as'=>'hardCopyUpdate','uses'=>'AdminController@hardcopy']);
 
             Route::get('audition/',['as' => 'audition', 'uses'=>'AdminController@audition']);
+            Route::get('auditiondatatable/',['as' => 'auditions', 'uses'=>'AdminController@auditionDataTable']);
+            Route::get('auditionedit/{id}',['as'=>'auditionStatus','uses'=>'AdminController@auditionedit']);
+            Route::patch('auditionedit/{id}',['as'=>'auditionUpdate','uses'=>'AdminController@auditionupdate' ]);
         });
 	});
 	

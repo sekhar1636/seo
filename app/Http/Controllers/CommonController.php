@@ -176,10 +176,22 @@ class CommonController extends Controller
 		   	);
 			if (Auth::attempt($authenticate)) {
 				if(Auth::user()->role == 'actor'){
+				    $actor = new App\Actor;
+				    $actor->user_id = $user->id;
+				    $actor->save();
 					return redirect()->route('actor::actorProfile');
 				}else if(Auth::user()->role == 'theater'){
+                    $theater = new App\Theater;
+                    $theater->user_id = $user->id;
+                    $theater->save();
 					return redirect()->route('theater::theaterProfile');
 				}else if(Auth::user()->role == 'staff'){
+                    $staff = new App\Staff;
+                    $staff->user_id = $user->id;
+                    $staff->email = $user->email;
+                    $staff->subscription = 0;
+                    $staff->status = 1;
+                    $staff->save();
 					return redirect()->route('staff::staffProfile');
 				}else{
 					dd('No User Exist');

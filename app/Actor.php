@@ -37,4 +37,6 @@ class Actor extends Model
             $this->save();
         }
     }
+
+
 }
