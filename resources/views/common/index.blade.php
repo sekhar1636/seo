@@ -5,6 +5,7 @@
 
 @section('style')
 <link href="{{asset('assets/pages/css/about.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('js')
@@ -14,17 +15,61 @@
  <!-- BEGIN PAGE CONTENT INNER -->
 <div class="page-content-inner">
     <!-- BEGIN CONTENT HEADER -->
-    <div class="row margin-bottom-40 about-header">
-        <div class="col-md-12">
-            <h1>About StrawHat</h1>
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                            <h3 style="color:#fff;">Actors, Singers, Dancers, Musicians, Staff, Tech, Design... All 3 Days! 
-                Actor Registrations for the 2017 Auditions are closed.</h3>
+    @if($slideshows)
+       @php
+       $val = count($slideshows);
+       $j = 0;
+       @endphp
+
+        <div id="myCarousel" class="margin-bottom-40 carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+
+                @for($i = 0; $i < $val; $i++)
+                 @if($i == 0)
+                     <li data-target="#myCarousel" data-slide-to="{{$i}}" class="active"></li>
+                 @else
+                     <li data-target="#myCarousel" data-slide-to="{{$i}}"></li>
+                 @endif
+                @endfor
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+            @foreach($slideshows as $slides)
+                @if($j == 0)
+               <div class="item hom-caro active">
+                    <img src="{{$slides['path']}}" alt="Chania">
+                    <div class="carousel-caption">
+                            <h1>{{$slides['title']}}</h1>
+                            <h3>{{$slides['description']}}</h3>
+                    </div>
                 </div>
+                @else
+                <div class="item hom-caro">
+                    <img src="{{$slides['path']}}" alt="Chania">
+                    <div class="carousel-caption">
+                            <h1>{{$slides['title']}}</h1>
+                            <h3>{{$slides['description']}}</h3>
+                    </div>
+                </div>
+                @endif
+                @php
+                    $j++;
+                @endphp
+             @endforeach
             </div>
-        </div>
-    </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+         </div>
+     @endif
     <!-- END CONTENT HEADER -->
     
     <!-- BEGIN TEXT & VIDEO -->

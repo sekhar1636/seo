@@ -20,12 +20,20 @@ use App\User;
 
 class CommonController extends Controller
 {
-
 	use ResetsPasswords;
 
 	//Index Page of website
 	public function getIndex(){
-		return view('common.index');
+        $slideshows = [];
+        $slides = [];
+        //Home Page slider
+	    $slides = Slideshow::where("id","=",2)->get();
+
+        if(count($slides)){
+            if($slides[0]['status'] == 1) $slideshows = Slide::where("slideshow_id", $slides[0]['id'])->get();
+        }
+
+	    return view('common.index', compact('slideshows'));
 	}
 
 	/* Get route map to /faq */

@@ -11,3 +11,23 @@
 .faq-content-1 .faq-section {
 	border:1px solid #f9f9f9;
 }
+
+/* Bootstrap carousel-captions text center */
+
+.carousel-caption {
+	top: 45%;
+	transform: translateY(-45%);
+}
+.hom-caro img{
+	/*height: 500px !important;*/
+	width: 100%;
+	background-position: center;
+}
+.hom-caro h1{
+	color: #fff;
+	font-weight: 600;
+}
+.hom-caro h3{
+	color: #fff;
+	font-weight: 300;
+}
