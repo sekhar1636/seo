@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actor;
+use App\Audition;
 use App\ProductVariant;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Facades\Datatables;
@@ -933,7 +934,52 @@ class AdminController extends Controller
 
     public function audition()
     {
-        $actor = Actor::select('user_id')->get();
-        dd($actor);
+
+        return view('admin.audition');
+    }
+    public function auditionDataTable()
+    {
+        $users = "SELECT c.name,c.email,c.id FROM users as c
+        join actors as a ON c.id = a.user_id
+                              WHERE c.payment_status = 1 AND c.verified = 1 AND a.hardcopy_status = 2
+                              ORDER BY c.id DESC
+                              ";
+        $actors = DB::table( DB::raw("($users) as actors") )->get();
+
+           //$actors = Actor::where('hardcopy_status',2)->orderBy('id','desc');
+        return Datatables::of($actors)
+            ->addColumn('action', function ($actor) {
+                $action = '<a href="'.route('admin::auditionStatus',$actor->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                return $action;
+            })
+            ->make(true);
+
+    }
+
+    public function auditionedit($id)
+    {
+        $auditionEdit = User::findorfail($id);
+        $start_time = Carbon::createFromTime(06,00,00)->toTimeString();
+        $tt = Carbon::parse($start_time)->addHour()->toTimeString();
+
+        $end_time = Carbon::createFromTime(22,00,00)->toTimeString();
+
+        $ar = [];
+        for ($i=$start_time; $i<=$end_time; $i = Carbon::parse($i)->addHour()->toTimeString()){
+          $ar[$i] = $i;
+        }
+        return view('admin.auditionedit',compact('auditionEdit'))->with([
+            'hour' => $ar
+        ]);
+    }
+
+    public function auditionupdate($id,Request $request)
+    {
+        $actor_audition_update = Actor::findorfail($id);
+        $actor_audition_update->audition_status = $request->audition_status;
+        $actor_audition_update->audition_hour = $request->audition_hour;
+        $actor_audition_update->save();
+        return redirect()->back()->with('success_message', 'Successfully set audition details for actor');
+
     }
 }

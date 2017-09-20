@@ -20,10 +20,9 @@ class ActorController extends Controller
 {
     /**
     \Get Function For Actor
-    \Server Dashboard 
-    */
+    \Server Dashboard
+     */
     public function index(){
-
         $verify = '';
         $user = \Auth::user()->verified;
         $user_id = \Auth::user()->id;
@@ -35,7 +34,7 @@ class ActorController extends Controller
         {
             $verify = 0;
         }
-        $hardcop = Actor::select('hardcopy_status')->where('user_id',$user_id)->get();
+        $hardcop = Actor::select('hardcopy_status','audition_status')->where('user_id',$user_id)->get();
 
         $mytime = \Carbon\Carbon::now();
         $today_date = $mytime->toDateString();
@@ -44,22 +43,27 @@ class ActorController extends Controller
 
         if(isset($mem_date))
         {
-            $mem_id = $mem_date[0]['membership_period_id'];
-            $memb_date = MembershipPeriod::findorfail($mem_id);
-            dd($memb_date->end_date);
+            $mem_id = (!empty($mem_date[0]['membership_period_id'])) ? $mem_date[0]['membership_period_id'] : '';
+            if(!empty($mem_id))
+            {
+                $memb_date = MembershipPeriod::findorfail($mem_id);
+                //dd($memb_date->end_date);
+            }
+
         }
         $hardcopy = (!empty($hardcop[0]['hardcopy_status'])) ? $hardcop[0]['hardcopy_status'] : 0;
-
+        $audition = (!empty($hardcop[0]['audition_status'])) ? $hardcop[0]['audition_status'] : 0;
 
         return view('actor.dashboard')->with([
             'verify' => $verify,
-            'hardcopy' => $hardcopy
+            'hardcopy' => $hardcopy,
+            'audition_status' => $audition
         ]);
     }
-	
-	public function products(){
-		$products = Product::latest()->orderBy('id', 'desc')->get();
-		return view("actor.products",compact('products'));
+
+    public function products(){
+        $products = Product::latest()->orderBy('id', 'desc')->get();
+        return view("actor.products",compact('products'));
     }
 
     public function mail()
@@ -69,80 +73,86 @@ class ActorController extends Controller
         return redirect()->route('actor::actorProfile')->with('success_message', 'Mail Sent Successfully');
     }
 
-	public function productBuy(Request $request){
-		$description = "Products Invoice: ";
-		$totalPrice = 0;
-		$size = sizeof($request->products);
-		if($size)
-		{
-		foreach($request->products as $prod){
-            $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
-            $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
-            if($proid && $varid) {
-                $product = Product::findOrFail($proid);
-                $varient = ProductVariant::findorFail($varid);
-                $totalPrice = $totalPrice + $varient['price'];
-                $description .= "\nProduct: " . $product->name . " Price: " . $varient['price'];
+    public function productBuy(Request $request){
+        $description = "Products Invoice: ";
+        $totalPrice = 0;
+        $size = sizeof($request->products);
+        if($size)
+        {
+            foreach($request->products as $prod){
+                $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
+                $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
+                if($proid && $varid) {
+                    $product = Product::findOrFail($proid);
+                    $varient = ProductVariant::findorFail($varid);
+                    $totalPrice = $totalPrice + $varient['price'];
+                    $description .= "\nProduct: " . $product->name . " Price: " . $varient['price'];
+                }
             }
-		}
 
         }
-		$totalPrice = $totalPrice*100;
-		Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
-		$result = \Stripe\Charge::create(array(
-								  "amount" => $totalPrice,
-								  "currency" => "usd",
-								  "source" => $request->token,
-								  "description" => $description
-								));
-		
-		if(!isset($result->status)){
-			return redirect()->back()->with('error_message', 'Something went wrong. Error:'.$result->type);
-		}else{
+        $totalPrice = $totalPrice*100;
+        Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
+        $result = \Stripe\Charge::create(array(
+            "amount" => $totalPrice,
+            "currency" => "usd",
+            "source" => $request->token,
+            "description" => $description
+        ));
+
+        if(!isset($result->status)){
+            return redirect()->back()->with('error_message', 'Something went wrong. Error:'.$result->type);
+        }else{
             foreach($request->products as $prod){
                 $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
                 $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
                 if($proid && $varid){
-                $product = Product::findOrFail($proid);
-                $varient = ProductVariant::findorFail($varid);
-                $payment = new Payment;
-				$payment->user_id = \Auth::user()->id;
-				$payment->transaction_id = $request->token;
-				$payment->product_id = $product->id;
-				$payment->price = $varient['price'];
-				$payment->save();
+                    $product = Product::findOrFail($proid);
+                    $varient = ProductVariant::findorFail($varid);
+                    $payment = new Payment;
+                    $payment->user_id = \Auth::user()->id;
+                    $payment->transaction_id = $request->token;
+                    $payment->product_id = $product->id;
+                    $payment->price = $varient['price'];
+                    $payment->save();
                 }
-			}
-			return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully bought products.');
-		}
-		
+            }
+            return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully bought products.');
+        }
+
     }
-	
+
     public function edit(){
         $weight = [];
         $age = [];
-        for ($i=1; $i <= 100 ; $i++) { 
+        for ($i=1; $i <= 100 ; $i++) {
             $age[$i] = $i;
         }
-        for ($i=75; $i <= 400 ; $i++) { 
+        for ($i=75; $i <= 400 ; $i++) {
             $weight[$i] = $i .' lbs';
         }
         $uid = \Auth::user()->id;
         $actor = Actor::where('user_id',$uid)->get();
         $roles = User::findorFail($uid);
         $rol = explode(',',$roles->roles_chosen);
-    	if(!empty($actor[0])){
+
+        if(!empty($actor[0]))
+        {
             return view('actor.editProfile')->with('actor',$actor)->with('weight', $weight)->with('age', $age)->with('rol',$rol);
-    	}
-        
-    	return view('actor.editProfile')->with([
-    	    'weight'=>$weight,
-            'age'=>$age,
-            'rol'=>$rol
-        ]);
+        }
+        $actors = User::where('payment_status',1)->where('verified',1)->orderBy('id','desc');
+        $user = \Auth::user();
+        if($user->verified==1 && $user->payment_status==1)
+            return view('actor.editProfile')->with([
+                'weight'=>$weight,
+                'age'=>$age,
+                'rol'=>$rol
+            ]);
     }
+
+
     public function update(Request $request){
-    	$validator = \Validator::make($request->all(),
+        $validator = \Validator::make($request->all(),
             [
                 "resume"=>"mimes:pdf|max:10000",
                 'first_name' => "required|max:20|min:3",
@@ -187,7 +197,7 @@ class ActorController extends Controller
         $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
         $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
 
-    	$actor->user_id = \Auth::user()->id;
+        $actor->user_id = \Auth::user()->id;
         $actor->first_name = $request->get('first_name');
         $actor->last_name = $request->get('last_name');
         $actor->age = $request->get('age');
@@ -209,18 +219,18 @@ class ActorController extends Controller
         $actor->instrument = implode(',', $request->get('instrument'));
         $actor->misc = implode(',', $request->get('misc'));
         if($request->hasFile('resume')) {
-           $this->uploadResume($actor,$request->file('resume'), $request->get('name'));      
+            $this->uploadResume($actor,$request->file('resume'), $request->get('name'));
         }
         if($request->get('method') == "PUT"){
             if($actor->update()){
                 return redirect()->back()->with('success_message', 'Profile Data Successfully Updated');
             }
         }else{
-           if($actor->save()){
-                 return redirect()->route('actor::actorProfile')->with('success_message', 'Profile Data Successfully Created');
+            if($actor->save()){
+                return redirect()->route('actor::actorProfile')->with('success_message', 'Profile Data Successfully Created');
             }
         }
-        
+
     }
 
     public function uploadResume($actor,$file, $name){
@@ -228,7 +238,7 @@ class ActorController extends Controller
         $extension = $file->getClientOriginalExtension();
         $fileName = $name.rand(11111,99999).'.'.$extension; // renameing image
         $file->move(public_path($destinationPath), $fileName);
-        $actor->resume_path = $destinationPath.'/'.$fileName; 
+        $actor->resume_path = $destinationPath.'/'.$fileName;
     }
 
     public function postEditPassword(Request $request){
@@ -236,7 +246,7 @@ class ActorController extends Controller
             [
                 'password' => "required|max:15|min:6",
                 'new_password' => "required|max:15|min:6",
-                're_password' => "required|max:15|min:6", 
+                're_password' => "required|max:15|min:6",
             ]
         );
         if ($validator->fails()) {
@@ -265,38 +275,38 @@ class ActorController extends Controller
         return redirect()->route('actor::actorProfile')->with('success_message', 'user roles Successfully Created');
     }
     /**
-    * TODO : Dummy payment just chaning payment status for now
-    * Will update with proper payment system in future
-    */
+     * TODO : Dummy payment just chaning payment status for now
+     * Will update with proper payment system in future
+     */
     public function payment()
     {
-		$user = User::find(\Auth::user()->id);
-		if($user->subscribed('main'))
-		{
-			return redirect()->route('actor::actorProfile')->with('success_message', 'Already Subscribed');
-		}
-		else
+        $user = User::find(\Auth::user()->id);
+        if($user->subscribed('main'))
         {
-			$membershipPeriods = MembershipPeriod::latest()->where('type','Actor')->orderBy('id', 'desc')->get();
-			$products = Product::orderBy('id', 'desc')->get();
+            return redirect()->route('actor::actorProfile')->with('success_message', 'Already Subscribed');
+        }
+        else
+        {
+            $membershipPeriods = MembershipPeriod::latest()->where('type','Actor')->orderBy('id', 'desc')->get();
+            $products = Product::orderBy('id', 'desc')->get();
             //$products = Product::findorfail(2);
             //$n = $products->product_variant;
             //dd($n);
             return view('actor.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods]);
-		}
-		
-    }
-	
-	public function paymentStore(Request $request){
-		$request->all();
-		$description = "";
-		$totalPrice = 0;
-		$membershipPeriod = MembershipPeriod::findOrFail($request->subscription);
-		$totalPrice = $totalPrice + $membershipPeriod->price;
-		$description.= "StrawHat Subscription\nPlan: ".$membershipPeriod->name." Price: ".$membershipPeriod->price;
-		/*$size = sizeof($request->products);
+        }
 
-		if($request->products){
+    }
+
+    public function paymentStore(Request $request){
+        $request->all();
+        $description = "";
+        $totalPrice = 0;
+        $membershipPeriod = MembershipPeriod::findOrFail($request->subscription);
+        $totalPrice = $totalPrice + $membershipPeriod->price;
+        $description.= "StrawHat Subscription\nPlan: ".$membershipPeriod->name." Price: ".$membershipPeriod->price;
+        /*$size = sizeof($request->products);
+
+        if($request->products){
             foreach($request->products AS $prod){
                 $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
                 $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
@@ -309,15 +319,15 @@ class ActorController extends Controller
             }
         }*/
 
-		$totalPrice = $totalPrice*100;
-		\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
-		try{
-		$result = \Stripe\Charge::create(array(
-								  "amount" => $totalPrice,
-								  "currency" => "usd",
-								  "source" => $request->token,
-								  "description" => $description
-								));
+        $totalPrice = $totalPrice*100;
+        \Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
+        try{
+            $result = \Stripe\Charge::create(array(
+                "amount" => $totalPrice,
+                "currency" => "usd",
+                "source" => $request->token,
+                "description" => $description
+            ));
 
         } catch (\Stripe\Error\Card $e) {
             return redirect()->back()->with('error_message',$e->getMessage());
@@ -332,23 +342,23 @@ class ActorController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error_message',$e->getMessage());
         }
-		if(!isset($result->status)){
-			return redirect()->back()->with('error_message', 'Something went wrong. Error:'.$result->type);
-		}else{
-			$membership = new Membership;
-			$membership->membership_period_id = $membershipPeriod->id;
-			$membership->user_id = \Auth::user()->id;
-			$membership->save();
-			
-			//save the payment details for subscription
-			$payment = new Payment;
-			$payment->user_id = \Auth::user()->id;
-			$payment->transaction_id = $request->token;
-			$payment->membership_period_id = $membershipPeriod->id;
-			$payment->price = $membershipPeriod->price;
-			$payment->save();
+        if(!isset($result->status)){
+            return redirect()->back()->with('error_message', 'Something went wrong. Error:'.$result->type);
+        }else{
+            $membership = new Membership;
+            $membership->membership_period_id = $membershipPeriod->id;
+            $membership->user_id = \Auth::user()->id;
+            $membership->save();
 
-			//subscription table
+            //save the payment details for subscription
+            $payment = new Payment;
+            $payment->user_id = \Auth::user()->id;
+            $payment->transaction_id = $request->token;
+            $payment->membership_period_id = $membershipPeriod->id;
+            $payment->price = $membershipPeriod->price;
+            $payment->save();
+
+            //subscription table
             $subes = SubscriptionPackage::where('user_id',\Auth::user()->id)->get();
 
             if(isset($subes[0])) {
@@ -404,8 +414,8 @@ class ActorController extends Controller
                 }
 			}
             }*/
-			return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully subscribed.');
-		}
+            return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully subscribed.');
+        }
     }
     /**for preparing data**/
     public function prepareData($data){
@@ -424,7 +434,6 @@ class ActorController extends Controller
     public function check_in_range($start_date, $end_date, $start_lookup, $end_lookup)
     {
         // Convert to timestamp
-
         $begin = new \DateTime($start_date);
         $end = new \DateTime($end_date);
         $daterange = new \DatePeriod($begin, new \DateInterval('P1D'), $end);
@@ -439,8 +448,9 @@ class ActorController extends Controller
         return false;
 
     }
-        /*getting actors in actor view*/
+    /*getting actors in actor view*/
     public function getActors(){
+
         $actors = \App\User::join('actors','actors.user_id', '=', 'users.id')
             ->where('payment_status',1)
             ->get();
@@ -530,8 +540,8 @@ class ActorController extends Controller
 
             /*Build the Output*/
         }
-
         return view('actor.actorSearch1')->with('actorList', $actorList);
+
     }
 
     /** View user */
@@ -544,7 +554,7 @@ class ActorController extends Controller
     |Post function to upload images
     */
     public function postPhotoUpdate(Request $request){
-       
+
         $validator = \Validator::make($request->all(),
             [
                 "photo"=>"required|image|dimensions:max_width=600",
@@ -553,20 +563,20 @@ class ActorController extends Controller
                 'photo.dimensions'=>'Photo width must be lest than 600.'
             ]
         );
-         if ($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput()
                 ->with('tabactive', 'active');
         }
-		
-		if(\Auth::user()->Actor){
+
+        if(\Auth::user()->Actor){
             $actor = \App\Actor::where('user_id',\Auth::user()->id)->first();
         }else{
             $actor = new \App\Actor;
         }
-        
+
         $destinationPath = 'assets/photos'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
@@ -574,29 +584,29 @@ class ActorController extends Controller
         $file->move(public_path($destinationPath), $fileName);
 
 
-        $actor->precrop_path = $destinationPath.'/'.$fileName; 
-        $actor->precrop_url = $destinationPath.'/'.$fileName; 
-		
-		if(\Auth::user()->Actor){
-			
+        $actor->precrop_path = $destinationPath.'/'.$fileName;
+        $actor->precrop_url = $destinationPath.'/'.$fileName;
+
+        if(\Auth::user()->Actor){
+
             if($actor->update()){
-				return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-			}else{
-				return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
-			}
-			
+                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+            }else{
+                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+            }
+
         }else{
-			$actor->user_id = \Auth::user()->id; 
+            $actor->user_id = \Auth::user()->id;
             if($actor->save()){
-				return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-			}else{
-				return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
-			}
-			
+                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+            }else{
+                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+            }
+
         }
-        
-        
-           
+
+
+
     }
 
 
@@ -604,9 +614,9 @@ class ActorController extends Controller
         $targ_w = $targ_h = 230;
         $jpeg_quality = 90;
         $src = \Auth::user()->actor->precrop_url;
- 
+
         $exploded = explode('.',$src);
-        $ext = $exploded[count($exploded) - 1]; 
+        $ext = $exploded[count($exploded) - 1];
 
         $img_r = "";
         if (preg_match('/jpg|jpeg/i',$ext))
@@ -622,42 +632,42 @@ class ActorController extends Controller
 
         $dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
         imagecopyresampled($dst_r,$img_r,0,0,$request->get('x'),$request->get('y'),
-        $targ_w,$targ_h,$request->get('w'),$request->get('h'));
+            $targ_w,$targ_h,$request->get('w'),$request->get('h'));
 
-       
 
-        $actor = \App\Actor::where('user_id', \Auth::user()->id)->first(); 
-        
+
+        $actor = \App\Actor::where('user_id', \Auth::user()->id)->first();
+
         $destinationPath = 'assets/photos'; // upload path
-      
+
         $fileName = \Auth::user()->name.rand(11111,99999).'.jpg'; // renameing image
-        $originalPath = $destinationPath.'/'.$fileName; 
-    
+        $originalPath = $destinationPath.'/'.$fileName;
+
         $actor->photo_path = $originalPath;
-        $actor->photo_url = $originalPath; 
-         header('Content-type: image/jpeg');
+        $actor->photo_url = $originalPath;
+        header('Content-type: image/jpeg');
         imagejpeg($dst_r,public_path().'/'.$originalPath,$jpeg_quality);
         if($actor->update()){
             return redirect()->back()->with('success_message', 'Profile picture successfully updated.')->with('tabactive','active');
         }else{
             return redirect()->back()->with('error_message', 'Picture not uploaded. Try again!');
         }
-  
+
     }
 
     public function getDeletePhoto(){
-        $actor = \App\Actor::where('user_id', \Auth::user()->id)->first(); 
+        $actor = \App\Actor::where('user_id', \Auth::user()->id)->first();
         unlink(public_path().'/'.$actor->precrop_path);
         $actor->precrop_url = null;
         $actor->precrop_path = null;
-    
+
         if($actor->update()){
             return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
         }else{
             return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
         }
-    }	
-	
-	
+    }
+
+
 
 }

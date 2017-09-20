@@ -158,6 +158,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/hardcopysubmit/{id}', ['as'=>'hardCopyUpdate','uses'=>'AdminController@hardcopy']);
 
             Route::get('audition/',['as' => 'audition', 'uses'=>'AdminController@audition']);
+            Route::get('auditiondatatable/',['as' => 'auditions', 'uses'=>'AdminController@auditionDataTable']);
+            Route::get('auditionedit/{id}',['as'=>'auditionStatus','uses'=>'AdminController@auditionedit']);
+            Route::patch('auditionedit/{id}',['as'=>'auditionUpdate','uses'=>'AdminController@auditionupdate' ]);
         });
 	});
 	

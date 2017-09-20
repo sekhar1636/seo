@@ -229,6 +229,80 @@
                             <!-- END TIMELINE ITEM -->
 
                             @endif
+                                        @if(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy==2 && $audition_status==1)
+                                            <div class="timeline-item">
+                                                <div class="timeline-badge">
+                                                    <div class="timeline-icon">
+                                                        <i class="icon-credit-card font-green"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-body activeBox">
+
+                                                    <div class="timeline-body-head">
+                                                        <div class="timeline-body-head-caption">
+                                                            <span class="timeline-body-alerttitle font-green">Audition</span>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Selected For Audition
+
+                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        @elseif(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy==2 && $audition_status==2)
+
+                                            <div class="timeline-item">
+                                                <div class="timeline-badge">
+                                                    <div class="timeline-icon">
+                                                        <i class="icon-credit-card font-red"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-body inactiveBox">
+
+                                                    <div class="timeline-body-head">
+                                                        <div class="timeline-body-head-caption">
+                                                            <span class="timeline-body-alerttitle font-red-intense">Audition</span>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Come for next year audition
+
+                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        @elseif(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy==2 && $audition_status==0)
+
+                                            <div class="timeline-item">
+                                                <div class="timeline-badge">
+                                                    <div class="timeline-icon">
+                                                        <i class="icon-credit-card font-red"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-body inactiveBox">
+
+                                                    <div class="timeline-body-head">
+                                                        <div class="timeline-body-head-caption">
+                                                            <span class="timeline-body-alerttitle font-red-intense">Audition</span>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Your Audition Status is Pending Now. Once Confirmed you will get this information shortly.
+
+                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
 
                         </div>
 

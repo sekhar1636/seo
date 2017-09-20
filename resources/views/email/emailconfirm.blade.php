@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('common.layout')
 
 @section('title', 'Email Verified')
 
