@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function staff()
     {
-        return $this->hasOne();
+        return $this->hasOne('App\Staff');
     }
 	
 	public function delete()

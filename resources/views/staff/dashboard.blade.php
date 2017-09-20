@@ -52,29 +52,28 @@
                                     <div class="timeline-item">
                                         <div class="timeline-badge">
                                             <div class="timeline-icon">
-                                                <i class="icon-question font-green"></i>
+                                                <i class="icon-question font-red"></i>
                                             </div>
                                         </div>
-                                        <div class="timeline-body activeBox">
+                                        <div class="timeline-body inactiveBox">
                                             <div class="timeline-body-head">
                                                 <div class="timeline-body-head-caption">
-                                                    <span class="timeline-body-alerttitle font-green">Account Information</span>
+                                                    <span class="timeline-body-alerttitle font-red">Verify Email Address</span>
                                                 </div>
-                                                <form method="POST" action="{{ route('theater::theaterProfileTrigger') }}">
+                                                <form method="POST" action="{{ route('actor::actorProfileTrigger') }}">
                                                     {{ csrf_field() }}
                                                     <div class="timeline-body-head-actions">
-                                                        <button type="submit" class="btn green">Verify</button>
+                                                        <button type="submit" class="btn red">Resend Email</button>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">Verify Your Account By clicking Verify.
-
+                                            <span class="font-grey-cascade">If you do not receive an email within the next 15 minutes, resend the verification
                                             </span>
                                             </div>
                                         </div>
                                         @endif
-                                        @if(\Auth::user()->actor)
+                                        @if(\Auth::user()->staff)
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
                                                     <div class="timeline-icon">
@@ -87,7 +86,7 @@
                                                             <span class="timeline-body-alerttitle font-green">Profile Information</span>
                                                         </div>
                                                         <div class="timeline-body-head-actions">
-                                                            <a href="{{route('theater::getEditProfile')}}" class="btn green">Update</a>
+                                                            <a href="{{route('staff::getEditProfile')}}" class="btn green">Update</a>
                                                         </div>
                                                     </div>
                                                     <div class="timeline-body-content">
@@ -112,7 +111,7 @@
 
                                                         </div>
                                                         <div class="timeline-body-head-actions">
-                                                            <a href="{{route('theater::getEditProfile')}}" class="btn btn-danger">Update</a>
+                                                            <a href="{{route('staff::getEditProfile')}}" class="btn btn-danger">Update</a>
                                                         </div>
                                                     </div>
                                                     <div class="timeline-body-content">
@@ -128,7 +127,63 @@
 
                                         <!-- END TIMELINE ITEM -->
                                         <!-- TIMELINE ITEM -->
+                                        @if(\Auth::user()->payment_status == 1)
+                                            <div class="timeline-item">
+                                                <div class="timeline-badge">
+                                                    <div class="timeline-icon">
+                                                        <i class="icon-credit-card font-green"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-body activeBox">
 
+                                                    <div class="timeline-body-head">
+                                                        <div class="timeline-body-head-caption">
+                                                            <span class="timeline-body-alerttitle font-green">Payment</span>
+
+                                                        </div>
+                                                        <div class="timeline-body-head-actions">
+                                                            <a href="javascript:;" class="btn btn-success">Done</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Payment Completed
+
+                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <!-- END TIMELINE ITEM -->
+                                @else
+                                    <div class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <div class="timeline-icon">
+                                                <i class="icon-credit-card font-red"></i>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-body inactiveBox">
+
+                                            <div class="timeline-body-head">
+                                                <div class="timeline-body-head-caption">
+                                                    <span class="timeline-body-alerttitle font-red-intense">Payment</span>
+
+                                                </div>
+                                                <div class="timeline-body-head-actions">
+                                                    <a href="{{route('staff::getStaffPayment')}}" class="btn btn-danger">Pay Now</a>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Payment Pending
+
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                            </div>
+                            <!-- END TIMELINE ITEM -->
+                            @endif
 
                         </div>
 

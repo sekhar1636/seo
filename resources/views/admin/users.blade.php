@@ -41,7 +41,7 @@ $('#actor-table').DataTable({
         {data: 'id'},
         {data: 'actor.first_name'},
         {data: 'email'},
-        {data: 'role'},
+        {data: 'subscription'},
         {data: 'payment_status'},
         {data: 'status'},
         {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -55,8 +55,7 @@ $('#theater-table').DataTable({
         {data: 'id'},
         {data: 'name'},
         {data: 'email'},
-        {data: 'payment_status'},
-        {data: 'stripe_id'},
+        {data: 'subscription'},
         {data: 'status'},
         {data: 'action', name: 'action', orderable: false, searchable: false}
     ]
@@ -70,7 +69,7 @@ $('#staff-table').DataTable({
         {data: 'id'},
         {data: 'name'},
         {data: 'email'},
-        {data: 'stripe_id'},
+        {data: 'subscription'},
         {data: 'status'},
         {data: 'action', name: 'action', orderable: false, searchable: false}
     ]
@@ -213,7 +212,6 @@ $(document).ready(function() {
                                 <td>Company Name</td>
                                 <td>Email</td>
                                 <td>Subscription</td>
-                                <td>Products Purchased</td>
                                 <td>Active</td>
                                 <td>Action</td>
                             </tr>
