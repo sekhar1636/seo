@@ -8,3 +8,5 @@
 ehthumbs.db
 Thumbs.db
 vendor/*
+.env
+public/assets/photos/

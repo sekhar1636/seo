@@ -23,6 +23,7 @@ use App\Product;
 use App\MembershipPeriod;
 use App\Payment;
 
+
 class AdminController extends Controller
 {
     public function index(){
@@ -326,9 +327,7 @@ class AdminController extends Controller
 
     public function actorsDataTable(){
 
-        $users = User::where('role','actor')->orderBy('id', 'desc')->get();
-
-        //$users = DB::table('users')->where('role','actor')->orderBy('id', 'desc')->get();
+	    $users = DB::table('users')->where('role','actor')->orderBy('id', 'desc')->get();
         $index = 0;
         foreach ($users as $user){
             $users[$index]->subscription = $this->subscriptionStatus($user->id);
@@ -372,9 +371,7 @@ class AdminController extends Controller
 
     public function staffDataTable()
     {
-        //$users = DB::table('users')->where('role','staff')->orderBy('id', 'desc')->get();
-        $users = User::where('role','actor')->orderBy('id', 'desc')->get();
-
+        $users = DB::table('users')->where('role','staff')->orderBy('id', 'desc')->get();
         $index = 0;
         foreach ($users as $user){
             $users[$index]->subscription = $this->subscriptionStatus($user->id);
@@ -392,8 +389,7 @@ class AdminController extends Controller
 
     public function theaterDataTable()
     {
-        //$users = DB::table('users')->where('role','theater')->orderBy('id', 'desc')->get();
-        $users = User::where('role','actor')->orderBy('id', 'desc')->get();
+        $users = DB::table('users')->where('role','theater')->orderBy('id', 'desc')->get();
 
         $index = 0;
 

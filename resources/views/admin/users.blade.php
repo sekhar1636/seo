@@ -39,7 +39,7 @@ $('#actor-table').DataTable({
     ajax: '{{route("admin::adminActorDataTable")}}',
     columns: [
         {data: 'id'},
-        {data: 'actor.first_name'},
+        {data: 'name'},
         {data: 'email'},
         {data: 'subscription'},
         {data: 'payment_status'},
