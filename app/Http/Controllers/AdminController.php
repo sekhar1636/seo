@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actor;
 use App\Audition;
+use App\Membership;
 use App\ProductVariant;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Facades\Datatables;
@@ -324,7 +325,16 @@ class AdminController extends Controller
     }
 
     public function actorsDataTable(){
-        $users = User::with('actor')->where('role','actor')->orderBy('id', 'desc')->select('users.*');;
+
+        $users = User::where('role','actor')->orderBy('id', 'desc')->get();
+
+        //$users = DB::table('users')->where('role','actor')->orderBy('id', 'desc')->get();
+        $index = 0;
+        foreach ($users as $user){
+            $users[$index]->subscription = $this->subscriptionStatus($user->id);
+            $index++;
+        }
+
 
         return Datatables::of($users)
             ->addColumn('action', function ($user) {
@@ -343,18 +353,34 @@ class AdminController extends Controller
 
     }
 
-    /*public function actorsDataTable()
-    {
-        $actors = Actor::select(['id','first_name','last_name'])->orderBy('user_id','desc');
-        return Datatables::of($actors)
-            ->addColumn('email', function() {
-                $email = User::select('email')->orderBy('id','desc');
-                return $email;
-            })->make(true);
-    }*/
+    public function subscriptionStatus($id){
+        $status = 'Expired';
+
+        $subsciption_expiry = Membership::where('user_id',$id)->get();
+        if(count($subsciption_expiry)){
+            $subsciption_expiry = MembershipPeriod::where('id',$subsciption_expiry[0]['membership_period_id'])->get();
+            $subsciption_expiry = $subsciption_expiry[0]['end_date'];
+            if($subsciption_expiry > date('Y-m-d')){
+                $status = 'Active';
+            }
+        } else {
+            $status = 'None';
+        }
+
+        return $status;
+    }
+
     public function staffDataTable()
     {
-        $users = User::latest()->where('role','staff')->orderBy('id', 'desc');
+        //$users = DB::table('users')->where('role','staff')->orderBy('id', 'desc')->get();
+        $users = User::where('role','actor')->orderBy('id', 'desc')->get();
+
+        $index = 0;
+        foreach ($users as $user){
+            $users[$index]->subscription = $this->subscriptionStatus($user->id);
+            $index++;
+        }
+
         return Datatables::of($users)->addColumn('action', function($user){
             $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
@@ -366,7 +392,17 @@ class AdminController extends Controller
 
     public function theaterDataTable()
     {
-        $users = User::latest()->where('role','theater')->orderBy('id', 'desc');
+        //$users = DB::table('users')->where('role','theater')->orderBy('id', 'desc')->get();
+        $users = User::where('role','actor')->orderBy('id', 'desc')->get();
+
+        $index = 0;
+
+        foreach ($users as $user){
+            $users[$index]->subscription = $this->subscriptionStatus($user->id);
+
+            $index++;
+        }
+
         return Datatables::of($users)->addColumn('action', function($user){
             $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
@@ -391,6 +427,15 @@ class AdminController extends Controller
         }
 		
 		$user = User::findOrFail($id);
+
+		$subsciption_expiry = Membership::where('user_id',$id)->get();
+		if(count($subsciption_expiry)){
+            $subsciption_expiry = MembershipPeriod::where('id',$subsciption_expiry[0]['membership_period_id'])->get();
+            $subsciption_expiry = $subsciption_expiry[0]['end_date'];
+        } else {
+		    $subsciption_expiry = '';
+        }
+
 		if($user->role == 'actor'){
 			//\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
 //			return \Stripe\Charge::all(array("customer"=>"cus_BATTZrHSA1uhHo"));
@@ -403,7 +448,7 @@ class AdminController extends Controller
 
             ]);
 		}
-		return view('admin.userEdit',compact('user'));
+		return view('admin.userEdit',compact('user'))->with('subsciption_expiry',$subsciption_expiry);
     }
 	
 	public function userPaymentDatatable($id){
