@@ -27,8 +27,7 @@ class CommonController extends Controller
         $slideshows = [];
         $slides = [];
         //Home Page slider
-	    $slides = Slideshow::where("id","=",2)->get();
-
+	    $slides = Slideshow::where("name","=","Home Slide")->get();
         if(count($slides)){
             if($slides[0]['status'] == 1) $slideshows = Slide::where("slideshow_id", $slides[0]['id'])->get();
         }
