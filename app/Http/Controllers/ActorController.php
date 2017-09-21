@@ -41,18 +41,18 @@ class ActorController extends Controller
 
         $mem_date = Membership::select('membership_period_id')->where('user_id',$user_id)->get();
 
-        if(isset($mem_date))
+        if(count($mem_date))
         {
             $mem_id = (!empty($mem_date[0]['membership_period_id'])) ? $mem_date[0]['membership_period_id'] : '';
-            if(!empty($mem_id))
+            if(count($mem_id))
             {
                 $memb_date = MembershipPeriod::findorfail($mem_id);
                 //dd($memb_date->end_date);
             }
 
         }
-        $hardcopy = (!empty($hardcop[0]['hardcopy_status'])) ? $hardcop[0]['hardcopy_status'] : 0;
-        $audition = (!empty($hardcop[0]['audition_status'])) ? $hardcop[0]['audition_status'] : 0;
+        $hardcopy = (!empty($hardcop[0]['hardcopy_status'])) ? (!empty($hardcop[0]['hardcopy_status'])) : 0;
+        $audition = (!empty($hardcop[0]['audition_status'])) ? (!empty($hardcop[0]['audition_status'])) : 0;
 
         return view('actor.dashboard')->with([
             'verify' => $verify,
