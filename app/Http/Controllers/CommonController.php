@@ -17,6 +17,7 @@ use App\Slide;
 use App\Faq;
 use App\Jobs\SendVerificationMail;
 use App\User;
+use Carbon\Carbon;
 
 class CommonController extends Controller
 {
@@ -176,8 +177,12 @@ class CommonController extends Controller
 		   	);
 			if (Auth::attempt($authenticate)) {
 				if(Auth::user()->role == 'actor'){
+                    $actor_time = Carbon::createFromTime(00,00,00)->toTimeString();
 				    $actor = new App\Actor;
 				    $actor->user_id = $user->id;
+				    $actor->hardcopy_status = 0;
+				    $actor->audition_status = 0;
+				    $actor->audition_hour = $actor_time;
 				    $actor->save();
 					return redirect()->route('actor::actorProfile');
 				}else if(Auth::user()->role == 'theater'){

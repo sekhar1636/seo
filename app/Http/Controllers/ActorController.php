@@ -140,9 +140,9 @@ class ActorController extends Controller
         {
             return view('actor.editProfile')->with('actor',$actor)->with('weight', $weight)->with('age', $age)->with('rol',$rol);
         }
-        $actors = User::where('payment_status',1)->where('verified',1)->orderBy('id','desc');
-        $user = \Auth::user();
-        if($user->verified==1 && $user->payment_status==1)
+        //$actors = User::where('payment_status',1)->where('verified',1)->orderBy('id','desc');
+        //$user = \Auth::user();
+        //if($user->verified==1 && $user->payment_status==1)
             return view('actor.editProfile')->with([
                 'weight'=>$weight,
                 'age'=>$age,

@@ -167,9 +167,17 @@
                                                 <span class="arrow"></span>
                                             </a>
                                             <ul class="dropdown-menu pull-left">
+                                                @if(Auth::check())
                                                 <li>
-                                                    <a href="{{route('getActors')}}">Actors</a>
+
+                                                    <a href=" @if(\Auth::user()->role=="actor" && \Auth::user()->payment_status==1) {{route('getActors')}}" @endif>Actors</a>
                                                 </li>
+                                                @else
+                                                   <li>
+                                                    <a href="{{route('getStaticPage',['slug'=>'actor'])}}">Actors</a>
+                                                   </li>
+                                                @endif
+
                                                 <li>
                                                     <a href="{{route('getStaticPage',['slug'=>'howitworks'])}}">How it Works</a>
                                                 </li>
@@ -193,18 +201,42 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li>
-                                            <a href="{{route('getStaffs')}}">
-                                                <i class="icon-user-following"></i> Staff
-                                                <span class="arrow"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('getTheaters')}}">
-                                                <i class=" icon-disc"></i> Theater
-                                                <span class="arrow"></span>
-                                            </a>
-                                        </li>
+                                        @if(Auth::check())
+                                            @if(\Auth::user()->role=="staff")
+                                                <li>
+                                                    <a href="{{route('staff::staffProfile')}}">
+                                                        <i class="icon-user-following"></i> Staff
+                                                        <span class="arrow"></span>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @else
+                                            <li>
+                                                <a href="{{route('getStaticPage',['slug'=>'staff'])}}">
+                                                    <i class="icon-user-following"></i> Staff
+                                                    <span class="arrow"></span>
+                                                </a>
+                                            </li>
+                                        @endif
+
+                                        @if(Auth::check())
+                                            @if(\Auth::user()->role=="theater")
+
+                                                    <li>
+                                                        <a href="{{route('theater::theaterProfile')}}">
+                                                            <i class=" icon-disc"></i> Theater
+                                                            <span class="arrow"></span>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                        @else
+                                            <li>
+                                                <a href="{{route('getStaticPage',['slug'=>'theater'])}}">
+                                                    <i class="icon-user-following"></i> Theater
+                                                    <span class="arrow"></span>
+                                                </a>
+                                            </li>
+                                        @endif
                                         <li>
                                             <a href="{{route('getFaq')}}">
                                                 <i class="icon-question"></i> FAQ

@@ -18,7 +18,6 @@ use App\SubscriptionPackage;
 class TheaterController extends Controller
 {
     public function getProfile(){
-
         $verify = '';
         if(\Auth::user()->verified == 1)
         {

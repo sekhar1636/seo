@@ -173,6 +173,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('auditiondatatable/',['as' => 'auditions', 'uses'=>'AdminController@auditionDataTable']);
             Route::get('auditionedit/{id}',['as'=>'auditionStatus','uses'=>'AdminController@auditionedit']);
             Route::patch('auditionedit/{id}',['as'=>'auditionUpdate','uses'=>'AdminController@auditionupdate' ]);
+
+            Route::post('auditionextra/{id}',['as'=>'adminextrafields','uses'=>'AdminController@adminextra']);
         });
 	});
 	

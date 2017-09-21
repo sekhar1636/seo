@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actor;
-use App\Audition;
+use App\AuditionExtra;
 use App\Membership;
 use App\ProductVariant;
 use Illuminate\Http\Request;
@@ -424,12 +424,21 @@ class AdminController extends Controller
 		
 		$user = User::findOrFail($id);
 
+
 		$subsciption_expiry = Membership::where('user_id',$id)->get();
 		if(count($subsciption_expiry)){
             $subsciption_expiry = MembershipPeriod::where('id',$subsciption_expiry[0]['membership_period_id'])->get();
             $subsciption_expiry = $subsciption_expiry[0]['end_date'];
         } else {
 		    $subsciption_expiry = '';
+        }
+
+        $ae = AuditionExtra::updateorcreate(['user_id'=>$id],['user_id',$id]);
+        $audition_extra = AuditionExtra::where('user_id',$id)->get();
+        if(count($audition_extra)){
+           $ax = $audition_extra[0];
+        } else {
+            $ax = '';
         }
 
 		if($user->role == 'actor'){
@@ -441,7 +450,7 @@ class AdminController extends Controller
                 'age' => $age,
                 'id' => $id,
                 'user' => $user,
-
+                'ax' => $ax,
             ]);
 		}
 		return view('admin.userEdit',compact('user'))->with('subsciption_expiry',$subsciption_expiry);
@@ -1022,5 +1031,36 @@ class AdminController extends Controller
         $actor_audition_update->save();
         return redirect()->back()->with('success_message', 'Successfully set audition details for actor');
 
+    }
+
+    public function adminextra($id, Request $request)
+    {
+        $data = AuditionExtra::updateorcreate(
+            [
+                'user_id' => $id
+            ],
+            [
+                'last_audition_year' => $request->last_audition_year,
+                'last_audition_two' => $request->last_audition_two,
+                'last_year_year' => $request->last_year_year,
+                'audition_last_apply' => $request->audition_last_apply,
+                'summer_stock_last_year' => $request->summer_stock_last_year,
+                'where_place' => $request->where_place,
+                'unpaid_apprentice' => $request->unpaid_apprentice,
+                'internship' => $request->internship,
+                'standby_appointment' => $request->standby_appointment,
+                'emca' => $request->emca,
+                'sag' => $request->sag,
+                'aftra' => $request->aftra,
+                'agva' => $request->agva,
+                'agma' => $request->agma,
+                'friday_m' => $request->friday_m,
+                'friday_af' => $request->friday_af,
+                'saturday_m' => $request->saturday_m,
+                'saturday_af' => $request->saturday_af,
+                'sunday_m' => $request->sunday_m,
+                'sunday_af' => $request->sunday_af,
+            ]);
+        return redirect()->back()->with('success_message','Record Added');
     }
 }
