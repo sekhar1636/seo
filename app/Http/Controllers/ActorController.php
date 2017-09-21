@@ -491,8 +491,8 @@ class ActorController extends Controller
             if($next_year) $mixClass .= $this->prepareData("Next Year") . ' ';
 
             $actorList .= '<div class="mix ' . $mixClass . '" ';
-            $actorList .= 'data-first-name="' . $actor->first_name . '" ';
-            $actorList .= 'data-last-name="' . $actor->last_name . '" ';
+            $actorList .= 'data-first-name="' . strtolower($actor->first_name) . '" ';
+            $actorList .= 'data-last-name="' . strtolower($actor->last_name) . '" ';
             // $actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
             // $actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
             $actorList .= 'data-audition-type="' . preg_replace('/\s+/', '', $actor->auditionType)  . '" ';
