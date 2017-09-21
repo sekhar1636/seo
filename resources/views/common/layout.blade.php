@@ -170,7 +170,7 @@
                                                 @if(Auth::check())
                                                     @if(\Auth::user()->role=="actor" && \Auth::user()->payment_status==1)
                                                     <li>
-                                                    <a href="{{route('getActors')}}" @endif>Actors</a>
+                                                    <a href="{{route('getActors')}}">Actors</a>
                                                 </li>
                                                         @endif
                                                 @else
