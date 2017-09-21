@@ -168,10 +168,11 @@
                                             </a>
                                             <ul class="dropdown-menu pull-left">
                                                 @if(Auth::check())
-                                                <li>
-
-                                                    <a href=" @if(\Auth::user()->role=="actor" && \Auth::user()->payment_status==1) {{route('getActors')}}" @endif>Actors</a>
+                                                    @if(\Auth::user()->role=="actor" && \Auth::user()->payment_status==1)
+                                                    <li>
+                                                    <a href="{{route('getActors')}}" @endif>Actors</a>
                                                 </li>
+                                                        @endif
                                                 @else
                                                    <li>
                                                     <a href="{{route('getStaticPage',['slug'=>'actor'])}}">Actors</a>
