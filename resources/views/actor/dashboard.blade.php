@@ -73,7 +73,7 @@
                                             </div>
                                         </div>
                                         @endif
-                                        @if(\Auth::user()->actor)
+                                        @if(\Auth::user()->actor->first_name != Null)
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
                                                     <div class="timeline-icon">
