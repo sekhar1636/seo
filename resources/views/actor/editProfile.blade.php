@@ -691,7 +691,7 @@
 
 				                         <div class="form-group" {{ $errors->has("dance") ? "has-error":"" }}'>
 
-				                            <label for="multiple" class="control-label col-md-3">Dances</label>
+				                            <label for="multiple" class="control-label col-md-3">Dance</label>
 
 				                            <div class="col-md-9">
 

@@ -73,7 +73,8 @@ class Misc
 		'Ballroom' => 'Ballroom',		
 		'Tap'=>'Tap',
 		'Swing' => 'Swing',		
-		'Jazz'=>'Jazz'
+		'Jazz'=>'Jazz',
+        'Musical Theatre' => 'Musical Theatre'
 	];
 	public static $technical = [
 		'Set Design' => 'Set Design',
@@ -107,7 +108,7 @@ class Misc
 		'Guitar'=>'Guitar',
 	];
 	public static $misc = [
-		'Shakes' => 'Shakes',
+		'Shakespeare' => 'Shakespeare',
 		'Cabaret' => 'Cabaret',		
 		'Improv'=>'Improv',
 		'Mime' => 'Mime',		
@@ -115,7 +116,7 @@ class Misc
 		'Acrobatics' => 'Acrobatics',
 		'Juggling' => 'Juggling',		
 		'Puppetry'=>'Puppetry',
-		'Asl' => 'Asl',		
+		'Asl' => 'ASL',
 		'Painting'=>'Painting',
 		'Combat' => 'Combat'
 	];
