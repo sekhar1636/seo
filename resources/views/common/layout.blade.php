@@ -162,23 +162,19 @@
                                             </a>
                                         </li>
                                         <li class="menu-dropdown">
-                                            <a href="javascript:; {{ route('getActors') }}">
+                                            @if(Auth::check())
+                                                @if(\Auth::user()->role=="actor" && \Auth::user()->payment_status==1)
+                                            <a href="{{ route('getActors') }}">
+                                                @else
+                                                    <a href="{{route('getStaticPage',['slug'=>'actor'])}}">
+                                                @endif
+                                            @else
+                                                  <a href="{{route('getStaticPage',['slug'=>'actor'])}}">
+                                            @endif
                                                 <i class="icon-users"></i> Actors
                                                 <span class="arrow"></span>
                                             </a>
                                             <ul class="dropdown-menu pull-left">
-                                                @if(Auth::check())
-                                                    @if(\Auth::user()->role=="actor" && \Auth::user()->payment_status==1)
-                                                    <li>
-                                                    <a href="{{route('getActors')}}">Actors</a>
-                                                </li>
-                                                        @endif
-                                                @else
-                                                   <li>
-                                                    <a href="{{route('getStaticPage',['slug'=>'actor'])}}">Actors</a>
-                                                   </li>
-                                                @endif
-
                                                 <li>
                                                     <a href="{{route('getStaticPage',['slug'=>'howitworks'])}}">How it Works</a>
                                                 </li>
