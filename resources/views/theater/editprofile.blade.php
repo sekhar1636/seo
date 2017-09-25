@@ -69,6 +69,26 @@
     <script type="text/javascript">
 
 
+            $(document).ready(function(){
+                $('.dancers_show').hide();
+                $('.radio_show').hide();
+                $('.dancers_show_s').hide();
+                $('.dancers_show_n').hide();
+                $('.non_musical_certain_s').hide();
+                $('.non_musical_certain_n').hide();
+                $('.dancers_click_s').click(function(){
+                    $('.dancers_show').show();
+                    $('.dancers_show_s').show();
+                    $('.dancers_show_n').show();
+                });
+                $('#non_click_s').click(function(){
+                    $('.radio_show').show();
+                    $('.non_musical_certain_s').show();
+                    $('.non_musical_certain_n').show();
+                });
+            });
+
+
 
         $(function(){
             $('#cropbox').Jcrop({
@@ -365,6 +385,22 @@
 
                                                         </div>
 
+                                                        <div class="col-md-6">
+
+                                                            <div class="form-group" {{ $errors->has("contact_number") ? "has-error":"" }}'>
+
+                                                            <label class="control-label col-md-3">Contact Number</label>
+
+                                                            <div class="col-md-9">
+
+                                                                {!! Form::text('contact_number',isset($theater[0]['contact_number']) ? $theater[0]['contact_number'] : null , ['class' => 'form-control', 'placeholder' => 'Contact Number', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+
+                                                                <span class="help-block"> {{ $errors->first("contact_number") }} </span>
+
+                                                            </div>
+
+                                                        </div>
+                                                        </div>
 
 
                                             </div>
@@ -390,18 +426,150 @@
                                                 </div>
 
                                             </div>
+                                            <div class="col-md-6">
+                                            <div class="form-group" {{ $errors->has("website") ? "has-error":"" }}'>
+
+                                            <label class="control-label col-md-3">Website</label>
+
+                                            <div class="col-md-9">
+
+                                                {!! Form::text('website',isset($theater[0]['website']) ? $theater[0]['website'] : null , ['class' => 'form-control', 'placeholder' => 'Website', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+
+                                                <span class="help-block"> {{ $errors->first("website") }} </span>
+
+                                            </div>
+
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group" {{ $errors->has("non_musical_performers") ? "has-error":"" }}'>
+
+                                            <label class="control-label col-md-6">Are You Casting Non Musical Performers this Season?</label>
+
+                                            <div class="col-md-6">
+                                                {!! Form::radio('non_musical_yes',1,@$theater[0]['non_musical_yes']==1 ? true : null) !!}
+                                                <label>Yes</label>
+                                                {!! Form::radio('non_musical_yes',2,@$theater[0]['non_musical_yes']==2 ? true : null) !!}
+                                                <label>No</label>
+                                                {!! Form::radio('non_musical_yes',3,@$theater[0]['non_musical_yes']==3 ? true : null) !!}
+                                                <label>Not Certain</label>
+                                                <span class="help-block"> {{ $errors->first("non_musical_performers") }} </span>
+
+                                            </div>
+
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
+
+                                        <label class="control-label col-md-6">Are You Casting Dancers this Season?</label>
+
+                                        <div class="col-md-6">
+
+                                            {!! Form::radio('dancers_yes',1,@$theater[0]['dancers_yes']==1 ? true : null) !!}
+                                            <label>Yes</label>
+                                            {!! Form::radio('dancers_yes',2,@$theater[0]['dancers_yes']==2 ? true : null) !!}
+                                            <label>No</label>
+                                            {!! Form::radio('dancers_yes',3,@$theater[0]['dancers_yes']==3 ? true : null) !!}
+                                            <label>Not Certain</label>
+                                            <span class="help-block"> {{ $errors->first("dancers") }} </span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group" {{ $errors->has("days") ? "has-error":"" }}'>
+
+                                    <label class="control-label col-md-6">Which Days do you plan to attend?</label>
+
+                                    <div class="col-md-6">
 
 
+                                        {!! Form::checkbox('friday',1,@$theater[0]['friday'] ? true : null) !!}
+                                        <label>Friday</label>
+                                        {!! Form::checkbox('saturday',1,@$theater[0]['saturday'] ? true : null) !!}
+                                        <label>Saturday</label>
+                                        {!! Form::checkbox('sunday',1,@$theater[0]['sunday'] ? true : null) !!}
+                                        <label>Sunday</label>
+                                        <span class="help-block"> {{ $errors->first("days") }} </span>
 
                                     </div>
 
-                                    <!--/row-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <label class="col-md-12">Representatives who will attend StrawHat: (List more on reverse side if necessary)</label>
+                        <div class="col-md-12">
+                            <table class="col-md-12">
+                            <th>
+                                <tr><td>Name</td><td>Title</td></tr>
+                            </th>
+                                <tbody>
+                                <tr><td>{!! Form::text('name_table_1',@$theater[0]['name_table_1'] ? $theater[0]['name_table_1'] : null,['class' => 'form-control', 'placeholder' => ' Name', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td><td>{!! Form::text('title_table_1',@$theater[0]['title_table_1'] ? $theater[0]['title_table_1'] : null,['class' => 'form-control', 'placeholder' => 'Title', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td></tr>
+                                <tr><td>{!! Form::text('name_table_2',@$theater[0]['name_table_2'] ? $theater[0]['name_table_2'] : null,['class' => 'form-control', 'placeholder' => ' Name', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td><td>{!! Form::text('title_table_2',@$theater[0]['title_table_2'] ? $theater[0]['title_table_2'] : null,['class' => 'form-control', 'placeholder' => 'Title', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
 
+                                <label class="control-label col-md-6">Do You accept Video Auditions?</label>
 
-                            <!--/row-->
+                                <div class="col-md-6">
 
+                                    {!! Form::radio('dancers_no',1,@$theater[0]['dancers_no']==1 ? true : null,['class'=>'dancers_click_s']) !!}
+                                    <label>Yes</label>
+                                    {!! Form::radio('dancers_no',2,@$theater[0]['dancers_no']==2 ? true : null) !!}
+                                    <label>No</label>
+                                    {!! Form::radio('dancers_not_certain',1,@$theater[0]['dancers_not_certain']==1 ? true : null,['class'=>'dancers_show','id'=>'dancers_s']) !!}
+                                    <label class="dancers_show_s">Yes</label>
+                                    {!! Form::radio('dancers_not_certain',2,@$theater[0]['dancers_not_certain']==2 ? true : null,['class'=>'dancers_show','id'=>'dancers_n']) !!}
+                                    <label class="dancers_show_n">No</label>
+                                    <span class="help-block"> {{ $errors->first("dancers") }} </span>
 
-            </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
+
+                            <label class="control-label col-md-6">Do you operate on a AEA contract?</label>
+
+                            <div class="col-md-6">
+
+                                {!! Form::radio('non_musical_no',1,@$theater[0]['non_musical_no']==1 ? true : null,['class'=>'radio_s','id'=>'non_click_s']) !!}
+                                <label>Yes</label>
+                                {!! Form::radio('non_musical_no',2,@$theater[0]['non_musical_no']==2 ? true : null) !!}
+                                <label>No</label>
+                                {!! Form::radio('non_musical_certain',1,@$theater[0]['non_musical_certain']==1 ? true : null,['class'=>'radio_show','id'=>'non_s']) !!}
+                                <label class="non_musical_certain_s">Yes</label>
+                                {!! Form::radio('non_musical_certain',2,@$theater[0]['dancers_not_certain']==2 ? true : null,['class'=>'radio_show','id'=>'non_n']) !!}
+                                <label class="non_musical_certain_n">No</label>
+                                <span class="help-block"> {{ $errors->first("dancers") }} </span>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
             <!--/row-->
 
@@ -450,7 +618,7 @@
     </div>
 
     </div>
-
+            </div>
 
     <!-- END PERSONAL INFO TAB -->
 
@@ -670,5 +838,4 @@
     </div>
 
     <!-- END PAGE CONTENT INNER -->
-
 @endsection

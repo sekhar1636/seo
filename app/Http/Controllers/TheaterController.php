@@ -124,6 +124,22 @@ class TheaterController extends Controller
         $theater->user_id = \Auth::user()->id;
         $theater->company_name = $request->company_name;
         $theater->email = $request->email;
+        $theater->contact_number = $request->contact_number;
+        $theater->website = $request->website;
+        $theater->non_musical_yes = $request->non_musical_yes;
+        $theater->non_musical_no = $request->non_musical_no;
+        $theater->non_musical_not_certain = $request->non_musical_not_certain;
+        $theater->dancers_yes = $request->dancers_yes;
+        $theater->dancers_no = $request->dancers_no;
+        $theater->dancers_not_certain = $request->dancers_not_certain;
+        $theater->friday = $request->friday;
+        $theater->saturday = $request->saturday;
+        $theater->sunday = $request->sunday;
+        $theater->name_table_1 = $request->name_table_1;
+        $theater->title_table_1 = $request->title_table_1;
+        $theater->name_table_2 = $request->name_table_2;
+        $theater->title_table_2 = $request->title_table_2;
+
         if($request->tes == "PUT"){
             if($theater->update()){
                 return redirect()->back()->with('success_message', 'Profile Data Successfully Updated');
