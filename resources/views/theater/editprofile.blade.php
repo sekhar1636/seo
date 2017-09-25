@@ -74,8 +74,7 @@
             $('#cropbox').Jcrop({
                 onSelect: updateCoords,
                 setSelect: [0, 160, 160, 0],// you have set proper proper x and y coordinates here
-                minSize:[300,300],
-                maxSize:[300,300],
+                minSize:[75,75],
                 aspectRatio: 1
             });
         });
