@@ -505,6 +505,79 @@
                                         </div>
                                     </div>
                                     <div class="row">
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group" {{ $errors->has("mailing") ? "has-error":"" }}'>
+
+                                            <label class="control-label col-md-3">Mailing</label>
+
+                                            <div class="col-md-9">
+
+                                                {!! Form::text('mailing',isset($theater->mailing) ? $theater->mailing : null, ['class' => 'form-control', 'placeholder' => 'Mailing', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+
+                                                <span class="help-block"> {{ $errors->first("email") }} </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" {{ $errors->has("telephone") ? "has-error":"" }}'>
+
+                                        <label class="control-label col-md-3">Telephone</label>
+
+                                        <div class="col-md-9">
+
+                                            {!! Form::text('telephone',isset($theater->telephone) ? $theater->telephone : null , ['class' => 'form-control', 'placeholder' => 'Telephone', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+
+                                            <span class="help-block"> {{ $errors->first("zipcode") }} </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group" {{ $errors->has("fax") ? "has-error":"" }}'>
+
+                                    <label class="control-label col-md-3">Fax</label>
+
+                                    <div class="col-md-9">
+
+                                        {!! Form::text('fax',isset($theater->fax) ? $theater->fax : null, ['class' => 'form-control', 'placeholder' => 'Fax', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+
+                                        <span class="help-block"> {{ $errors->first("fax") }} </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" {{ $errors->has("zipcode") ? "has-error":"" }}'>
+
+                                <label class="control-label col-md-3">Zipcode</label>
+
+                                <div class="col-md-9">
+
+                                    {!! Form::text('zipcode',isset($theater->zipcode) ? $theater->zipcode : null , ['class' => 'form-control', 'placeholder' => 'Zipcode', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+
+                                    <span class="help-block"> {{ $errors->first("zipcode") }} </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group" {{ $errors->has("non_musical_performers") ? "has-error":"" }}'>
 

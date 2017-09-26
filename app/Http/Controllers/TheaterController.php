@@ -126,6 +126,10 @@ class TheaterController extends Controller
         $theater->email = $request->email;
         $theater->contact_number = $request->contact_number;
         $theater->website = $request->website;
+        $theater->mailing = $request->mailing;
+        $theater->telephone = $request->telephone;
+        $theater->fax = $request->fax;
+        $theater->zipcode = $request->zipcode;
         $theater->non_musical_yes = $request->non_musical_yes;
         $theater->non_musical_no = $request->non_musical_no;
         $theater->non_musical_not_certain = $request->non_musical_not_certain;
