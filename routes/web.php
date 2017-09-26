@@ -137,6 +137,11 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('actor/{id}/photo', ['as'=>'actorPhotoUpdate', 'uses'=>'AdminController@actorPhotoUpdate']);
 			Route::post('actor/{id}/cropPhoto', ['as'=>'actorCropPhoto', 'uses'=>'AdminController@postCropPhotoUpdate']);
 			Route::get('actor/{id}/deletePhoto', ['as'=>'actorPhotoDelete', 'uses'=>'AdminController@actorPhotoDelete']);
+
+            Route::match(array('POST', 'PUT'),'theater/{id}', ['as'=>'adminTheaterUpdate', 'uses'=>'AdminController@theaterUpdate']);
+            Route::post('theater/{id}/photo', ['as'=>'theaterPhotoUpdate', 'uses'=>'AdminController@theaterPhotoUpdate']);
+            Route::post('theater/{id}/cropPhoto', ['as'=>'theaterCropPhoto', 'uses'=>'AdminController@posttheaterCropPhotoUpdate']);
+            Route::get('theater/{id}/deletePhoto', ['as'=>'theaterPhotoDelete', 'uses'=>'AdminController@theaterPhotoDelete']);
 			
 			Route::get('usersDataTable/', ['as'=>'adminUsersDataTable', 'uses'=>'AdminController@UsersDataTable']);
             Route::get('actorsDataTable/', ['as'=>'adminActorDataTable', 'uses'=>'AdminController@actorsDataTable']);

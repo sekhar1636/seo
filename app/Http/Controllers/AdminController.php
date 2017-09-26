@@ -6,6 +6,7 @@ use App\Actor;
 use App\AuditionExtra;
 use App\Membership;
 use App\ProductVariant;
+use App\Theater;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Facades\Datatables;
 use Stripe\Stripe as Stripe;
@@ -415,6 +416,7 @@ class AdminController extends Controller
 	}
 	
 	public function userEdit($id){
+
 		for ($i=1; $i <= 100 ; $i++) { 
             $age[$i] = $i;
         }
@@ -453,6 +455,14 @@ class AdminController extends Controller
                 'ax' => $ax,
             ]);
 		}
+        if($user->role=='theater')
+        {
+            return view('admin.theaterEdit')->with([
+               'theater' => $user->theater,
+                'user' => $user,
+                'id' => $id
+            ]);
+        }
 		return view('admin.userEdit',compact('user'))->with('subsciption_expiry',$subsciption_expiry);
     }
 	
@@ -579,6 +589,54 @@ class AdminController extends Controller
         
     }
 
+    public function theaterUpdate(Request $request,$id){
+        $validator = \Validator::make($request->all(),
+            [
+                'company_name' => 'min:3|max:56'
+            ]
+        );
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors())
+                ->withInput();
+        }
+        if($request->m == "PUT"){
+            $theater = Theater::where('user_id',$id)->first();
+        }else{
+            $theater = new Theater;
+        }
+
+        $theater->user_id = $id;
+        $theater->company_name = $request->company_name;
+        $theater->email = $request->email;
+        $theater->contact_number = $request->contact_number;
+        $theater->website = $request->website;
+        $theater->non_musical_yes = $request->non_musical_yes;
+        $theater->non_musical_no = $request->non_musical_no;
+        $theater->non_musical_not_certain = $request->non_musical_not_certain;
+        $theater->dancers_yes = $request->dancers_yes;
+        $theater->dancers_no = $request->dancers_no;
+        $theater->dancers_not_certain = $request->dancers_not_certain;
+        $theater->friday = $request->friday;
+        $theater->saturday = $request->saturday;
+        $theater->sunday = $request->sunday;
+        $theater->name_table_1 = $request->name_table_1;
+        $theater->title_table_1 = $request->title_table_1;
+        $theater->name_table_2 = $request->name_table_2;
+        $theater->title_table_2 = $request->title_table_2;
+        if($request->m == "PUT"){
+            if($theater->update()){
+                return redirect()->back()->with('success_message', 'Theater Data Successfully Updated');
+            }
+        }else{
+            if($theater->save()){
+                return redirect()->back()->with('success_message', 'Theater Data Successfully Created');
+            }
+        }
+
+    }
+
     public function uploadResume($actor,$file, $name){
         $destinationPath = 'assets/files'; // upload path
         $extension = $file->getClientOriginalExtension();
@@ -643,6 +701,62 @@ class AdminController extends Controller
         
            
     }
+    public function theaterPhotoUpdate(Request $request,$id){
+
+        $validator = \Validator::make($request->all(),
+            [
+                "photo"=>"required|image|dimensions:max_width=600",
+            ],
+            [
+                'photo.dimensions'=>'Photo width must be lest than 600.'
+            ]
+        );
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors())
+                ->withInput()
+                ->with('tabactive', 'active');
+        }
+
+        $user = User::findOrFail($id);
+        $theater = $user->theater;
+
+
+        if($user->theater){
+            $theater = Theater::where('user_id',$id)->first();
+        }else{
+            $theater = new Theater;
+        }
+
+        $destinationPath = 'assets/photos'; // upload path
+        $file = $request->file('photo');
+        $extension = $file->getClientOriginalExtension();
+        $fileName = $user->name.rand(11111,99999).'.'.$extension; // renameing image
+        $file->move(public_path($destinationPath), $fileName);
+
+
+        $theater->precrop_path = $destinationPath.'/'.$fileName;
+        $theater->precrop_url = $destinationPath.'/'.$fileName;
+
+        if($user->theater){
+            if($theater->update()){
+                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+            }else{
+                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+            }
+        }else{
+            $theater->user_id = $id;
+            if($theater->save()){
+                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+            }else{
+                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+            }
+        }
+
+
+
+    }
 	
 	public function actorPhotoDelete($id){
         $actor = \App\Actor::where('user_id', $id)->first(); 
@@ -651,6 +765,18 @@ class AdminController extends Controller
         $actor->precrop_path = null;
     
         if($actor->update()){
+            return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
+        }else{
+            return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
+        }
+    }
+    public function theaterPhotoDelete($id){
+        $theater = Theater::where('user_id', $id)->first();
+        unlink(public_path().'/'.$theater->precrop_path);
+        $theater->precrop_url = null;
+        $theater->precrop_path = null;
+
+        if($theater->update()){
             return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
         }else{
             return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
@@ -698,8 +824,52 @@ class AdminController extends Controller
             return redirect()->back()->with('error_message', 'Picture not uploaded. Try again!');
         }
   
-    }	
-	
+    }
+    public function posttheaterCropPhotoUpdate(Request $request, $id){
+        $targ_w = $targ_h = 230;
+        $jpeg_quality = 90;
+		$user = User::findOrFail($id);
+        $theater = $user->theater;
+        $src = $theater->precrop_url;
+
+        $exploded = explode('.',$src);
+        $ext = $exploded[count($exploded) - 1];
+
+        $img_r = "";
+        if (preg_match('/jpg|jpeg/i',$ext))
+            $img_r=imagecreatefromjpeg($src);
+        else if (preg_match('/png/i',$ext))
+            $img_r=imagecreatefrompng($src);
+        else if (preg_match('/gif/i',$ext))
+            $img_r=imagecreatefromgif($src);
+        else if (preg_match('/bmp/i',$ext))
+            $img_r=imagecreatefrombmp($src);
+        else
+            return 0;
+
+        $dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
+        imagecopyresampled($dst_r,$img_r,0,0,$request->get('x'),$request->get('y'),
+        $targ_w,$targ_h,$request->get('w'),$request->get('h'));
+
+        $destinationPath = 'assets/photos'; // upload path
+
+        $fileName = $user->name.rand(11111,99999).'.jpg'; // renameing image
+        $originalPath = $destinationPath.'/'.$fileName;
+
+        $theater->photo_path = $originalPath;
+        $theater->photo_url = $originalPath;
+         header('Content-type: image/jpeg');
+        imagejpeg($dst_r,public_path().'/'.$originalPath,$jpeg_quality);
+        if($theater->update()){
+            return redirect()->back()->with('success_message', 'Profile picture successfully updated.')->with('tabactive','active');
+        }else{
+            return redirect()->back()->with('error_message', 'Picture not uploaded. Try again!');
+        }
+
+    }
+
+
+
 	//======================================================================
 	// Content Pages Functions
 	//======================================================================
