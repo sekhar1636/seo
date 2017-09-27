@@ -401,5 +401,8 @@ class StaffController extends Controller
             return redirect()->route('staff::staffProfile')->with('success_message', 'Successfully subscribed.');
         }
     }
+    public function getStaff(){
+        dd('Staff Page Coming Soon');
+    }
 
 }

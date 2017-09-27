@@ -423,4 +423,8 @@ class TheaterController extends Controller
         }
     }
 
+    public function getTheater(){
+        dd('Theater Page Coming Soon');
+    }
+
 }
