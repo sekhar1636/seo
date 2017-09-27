@@ -13,36 +13,35 @@
 Route::get('/verifyemail/{token}',['as'=>'getEmail', 'uses'=>'CommonController@verify']);
 //Static pages common for all users
 Route::get('/', ['as'=>'getIndex', 'uses'=>'CommonController@getIndex']);
-Route::get('/faq',['as'=>'getFaq', 'uses'=>'CommonController@getFaq']);
-Route::get('/younger', ['as'=>'getYounger', 'uses'=>'CommonController@getYounger']);
-Route::get('/contact', ['as'=>'getContact', 'uses'=>'CommonController@getContact']);
-Route::post('/contact',['as'=>'postContact', 'uses'=>'CommonController@postContact']);
-Route::get('/premium_content', ['as'=>'getContents', 'uses'=>'CommonController@getContent']);
+Route::get('/faq',['as'=>'getFaq', 'uses'=>'FaqController@getFaq']);
+Route::get('/younger', ['as'=>'getYounger', 'uses'=>'YoungerController@getYounger']);
+Route::get('/contact', ['as'=>'getContact', 'uses'=>'ContactController@getContact']);
+Route::post('/contact',['as'=>'postContact', 'uses'=>'ContactController@postContact']);
+Route::get('/premium_content', ['as'=>'getContents', 'uses'=>'PremiumContentController@getContent']);
 
-
-Route::get('/login', ['as' => 'getLogin', 'uses' =>  "CommonController@getLogin"]);
-Route::post('/login', ['uses' =>  "CommonController@authenticate"]);
-Route::get('/signup', ['as' => 'getSignup', 'uses' =>  "CommonController@getSignup"]);
-Route::post('/signup', ['uses' =>  "CommonController@postSignup"]);
+Route::get('/login', ['as' => 'getLogin', 'uses' =>  "LoginController@getLogin"]);
+Route::post('/login', ['uses' =>  "LoginController@authenticate"]);
+Route::get('/signup', ['as' => 'getSignup', 'uses' =>  "SignupController@getSignup"]);
+Route::post('/signup', ['uses' =>  "SignupController@postSignup"]);
 
 Route::get('/content/{slug}', ['as'=>'getStaticPage', 'uses'=>'StaticPageController@index']);
 
-Route::get('/forgot', ['as' => 'getForgot', 'uses' =>  "CommonController@getForgot"]);
-Route::post('/forgot', ['uses' =>  "CommonController@postForgot"]);
-Route::get('reset/{id}/{token}', ['as'=>'getReset', 'uses'=>'CommonController@getReset']);
-Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'CommonController@postReset']);
+Route::get('/forgot', ['as' => 'getForgot', 'uses' =>  "PasswordController@getForgot"]);
+Route::post('/forgot', ['uses' =>  "PasswordController@postForgot"]);
+Route::get('reset/{id}/{token}', ['as'=>'getReset', 'uses'=>'PasswordController@getReset']);
+Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'PasswordController@postReset']);
 
 Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
 Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@view']);
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'CommonController@getTheater']);
-	Route::get('/staffs', ['as'=>'getStaffs', 'uses'=>'CommonController@getStaff']);
+    Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'TheaterController@getTheater']);
+	Route::get('/staffs', ['as'=>'getStaffs', 'uses'=>'StaffController@getStaff']);
 
 	// Route::get('/role', ['as'=>'getRole', 'uses'=>'CommonController@getRole']);
 	// Route::post('/role', ['as'=>'postRole', 'uses'=>'CommonController@postRole']);
 
-	Route::get('/logout', ['as' => 'logout', 'uses' =>  "CommonController@logout"]);
+	Route::get('/logout', ['as' => 'logout', 'uses' =>  "LoginController@logout"]);
 
 	Route::group(['prefix'=>'actor'], function (){
 		Route::group(['as' => 'actor::', 'middleware' => 'role:actor'], function ()
