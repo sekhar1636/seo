@@ -310,83 +310,31 @@
                                         <!-- PERSONAL INFO TAB -->
 
                                         <div class="tab-pane {{  (Session::has('tabactive') ? '' : 'active') }}" id="tab_1_1">
-
                                             <div class="portlet-body form">
-
                                                 <!-- BEGIN FORM-->
-
                                                 <form method="POST" class="form-horizontal form-validate-auto"  enctype="multipart/form-data">
-
                                                     {{csrf_field()}}
-
                                                     <div class="form-body">
-
                                                         <h3 class="form-section">Personal Information</h3>
-
-                                                        <div class="row">
-
-
-
-
-
-                                                        </div>
-
-                                                        @if(isset($staff))
-
+                                                        @if(count($staff))
                                                             <input type="hidden" name="tes" value="PUT"/>
-
                                                         @else
-
                                                             <input type="hidden" name="tes" value="POST"/>
-
                                                         @endif
-
-
-
-
-
-                                                        <div class="row">
-
-
-                                                        </div>
-
-
-
-                                            </div>
-
-
-
-                                            <div class="row">
-
-                                                <div class="col-md-6">
-
-                                                    <div class="form-group" {{ $errors->has("email") ? "has-error":"" }}'>
-
-                                                    <label class="control-label col-md-3">Email</label>
-
-                                                    <div class="col-md-9">
-
-                                                        {!! Form::text('email',isset($staff[0]['email']) ? $staff[0]['email'] : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
-
-                                                        <span class="help-block"> {{ $errors->first("email") }} </span>
-
                                                     </div>
-
+                                                    <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group" {{ $errors->has("email") ? "has-error":"" }}'>
+                                                    <label class="control-label col-md-3">Email</label>
+                                                    <div class="col-md-9">
+                                                        {!! Form::text('email',isset($staff[0]['email']) ? $staff[0]['email'] : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                        <span class="help-block"> {{ $errors->first("email") }} </span>
+                                                    </div>
                                                 </div>
-
                                             </div>
-
-
-
                                     </div>
-
-                                    <!--/row-->
-
-
-                            <!--/row-->
-
-
             </div>
+
 
             <!--/row-->
 
@@ -427,14 +375,12 @@
         </div>
 
     </div>
+                                        </form>
+                                    </div>
 
-    </form>
 
     <!-- END FORM-->
 
-    </div>
-
-    </div>
 
 
     <!-- END PERSONAL INFO TAB -->

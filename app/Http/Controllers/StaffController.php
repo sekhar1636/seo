@@ -97,11 +97,9 @@ class StaffController extends Controller
     }
 
     public function edit(){
-
         $staffid = \Auth::user()->id;
         $staff = Staff::where('user_id',$staffid)->get();
         return view('staff.editprofile')->with(['staff'=>$staff]);
-
     }
 
     public function update(Request $request)
@@ -122,9 +120,7 @@ class StaffController extends Controller
         {
             $staff = new Staff;
         }
-
         $staff->user_id = \Auth::user()->id;
-        $staff->company_name = $request->company_name;
         $staff->email = $request->email;
         if($request->tes == "PUT"){
             if($staff->update()){
