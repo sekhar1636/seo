@@ -418,7 +418,7 @@ class ActorController extends Controller
         }
     }
     /**for preparing data**/
-    public function prepareData($data){
+    public static function prepareData($data){
 
         if($data){
             $removeWhitespace = preg_replace('/\s+/', '', $data);
@@ -431,7 +431,7 @@ class ActorController extends Controller
     }
 
     /**for checking date comparision and return**/
-    public function check_in_range($start_date, $end_date, $start_lookup, $end_lookup)
+    public static function check_in_range($start_date, $end_date, $start_lookup, $end_lookup)
     {
         // Convert to timestamp
         $begin = new \DateTime($start_date);
@@ -442,26 +442,62 @@ class ActorController extends Controller
         foreach($daterange as $date) {
             $user_ts = strtotime($date->format('Y-m-d'));
             // Check that user date is between start & end
-            if(($user_ts >= $start_ts) && ($user_ts <= $end_ts)) return true;
+            if(($user_ts >= $start_ts) && ($user_ts <= $end_ts)) return "true";
         }
 
-        return false;
+        return "false";
 
     }
+	
+	/* Getting actor availability */
+	public static function getAvailability($from, $to){
+		//contion for employment availability
+
+			$availability = "";
+           //imediate
+            $imediate = ActorController::check_in_range($from, $to, date('Y-m-d'), date('Y-m-d'));
+            if($imediate == "true")
+				$availability .= "Immediate ";
+				
+			//for getting summer
+			$sd = date("Y-m-d", strtotime("third monday".date("Y-05")));
+			$ed = date("Y-m-d", strtotime("first monday ".date("Y-09")));
+			$summer = ActorController::check_in_range($from, $to, $sd, $ed);
+			if($summer == "true")
+				$availability .= "Summer ";
+
+
+			//for getting fall
+			$fd = date("Y-m-d", strtotime("first monday ".date("Y-09")));
+			$fed = date("Y-12-25");
+			$fall = ActorController::check_in_range($from, $to, $fd, $fed);
+			if($fall == "true")
+				$availability .= "Fall ";
+
+			//for getting next year
+			$ny = date("Y-m-d", strtotime("+1 year".date("Y-01-01")));
+			$eny = date("Y-m-d", strtotime("+1 year".date("Y-12-31")));
+			$next_year = ActorController::check_in_range($from, $to, $ny, $eny);
+			if($next_year== "true")
+				$availability .= "NextYear ";
+			
+			return $availability;
+	}
     /*getting actors in actor view*/
     public function getActors(){
 
         $actors = \App\User::join('actors','actors.user_id', '=', 'users.id')
-            ->where('payment_status',1)
+            ->where('payment_status',1)->orderBy('first_name', 'asc')
             ->get();
 
         $actorList = "";
         /*Loop through the Actors*/
-        foreach($actors as $actor){
-            /*Build MIX Class*/
+				
+        /*foreach($actors as $actor){
+            
             $mixClass = $actor->gender . ' ';
             $mixClass .= $this->prepareData($actor->ethnicity) . ' ';
-            $mixClass .=$this->prepareData($actor->misc) . ' ';
+            $mixClass .= $this->prepareData($actor->misc) . ' ';
             $mixClass .= $this->prepareData($actor->technical) . ' ';
             $mixClass .= $this->prepareData($actor->dance) . ' ';
             $mixClass .= $this->prepareData($actor->jobType) . ' ';
@@ -490,57 +526,26 @@ class ActorController extends Controller
             $next_year = $this->check_in_range($actor->from, $actor->to, $ny, $eny);
             if($next_year) $mixClass .= $this->prepareData("Next Year") . ' ';
 
-            $actorList .= '<div class="mix ' . $mixClass . '" ';
-            $actorList .= 'data-first-name="' . strtolower($actor->first_name) . '" ';
-            $actorList .= 'data-last-name="' . strtolower($actor->last_name) . '" ';
-            // $actorList .= 'data-height="' . (int) $actor['physical']['ht'] . '" ';
-            // $actorList .= 'data-height-group="' . $this->actorProcess->processHeightGroup($actor['physical']['ht']) . '" ';
-            $actorList .= 'data-audition-type="' . preg_replace('/\s+/', '', $actor->auditionType)  . '" ';
-            $actorList .= 'data-skill-vocal="' . preg_replace('/\s+/', '', $actor->vocalRange) . '" ';
-
-            $actorList .= '>';
-
-            $actorList .=  '<div class="col-md-4">';
-            $actorList .=  ' <div class="tile-container">';
-            $actorList .=  '<div class="tile-thumbnail">';
-            $actorList .=  '<a href="javascript:;">';
-            if($actor->photo_url){
-                $actorList .= '<img src="' . $actor->photo_url . '" />';
+            $first_name = $actor->first_name;
+			$last_name = $actor->last_name;
+			$auditionType = preg_replace('/\s+/', '', $actor->auditionType);
+			$skill_vocal = preg_replace('/\s+/', '', $actor->vocalRange);
+			$from = $actor->from;
+			$to = $actor->to;
+			$user_id = $actor->user_id;
+			if($actor->photo_url){
+                $photo_url = $actor->photo_url ;
             }else{
-                $actorList .= '<img src="' . asset('assets/images/photos/default-medium.jpg') . '" />';
+                $photo_url = asset('assets/images/photos/default-medium.jpg');
             }
-            $actorList .=  '</a>';
-            $actorList .=  '</div>';
-            $actorList .=  '<div class="tile-title">';
-            $actorList .=  '<h3>';
-            $actorList .=  '<a href="javascript:;">'. $actor->first_name.' '.$actor->last_name.'</a>';
-            $actorList .=  '</h3>';
-            $actorList .=  '<div class="tile-desc">';
-            $actorList .=  '<p>';
-            $actorList .=  $actor->auditionType;
-            $actorList .=  '</p>';
-            $actorList .=  '<p>Employment Availability:';
-            $actorList .=  $actor->from. ' to ' . $actor->to;
+			$height = (int) $actor['physical']['ht'];
+			
+			
+			$actorList = array( "first_name"=>$first_name, "last_name"=>$last_name, "auditionType"=>$auditionType, "from"=>$from, "to"=>$to, "photo_url"=>$photo_url, "user_id"=>$user_id, "skill_vocal"=>$skill_vocal, "mix_class"=>$mixClass );
 
-            $actorList .=  '</p>';
-            $actorList .=  '</div>';
-
-            if ($actor->resume_path){
-                $actorList .= '<a href="' . public_path($actor->resume_path) . '" class="btn btn-block btn-primary" target="_blank"><span class="glyphicon glyphicon-download"></span> ' . $actor->last_name . '\'s Resume</a>';
-            }
-            $actorList .= '<a href="'.route('getActorView', $actor->user_id).'" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> ' . $actor->last_name . '\'s Profile</a>';
-
-            $actorList .=  '</div>';
-            $actorList .=  '</div>';
-            $actorList .=  '</div>';
-
-
-
-            $actorList .= '</div>' . PHP_EOL;
-
-            /*Build the Output*/
-        }
-        return view('actor.actorSearch1')->with('actorList', $actorList);
+            
+        }*/
+        return view('actor.actorSearch1')->with('actorList', $actors);
 
     }
 

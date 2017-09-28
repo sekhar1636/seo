@@ -237,7 +237,39 @@
             <div class="col-lg-8">
                 <div class="row">
                     <div class="actorContainer">
-                        {!!$actorList!!}
+					
+					@foreach($actorList as $actor)
+						{{
+							$mixClass = $actor->gender . ' '. \App\Http\Controllers\ActorController::prepareData($actor->ethnicity). ' '. \App\Http\Controllers\ActorController::prepareData($actor->misc). ' '. \App\Http\Controllers\ActorController::prepareData($actor->technical). ' '. \App\Http\Controllers\ActorController::prepareData($actor->dance). ' '. \App\Http\Controllers\ActorController::prepareData($actor->jobType). ' '. \App\Http\Controllers\ActorController::prepareData($actor->instrument) .' '. \App\Http\Controllers\ActorController::getAvailability($actor->from, $actor->to)
+						}}
+						<div data-first-name="{{ strtolower($actor->first_name) }}" data-last-name="{{ strtolower($actor->last_name) }}" data-audition-type="{{ preg_replace('/\s+/', '', $actor->auditionType) }}" data-skill-vocal="{{ preg_replace('/\s+/', '', $actor->vocalRange) }}" class="mix {{ $mixClass }}">
+							<div class="col-md-4">
+								<div class="tile-container">
+									<div class="tile-thumbnail">
+										<a href="javascript:;">
+											<img src="{{ $actor->photo_url }}" />
+										</a>
+									</div>
+									<div class="tile-title">
+										<h3>
+											<a href="javascript:;">{{ $actor->first_name ." ". $actor->last_name }}</a>
+										</h3>
+										<div class="tile-desc">
+											<p>
+												{{ $actor->auditionType }}
+											</p>
+											<p>
+												{{ "Employment Availability:". $actor->from ." to ". $actor->to }}
+											</p>
+										</div>
+
+										<a href="{{route('getActorView', $actor->user_id) }}" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> {{ $actor->last_name }} </a>
+									</div>
+								</div>
+							</div>
+						</div>
+						{{ $mixClass = "" }}
+					@endforeach
                     </div>
                     <div class="clearfix"></div>
                     <div class="controls-pagination">
