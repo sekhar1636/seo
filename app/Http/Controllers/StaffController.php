@@ -14,6 +14,7 @@ use App\MembershipPeriod;
 use App\Payment;
 use App\SubscriptionPackage;
 use Validator;
+use Carbon\Carbon;
 
 
 class StaffController extends Controller
@@ -271,7 +272,7 @@ class StaffController extends Controller
         }
         else
         {
-            $membershipPeriods = MembershipPeriod::latest()->where('type','Staff')->orderBy('id', 'desc')->get();
+            $membershipPeriods = MembershipPeriod::latest()->where('type','Staff')->where('status',1)->orderBy('id', 'desc')->get();
             $products = Product::orderBy('id', 'desc')->get();
             //$products = Product::findorfail(2);
             //$n = $products->product_variant;
