@@ -15,6 +15,60 @@ class Misc
 		'theater'=>'Theater'
 	];
 
+	public static $primary_sought = [
+        '1' => 'Accompanist',
+        '2' => 'Administration',
+        '3' => 'Box Office',
+        '4' => 'Carpentry',
+        '5' => 'Choreography',
+        '6' => 'Costume Design',
+        '7' => 'Sewing',
+        '8' => 'Technical Director',
+        '9' => 'Graphics',
+        '10' => 'House Management',
+        '11' => 'Lighting Design',
+        '12' => 'Electrics',
+        '13' => 'Director',
+        '14' => 'Musical Director',
+        '15' => 'Photography',
+        '16' => 'Video',
+        '17' => 'Props',
+        '18' => 'Publicity',
+        '19' => 'Running Crew',
+        '20' => 'Scenic Artist',
+        '21' => 'Scenic Artist',
+        '22' => 'Sound',
+        '23' => 'State Management',
+        '24' => 'Company Management'
+    ];
+
+    public static $secondary_sought = [
+        '1' => 'Accompanist',
+        '2' => 'Administration',
+        '3' => 'Box Office',
+        '4' => 'Carpentry',
+        '5' => 'Choreography',
+        '6' => 'Costume Design',
+        '7' => 'Sewing',
+        '8' => 'Technical Director',
+        '9' => 'Graphics',
+        '10' => 'House Management',
+        '11' => 'Lighting Design',
+        '12' => 'Electrics',
+        '13' => 'Director',
+        '14' => 'Musical Director',
+        '15' => 'Photography',
+        '16' => 'Video',
+        '17' => 'Props',
+        '18' => 'Publicity',
+        '19' => 'Running Crew',
+        '20' => 'Scenic Artist',
+        '21' => 'Scenic Artist',
+        '22' => 'Sound',
+        '23' => 'State Management',
+        '24' => 'Company Management'
+    ];
+
 	public static $showPage = [
 		'0' => 'No',
 		'1' => 'Yes',	
