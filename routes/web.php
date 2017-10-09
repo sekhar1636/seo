@@ -32,6 +32,7 @@ Route::get('reset/{id}/{token}', ['as'=>'getReset', 'uses'=>'PasswordController@
 Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'PasswordController@postReset']);
 
 Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
+Route::get('/staffs',['as'=>'getStaff', 'uses'=>'StaffController@getStaff']);
 Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@view']);
 
 Route::group(['middleware' => ['auth']], function () {
@@ -141,8 +142,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('theater/{id}/photo', ['as'=>'theaterPhotoUpdate', 'uses'=>'AdminController@theaterPhotoUpdate']);
             Route::post('theater/{id}/cropPhoto', ['as'=>'theaterCropPhoto', 'uses'=>'AdminController@posttheaterCropPhotoUpdate']);
             Route::get('theater/{id}/deletePhoto', ['as'=>'theaterPhotoDelete', 'uses'=>'AdminController@theaterPhotoDelete']);
-			
-			Route::get('usersDataTable/', ['as'=>'adminUsersDataTable', 'uses'=>'AdminController@UsersDataTable']);
+
+            Route::match(array('POST','PUT'),'staff/{id}',['as'=>'adminStaffUpdate','uses'=>'AdminController@staffupdate']);
+            Route::post('staff/{id}/photo', ['as'=>'staffPhotoUpdate', 'uses'=>'AdminController@staffPhotoUpdate']);
+            Route::post('theater/{id}/cropPhoto', ['as'=>'staffCropPhoto', 'uses'=>'AdminController@poststaffCropPhotoUpdate']);
+            Route::get('staff/{id}/deletePhoto', ['as'=>'staffPhotoDelete', 'uses'=>'AdminController@staffPhotoDelete']);
+
+
+
+            Route::get('usersDataTable/', ['as'=>'adminUsersDataTable', 'uses'=>'AdminController@UsersDataTable']);
             Route::get('actorsDataTable/', ['as'=>'adminActorDataTable', 'uses'=>'AdminController@actorsDataTable']);
             Route::get('staffDataTable/', ['as'=>'adminStaffDataTable', 'uses'=>'AdminController@staffDataTable']);
             Route::get('theaterDataTable/', ['as'=>'adminTheaterDataTable', 'uses'=>'AdminController@theaterDataTable']);

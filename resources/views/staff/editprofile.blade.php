@@ -58,6 +58,7 @@
 
     <script src="{{asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>
 
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/2.0.4/js/Jcrop.min.js"></script>
 
     <script type="text/javascript" src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
@@ -68,7 +69,12 @@
 
     <script type="text/javascript">
 
-
+        $(document).ready(function() {
+            $('.input-daterange input').each(function() {
+                $(this).datepicker({
+                });
+            });
+        });
 
         $(function(){
             $('#cropbox').Jcrop({
@@ -332,7 +338,147 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+
+                                                            <label class="control-label col-md-3">Availability</label>
+
+                                                            <div class="col-md-9">
+
+                                                                <div class="input-group input-large date-picker input-daterange" data-date="2012/11/10" data-date-format="yyyy/mm/dd">
+
+                                                                    {!! Form::text('from', \Carbon\Carbon::parse(@$staff[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required','readonly']) !!}
+
+
+
+                                                                    <span class="input-group-addon"> to </span>
+
+                                                                    {!! Form::text('to', \Carbon\Carbon::parse(@$staff[0]['to'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'required'=>'required','readonly']) !!} </div>
+
+                                                                <!-- /input-group -->
+
+                                                                <span class="help-block"> {{ $errors->first("from") }} {{ $errors->first("to") }} </span>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                     </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="Roles" class="control-label col-md-3">Primary Sought</label>
+
+                                                    <div class="col-md-9">
+
+                                                        {!! Form::select('primary_sought',['' => 'Select', 1 => 'Accompanist', 2 => 'Administration',3 => 'Box Office', 4 => 'Carpentry', 5 => 'Choreography', 6 => 'Costume Design', 7 => 'Sewing', 8 => 'Technical Director', 9 => 'Graphics', 10 => 'House Management', 11 => 'Lighting Design', 12 => 'Electrics', 13 => 'Director', 14 => 'Musical Director', 15 => 'Photography', 16 => 'Video', 17 => 'Props',18=>'Publicity',19=>'Running Crew',20=>'Scenic Artist',21=>'Set Design',22=>'Sound',23=>'State Management',24=>'Company Management'], @$staff[0]['primary_sought'] ? $staff[0]['primary_sought'] : '', ['required' => 'required',  'class' => 'form-control', 'id' => "primary_sought"]) !!}
+
+                                                        <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="Roles" class="control-label col-md-3">Secondary Sought</label>
+
+                                                    <div class="col-md-9">
+
+                                                        {!! Form::select('secondary_sought',['' => 'Select', 1 => 'Accompanist', 2 => 'Administration',3 => 'Box Office', 4 => 'Carpentry', 5 => 'Choreography', 6 => 'Costume Design', 7 => 'Sewing', 8 => 'Technical Director', 9 => 'Graphics', 10 => 'House Management', 11 => 'Lighting Design', 12 => 'Electrics', 13 => 'Director', 14 => 'Musical Director', 15 => 'Photography', 16 => 'Video', 17 => 'Props',18=>'Publicity',19=>'Running Crew',20=>'Scenic Artist',21=>'Set Design',22=>'Sound',23=>'State Management',24=>'Company Management'], @$staff[0]['secondary_sought'] ? $staff[0]['secondary_sought'] : '', ['required' => 'required',  'class' => 'form-control', 'id' => "secondary_sought"]) !!}
+
+                                                        <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group" {{ $errors->has("age_twenty_one") ? "has-error":"" }}'>
+
+                                                    <label class="control-label col-md-3">Age if Under 21?</label>
+
+                                                    <div class="col-md-3">
+
+                                                        {!! Form::text('age_twenty_one', @$staff[0]['age_twenty_one'] ? $staff[0]['age_twenty_one'] : null, ['class' => 'form-control', 'placeholder' => 'Age Under 21', 'maxlength'=>'20']) !!}
+
+                                                        <span class="help-block"> {{ $errors->first("age_twenty_one") }} </span>
+
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="control-label col-md-3">Would You Job In?</label>
+
+                                                    <div class="col-md-9">
+
+                                                        {!! Form::select('job_in',[0=>'No',1=>'Yes'],@$staff[0]['job_in'] ? $staff[0]['job_in'] : null) !!}
+
+                                                        <span class="help-block"> {{ $errors->first("last_audition_year") }} </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div class="row">
+                                            <label class="col-md-12">
+                                                Please check all areas of significant training and related experience.
+                                            </label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {!! Form::checkbox('accompanist',1,@$staff[0]['accompanist'] ? true : null) !!}
+                                                <label>Accompanist</label><br>
+                                                {!! Form::checkbox('administration',1,$staff[0]['administration'] ? true:null) !!}
+                                                <label>Administration</label><br>
+                                                {!! Form::checkbox('box_office',1,@$staff[0]['box_office'] ? true:null) !!}
+                                                <label>Box Office</label><br>
+                                                {!! Form::checkbox('carpentry',1,@$staff[0]['carpentry'] ? true:null) !!}
+                                                <label>Carpentry</label><br>
+                                                {!! Form::checkbox('choreography',1,@$staff[0]['choreography'] ? true:null) !!}
+                                                <label>Choreography</label><br>
+
+                                                {!! Form::checkbox('costume_design',1,@$staff[0]['costume_design'] ? true:null) !!}
+                                                <label>Costume Design</label><br>
+                                                {!! Form::checkbox('sewing',1,@$staff[0]['sewing'] ? true:null) !!}
+                                                <label>Sewing</label><br>
+                                                {!! Form::checkbox('technical_director',1,@$staff[0]['technical_director'] ? true:null) !!}
+                                                <label>Tecnical Director</label><br>
+                                            </div>
+                                            <div class="col-md-4">
+                                                {!! Form::checkbox('graphics',1,@$staff[0]['graphics'] ? true : null) !!}
+                                                <label>Graphics</label><br>
+                                                {!! Form::checkbox('house_management',1,@$staff[0]['house_management'] ? true:null) !!}
+                                                <label>House Management</label><br>
+                                                {!! Form::checkbox('lighting_design',1,@$staff[0]['lighting_design'] ? true:null) !!}
+                                                <label>Lighting Design</label><br>
+                                                {!! Form::checkbox('electrics',1,@$staff[0]['electrics'] ? true:null) !!}
+                                                <label>Electrics</label><br>
+                                                {!! Form::checkbox('director',1,@$staff[0]['director'] ? true:null) !!}
+                                                <label>Director</label><br>
+
+                                                {!! Form::checkbox('musical_director',1,@$staff[0]['musical_director'] ? true:null) !!}
+                                                <label>Musical Director</label><br>
+                                                {!! Form::checkbox('photography',1,@$staff[0]['photography'] ? true:null) !!}
+                                                <label>Photography</label><br>
+                                                {!! Form::checkbox('video',1,@$staff[0]['video'] ? true:null) !!}
+                                                <label>Video</label><br>
+                                            </div>
+                                            <div class="col-md-4">
+                                                {!! Form::checkbox('props',1,@$staff[0]['props'] ? true:null) !!}
+                                                <label>Props</label><br>
+                                                {!! Form::checkbox('publicity',1,@$staff[0]['publicity'] ? true:null) !!}
+                                                <label>Publicity</label><br>
+                                                {!! Form::checkbox('running_crew',1,@$staff[0]['running_crew'] ? true:null) !!}
+                                                <label>Running Crew</label><br>
+                                                {!! Form::checkbox('scenic_artist',1,@$staff[0]['scenic_artist'] ? true:null) !!}
+                                                <label>Scenic Artist</label><br>
+
+                                                {!! Form::checkbox('set_design',1,@$staff[0]['set_design'] ? true:null) !!}
+                                                <label>Set Design</label><br>
+                                                {!! Form::checkbox('sound',1,@$staff[0]['sound'] ? true:null) !!}
+                                                <label>Sound</label><br>
+                                                {!! Form::checkbox('state_management',1,@$staff[0]['state_management'] ? true:null) !!}
+                                                <label>State Management</label><br>
+                                                {!! Form::checkbox('company_management',1,@$staff[0]['company_management'] ? true:null) !!}
+                                                <label>Company Management</label><br>
+                                            </div>
+                                        </div>
             </div>
 
 

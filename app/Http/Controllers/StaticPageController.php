@@ -19,7 +19,8 @@ class StaticPageController extends Controller
         return view('staticpage.content')->with([
             'description' => $desc,
             'title' => $title,
-            'status' => $status
+            'status' => $status,
+            'divactive' => 'active'
         ]);
     }
 

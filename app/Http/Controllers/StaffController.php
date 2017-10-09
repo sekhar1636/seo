@@ -121,8 +121,42 @@ class StaffController extends Controller
         {
             $staff = new Staff;
         }
+
+        $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
+        $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
+
         $staff->user_id = \Auth::user()->id;
         $staff->email = $request->email;
+        $staff->from = $from_date;
+        $staff->to = $to_date;
+        $staff->primary_sought = $request->primary_sought;
+        $staff->secondary_sought = $request->secondary_sought;
+        $staff->age_twenty_one = $request->age_twenty_one;
+        $staff->job_in = $request->job_in;
+        $staff->accompanist = $request->accompanist;
+        $staff->administration = $request->administration;
+        $staff->box_office = $request->box_office;
+        $staff->carpentry = $request->carpentry;
+        $staff->choreography = $request->choreography;
+        $staff->costume_design = $request->costume_design;
+        $staff->sewing = $request->sewing;
+        $staff->technical_director = $request->technical_director;
+        $staff->graphics = $request->graphics;
+        $staff->house_management = $request->house_management;
+        $staff->lighting_design = $request->lighting_design;
+        $staff->electrics = $request->electrics;
+        $staff->director = $request->director;
+        $staff->musical_director = $request->musical_director;
+        $staff->photography = $request->photography;
+        $staff->video = $request->video;
+        $staff->props = $request->props;
+        $staff->publicity = $request->publicity;
+        $staff->running_crew = $request->running_crew;
+        $staff->scenic_artist = $request->scenic_artist;
+        $staff->set_design = $request->set_design;
+        $staff->sound = $request->sound;
+        $staff->state_management = $request->state_management;
+        $staff->company_management = $request->company_management;
         if($request->tes == "PUT"){
             if($staff->update()){
                 return redirect()->back()->with('success_message', 'Profile Data Successfully Updated');
@@ -132,6 +166,15 @@ class StaffController extends Controller
                 return redirect()->route('actor::actorProfile')->with('success_message', 'Profile Data Successfully Created');
             }
         }
+    }
+
+    public function getStaff(){
+
+        $staffs = \App\User::join('staff','staff.user_id', '=', 'users.id')
+            ->where('payment_status',1)->orderBy('name', 'asc')
+            ->get();
+
+        return view('staff.staffsearch')->with('staffs', $staffs);
     }
 
     public function postPhotoUpdate(Request $request)
@@ -402,8 +445,6 @@ class StaffController extends Controller
             return redirect()->route('staff::staffProfile')->with('success_message', 'Successfully subscribed.');
         }
     }
-    public function getStaff(){
-        dd('Staff Page Coming Soon');
-    }
+
 
 }

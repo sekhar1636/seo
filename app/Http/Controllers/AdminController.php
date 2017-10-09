@@ -7,6 +7,7 @@ use App\AuditionExtra;
 use App\Membership;
 use App\ProductVariant;
 use App\Theater;
+use App\Staff;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Facades\Datatables;
 use Stripe\Stripe as Stripe;
@@ -28,7 +29,7 @@ use App\Payment;
 class AdminController extends Controller
 {
     public function index(){
-    	return view("admin.index");
+    	return view("admin.index")->with('tabactive','active');
     }//end function
 	
 	//======================================================================
@@ -36,7 +37,7 @@ class AdminController extends Controller
 	//======================================================================
 	
 	public function faq(){
-    	return view("admin.faq");
+    	return view("admin.faq")->with('tabactive','active');
     }
 	
 	public function faqStore(Request $request){
@@ -463,6 +464,14 @@ class AdminController extends Controller
                 'id' => $id
             ]);
         }
+        if($user->role =='staff')
+        {
+            return view('admin.staff')->with([
+               'staff' => $user->staff,
+               'user' => $user,
+               'id' => $id
+            ]);
+        }
 		return view('admin.userEdit',compact('user'))->with('subsciption_expiry',$subsciption_expiry);
     }
 	
@@ -641,6 +650,61 @@ class AdminController extends Controller
 
     }
 
+    public function staffupdate(Request $request,$id){
+        if($request->m == "PUT"){
+            $staff = Staff::where('user_id',$id)->first();
+        }
+        else
+        {
+            $staff = new Staff;
+        }
+
+        $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
+        $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
+
+        $staff->user_id = $id;
+        $staff->email = $request->email;
+        $staff->from = $from_date;
+        $staff->to = $to_date;
+        $staff->primary_sought = $request->primary_sought;
+        $staff->secondary_sought = $request->secondary_sought;
+        $staff->age_twenty_one = $request->age_twenty_one;
+        $staff->job_in = $request->job_in;
+        $staff->accompanist = $request->accompanist;
+        $staff->administration = $request->administration;
+        $staff->box_office = $request->box_office;
+        $staff->carpentry = $request->carpentry;
+        $staff->choreography = $request->choreography;
+        $staff->costume_design = $request->costume_design;
+        $staff->sewing = $request->sewing;
+        $staff->technical_director = $request->technical_director;
+        $staff->graphics = $request->graphics;
+        $staff->house_management = $request->house_management;
+        $staff->lighting_design = $request->lighting_design;
+        $staff->electrics = $request->electrics;
+        $staff->director = $request->director;
+        $staff->musical_director = $request->musical_director;
+        $staff->photography = $request->photography;
+        $staff->video = $request->video;
+        $staff->props = $request->props;
+        $staff->publicity = $request->publicity;
+        $staff->running_crew = $request->running_crew;
+        $staff->scenic_artist = $request->scenic_artist;
+        $staff->set_design = $request->set_design;
+        $staff->sound = $request->sound;
+        $staff->state_management = $request->state_management;
+        $staff->company_management = $request->company_management;
+        if($request->m == "PUT"){
+            if($staff->update()){
+                return redirect()->back()->with('success_message', 'Profile Data Successfully Updated');
+            }
+        }else{
+            if($staff->save()){
+                return redirect()->route('actor::actorProfile')->with('success_message', 'Profile Data Successfully Created');
+            }
+        }
+    }
+
     public function uploadResume($actor,$file, $name){
         $destinationPath = 'assets/files'; // upload path
         $extension = $file->getClientOriginalExtension();
@@ -761,6 +825,62 @@ class AdminController extends Controller
 
 
     }
+    public function staffPhotoUpdate(Request $request,$id){
+
+        $validator = \Validator::make($request->all(),
+            [
+                "photo"=>"required|image|dimensions:max_width=600",
+            ],
+            [
+                'photo.dimensions'=>'Photo width must be lest than 600.'
+            ]
+        );
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors())
+                ->withInput()
+                ->with('tabactive', 'active');
+        }
+
+        $user = User::findOrFail($id);
+        $staff = $user->staff;
+
+
+        if($user->staff){
+            $staff = Staff::where('user_id',$id)->first();
+        }else{
+            $staff = new Staff;
+        }
+
+        $destinationPath = 'assets/photos'; // upload path
+        $file = $request->file('photo');
+        $extension = $file->getClientOriginalExtension();
+        $fileName = $user->name.rand(11111,99999).'.'.$extension; // renameing image
+        $file->move(public_path($destinationPath), $fileName);
+
+
+        $staff->precrop_path = $destinationPath.'/'.$fileName;
+        $staff->precrop_url = $destinationPath.'/'.$fileName;
+
+        if($staff->theater){
+            if($staff->update()){
+                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+            }else{
+                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+            }
+        }else{
+            $staff->user_id = $id;
+            if($staff->save()){
+                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+            }else{
+                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+            }
+        }
+
+
+
+    }
 	
 	public function actorPhotoDelete($id){
         $actor = \App\Actor::where('user_id', $id)->first(); 
@@ -786,7 +906,18 @@ class AdminController extends Controller
             return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
         }
     }
-	
+    public function staffPhotoDelete($id){
+        $staff = Staff::where('user_id', $id)->first();
+        unlink(public_path().'/'.$staff->precrop_path);
+        $staff->precrop_url = null;
+        $staff->precrop_path = null;
+
+        if($staff->update()){
+            return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
+        }else{
+            return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
+        }
+    }
 	public function postCropPhotoUpdate(Request $request, $id){
         $targ_w = $targ_h = 230;
         $jpeg_quality = 90;
@@ -872,7 +1003,48 @@ class AdminController extends Controller
 
     }
 
+    public function poststaffCropPhotoUpdate(Request $request, $id){
+        $targ_w = $targ_h = 230;
+        $jpeg_quality = 90;
+        $user = User::findOrFail($id);
+        $staff = $user->staff;
+        $src = $staff->precrop_url;
 
+        $exploded = explode('.',$src);
+        $ext = $exploded[count($exploded) - 1];
+
+        $img_r = "";
+        if (preg_match('/jpg|jpeg/i',$ext))
+            $img_r=imagecreatefromjpeg($src);
+        else if (preg_match('/png/i',$ext))
+            $img_r=imagecreatefrompng($src);
+        else if (preg_match('/gif/i',$ext))
+            $img_r=imagecreatefromgif($src);
+        else if (preg_match('/bmp/i',$ext))
+            $img_r=imagecreatefrombmp($src);
+        else
+            return 0;
+
+        $dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
+        imagecopyresampled($dst_r,$img_r,0,0,$request->get('x'),$request->get('y'),
+            $targ_w,$targ_h,$request->get('w'),$request->get('h'));
+
+        $destinationPath = 'assets/photos'; // upload path
+
+        $fileName = $user->name.rand(11111,99999).'.jpg'; // renameing image
+        $originalPath = $destinationPath.'/'.$fileName;
+
+        $staff->photo_path = $originalPath;
+        $staff->photo_url = $originalPath;
+        header('Content-type: image/jpeg');
+        imagejpeg($dst_r,public_path().'/'.$originalPath,$jpeg_quality);
+        if($staff->update()){
+            return redirect()->back()->with('success_message', 'Profile picture successfully updated.')->with('tabactive','active');
+        }else{
+            return redirect()->back()->with('error_message', 'Picture not uploaded. Try again!');
+        }
+
+    }
 
 	//======================================================================
 	// Content Pages Functions

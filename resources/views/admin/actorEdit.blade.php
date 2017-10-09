@@ -1089,7 +1089,7 @@ function initTable(tableId, data) {
 
 				 <div class="col-md-9">
 
-					 {!! Form::select('hardcopy',[0 => 'Pending', 1 => 'Incomplete', 2 => 'Received'], @$actor->hardcopy_status ? $actor->hardcopy_status : 0, ['required' => 'required',  'class' => 'form-control', 'id' => "hardcp"]) !!}
+					 {!! Form::select('hardcopy',['' => 'Pending', 1 => 'Incomplete', 2 => 'Received'], @$actor->hardcopy_status ? $actor->hardcopy_status : '', ['required' => 'required',  'class' => 'form-control', 'id' => "hardcp"]) !!}
 
 					 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
 

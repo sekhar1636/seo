@@ -116,7 +116,7 @@
                                 <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
                                 <div class="hor-menu  ">
                                     <ul class="nav navbar-nav">
-                                        <li class="active">
+                                        <li>
                                             <a href="{{route('admin::adminDashboard')}}">
                                                 <i class="icon-home"></i> Home
                                                 <span class="arrow"></span>
@@ -192,9 +192,10 @@
                             <!-- BEGIN PAGE CONTENT BODY -->
                              <div class="page-content">
                                 <div class="container-fluid">
+
                                     <!-- BEGIN PAGE BREADCRUMBS -->
 
-                                   <!--  <ul class="page-breadcrumb breadcrumb">
+                                 <ul class="page-breadcrumb breadcrumb">
                                         <li>
                                             <a href="{{route('getIndex')}}">StrawHat</a>
                                             <i class="fa fa-circle"></i>
@@ -202,7 +203,7 @@
                                         <li>
                                             <span>@yield('title')</span>
                                         </li>
-                                    </ul> -->
+                                    </ul>
                                 
                                 @yield('content')
                                

@@ -305,7 +305,7 @@
                                 <div class="container-fluid">
                                     <!-- BEGIN PAGE BREADCRUMBS -->
 
-                                   <!--  <ul class="page-breadcrumb breadcrumb">
+                                   <ul class="page-breadcrumb breadcrumb">
                                         <li>
                                             <a href="{{route('getIndex')}}">StrawHat</a>
                                             <i class="fa fa-circle"></i>
@@ -313,7 +313,7 @@
                                         <li>
                                             <span>@yield('title')</span>
                                         </li>
-                                    </ul> -->
+                                   </ul>
                                 
                                 @yield('content')
                                
