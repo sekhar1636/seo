@@ -424,7 +424,22 @@ class TheaterController extends Controller
     }
 
     public function getTheater(){
-        dd('Theater Page Coming Soon');
+        $theaters = \App\User::join('theaters','theaters.user_id', '=', 'users.id')
+            ->where('payment_status',1)->orderBy('name', 'asc')
+            ->get();
+
+        return view('theater.theaterSearch')->with([
+            'theaters'=>$theaters,
+            'theateractive' => 'active'
+        ]);
+    }
+
+    public function view($id)
+    {
+        $theater = User::findorfail($id);
+        return view('theater.profileView')->with([
+            'theater'=>$theater,
+        ]);
     }
 
 }

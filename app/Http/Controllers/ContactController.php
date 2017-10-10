@@ -17,7 +17,7 @@ class ContactController extends Controller
     /* Get route map to /contact */
     public function getContact(){
         $slides = Slide::latest()->where("slideshow_id","=",3)->orderBy('id', 'desc')->get();
-        return view('common.contact',compact('slides'));
+        return view('common.contact',compact('slides'))->with('contactactive','active');
     }
 
     /*Post route map to /contact*/

@@ -32,8 +32,9 @@ Route::get('reset/{id}/{token}', ['as'=>'getReset', 'uses'=>'PasswordController@
 Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'PasswordController@postReset']);
 
 Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
-Route::get('/staffs',['as'=>'getStaff', 'uses'=>'StaffController@getStaff']);
 Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@view']);
+Route::get('/staffs/{id}/view',['as'=>'getStaffView', 'uses'=>'StaffController@view']);
+Route::get('/theaters/{id}/view',['as'=>'getTheaterView','uses'=>'TheaterController@view']);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'TheaterController@getTheater']);

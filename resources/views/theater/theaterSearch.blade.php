@@ -1,6 +1,6 @@
 @extends('common.layout')
 
-@section('title', 'Staff Search')
+@section('title', 'Theater Search')
 
 @section('style')
     <link href="{{asset('assets/pages/css/search.min.css')}}" rel="stylesheet" type="text/css" />
@@ -115,29 +115,29 @@
                             <div class="row">
                                 <button type="reset" class="btn grey bold uppercase btn-block">Reset Filters</button>
                             </div>
-                            <div class="search-label uppercase">Primary Sought</div>
-                            <fieldset data-filter-group="primary-sought" class="control-group">
+                            <div class="search-label uppercase">Musical Performers</div>
+                            <fieldset data-filter-group="musical-performers" class="control-group">
 
                                 <select class="form-control">
-                                    <option value="">--Primary Sought--</option>
-                                    @foreach(\App\Misc::$primary_sought as $key=>$at)
-                                        <option value="[data-primary-sought={{preg_replace('/\s+/', '', $at)}}]">{{$at}}</option>
+                                    <option value="">--Musical performers--</option>
+                                    @foreach(\App\Misc::$musical_performers as $key=>$at)
+                                        <option value="[data-musical-performers={{preg_replace('/\s+/', '', $at)}}]">{{$at}}</option>
 
                                     @endforeach
                                 </select>
                             </fieldset>
-                            <div class="search-label uppercase">Secondary Sought</div>
-                            <fieldset data-filter-group="secondary-sought" class="control-group">
+                            <div class="search-label uppercase">Casting Dancers</div>
+                            <fieldset data-filter-group="casting-dancers" class="control-group">
 
                                 <select class="form-control">
-                                    <option value="">--Secondary Sought--</option>
-                                    @foreach(\App\Misc::$secondary_sought as $key=>$at)
-                                        <option value="[data-secondary-sought={{preg_replace('/\s+/', '',  $at)}}]">{{$at}}</option>
+                                    <option value="">--Casting Dancers--</option>
+                                    @foreach(\App\Misc::$casting_dancers as $key=>$at)
+                                        <option value="[data-casting-dancers={{preg_replace('/\s+/', '',  $at)}}]">{{$at}}</option>
 
                                     @endforeach
                                 </select>
                             </fieldset>
-<br>
+                            <br>
                         </div>
                     </div>
                 </form>
@@ -145,28 +145,22 @@
                     <div class="row">
                         <div class="actorContainer">
 
-                            @foreach($staffs as $staff)
+                            @foreach($theaters as $theater)
 
-                                <div data-primary-sought="{{ preg_replace('/\s+/', '', \App\Misc::$primary_sought[$staff->primary_sought]) }}" data-secondary-sought="{{ preg_replace('/\s+/', '', \App\Misc::$secondary_sought[$staff->secondary_sought]) }}" class="mix">
+                                <div data-musical-performers="{{ preg_replace('/\s+/', '', \App\Misc::$musical_performers[$theater->non_musical_yes]) }}" data-casting-dancers="{{ preg_replace('/\s+/', '', \App\Misc::$casting_dancers[$theater->dancers_yes]) }}" class="mix">
                                     <div class="col-md-4">
                                         <div class="tile-container">
                                             <div class="tile-thumbnail">
                                                 <a href="javascript:;">
-                                                    <img src="{{ $staff->photo_url }}" />
+                                                    <img src="{{ $theater->photo_url }}" />
                                                 </a>
                                             </div>
                                             <div class="tile-title">
                                                 <h3>
-                                                    <a href="javascript:;">{{ $staff->name }}</a>
+                                                    <a href="javascript:;">{{ $theater->name }}</a>
                                                 </h3>
-                                                <div class="tile-desc">
 
-                                                    <p>
-                                                        {{ "Availability:". $staff->from ." to ". $staff->to }}
-                                                    </p>
-                                                </div>
-
-                                                <a href="{{route('getStaffView', $staff->user_id) }}" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> {{ $staff->name }} </a>
+                                                <a href="{{route('getTheaterView', $theater->user_id) }}" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> {{ $theater->name }} </a>
                                             </div>
                                         </div>
                                     </div>

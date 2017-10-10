@@ -143,13 +143,13 @@
                                 <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
                                 <div class="hor-menu col-md-9">
                                     <ul class="nav navbar-nav">
-                                        <li class="active">
+                                        <li class="{{ @$homeactive ? 'active' : '' }}">
                                             <a href="{{route('getIndex')}}">
                                                 <i class="icon-home"></i> Home
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li class="menu-dropdown">
+                                        <li class="menu-dropdown {{ @$actoractive ? 'active' : @$staticactive=='actoractive' ? 'active' : '' }}">
                                             @if(Auth::check())
                                                 @if(\Auth::user()->role=="actor" && \Auth::user()->payment_status==1)
                                             <a href="{{ route('getActors') }}">
@@ -185,27 +185,33 @@
                                                     <a href="{{route('getSignup')}}">Register</a>
                                                 </li>
                                             </ul>
+                                        <li class="{{ @$staffactive ? 'active' : @$staticactive=='staffactive' ? 'active' : '' }}">
+                                            @if(Auth::check())
+                                                @if(\Auth::user()->role=="staff" && \Auth::user()->payment_status==1)
+                                                    <a href="{{ route('getStaffs') }}">
+                                                        @else
+                                                            <a href="{{route('getStaticPage',['slug'=>'staff'])}}">
+                                                                @endif
+                                                                @else
+                                                                    <a href="{{route('getStaticPage',['slug'=>'staff'])}}">
+                                                                        @endif
+                                                                        <i class="icon-users"></i> Staffs
+                                                                        <span class="arrow"></span>
+                                                                    </a>
 
-                                        @if(Auth::check())
-                                            @if(\Auth::user()->role=="staff")
-                                                <li>
-                                                    <a href="{{route('staff::staffProfile')}}">
-                                                        <i class="icon-user-following"></i> Staff
-                                                        <span class="arrow"></span>
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @else
-                                            <li>
-                                                <a href="{{route('getStaticPage',['slug'=>'staff'])}}">
-                                                    <i class="icon-user-following"></i> Staff
-                                                    <span class="arrow"></span>
-                                                </a>
-                                            </li>
-                                        @endif
-                                       <li class="menu-dropdown">
-                                           <a href="{{route('getStaticPage',['slug'=>'theater'])}}"><i class="icon-user-following"></i> Theaters
-                                               <span class="arrow"></span></a>
+                                       <li class="menu-dropdown {{ @$theateractive ? 'active' : @$staticactive=='theateractive' ? 'active' : '' }}">
+                                           @if(Auth::check())
+                                               @if(\Auth::user()->role=="theater" && \Auth::user()->payment_status==1)
+                                                   <a href="{{ route('getTheaters') }}">
+                                                       @else
+                                                           <a href="{{route('getStaticPage',['slug'=>'theater'])}}">
+                                                               @endif
+                                                               @else
+                                                                   <a href="{{route('getStaticPage',['slug'=>'theater'])}}">
+                                                                       @endif
+                                                                       <i class="icon-users"></i> Theaters
+                                                                       <span class="arrow"></span>
+                                                                   </a>
                                            <ul class="dropdown-menu pull-left">
                                                <li>
                                                    <a href="{{route('getStaticPage',['slug'=>'theaterintro'])}}">Theater Intro</a>
@@ -224,19 +230,19 @@
                                            </ul>
                                        </li>
 
-                                        <li>
+                                        <li class="{{ @$faqactive ? 'active' : '' }}">
                                             <a href="{{route('getFaq')}}">
                                                 <i class="icon-question"></i> FAQ
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="{{ @$youngeractive ? 'active' : '' }}">
                                             <a href="{{route('getYounger')}}">
                                                 <i class="icon-info"></i> Younger
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li class="menu-dropdown">
+                                        <li class="menu-dropdown {{ @$staticactive=='moreactive' ? 'active' : '' }}">
                                             <a href="javascript:;">
                                                 <i class="icon-briefcase"></i> More
                                                 <span class="arrow"></span>
@@ -250,7 +256,7 @@
                                                     </li>
                                             </ul>
                                         </li>
-                                        <li>
+                                        <li class="{{ @$contactactive ? 'active' : '' }}">
                                             <a href="{{route('getContact')}}">
                                                 <i class="icon-envelope"></i> Contact
                                                 <span class="arrow"></span>

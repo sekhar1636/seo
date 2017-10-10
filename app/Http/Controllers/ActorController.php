@@ -545,7 +545,10 @@ class ActorController extends Controller
 
             
         }*/
-        return view('actor.actorSearch1')->with('actorList', $actors);
+        return view('actor.actorSearch1')->with([
+            'actorList'=>$actors,
+            'actoractive' => 'active'
+        ]);
 
     }
 

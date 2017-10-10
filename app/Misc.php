@@ -69,6 +69,34 @@ class Misc
         '24' => 'Company Management'
     ];
 
+    public static $musical_performers = [
+      '1' => 'Non Musical Performers',
+      '2' => 'Musical Performers',
+      '3' => 'Not Certain',
+      ''  => 'Not selected Musical Performers'
+    ];
+
+    public static $view_musical_performers = [
+        '1' => 'Yes',
+        '2' => 'No',
+        '3' => 'Not Certain',
+        ''  => 'Theater User not selected this field.'
+    ];
+
+    public static $casting_dancers = [
+        '1' => 'Casting Dancers',
+        '2' => 'Non Casting Dancers',
+        '3' => 'Not Certain',
+        ''  => 'Not Selected Casting Dancer'
+    ];
+
+    public static $view_casting_dancers = [
+        '1' => 'Yes',
+        '2' => 'No',
+        '3' => 'Not Certain',
+        ''  => 'Theater User Not selected this field'
+    ];
+
 	public static $showPage = [
 		'0' => 'No',
 		'1' => 'Yes',	

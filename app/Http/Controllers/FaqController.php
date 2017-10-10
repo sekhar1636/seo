@@ -12,6 +12,6 @@ class FaqController extends Controller
         $faq['audition'] = Faq::where('_type', '=', "Audition")->get();
         $faq['members'] = Faq::where('_type', '=', "Members")->get();
         $faq['selection'] = Faq::where('_type', '=', "Selection")->get();
-        return view('common.faq',compact('faq'));
+        return view('common.faq',compact('faq'))->with('faqactive','active');
     }
 }

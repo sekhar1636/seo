@@ -174,7 +174,18 @@ class StaffController extends Controller
             ->where('payment_status',1)->orderBy('name', 'asc')
             ->get();
 
-        return view('staff.staffsearch')->with('staffs', $staffs);
+        return view('staff.staffsearch')->with([
+            'staffs'=>$staffs,
+            'staffactive' => 'active'
+        ]);
+    }
+
+    public function view($id)
+    {
+        $staff = User::findorfail($id);
+        return view('staff.profileView')->with([
+            'staff'=>$staff,
+        ]);
     }
 
     public function postPhotoUpdate(Request $request)

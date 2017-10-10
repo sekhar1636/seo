@@ -32,7 +32,7 @@ class CommonController extends Controller
             if($slides[0]['status'] == 1) $slideshows = Slide::where("slideshow_id", $slides[0]['id'])->get();
         }
 
-	    return view('common.index', compact('slideshows'));
+	    return view('common.index', compact('slideshows'))->with('homeactive','active');
 	}
 
 	// public function getRole(){

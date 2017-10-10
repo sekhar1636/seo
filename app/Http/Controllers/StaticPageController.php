@@ -16,11 +16,32 @@ class StaticPageController extends Controller
             $status = $val['status'];
         }
 
+        $active='';
+        if($slug=="actor" || $slug=="howitworks" || $slug=="instructions" || $slug=="auditiontypes" || $slug=="criteria" || $slug=="headshot" || $slug=="resumeadvice")
+        {
+            $active = 'actoractive';
+        }
+        if($slug=="theater" || $slug=="theaterintro" || $slug=="auditionschedule" || $slug=="theaterregistrationfees" || $slug=="theatercompanies")
+        {
+            $active = 'theateractive';
+        }
+
+        if($slug=="staff")
+        {
+            $active = 'staffactive';
+        }
+
+        if($slug=="aboutstrawhat" || $slug=="kristijaybios")
+        {
+            $active = 'moreactive';
+        }
+
         return view('staticpage.content')->with([
             'description' => $desc,
             'title' => $title,
             'status' => $status,
-            'divactive' => 'active'
+            'divactive' => 'active',
+            'staticactive' => $active
         ]);
     }
 
