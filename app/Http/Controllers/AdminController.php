@@ -29,7 +29,7 @@ use App\Payment;
 class AdminController extends Controller
 {
     public function index(){
-    	return view("admin.index")->with('tabactive','active');
+    	return view("admin.index")->with('homeactive','active');
     }//end function
 	
 	//======================================================================
@@ -37,7 +37,7 @@ class AdminController extends Controller
 	//======================================================================
 	
 	public function faq(){
-    	return view("admin.faq")->with('tabactive','active');
+    	return view("admin.faq")->with('faqactive','active');
     }
 	
 	public function faqStore(Request $request){
@@ -115,7 +115,7 @@ class AdminController extends Controller
 	//======================================================================
 	
 	public function slideshows(){
-    	return view("admin.slideshows");
+    	return view("admin.slideshows")->with('slideshowactive','active');
     }
 	
 	public function slideshowStore(Request $request){
@@ -278,7 +278,7 @@ class AdminController extends Controller
 	// Users Functions
 	//======================================================================
 	public function users(){
-    	return view("admin.users");
+    	return view("admin.users")->with('useractive','active');
     }
 	
 	public function userStore(Request $request){
@@ -1051,7 +1051,7 @@ class AdminController extends Controller
 	//======================================================================
 	
 	public function contentPages(){
-    	return view("admin.content_pages");
+    	return view("admin.content_pages")->with('contentactive','active');
     }
 	
     public function contentPagesDataTable(){
@@ -1104,7 +1104,7 @@ class AdminController extends Controller
 	//======================================================================
 	
 	public function subscriptions(){
-		return view("admin.subscription");
+		return view("admin.subscription")->with('subscriptionactive','active');
     }
 	
 	public function subscriptionsDataTable(){
@@ -1190,7 +1190,7 @@ class AdminController extends Controller
     }
 	
 	public function products(){
-		return view("admin.products");
+		return view("admin.products")->with('productactive','active');
     }
 	
 	public function productsDataTable(){

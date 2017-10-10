@@ -116,43 +116,43 @@
                                 <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
                                 <div class="hor-menu  ">
                                     <ul class="nav navbar-nav">
-                                        <li>
+                                        <li class="{{ @$homeactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminDashboard')}}">
                                                 <i class="icon-home"></i> Home
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="{{ @$useractive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminUsers')}}">
                                                 Users
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="{{ @$faqactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminFaq')}}">
                                                 FAQ
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="{{ @$slideshowactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminSlideshows')}}">
                                                 Slideshows
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="{{ @$contentactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminContentPages')}}">
                                                 Content Pages
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="{{ @$subscriptionactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminSubscriptions')}}">
                                                 Subscription
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="{{ @$productactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminProducts')}}">
                                                 Products
                                                 <span class="arrow"></span>
@@ -175,7 +175,7 @@
                         <!-- BEGIN CONTENT -->
                         <div class="page-content-wrapper">
                             <!-- BEGIN CONTENT BODY -->
-                            
+
                             @if(\Route::getCurrentRoute()->uri != '/')
                             <!-- BEGIN PAGE HEAD-->
                             <div class="page-head">
