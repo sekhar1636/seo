@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('products', ['as'=>'actorProducts', 'uses'=>'ActorController@products']);
 			Route::post('photo/update', ['as'=>'postPhotoUpdate', 'uses'=>'ActorController@postPhotoUpdate']);
 			Route::post('photo/crop', ['as'=>'postCropPhotoUpdate', 'uses'=>'ActorController@postCropPhotoUpdate']);
-			Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'ActorController@getDeletePhoto']);
+			Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'ActorController@actorPhotoDelete']);
 			Route::get('products', ['as'=>'products', 'uses'=>'ActorController@products']);
 			Route::post('product/buy', ['as'=>'buyProduct', 'uses'=>'ActorController@productBuy']);
 			Route::post('updaterole',['as'=>'updateUsersRole','uses'=>'ActorController@userroles']);
@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('payment', ['as'=>'storeStaffPayment', 'uses'=>'StaffController@paymentStore']);
             Route::post('photo/update', ['as'=>'postPhotoUpdate', 'uses'=>'StaffController@postPhotoUpdate']);
             Route::post('photo/crop', ['as'=>'postCropPhotoUpdate', 'uses'=>'StaffController@postCropPhotoUpdate']);
-            Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'StaffController@getDeletePhoto']);
+            Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'StaffController@staffPhotoDelete']);
             Route::post('password', ['as'=>'postEditPassword', 'uses'=>'StaffController@postEditPassword']);
 		});
 	});
@@ -96,7 +96,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('payment', ['as'=>'storeTheaterPayment', 'uses'=>'TheaterController@paymentStore']);
             Route::post('photo/update', ['as'=>'postPhotoUpdate', 'uses'=>'TheaterController@postPhotoUpdate']);
             Route::post('photo/crop', ['as'=>'postCropPhotoUpdate', 'uses'=>'TheaterController@postCropPhotoUpdate']);
-            Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'TheaterController@getDeletePhoto']);
+            Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'TheaterController@theaterPhotoDelete']);
             Route::post('password', ['as'=>'postEditPassword', 'uses'=>'TheaterController@postEditPassword']);
 
         });

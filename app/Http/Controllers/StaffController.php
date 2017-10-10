@@ -180,6 +180,19 @@ class StaffController extends Controller
         ]);
     }
 
+    public function staffPhotoDelete(){
+        $staff = Staff::where('user_id', \Auth::User()->id)->first();
+        unlink(public_path().'/'.$staff->precrop_path);
+        $staff->precrop_url = null;
+        $staff->precrop_path = null;
+
+        if($staff->update()){
+            return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
+        }else{
+            return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
+        }
+    }
+
     public function view($id)
     {
         $staff = User::findorfail($id);

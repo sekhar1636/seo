@@ -155,6 +155,19 @@ class TheaterController extends Controller
         }
     }
 
+    public function theaterPhotoDelete(){
+        $theater = Theater::where('user_id', \Auth::User()->id)->first();
+        unlink(public_path().'/'.$theater->precrop_path);
+        $theater->precrop_url = null;
+        $theater->precrop_path = null;
+
+        if($theater->update()){
+            return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
+        }else{
+            return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
+        }
+    }
+
     public function postPhotoUpdate(Request $request)
     {
         $validator = \Validator::make($request->all(),

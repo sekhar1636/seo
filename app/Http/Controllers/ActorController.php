@@ -552,6 +552,19 @@ class ActorController extends Controller
 
     }
 
+    public function actorPhotoDelete(){
+        $actor = Actor::where('user_id', \Auth::User()->id)->first();
+        unlink(public_path().'/'.$actor->precrop_path);
+        $actor->precrop_url = null;
+        $actor->precrop_path = null;
+
+        if($actor->update()){
+            return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
+        }else{
+            return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
+        }
+    }
+
     /** View user */
     public function view($id){
         $actor = \App\User::findOrFail($id);
