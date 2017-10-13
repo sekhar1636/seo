@@ -1114,14 +1114,63 @@
 
 											 <div class="col-md-9">
 
-												 {!! Form::select('roles_chosen[]',App\Misc::$accountTypes, $rol, ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "roles"]) !!}
-
+{!! Form::text('roles_chosen',null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
 												 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
 
 											 </div>
 
 										 </div>
+									 </div>
+									 <div class="col-md-6">
 
+										 <div class="form-group" {{ $errors->has("roles_chosen") ? "has-error":"" }}'>
+
+										 <label for="Roles" class="control-label col-md-3">Show</label>
+
+										 <div class="col-md-9">
+
+											 {!! Form::text('show',null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+											 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+
+										 </div>
+
+									 </div>
+							 </div>
+ </div>
+
+
+										 <div class="row">
+											 <div class="col-md-6">
+
+												 <div class="form-group" {{ $errors->has("roles_chosen") ? "has-error":"" }}'>
+
+												 <label for="Roles" class="control-label col-md-3">Theater</label>
+
+												 <div class="col-md-9">
+
+													 {!! Form::text('theater',null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+													 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+
+												 </div>
+
+											 </div>
+										 </div>
+ <div class="col-md-6">
+
+	 <div class="form-group" {{ $errors->has("roles_chosen") ? "has-error":"" }}'>
+
+	 <label for="Roles" class="control-label col-md-3">Dir/Chor/Other</label>
+
+	 <div class="col-md-9">
+
+		 {!! Form::text('dir_chor',null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+		 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+
+	 </div>
+
+ </div>
+ </div>
+ </div>
 										 <div class="margin-top-20">
 
 											 <button type="submit" class="btn green"> Roles </button>
@@ -1129,6 +1178,39 @@
 
 
 										 </div>
+<br>
+ <table class="table table-striped table-bordered table-advance table-hover">
+	 <thead>
+	 <tr>
+		 <th>
+			 <i class="fa fa-briefcase"></i> Role </th>
+		 <th class="hidden-xs">
+			 <i class="fa fa-question"></i> Show </th>
+		 <th>
+			 <i class="fa fa-home"></i> Theater </th>
+		 <th>
+			 <i class="fa fa-user"></i> Dir/Choreo/Other </th>
+
+	 </tr>
+	 </thead>
+	 <tbody>
+
+	 @foreach($rol as $val)
+	 <tr>
+		 <td>
+			 {{ $val['roles_chosen'] }}
+		 </td>
+		 <td class="hidden-xs">  {{ $val['show'] }} </td>
+		 <td> {{ $val['theater'] }}
+
+		 </td>
+		 <td>
+			 {{ $val['dir_chor'] }}
+		 </td>
+	 </tr>
+	 @endforeach
+	 </tbody>
+ </table>
 							 </div>
 
 								 </form>

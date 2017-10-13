@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actor;
+use App\ActorRole;
 use App\ProductVariant;
 use App\SubscriptionPackage;
 use Illuminate\Http\Request;
@@ -133,12 +134,11 @@ class ActorController extends Controller
         }
         $uid = \Auth::user()->id;
         $actor = Actor::where('user_id',$uid)->get();
-        $roles = User::findorFail($uid);
-        $rol = explode(',',$roles->roles_chosen);
+        $roles = ActorRole::where('user_id',$uid)->get();
 
         if(!empty($actor[0]))
         {
-            return view('actor.editProfile')->with('actor',$actor)->with('weight', $weight)->with('age', $age)->with('rol',$rol);
+            return view('actor.editProfile')->with('actor',$actor)->with('weight', $weight)->with('age', $age)->with('rol',$roles);
         }
         //$actors = User::where('payment_status',1)->where('verified',1)->orderBy('id','desc');
         //$user = \Auth::user();
@@ -146,7 +146,7 @@ class ActorController extends Controller
             return view('actor.editProfile')->with([
                 'weight'=>$weight,
                 'age'=>$age,
-                'rol'=>$rol
+                'rol'=>$roles
             ]);
     }
 
@@ -268,8 +268,12 @@ class ActorController extends Controller
 
     public function userroles(Request $request)
     {
-        $user = User::findorFail(\Auth::user()->id);
-        $user->roles_chosen = implode(',', $request->roles_chosen);
+        $user = new ActorRole;
+        $user->roles_chosen = $request->roles_chosen;
+        $user->show = $request->show;
+        $user->theater = $request->theater;
+        $user->dir_chor = $request->dir_chor;
+        $user->user_id = \Auth::user()->id;
         $user->save();
 
         return redirect()->route('actor::actorProfile')->with('success_message', 'user roles Successfully Created');
@@ -568,7 +572,11 @@ class ActorController extends Controller
     /** View user */
     public function view($id){
         $actor = \App\User::findOrFail($id);
-        return view('actor.profileView')->with('actor', $actor);
+        $actor_role = \App\ActorRole::where('user_id',\Auth::user()->id)->get();
+        return view('actor.profileView')->with([
+            'actor'=>$actor,
+            'actor_role' => $actor_role
+        ]);
     }
 
     /*

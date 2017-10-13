@@ -151,30 +151,20 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-  
+                                                @foreach($actor_role as $val)
                                                     <tr>
                                                         <td>
-                                                            Let's Rock! 
+                                                            {{ $val['roles_chosen'] }}
                                                         </td>
-                                                        <td class="hidden-xs">  Band Girl </td>
-                                                        <td> RWS & Associates @ Idlewild Park 
+                                                        <td class="hidden-xs">  {{ $val['show'] }} </td>
+                                                        <td> {{ $val['theater'] }}
                                                             
                                                         </td>
                                                         <td>
-                                                            Amy Cannon
+                                                            {{ $val['dir_chor'] }}
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            American Beat
-                                                        </td>
-                                                        <td class="hidden-xs"> Band Girl</td>
-                                                        <td> Soloist RWS & Associates @ Idlewild Park 
-                                                        </td>
-                                                        <td>
-                                                            Amy Cannon
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

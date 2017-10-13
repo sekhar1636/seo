@@ -53,6 +53,11 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Staff');
     }
+
+    public function actors_role()
+    {
+        return $this->hasMany(ActorRole::class);
+    }
 	
 	public function delete()
     {
