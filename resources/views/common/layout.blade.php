@@ -151,10 +151,10 @@
                                         </li>
                                         <li class="menu-dropdown {{ @$actoractive ? 'active' : @$staticactive=='actoractive' ? 'active' : '' }}">
                                             @if(Auth::check())
-                                                @if(\Auth::user()->role=="actor" && \Auth::user()->payment_status==1)
+                                                @if(\Auth::user()->payment_status==1)
                                             <a href="{{ route('getActors') }}">
                                                 @else
-                                                    <a href="{{route('getStaticPage',['slug'=>'actor'])}}">
+                                                    <a href="{{route('theater::theaterProfile')}}">
                                                 @endif
                                             @else
                                                   <a href="{{route('getStaticPage',['slug'=>'actor'])}}">
@@ -187,10 +187,10 @@
                                             </ul>
                                         <li class="{{ @$staffactive ? 'active' : @$staticactive=='staffactive' ? 'active' : '' }}">
                                             @if(Auth::check())
-                                                @if(\Auth::user()->role=="staff" && \Auth::user()->payment_status==1)
+                                                @if(\Auth::user()->payment_status==1)
                                                     <a href="{{ route('getStaffs') }}">
                                                         @else
-                                                            <a href="{{route('getStaticPage',['slug'=>'staff'])}}">
+                                                            <a href="{{route('staff::staffProfile')}}">
                                                                 @endif
                                                                 @else
                                                                     <a href="{{route('getStaticPage',['slug'=>'staff'])}}">
@@ -201,10 +201,10 @@
 
                                        <li class="menu-dropdown {{ @$theateractive ? 'active' : @$staticactive=='theateractive' ? 'active' : '' }}">
                                            @if(Auth::check())
-                                               @if(\Auth::user()->role=="theater" && \Auth::user()->payment_status==1)
+                                               @if(\Auth::user()->payment_status==1)
                                                    <a href="{{ route('getTheaters') }}">
                                                        @else
-                                                           <a href="{{route('getStaticPage',['slug'=>'theater'])}}">
+                                                           <a href="{{route('theater::theaterProfile')}}">
                                                                @endif
                                                                @else
                                                                    <a href="{{route('getStaticPage',['slug'=>'theater'])}}">
