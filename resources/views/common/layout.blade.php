@@ -249,10 +249,10 @@
                                             </a>
                                             <ul class="dropdown-menu pull-left">
                                                     <li>
-                                                        <a href="{{ route('getStaticPage',['slug'=>'aboutstrawhat']) }}">About StrawHat</a>
+                                                        <a href="{{ route('getStaticPage',['slug'=>'aboutstrawhat']) }}">Our Company</a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('getStaticPage',['slug'=>'kirstijaybios']) }}">Kiristi & Jay Bios</a>
+                                                        <a href="{{ route('getStaticPage',['slug'=>'kirstijaybios']) }}">Who We are?</a>
                                                     </li>
                                             </ul>
                                         </li>
