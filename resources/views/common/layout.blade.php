@@ -225,7 +225,7 @@
                                                </li>
 
                                                <li>
-                                                   <a href="{{route('getStaticPage',['slug'=>'theatercompanies'])}}">Companies</a>
+                                                   <a href="{{route('getStaticPage',['slug'=>'theatercompanies'])}}">Past Companies</a>
                                                </li>
                                            </ul>
                                        </li>

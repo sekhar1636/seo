@@ -157,6 +157,10 @@ class StaffController extends Controller
         $staff->sound = $request->sound;
         $staff->state_management = $request->state_management;
         $staff->company_management = $request->company_management;
+        $staff->phone_number = $request->phone_number;
+        if($request->hasFile('resume')) {
+            $this->uploadResume($staff,$request->file('resume'), $request->get('name'));
+        }
         if($request->tes == "PUT"){
             if($staff->update()){
                 return redirect()->back()->with('success_message', 'Profile Data Successfully Updated');
@@ -166,6 +170,13 @@ class StaffController extends Controller
                 return redirect()->route('actor::actorProfile')->with('success_message', 'Profile Data Successfully Created');
             }
         }
+    }
+    public function uploadResume($staff,$file, $name){
+        $destinationPath = 'assets/files'; // upload path
+        $extension = $file->getClientOriginalExtension();
+        $fileName = $name.rand(11111,99999).'.'.$extension; // renameing image
+        $file->move(public_path($destinationPath), $fileName);
+        $staff->resume_path = $destinationPath.'/'.$fileName;
     }
 
     public function getStaff(){

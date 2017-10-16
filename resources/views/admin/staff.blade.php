@@ -576,6 +576,70 @@
                                                     <label>Company Management</label><br>
                                                 </div>
                                             </div>
+                                            <br><br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+
+                                                    <div class="form-group">
+
+                                                        <label class="control-label col-md-3">Resume</label>
+
+                                                        <div class="col-md-3">
+
+                                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+
+                                                                <div class="input-group input-large">
+
+                                                                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+
+                                                                        <i class="fa fa-file fileinput-exists"></i>&nbsp;
+
+
+
+                                                                        <span class="fileinput-filename"> {{isset($staff->resume_path) ? 'Resume exist' : ''}}</span>
+
+                                                                    </div>
+
+                                                                    <span class="input-group-addon btn default btn-file">
+
+                                                        <span class="fileinput-new"> Select file </span>
+
+                                                        <span class="fileinput-exists"> Change </span>
+
+                                                        <input type="file" name="resume"> </span>
+
+                                                                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <span class="help-block"> {{ $errors->first("resume") }} </span>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+
+                                                    <div class="form-group" {{ $errors->has("phone_number") ? "has-error":"" }}'>
+
+                                                    <label class="control-label col-md-3">Phone Number</label>
+
+                                                    <div class="col-md-6">
+
+                                                        {!! Form::text('phone_number', @$staff->phone_number ? $staff->phone_number : null, ['class' => 'form-control', 'placeholder' => 'Phone Number', 'maxlength'=>'20']) !!}
+
+                                                        <span class="help-block"> {{ $errors->first("age_twenty_one") }} </span>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
     <!--/row-->
 
 

@@ -238,8 +238,6 @@
 
                             </li>
 
-                           
-
                             <li>
 
                                 <a href="#tab_1_2"  data-toggle="tab">
@@ -824,7 +822,7 @@
 
 				                 		<div class="form-group">
 
-                                        <label class="control-label col-md-3">Resume (Optional)</label>
+                                        <label class="control-label col-md-3">Resume</label>
 
                                         <div class="col-md-3">
 
@@ -1173,7 +1171,7 @@
  </div>
 										 <div class="margin-top-20">
 
-											 <button type="submit" class="btn green"> Roles </button>
+											 <button type="submit" class="btn green"> Submit </button>
 
 
 
