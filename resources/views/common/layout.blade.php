@@ -195,7 +195,7 @@
                                                                 @else
                                                                     <a href="{{route('getStaticPage',['slug'=>'staff'])}}">
                                                                         @endif
-                                                                        <i class="icon-users"></i> Staffs
+                                                                        <i class="icon-users"></i> Staff/Tech
                                                                         <span class="arrow"></span>
                                                                     </a>
 
