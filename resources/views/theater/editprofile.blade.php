@@ -371,7 +371,7 @@
 
                                                                 <div class="form-group" {{ $errors->has("company_name") ? "has-error":"" }}'>
 
-                                                                <label class="control-label col-md-3">Theater</label>
+                                                                <label class="control-label col-md-3"><strong>Theater</strong></label>
 
                                                                 <div class="col-md-9">
 
@@ -389,7 +389,7 @@
 
                                                             <div class="form-group" {{ $errors->has("contact_number") ? "has-error":"" }}'>
 
-                                                            <label class="control-label col-md-3">Contact Number</label>
+                                                            <label class="control-label col-md-3"><strong>Contact Number</strong></label>
 
                                                             <div class="col-md-9">
 
@@ -413,7 +413,7 @@
 
                                                     <div class="form-group" {{ $errors->has("email") ? "has-error":"" }}'>
 
-                                                    <label class="control-label col-md-3">Email</label>
+                                                    <label class="control-label col-md-3"><strong>Email</strong></label>
 
                                                     <div class="col-md-9">
 
@@ -429,7 +429,7 @@
                                             <div class="col-md-6">
                                             <div class="form-group" {{ $errors->has("website") ? "has-error":"" }}'>
 
-                                            <label class="control-label col-md-3">Website</label>
+                                            <label class="control-label col-md-3"><strong>Website</strong></label>
 
                                             <div class="col-md-9">
 
@@ -450,7 +450,7 @@
 
                                             <div class="form-group" {{ $errors->has("mailing") ? "has-error":"" }}'>
 
-                                            <label class="control-label col-md-3">Mailing</label>
+                                            <label class="control-label col-md-3"><strong>Mailing</strong></label>
 
                                             <div class="col-md-9">
 
@@ -466,7 +466,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group" {{ $errors->has("telephone") ? "has-error":"" }}'>
 
-                                        <label class="control-label col-md-3">Telephone</label>
+                                        <label class="control-label col-md-3"><strong>Telephone</strong></label>
 
                                         <div class="col-md-9">
 
@@ -486,7 +486,7 @@
 
                                     <div class="form-group" {{ $errors->has("fax") ? "has-error":"" }}'>
 
-                                    <label class="control-label col-md-3">Fax</label>
+                                    <label class="control-label col-md-3"><strong>Fax</strong></label>
 
                                     <div class="col-md-9">
 
@@ -502,7 +502,7 @@
                             <div class="col-md-6">
                                 <div class="form-group" {{ $errors->has("zipcode") ? "has-error":"" }}'>
 
-                                <label class="control-label col-md-3">Zipcode</label>
+                                <label class="control-label col-md-3"><strong>Zipcode</strong></label>
 
                                 <div class="col-md-9">
 
@@ -520,7 +520,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group" {{ $errors->has("non_musical_performers") ? "has-error":"" }}'>
 
-                                            <label class="control-label col-md-6">Are You Casting Non Musical Performers this Season?</label>
+                                            <label class="control-label col-md-6"><strong>Are You Casting Non Musical Performers this Season?</strong></label>
 
                                             <div class="col-md-6">
                                                 {!! Form::radio('non_musical_yes',1,@$theater[0]['non_musical_yes']==1 ? true : null) !!}
@@ -541,7 +541,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
 
-                                        <label class="control-label col-md-6">Are You Casting Dancers this Season?</label>
+                                        <label class="control-label col-md-6"><strong>Are You Casting Dancers this Season?</strong></label>
 
                                         <div class="col-md-6">
 
@@ -564,7 +564,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group" {{ $errors->has("days") ? "has-error":"" }}'>
 
-                                    <label class="control-label col-md-6">Which Days do you plan to attend?</label>
+                                    <label class="control-label col-md-6"><strong>Which Days do you plan to attend?</strong></label>
 
                                     <div class="col-md-6">
 
@@ -587,7 +587,7 @@
                         <div class="col-md-12">
                             <table class="col-md-12">
                             <th>
-                                <tr><td>Name</td><td>Title</td></tr>
+                                <tr><td><strong>Name</strong></td><td><strong>Title</strong></td></tr>
                             </th>
                                 <tbody>
                                 <tr><td>{!! Form::text('name_table_1',@$theater[0]['name_table_1'] ? $theater[0]['name_table_1'] : null,['class' => 'form-control', 'placeholder' => ' Name', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td><td>{!! Form::text('title_table_1',@$theater[0]['title_table_1'] ? $theater[0]['title_table_1'] : null,['class' => 'form-control', 'placeholder' => 'Title', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td></tr>
@@ -600,7 +600,7 @@
                             <div class="col-md-12">
                                 <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
 
-                                <label class="control-label col-md-6">Do You accept Video Auditions?</label>
+                                <label class="control-label col-md-6"><strong>Do You accept Video Auditions?</strong></label>
 
                                 <div class="col-md-6">
 
@@ -624,7 +624,7 @@
                         <div class="col-md-12">
                             <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
 
-                            <label class="control-label col-md-6">Do you operate on a AEA contract?</label>
+                            <label class="control-label col-md-6"><strong>Do you operate on a AEA contract?</strong></label>
 
                             <div class="col-md-6">
 
@@ -646,7 +646,7 @@
         <div class="col-md-12">
             <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
 
-            <label class="control-label col-md-6">Do you offer EMC points?</label>
+            <label class="control-label col-md-6"><strong>Do you offer EMC points?</strong></label>
 
             <div class="col-md-6">
                 {!! Form::radio('non_musical_not_certain',1,@$theater[0]['non_musical_not_certain']==1 ? true : null) !!}
@@ -657,6 +657,19 @@
         </div>
     </div>
 </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label for="Roles" class="control-label col-md-3"><strong>Aea Contract</strong></label>
+
+            <div class="col-md-9">
+
+                {!! Form::select('aea_contract',\App\Misc::$aea, (@$theater[0]['aea_contract']) ? @$theater[0]['aea_contract'] : null, [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
+
+                <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+
+            </div>
+        </div>
+    </div>
     </div>
 
 

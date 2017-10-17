@@ -638,6 +638,7 @@ class AdminController extends Controller
         $theater->title_table_1 = $request->title_table_1;
         $theater->name_table_2 = $request->name_table_2;
         $theater->title_table_2 = $request->title_table_2;
+        $theater->aea_contract = $request->aea_contract;
         if($request->m == "PUT"){
             if($theater->update()){
                 return redirect()->back()->with('success_message', 'Theater Data Successfully Updated');

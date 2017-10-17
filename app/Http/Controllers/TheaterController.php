@@ -143,6 +143,7 @@ class TheaterController extends Controller
         $theater->title_table_1 = $request->title_table_1;
         $theater->name_table_2 = $request->name_table_2;
         $theater->title_table_2 = $request->title_table_2;
+        $theater->aea_contract = $request->aea_contract;
 
         if($request->tes == "PUT"){
             if($theater->update()){

@@ -718,6 +718,19 @@
         </div>
     </div>
                 </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label for="Roles" class="control-label col-md-3"><strong>Aea Contract</strong></label>
+
+            <div class="col-md-9">
+
+                {!! Form::select('aea_contract',\App\Misc::$aea, (@$theater->aea_contract) ? @$theater->aea_contract : null, [  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
+
+                <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+
+            </div>
+        </div>
+    </div>
     </div>
 
                 <!--/row-->

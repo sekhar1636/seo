@@ -237,6 +237,52 @@ class Misc
         4 => 'Next Year'
     ];
 
+    public static $aea = [
+        'ANTC' => 'ANTC',
+'Bay Area Theatre' => 'Bay Area Theatre',
+'Business Theatre & Events' => 'Business Theatre & Events',
+'Cabaret' => 'Cabaret',
+'Casino' => 'Casino',
+'CAT' => 'CAT',
+'CORST' => 'CORST',
+'COST' => 'COST',
+'Dinner Theatre' => 'Dinner Theatre',
+'Dinner Theatre Artist' => 'Dinner Theatre Artist',
+'Disney World' => 'Disney World',
+'Guest Artist' => 'Guest Artist',
+'HAT' => 'HAT',
+'LOA' => 'LOA',
+'LOA-NYC' => 'LOA-NYC',
+'LORT Non-Rep' => 'LORT Non-Rep',
+'LORT Rep' => 'LORT Rep',
+'LA 99-Seat Theatre Code' => 'LA 99-Seat Theatre Code',
+'Midsize Theatres' => 'Midsize Theatres',
+'Mini' => 'Mini',
+'Modified BAT' => 'Modified BAT',
+'MSUA' => 'MSUA',
+'NEAT' => 'NEAT',
+'NOLA' => 'NOLA',
+'OAT' => 'OAT',
+'Off-Broadway' => 'Off-Broadway',
+'Outdoor Drama' => 'Outdoor Drama',
+'Production (Disney)' => 'Production (Disney)',
+'Production (League)' => 'Production (League)',
+'RMTA' => 'RMTA',
+'Short Engagement Touring Agreement' => 'Short Engagement Touring Agreement',
+'Showcase-NY' => 'Showcase-NY',
+'Special Agreement' => 'Special Agreement',
+'Special Appearance' => 'Special Appearance',
+'Special Production-Central' => 'Special Production-Central',
+'Special Production-Eastern' => 'Special Production-Eastern',
+'Special Production-Western' => 'Special Production-Western',
+'SPT' => 'SPT',
+'Transition' => 'Transition',
+'TYA' => 'TYA',
+'URTA' => 'URTA',
+'WCLO' => 'WCLO',
+'Workshop' => 'Workshop'
+    ];
+
 	public static function arrayInsertBefore($key, array &$array, $new_key, $new_value) {
 		if (array_key_exists($key, $array)) {
 			$new = array();
