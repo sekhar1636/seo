@@ -51,7 +51,15 @@ class LoginController extends Controller
             if(Auth::user()->role == "admin"){
                 return redirect()->route('admin::adminDashboard');
             }
-            return redirect()->intended(route('getIndex'));
+            if(Auth::user()->role == "actor")
+            {
+                return redirect()->route('actor::actorProfile');
+            }else if(Auth::user()->role == 'theater'){
+                return redirect()->route('theater::theaterProfile');
+            }else if(Auth::user()->role == 'staff'){
+                return redirect()->route('staff::staffProfile');
+            }
+            //return redirect()->intended(route('getIndex'));
         } else {
             return redirect()
                 ->back()->with('error_message', 'Incorrect credentials or account not approved yet.');
