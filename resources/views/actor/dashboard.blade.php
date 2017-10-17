@@ -73,7 +73,7 @@
                                             </div>
                                         </div>
                                         @endif
-                                        @if(\Auth::user()->actor->first_name != Null)
+                                        @if(\Auth::user()->actor->first_name != Null && @$resume != '')
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
                                                     <div class="timeline-icon">
@@ -95,8 +95,33 @@
                                             </span>
                                                     </div>
                                                 </div>
+                                                @elseif(@$resume == '')
+                                                    <div class="timeline-item">
+                                                        <div class="timeline-badge">
+                                                            <div class="timeline-icon">
+                                                                <i class="icon-user-following font-red"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="timeline-body inactiveBox">
 
-                                        @else
+                                                            <div class="timeline-body-head">
+                                                                <div class="timeline-body-head-caption">
+                                                                    <span class="timeline-body-alerttitle font-red-intense">Please Update Your Resume</span>
+
+                                                                </div>
+                                                                <div class="timeline-body-head-actions">
+                                                                    <a href="{{route('actor::getEditProfile')}}" class="btn btn-danger">Update</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Update Your resume information
+
+                                            </span>
+                                                            </div>
+                                                        </div>
+
+
+                                                    @else
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
                                                     <div class="timeline-icon">
@@ -154,7 +179,7 @@
                                             </div>
                                     </div>
                                     <!-- END TIMELINE ITEM -->
-                                    @if(@$hardcopy == 0)
+                                    @if(@$hardcopy == 0 && @$hardcopy != 2)
                                     <div class="timeline-item">
                                         <div class="timeline-badge">
                                             <div class="timeline-icon">
@@ -176,7 +201,7 @@
                                         </div>
                                     </div>
                                     @endif
-                                    @if(@$hardcopy==1)
+                                    @if(@$hardcopy==1 && @$hardcopy != 2)
                                         <div class="timeline-item">
                                             <div class="timeline-badge">
                                                 <div class="timeline-icon">
@@ -197,7 +222,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
+@endif
                                 @else
                                     <div class="timeline-item">
                                         <div class="timeline-badge">

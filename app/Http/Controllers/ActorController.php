@@ -35,7 +35,7 @@ class ActorController extends Controller
         {
             $verify = 0;
         }
-        $hardcop = Actor::select('hardcopy_status','audition_status')->where('user_id',$user_id)->get();
+        $hardcop = Actor::select('hardcopy_status','audition_status','resume_path')->where('user_id',$user_id)->get();
 
         $mytime = \Carbon\Carbon::now();
         $today_date = $mytime->toDateString();
@@ -54,11 +54,14 @@ class ActorController extends Controller
         }
         $hardcopy = (!empty($hardcop[0]['hardcopy_status'])) ? (!empty($hardcop[0]['hardcopy_status'])) : 0;
         $audition = (!empty($hardcop[0]['audition_status'])) ? (!empty($hardcop[0]['audition_status'])) : 0;
+        $resume = (!empty($hardcop[0]['resume_path'])) ? (!empty($hardcop[0]['resume_path'])) : 0;
+
 
         return view('actor.dashboard')->with([
             'verify' => $verify,
             'hardcopy' => $hardcopy,
-            'audition_status' => $audition
+            'audition_status' => $audition,
+            'resume' => $resume
         ]);
     }
 
