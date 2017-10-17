@@ -141,7 +141,7 @@ Route::group(['middleware' => ['auth']], function () {
 
             Route::match(array('POST', 'PUT'),'theater/{id}', ['as'=>'adminTheaterUpdate', 'uses'=>'AdminController@theaterUpdate']);
             Route::post('theater/{id}/photo', ['as'=>'theaterPhotoUpdate', 'uses'=>'AdminController@theaterPhotoUpdate']);
-            Route::post('theater/{id}/cropPhoto', ['as'=>'theaterCropPhoto', 'uses'=>'AdminController@posttheaterCropPhotoUpdate']);
+            Route::put('theater/{id}/cropPhoto', ['as'=>'theaterCropPhoto', 'uses'=>'AdminController@posttheaterCropPhotoUpdate']);
             Route::get('theater/{id}/deletePhoto', ['as'=>'theaterPhotoDelete', 'uses'=>'AdminController@theaterPhotoDelete']);
 
             Route::match(array('POST','PUT'),'staff/{id}',['as'=>'adminStaffUpdate','uses'=>'AdminController@staffupdate']);

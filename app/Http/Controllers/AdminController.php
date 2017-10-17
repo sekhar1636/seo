@@ -961,6 +961,7 @@ class AdminController extends Controller
   
     }
     public function posttheaterCropPhotoUpdate(Request $request, $id){
+
         $targ_w = $targ_h = 230;
         $jpeg_quality = 90;
 		$user = User::findOrFail($id);

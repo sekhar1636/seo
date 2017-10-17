@@ -703,7 +703,22 @@
 
                         </div>
                     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
+
+            <label class="control-label col-md-6">Do you offer EMC points?</label>
+
+            <div class="col-md-6">
+                {!! Form::radio('non_musical_not_certain',1,@$theater->non_musical_not_certain==1 ? true : null) !!}
+                <label>Yes</label>
+                {!! Form::radio('non_musical_not_certain',2,@$theater->non_musical_not_certain==2 ? true : null) !!}
+                <label>No</label>
+            </div>
+        </div>
+    </div>
                 </div>
+    </div>
 
                 <!--/row-->
 
@@ -773,7 +788,7 @@
 
             <!-- This is the form that our event handler fills -->
 
-            <form style="margin-top: 30px;" action="{{route('admin::theaterCropPhoto',$id)}}" method="post" onsubmit="return checkCoords();">
+            <form style="margin-top: 30px;" action="{{route('admin::theaterCropPhoto',$id)}}" method="put" onsubmit="return checkCoords();">
 
                 {{csrf_field()}}
 
