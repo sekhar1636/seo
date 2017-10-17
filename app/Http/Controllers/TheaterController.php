@@ -144,6 +144,7 @@ class TheaterController extends Controller
         $theater->name_table_2 = $request->name_table_2;
         $theater->title_table_2 = $request->title_table_2;
         $theater->aea_contract = $request->aea_contract;
+        $theater->email_videos = $request->email_videos;
 
         if($request->tes == "PUT"){
             if($theater->update()){

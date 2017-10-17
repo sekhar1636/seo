@@ -680,6 +680,16 @@
                             </div>
                         </div>
                     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
+            <label class="control-label col-md-6"><strong>Email to send the videos</strong></label>
+            <div class="col-md-6">
+                {!! Form::text('email_videos',isset($theater->email_videos) ? $theater->email_videos : null , ['class' => 'form-control', 'placeholder' => 'Email to send Videos', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+            </div>
+            </div>
+    </div>
+    </div>
 
                     <div class="row">
                         <div class="col-md-12">
