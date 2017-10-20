@@ -237,6 +237,38 @@ class Misc
         4 => 'Next Year'
     ];
 
+    public static $available_positions = [
+        'Accompanist' => 'Accompanist',
+        'Administration' => 'Administration',
+        'Box Office' => 'Box Office',
+        'Carpentry' => 'Carpentry',
+        'Choreographer' => 'Choreographer',
+        'Costume Design' => 'Costume Design',
+        'Director' => 'Director',
+        'Electrics' => 'Electrics',
+        'Graphics' => 'Graphics',
+        'House' => 'House',
+        'Light Ops' => 'Light Ops',
+        'Make-Up & Wig Design' => 'Make-Up & Wig Design',
+        'Music Director' => 'Music Director',
+        'Paint Charge' => 'Paint Charge',
+        'Photography' => 'Photography',
+        'Pit Musician' => 'Pit Musician',
+        'Properties' => 'Properties',
+        'Publicity'=> 'Publicity',
+        'Running Crew' => 'Running Crew',
+        'Scenic Artist' => 'Scenic Artist',
+        'Set Design' => 'Set Design',
+        'Sewing/Wardrobe' => 'Sewing/Wardrobe',
+        'Sound' => 'Sound',
+        'Stage Management' => 'Stage Management',
+        'Technical Direction' => 'Technical Direction',
+        'Video' => 'Video'
+    ];
+
+
+
+
     public static $aea = [
         'ANTC' => 'ANTC',
 'Bay Area Theatre' => 'Bay Area Theatre',
