@@ -733,6 +733,15 @@ class AdminController extends Controller
         }
     }
 
+    public function portfolioupdate($id, Request $request)
+    {
+        $staff = Staff::where('user_id', $id)->first();
+
+        $staff->portfolio = $request->portfolio;
+        $staff->update();
+        return redirect()->back()->with('success_message', 'Portfolio Successfully Updated');
+    }
+
     public function uploadResume($actor,$file, $name){
         $destinationPath = 'assets/files'; // upload path
         $extension = $file->getClientOriginalExtension();
@@ -1074,6 +1083,8 @@ class AdminController extends Controller
         }
 
     }
+
+
 
 	//======================================================================
 	// Content Pages Functions

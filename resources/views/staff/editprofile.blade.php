@@ -14,6 +14,8 @@
 
     <link href="{{asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css" />
 
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/2.0.4/css/Jcrop.min.css">
 
     <style type="text/css">
@@ -58,6 +60,7 @@
 
     <script src="{{asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>
 
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/2.0.4/js/Jcrop.min.js"></script>
 
@@ -73,6 +76,10 @@
             $('.input-daterange input').each(function() {
                 $(this).datepicker({
                 });
+            });
+            $('#editor').summernote({
+                code : "{{ $errors->first('answer', ':message') }}",
+                height:200,
             });
         });
 
@@ -309,6 +316,11 @@
 
                                         </li>
 
+                                        <li {{  (Session::has('tabactive') ? 'class=active' : '') }}>
+
+                                            <a href="#tab_1_4" data-toggle="tab">Portfolio</a>
+
+                                        </li>
                                     </ul>
 
                                 </div>
@@ -699,7 +711,31 @@
     </div>
 
     <!-- END CHANGE AVATAR TAB -->
+                            <div class="tab-pane" id="tab_1_4">
+                                <form action="{{route('staff::postPortfolio')}}" class="form" method="POST">
+                                    {{ Form::token() }}
+                                    @if(count($staff))
+                                        <input type="hidden" name="port_staff" value="PUT"/>
+                                    @else
+                                        <input type="hidden" name="port_staff" value="POST"/>
+                                    @endif
+                                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                        {{ Form::label('port', 'Portfolio', ['class' => 'col-lg-2 control-label']) }}
+                                        <div class="col-lg-10">
+                                            {{ Form::textarea('portfolio', @($staff[0]['portfolio']) ? $staff[0]['portfolio'] : null, ['class' => 'form-control', 'rows' => 3,  'id' => 'editor']) }}
+                                            <p class="help-block">{{ $errors->first('portfolio', ':message') }}</p>
+                                        </div>
+                                    </div>
 
+                                        <div class="margin-top-10">
+
+                                            <button type="submit" class="btn green"> Submit </button>
+
+
+
+                                        </div>
+                                </form>
+                            </div>
     <!-- CHANGE PASSWORD TAB -->
 
     <div class="tab-pane" id="tab_1_3">

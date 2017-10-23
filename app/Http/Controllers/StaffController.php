@@ -171,6 +171,19 @@ class StaffController extends Controller
             }
         }
     }
+
+    public function updatePortfolio(Request $request)
+    {
+
+
+        $staff = Staff::where('user_id', \Auth::user()->id)->first();
+
+        $staff->portfolio = $request->portfolio;
+        $staff->update();
+        return redirect()->back()->with('success_message', 'Portfolio Successfully Updated');
+
+    }
+
     public function uploadResume($staff,$file, $name){
         $destinationPath = 'assets/files'; // upload path
         $extension = $file->getClientOriginalExtension();
@@ -211,6 +224,7 @@ class StaffController extends Controller
             'staff'=>$staff,
         ]);
     }
+
 
     public function postPhotoUpdate(Request $request)
     {

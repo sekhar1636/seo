@@ -14,6 +14,7 @@
     <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
 
     <link href="{{asset('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css')}}" rel="stylesheet" type="text/css" />
 
@@ -72,10 +73,14 @@
     <script src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script>
     <script src="https://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>
     <script src="https://datatables.yajrabox.com/js/handlebars.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function(){
-
+            $('#editor').summernote({
+                code : "{{ $errors->first('answer', ':message') }}",
+                height:200,
+            });
         });
 
         $(function(){
@@ -309,7 +314,13 @@
                                         <i class="icon-key"></i> Staff Invoices </a>
 
                                 </li>
+                                <li>
 
+                                    <a href="#tab_1_4" data-toggle="tab">
+
+                                        <i class="icon-user"></i> Portfolio </a>
+
+                                </li>
                             </ul>
 
                         </div>
@@ -366,6 +377,11 @@
 
                                         </li>
 
+                                        <li {{  (Session::has('tabactive') ? 'class=active' : '') }}>
+
+                                            <a href="#tab_1_4" data-toggle="tab">PORTFOLIO</a>
+
+                                        </li>
 
                                     </ul>
 
@@ -792,6 +808,28 @@
     </div>
 
     <!-- END CHANGE AVATAR TAB -->
+
+                            <div class="tab-pane" id="tab_1_4">
+                                <form action="{{route('admin::adminStaffUpdate',$id)}}" class="form" method="POST">
+                                    {{ Form::token() }}
+
+                                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                        {{ Form::label('port', 'Portfolio', ['class' => 'col-lg-2 control-label']) }}
+                                        <div class="col-lg-10">
+                                            {{ Form::textarea('portfolio', @($staff->portfolio) ?  $staff->portfolio : null, ['class' => 'form-control', 'rows' => 3,  'id' => 'editor']) }}
+                                            <p class="help-block">{{ $errors->first('portfolio', ':message') }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="margin-top-10">
+
+                                        <button type="submit" class="btn green"> Submit </button>
+
+
+
+                                    </div>
+                                </form>
+                            </div>
 
     <!-- CHANGE PASSWORD TAB -->
 

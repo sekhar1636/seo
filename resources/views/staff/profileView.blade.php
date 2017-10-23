@@ -81,6 +81,7 @@
                                     <!--end col-md-4-->
                                 </div>
                                 <!--end row-->
+
                                 <div class="tabbable-line tabbable-custom-profile">
                                     <ul class="nav nav-tabs">
                                         <li class="active">
@@ -136,6 +137,18 @@
                                         </div>
                                         <!--tab-pane-->
 
+                                    </div>
+                                    <div class="col-md-7">
+                                        <label><h2>PORTFOLIO</h2></label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="body">
+                                            @if(@$staff->staff->portfolio != "")
+                                            {!! $staff->staff->portfolio !!}
+                                            @else
+                                                <h3 style="color:red">{{ "Coming Soon!" }}</h3>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
