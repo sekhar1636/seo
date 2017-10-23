@@ -741,6 +741,73 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
+
+            <label class="control-label col-md-2"><strong>Available Positions:</strong></label>
+
+            <div class="col-md-3">
+                {!! Form::checkbox('accompanist',1,@$theater->accompanist==1 ? true : null) !!}
+                <label>Accompanist</label><br>
+                {!! Form::checkbox('administration',2,@$theater->administration==2 ? true : null) !!}
+                <label>Administration</label><br>
+                {!! Form::checkbox('box_office',3,@$theater->box_office==3 ? true : null) !!}
+                <label>Box Office</label><br>
+                {!! Form::checkbox('carpentry',4,@$theater->carpentry==4 ? true : null) !!}
+                <label>Carpentry</label><br>
+                {!! Form::checkbox('choreographer',5,@$theater->choreographer==5 ? true : null) !!}
+                <label>Administration</label><br>
+                {!! Form::checkbox('costume_design',6,@$theater->costume_design==6 ? true : null) !!}
+                <label>Costume Design</label><br>
+                {!! Form::checkbox('director',7,@$theater->director==7 ? true : null) !!}
+                <label>Director</label><br>
+                {!! Form::checkbox('electrics',8,@$theater->electrics==8 ? true : null) !!}
+                <label>Electrics</label><br>
+                {!! Form::checkbox('graphics',9,@$theater->graphics==9 ? true : null) !!}
+                <label>Graphics</label><br>
+                {!! Form::checkbox('house',10,@$theater->house==10 ? true : null) !!}
+                <label>House</label><br>
+                {!! Form::checkbox('light_ops',11,@$theater->light_ops==11 ? true : null) !!}
+                <label>Light Ops</label><br>
+                {!! Form::checkbox('makeup_wig_design',12,@$theater->makeup_wig_design==12 ? true : null) !!}
+                <label>Make-Up & Wig Design</label><br>
+                {!! Form::checkbox('music_director',13,@$theater->music_director==13 ? true : null) !!}
+                <label>Music Director</label><br>
+                {!! Form::checkbox('paint_charge',14,@$theater->paint_charge==14 ? true : null) !!}
+                <label>Paint Charge</label><br>
+                {!! Form::checkbox('photography',15,@$theater->photography==15 ? true : null) !!}
+                <label>Photography</label><br>
+                {!! Form::checkbox('pit_musician',16,@$theater->pit_musician==16 ? true : null) !!}
+                <label>Pit Musician</label><br>
+                {!! Form::checkbox('properties',17,@$theater->properties==17 ? true : null) !!}
+                <label>Properties</label><br>
+                {!! Form::checkbox('publicity',18,@$theater->publicity==18 ? true : null) !!}
+                <label>Publicity</label><br>
+                {!! Form::checkbox('running_crew',19,@$theater->running_crew==19 ? true : null) !!}
+                <label>Running Crew</label><br>
+                {!! Form::checkbox('scenic_artist',20,@$theater->scenic_artist==20 ? true : null) !!}
+                <label>Scenic Artist</label><br>
+                {!! Form::checkbox('set_design',21,@$theater->set_design==21 ? true : null) !!}
+                <label>Set Design</label><br>
+                {!! Form::checkbox('sewing_wardrobe',22,@$theater->sewing_wardrobe==22 ? true : null) !!}
+                <label>Sewing/Wardrobe</label><br>
+                {!! Form::checkbox('sound',23,@$theater->sound==23 ? true : null) !!}
+                <label>Sound</label><br>
+                {!! Form::checkbox('state_management',24,@$theater->state_management==24 ? true : null) !!}
+                <label>State Management</label><br>
+                {!! Form::checkbox('technical_direction',25,@$theater->technical_direction==25 ? true : null) !!}
+                <label>Technical Direction</label><br>
+                {!! Form::checkbox('video',26,@$theater->video==26 ? true : null) !!}
+                <label>Video</label><br>
+
+                <span class="help-block"> {{ $errors->first("dancers") }} </span>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
     </div>
 
                 <!--/row-->

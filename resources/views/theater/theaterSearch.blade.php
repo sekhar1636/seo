@@ -102,6 +102,11 @@
     <script src="{{asset('assets/search/mixitup-pagination.min.js')}}"></script>
     <script src="{{asset('assets/search/mixitup-multifilter.min.js')}}"></script>
     <script src="{{asset('assets/search/main.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#unav').hide();
+        });
+    </script>
 @endsection
 @section('content')
     <!-- BEGIN PAGE CONTENT INNER -->
@@ -126,6 +131,17 @@
                                     @endforeach
                                 </select>
                             </fieldset>
+                            <div class="search-label uppercase">Available Positions</div>
+                            <fieldset data-filter-group="available_positions" class="checkbox-group" data-logic="and">
+                                @foreach(\App\Misc::$available_positions as $key)
+                                    <span id="{{$key}}">
+                                    <label class="mt-checkbox mt-checkbox-outline"> {{$key}}
+                                        <input type="checkbox"  value=".{{preg_replace('/\s+/', '', $key)}}"/>
+                                        <span></span>
+                                    </label>
+</span>
+                                @endforeach
+                            </fieldset>
                             <div class="search-label uppercase">Casting Dancers</div>
                             <fieldset data-filter-group="casting-dancers" class="control-group">
 
@@ -146,8 +162,10 @@
                         <div class="actorContainer">
 
                             @foreach($theaters as $theater)
+                                {{
+							$mixClass = \App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->accompanist) ? $theater->accompanist : '']).' '.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->administration) ? $theater->administration :'']).' '.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->box_office) ? $theater->box_office : '']).' '.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->carpentry) ? $theater->carpentry : '']).' '.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->choreographer) ? $theater->choreographer : '']).' '.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->costume_design) ? $theater->costume_design : '']).' '.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->director) ? $theater->director : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->electrics) ? $theater->electrics : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->graphics) ? $theater->graphics : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->house) ? $theater->house : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->light_ops) ? $theater->light_ops : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->makeup_wig_design) ? $theater->makeup_wig_design : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->music_director) ? $theater->music_director : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->paint_charge) ? $theater->paint_charge : '' ]).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->photography) ? $theater->photography : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->pit_musician) ? $theater->pit_musician : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->properties) ? $theater->properties : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->publicity) ? $theater->publicity : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->running_crew) ? $theater->running_crew : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->scenic_artist) ? $theater->scenic_artist : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->set_design) ? $theater->set_design : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->sewing_wardrobe) ? $theater->sewing_wardrobe : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->sound) ? $theater->sound : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->state_management) ? $theater->state_management : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->technical_direction) ? $theater->technical_direction : '']).''.\App\Http\Controllers\TheaterController::prepareData(\App\Misc::$available_positions[(@$theater->video) ? $theater->video : '']) }}
 
-                                <div data-musical-performers="{{ preg_replace('/\s+/', '', \App\Misc::$musical_performers[$theater->non_musical_yes]) }}" data-casting-dancers="{{ preg_replace('/\s+/', '', \App\Misc::$casting_dancers[$theater->dancers_yes]) }}" class="mix">
+                                <div data-musical-performers="{{ preg_replace('/\s+/', '', \App\Misc::$musical_performers[$theater->non_musical_yes]) }}" data-casting-dancers="{{ preg_replace('/\s+/', '', \App\Misc::$casting_dancers[$theater->dancers_yes]) }}" class="mix {{ $mixClass }}">
                                     <div class="col-md-4">
                                         <div class="tile-container">
                                             <div class="tile-thumbnail">

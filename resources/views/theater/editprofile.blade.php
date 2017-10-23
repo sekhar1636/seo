@@ -687,57 +687,57 @@
             <label class="control-label col-md-2"><strong>Available Positions:</strong></label>
 
             <div class="col-md-3">
-                {!! Form::checkbox('Accompanist',1,@$theater[0]['accompanist']==1 ? true : null) !!}
+                {!! Form::checkbox('accompanist',1,@$theater[0]['accompanist']==1 ? true : null) !!}
                 <label>Accompanist</label><br>
-                {!! Form::checkbox('Administration',2,@$theater[0]['administration']==2 ? true : null) !!}
+                {!! Form::checkbox('administration',2,@$theater[0]['administration']==2 ? true : null) !!}
                 <label>Administration</label><br>
-                {!! Form::checkbox('Box Office',3,@$theater[0]['box_office']==3 ? true : null) !!}
+                {!! Form::checkbox('box_office',3,@$theater[0]['box_office']==3 ? true : null) !!}
                 <label>Box Office</label><br>
-                {!! Form::checkbox('Carpentry',4,@$theater[0]['carpentry']==4 ? true : null) !!}
+                {!! Form::checkbox('carpentry',4,@$theater[0]['carpentry']==4 ? true : null) !!}
                 <label>Carpentry</label><br>
-                {!! Form::checkbox('Choreographer',5,@$theater[0]['choreographer']==5 ? true : null) !!}
+                {!! Form::checkbox('choreographer',5,@$theater[0]['choreographer']==5 ? true : null) !!}
                 <label>Administration</label><br>
-                {!! Form::checkbox('Costume Design',6,@$theater[0]['costume_design']==6 ? true : null) !!}
+                {!! Form::checkbox('costume_design',6,@$theater[0]['costume_design']==6 ? true : null) !!}
                 <label>Costume Design</label><br>
-                {!! Form::checkbox('Director',7,@$theater[0]['director']==7 ? true : null) !!}
+                {!! Form::checkbox('director',7,@$theater[0]['director']==7 ? true : null) !!}
                 <label>Director</label><br>
-                {!! Form::checkbox('Electrics',8,@$theater[0]['electrics']==8 ? true : null) !!}
+                {!! Form::checkbox('electrics',8,@$theater[0]['electrics']==8 ? true : null) !!}
                 <label>Electrics</label><br>
-                {!! Form::checkbox('Graphics',9,@$theater[0]['graphics']==9 ? true : null) !!}
+                {!! Form::checkbox('graphics',9,@$theater[0]['graphics']==9 ? true : null) !!}
                 <label>Graphics</label><br>
-                {!! Form::checkbox('House',10,@$theater[0]['house']==10 ? true : null) !!}
+                {!! Form::checkbox('house',10,@$theater[0]['house']==10 ? true : null) !!}
                 <label>House</label><br>
-                {!! Form::checkbox('Light Ops',11,@$theater[0]['light_ops']==11 ? true : null) !!}
+                {!! Form::checkbox('light_ops',11,@$theater[0]['light_ops']==11 ? true : null) !!}
                 <label>Light Ops</label><br>
-                {!! Form::checkbox('Make-Up & Wig Design',12,@$theater[0]['makeup_wig_design']==12 ? true : null) !!}
+                {!! Form::checkbox('makeup_wig_design',12,@$theater[0]['makeup_wig_design']==12 ? true : null) !!}
                 <label>Make-Up & Wig Design</label><br>
-                {!! Form::checkbox('Music Director',13,@$theater[0]['music_director']==13 ? true : null) !!}
+                {!! Form::checkbox('music_director',13,@$theater[0]['music_director']==13 ? true : null) !!}
                 <label>Music Director</label><br>
-                {!! Form::checkbox('Paint Charge',14,@$theater[0]['paint_charge']==14 ? true : null) !!}
+                {!! Form::checkbox('paint_charge',14,@$theater[0]['paint_charge']==14 ? true : null) !!}
                 <label>Paint Charge</label><br>
-                {!! Form::checkbox('Photography',15,@$theater[0]['photography']==15 ? true : null) !!}
+                {!! Form::checkbox('photography',15,@$theater[0]['photography']==15 ? true : null) !!}
                 <label>Photography</label><br>
-                {!! Form::checkbox('Pit Musician',16,@$theater[0]['pit_musician']==16 ? true : null) !!}
+                {!! Form::checkbox('pit_musician',16,@$theater[0]['pit_musician']==16 ? true : null) !!}
                 <label>Pit Musician</label><br>
-                {!! Form::checkbox('Properties',17,@$theater[0]['properties']==17 ? true : null) !!}
+                {!! Form::checkbox('properties',17,@$theater[0]['properties']==17 ? true : null) !!}
                 <label>Properties</label><br>
-                {!! Form::checkbox('Publicity',18,@$theater[0]['publicity']==18 ? true : null) !!}
+                {!! Form::checkbox('publicity',18,@$theater[0]['publicity']==18 ? true : null) !!}
                 <label>Publicity</label><br>
-                {!! Form::checkbox('Running Crew',19,@$theater[0]['running_crew']==19 ? true : null) !!}
+                {!! Form::checkbox('running_crew',19,@$theater[0]['running_crew']==19 ? true : null) !!}
                 <label>Running Crew</label><br>
-                {!! Form::checkbox('Scenic Artist',20,@$theater[0]['scenic_artist']==20 ? true : null) !!}
+                {!! Form::checkbox('scenic_artist',20,@$theater[0]['scenic_artist']==20 ? true : null) !!}
                 <label>Scenic Artist</label><br>
-                {!! Form::checkbox('Set Design',21,@$theater[0]['set_design']==21 ? true : null) !!}
+                {!! Form::checkbox('set_design',21,@$theater[0]['set_design']==21 ? true : null) !!}
                 <label>Set Design</label><br>
-                {!! Form::checkbox('Sewing/Wardrobe',22,@$theater[0]['sewing_wardrobe']==22 ? true : null) !!}
+                {!! Form::checkbox('sewing_wardrobe',22,@$theater[0]['sewing_wardrobe']==22 ? true : null) !!}
                 <label>Sewing/Wardrobe</label><br>
-                {!! Form::checkbox('Sound',23,@$theater[0]['sound']==23 ? true : null) !!}
+                {!! Form::checkbox('sound',23,@$theater[0]['sound']==23 ? true : null) !!}
                 <label>Sound</label><br>
-                {!! Form::checkbox('Stage Management',24,@$theater[0]['state_management']==24 ? true : null) !!}
+                {!! Form::checkbox('state_management',24,@$theater[0]['state_management']==24 ? true : null) !!}
                 <label>State Management</label><br>
-                {!! Form::checkbox('Technical Direction',25,@$theater[0]['technical_direction']==25 ? true : null) !!}
+                {!! Form::checkbox('technical_direction',25,@$theater[0]['technical_direction']==25 ? true : null) !!}
                 <label>Technical Direction</label><br>
-                {!! Form::checkbox('Video',26,@$theater[0]['video']==26 ? true : null) !!}
+                {!! Form::checkbox('video',26,@$theater[0]['video']==26 ? true : null) !!}
                 <label>Video</label><br>
 
                 <span class="help-block"> {{ $errors->first("dancers") }} </span>
