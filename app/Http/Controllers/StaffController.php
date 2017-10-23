@@ -15,6 +15,7 @@ use App\Payment;
 use App\SubscriptionPackage;
 use Validator;
 use Carbon\Carbon;
+use App\ActorRole;
 
 
 class StaffController extends Controller
@@ -100,7 +101,11 @@ class StaffController extends Controller
     public function edit(){
         $staffid = \Auth::user()->id;
         $staff = Staff::where('user_id',$staffid)->get();
-        return view('staff.editprofile')->with(['staff'=>$staff]);
+        $roles = ActorRole::where('user_id',$staffid)->get();
+        return view('staff.editprofile')->with([
+            'staff'=>$staff,
+            'roles'=>$roles
+        ]);
     }
 
     public function update(Request $request)
@@ -172,6 +177,20 @@ class StaffController extends Controller
         }
     }
 
+    public function staffroles(Request $request)
+    {
+        $user = new ActorRole;
+        $user->roles_chosen = $request->roles_chosen;
+        $user->show = $request->show;
+        $user->theater = $request->theater;
+        $user->dir_chor = $request->dir_chor;
+        $user->user_id = \Auth::user()->id;
+        $user->save();
+
+        return redirect()->route('staff::staffProfile')->with('success_message', 'user roles Successfully Created');
+
+    }
+
     public function updatePortfolio(Request $request)
     {
 
@@ -220,8 +239,10 @@ class StaffController extends Controller
     public function view($id)
     {
         $staff = User::findorfail($id);
+        $roles = ActorRole::where('user_id', \Auth::User()->id)->get();
         return view('staff.profileView')->with([
             'staff'=>$staff,
+            'roles'=>$roles
         ]);
     }
 

@@ -831,6 +831,10 @@
                                 </form>
                             </div>
 
+                            <div class="tab-pane" id="tab_1_5">
+
+                            </div>
+
     <!-- CHANGE PASSWORD TAB -->
 
     <div class="tab-pane" id="tab_1_3">

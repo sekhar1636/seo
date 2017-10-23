@@ -107,30 +107,20 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                    @foreach($roles as $val)
+                                                        <tr>
+                                                            <td>
+                                                                {{ $val['roles_chosen'] }}
+                                                            </td>
+                                                            <td class="hidden-xs">  {{ $val['show'] }} </td>
+                                                            <td> {{ $val['theater'] }}
 
-                                                    <tr>
-                                                        <td>
-                                                            Let's Rock!
-                                                        </td>
-                                                        <td class="hidden-xs">  Band Girl </td>
-                                                        <td> RWS & Associates @ Idlewild Park
-
-                                                        </td>
-                                                        <td>
-                                                            Amy Cannon
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            American Beat
-                                                        </td>
-                                                        <td class="hidden-xs"> Band Girl</td>
-                                                        <td> Soloist RWS & Associates @ Idlewild Park
-                                                        </td>
-                                                        <td>
-                                                            Amy Cannon
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                            <td>
+                                                                {{ $val['dir_chor'] }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -154,6 +144,11 @@
                             </div>
                         </div>
                     </div>
+
+                        <!--tab-pane-->
+
+                    </div>
+
                     <!--tab_1_2-->
 
 

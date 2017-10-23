@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'StaffController@staffPhotoDelete']);
             Route::post('password', ['as'=>'postEditPassword', 'uses'=>'StaffController@postEditPassword']);
             Route::post('edit/portfolio',['as'=>'postPortfolio','uses'=>'StaffController@updatePortfolio']);
+            Route::post('updatestaffrole',['as'=>'updateStaffsRole','uses'=>'StaffController@staffroles']);
 		});
 	});
 
