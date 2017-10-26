@@ -261,6 +261,13 @@
 									<i class="icon-layers"></i> Roles </a>
 
 							</li>
+							<li>
+
+								<a href="#tab_1_5" data-toggle="tab">
+
+									<i class="icon-layers"></i> Audition </a>
+
+							</li>
 
                         </ul>
 
@@ -323,6 +330,13 @@
 										<a href="#tab_1_4" data-toggle="tab">Roles</a>
 
 									</li>
+
+									<li>
+
+										<a href="#tab_1_5" data-toggle="tab">Audition</a>
+
+									</li>
+
 
                                 </ul>
 
@@ -904,6 +918,223 @@
 
                                     <!-- END PERSONAL INFO TAB -->
 
+ <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_5">
+	 <form action="{{route('actor::actoraudifields')}}" enctype="multipart/form-data" role="form" method="POST">
+
+		 {{csrf_field()}}
+
+		 <div class="form-group clearfix {{ $errors->has('photo') ? 'has-error' : '' }}">
+
+			 <!--  <label class="control-label col-md-3">Photo</label> -->
+
+			 <div class="row">
+
+				 <div class="col-md-4">
+					 <div class="form-group" {{ $errors->has("last_audition_year") ? "has-error":"" }}'>
+
+					 <label class="control-label col-md-6">Did You audition at Strawhat last Year?</label>
+
+					 <div class="col-md-4">
+
+						 {!! Form::select('last_audition_year',[0=>'No',1=>'Yes'],(count($ax->last_audition_year)) ? $ax->last_audition_year : null) !!}
+
+						 <span class="help-block"> {{ $errors->first("last_audition_year") }} </span>
+
+					 </div>
+				 </div>
+			 </div>
+			 <div class="col-md-4">
+				 <div class="form-group" {{ $errors->has("last_audition_two_year") ? "has-error":"" }}'>
+
+				 <label class="control-label col-md-6">(2) Years ago?</label>
+
+				 <div class="col-md-4">
+
+					 {!! Form::select('last_audition_two',[0=>'No',1=>'Yes'],(count($ax->last_audition_two)) ? $ax->last_audition_two : null) !!}
+
+					 <span class="help-block"> {{ $errors->first("last_audition_two_year") }} </span>
+
+				 </div>
+			 </div>
+		 </div>
+		 <div class="col-md-4">
+			 <div class="form-group" {{ $errors->has("last_audition_year") ? "has-error":"" }}'>
+
+			 <label class="control-label col-md-6">Last Audition Year?</label>
+
+			 <div class="col-md-6">
+
+				 {!! Form::text('last_year_year', @$ax->last_year_year ? $ax->last_year_year : null, ['class' => 'form-control', 'placeholder' => 'Year','minlength'=>'3', 'maxlength'=>'20']) !!}
+
+				 <span class="help-block"> {{ $errors->first("last_audition_year") }} </span>
+
+			 </div>
+		 </div>
+ </div>
+ </div>
+ <div class="row">
+
+	 <div class="col-md-4">
+		 <div class="form-group" {{ $errors->has("last_audition_year") ? "has-error":"" }}'>
+
+		 <label class="control-label col-md-6">Did You apply for an audition in last Year?</label>
+
+		 <div class="col-md-4">
+
+			 {!! Form::select('audition_last_apply',[0=>'No',1=>'Yes'],@$ax->audition_last_apply ? $ax->audition_last_apply : null) !!}
+
+			 <span class="help-block"> {{ $errors->first("last_audition_year") }} </span>
+
+		 </div>
+	 </div>
+ </div>
+ <div class="col-md-4">
+	 <div class="form-group" {{ $errors->has("last_audition_year") ? "has-error":"" }}'>
+
+	 <label class="control-label col-md-6">Summer Stock Last Year?</label>
+
+	 <div class="col-md-4">
+
+		 {!! Form::select('summer_stock_last_year',[0=>'No',1=>'Yes'],@$ax->summer_stock_last_year ? $ax->summer_stock_last_year : null ) !!}
+
+		 <span class="help-block"> {{ $errors->first("summer_stock_last_year") }} </span>
+
+	 </div>
+ </div>
+ </div>
+ <div class="col-md-4">
+	 <div class="form-group" {{ $errors->has("where_place") ? "has-error":"" }}'>
+
+	 <label class="control-label col-md-6">Where?</label>
+
+	 <div class="col-md-6">
+
+		 {!! Form::text('where_place',@$ax->where_place ? $ax->where_place : null, ['class' => 'form-control', 'placeholder' => 'Where', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+
+		 <span class="help-block"> {{ $errors->first("where_place") }} </span>
+
+	 </div>
+ </div>
+ </div>
+ </div>
+ <div class="row">
+	 <div class="col-md-12">
+		 <div class="form-group" {{ $errors->has("unpaid_apprentice") ? "has-error":"" }}'>
+
+		 <label class="control-label col-md-6">Would you consider accepting an unpaid apprentice position?</label>
+
+		 <div class="col-md-6">
+
+			 {!! Form::select('unpaid_apprentice',[0=>'No',1=>'Yes'],@$ax->unpaid_apprentice ? $ax->unpaid_apprentice : null) !!}
+
+			 <span class="help-block"> {{ $errors->first("unpaid_apprentice") }} </span>
+
+		 </div>
+	 </div>
+ </div>
+ </div>
+
+ <div class="row">
+	 <div class="col-md-12">
+		 <div class="form-group" {{ $errors->has("internship") ? "has-error":"" }}'>
+
+		 <label class="control-label col-md-6">An internship Involving crew works as well as performing?</label>
+
+		 <div class="col-md-6">
+
+			 {!! Form::select('internship',[0=>'No',1=>'Yes'],@$ax->internship ? $ax->internship : null ) !!}
+
+			 <span class="help-block"> {{ $errors->first("internship") }} </span>
+
+		 </div>
+	 </div>
+ </div>
+ </div>
+
+ <div class="row">
+	 <div class="col-md-12">
+		 <div class="form-group" {{ $errors->has("standby_appointment") ? "has-error":"" }}'>
+
+		 <label class="control-label col-md-6">Will You accept a standby Appointment?</label>
+
+		 <div class="col-md-6">
+
+			 {!! Form::select('standby_appointment',[0=>'No',1=>'Yes'],@$ax->standby_appointment ? $ax->standby_appointment : null ) !!}
+
+			 <span class="help-block"> {{ $errors->first("standby_appointment") }} </span>
+
+		 </div>
+	 </div>
+ </div>
+ </div>
+
+ <div class="row">
+	 <div class="col-md-12">
+		 <div class="form-group" {{ $errors->has("Union_status") ? "has-error":"" }}'>
+
+		 <label class="control-label col-md-3">Union Status</label>
+
+		 <div class="col-md-9">
+
+			 {!! Form::checkbox('emca',1,@$ax->emca ? true : null) !!}
+			 <label>EMC</label>
+			 {!! Form::checkbox('sag',1,@$ax->sag ? true:null) !!}
+			 <label>SAG</label>
+			 {!! Form::checkbox('aftra',1,@$ax->aftra ? true:null) !!}
+			 <label>AFTRA</label>
+			 {!! Form::checkbox('agva',1,@$ax->agva ? true:null) !!}
+			 <label>AGVA</label>
+			 {!! Form::checkbox('agma',1,@$ax->agma ? true:null) !!}
+			 <label>AGMA</label>
+			 <span class="help-block"> {{ $errors->first("standby_appointment") }} </span>
+
+		 </div>
+	 </div>
+ </div>
+ </div>
+
+ <div class="row">
+	 <div class="col-md-12">
+		 <div class="form-group" {{ $errors->has("DAY") ? "has-error":"" }}'>
+
+		 <label class="control-label col-md-3">Auditions Availability</label>
+
+		 <div class="col-md-9">
+
+			 {!! Form::checkbox('friday_m',1,@$ax->friday_m ? true : null) !!}
+			 <label>Friday Morning</label>
+			 {!! Form::checkbox('friday_af',1,@$ax->friday_af ? true : null) !!}
+			 <label>Friday Afternoon</label>
+			 {!! Form::checkbox('saturday_m',1,@$ax->saturday_m ? true :null) !!}
+			 <label>Saturday Morning</label>
+			 {!! Form::checkbox('saturday_af',1,@$ax->saturday_af ? true :null) !!}
+			 <label>Saturday Afternoon</label>
+			 {!! Form::checkbox('sunday_m',1,@$ax->sunday__m ? true:null) !!}
+			 <label>Sunday Morning</label>
+			 {!! Form::checkbox('sunday_af',1,@$ax->sunday_af ? true:null) !!}
+			 <label>Sunday Afternoon</label>
+			 <span class="help-block"> {{ $errors->first("standby_appointment") }} </span>
+
+		 </div>
+	 </div>
+ </div>
+ </div>
+
+
+ <div class="margin-top-20">
+
+	 <button type="submit" class="btn green"> Submit </button>
+
+
+
+ </div>
+
+
+
+
+ </div>
+ </form>
+ </div>
                                     <!-- CHANGE AVATAR TAB -->
 
                                     <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2">

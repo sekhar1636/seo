@@ -16,6 +16,7 @@ use App\MembershipPeriod;
 use App\Payment;
 use App\Jobs\SendVerificationMail;
 use Carbon\Carbon;
+use App\AuditionExtra;
 
 class ActorController extends Controller
 {
@@ -138,10 +139,16 @@ class ActorController extends Controller
         $uid = \Auth::user()->id;
         $actor = Actor::where('user_id',$uid)->get();
         $roles = ActorRole::where('user_id',$uid)->get();
-
+        $ae = AuditionExtra::updateorcreate(['user_id'=>$uid],['user_id',$uid]);
+        $audition_extra = AuditionExtra::where('user_id',$uid)->get();
+        if(count($audition_extra)){
+            $ax = $audition_extra[0];
+        } else {
+            $ax = '';
+        }
         if(!empty($actor[0]))
         {
-            return view('actor.editProfile')->with('actor',$actor)->with('weight', $weight)->with('age', $age)->with('rol',$roles);
+            return view('actor.editProfile')->with('actor',$actor)->with('weight', $weight)->with('age', $age)->with('rol',$roles)->with('ax',$ax);
         }
         //$actors = User::where('payment_status',1)->where('verified',1)->orderBy('id','desc');
         //$user = \Auth::user();
@@ -149,7 +156,8 @@ class ActorController extends Controller
             return view('actor.editProfile')->with([
                 'weight'=>$weight,
                 'age'=>$age,
-                'rol'=>$roles
+                'rol'=>$roles,
+                'ax'=>$ax
             ]);
     }
 
@@ -641,6 +649,36 @@ class ActorController extends Controller
 
     }
 
+    public function actoraudifields(Request $request)
+    {
+        $data = AuditionExtra::updateorcreate(
+            [
+                'user_id' => \Auth::user()->id
+            ],
+            [
+                'last_audition_year' => $request->last_audition_year,
+                'last_audition_two' => $request->last_audition_two,
+                'last_year_year' => $request->last_year_year,
+                'audition_last_apply' => $request->audition_last_apply,
+                'summer_stock_last_year' => $request->summer_stock_last_year,
+                'where_place' => $request->where_place,
+                'unpaid_apprentice' => $request->unpaid_apprentice,
+                'internship' => $request->internship,
+                'standby_appointment' => $request->standby_appointment,
+                'emca' => $request->emca,
+                'sag' => $request->sag,
+                'aftra' => $request->aftra,
+                'agva' => $request->agva,
+                'agma' => $request->agma,
+                'friday_m' => $request->friday_m,
+                'friday_af' => $request->friday_af,
+                'saturday_m' => $request->saturday_m,
+                'saturday_af' => $request->saturday_af,
+                'sunday_m' => $request->sunday_m,
+                'sunday_af' => $request->sunday_af,
+            ]);
+        return redirect()->back()->with('success_message','Record Added');
+    }
 
     public function postCropPhotoUpdate(Request $request){
         $targ_w = $targ_h = 230;

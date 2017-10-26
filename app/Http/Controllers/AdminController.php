@@ -728,7 +728,7 @@ class AdminController extends Controller
             }
         }else{
             if($staff->save()){
-                return redirect()->route('actor::actorProfile')->with('success_message', 'Profile Data Successfully Created');
+                return redirect()->route('staff::staffProfile')->with('success_message', 'Profile Data Successfully Created');
             }
         }
     }
