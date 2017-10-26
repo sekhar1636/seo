@@ -1307,7 +1307,7 @@ function initTable(tableId, data) {
 		 <div class="col-md-9">
 
 			 {!! Form::checkbox('emca',1,@$ax->emca ? true : null) !!}
-			 <label>EMCA</label>
+			 <label>EMC</label>
 			 {!! Form::checkbox('sag',1,@$ax->sag ? true:null) !!}
 			 <label>SAG</label>
 			 {!! Form::checkbox('aftra',1,@$ax->aftra ? true:null) !!}
@@ -1327,7 +1327,7 @@ function initTable(tableId, data) {
 	 <div class="col-md-12">
 		 <div class="form-group" {{ $errors->has("DAY") ? "has-error":"" }}'>
 
-		 <label class="control-label col-md-3">Different Auditions?</label>
+		 <label class="control-label col-md-3">Auditions Availability</label>
 
 		 <div class="col-md-9">
 
