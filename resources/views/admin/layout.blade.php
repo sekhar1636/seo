@@ -158,6 +158,12 @@
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
+                                        <li class="{{ @$edit ? 'active' : '' }}">
+                                            <a href="{{route('admin::adminHomepageEdit')}}">
+                                                Edit
+                                                <span class="arrow"></span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <!-- END MEGA MENU -->

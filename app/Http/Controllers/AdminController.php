@@ -1455,7 +1455,7 @@ class AdminController extends Controller
     {
         $content = Homepage::select('content')->where('id',1)->get();
         $cont = $content[0]['content'];
-        return view('admin.homepageedit')->with(['content' => $cont]);
+        return view('admin.homepageedit')->with(['content' => $cont,'edit'=>'active']);
     }
 
     protected function homepageupdate(Request $request)
