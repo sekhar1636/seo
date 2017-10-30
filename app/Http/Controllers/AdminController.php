@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actor;
 use App\AuditionExtra;
+use App\Homepage;
 use App\Membership;
 use App\ProductVariant;
 use App\Theater;
@@ -1448,5 +1449,20 @@ class AdminController extends Controller
                 'sunday_af' => $request->sunday_af,
             ]);
         return redirect()->back()->with('success_message','Record Added');
+    }
+
+    public function homepageedit()
+    {
+        $content = Homepage::select('content')->where('id',1)->get();
+        $cont = $content[0]['content'];
+        return view('admin.homepageedit')->with(['content' => $cont]);
+    }
+
+    protected function homepageupdate(Request $request)
+    {
+        $cont_upd = Homepage::findorFail(1);
+        $cont_upd->content = $request->content;
+        $cont_upd->save();
+        return redirect()->back()->with('success_message','Content Updated');
     }
 }

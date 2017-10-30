@@ -191,6 +191,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::patch('auditionedit/{id}',['as'=>'auditionUpdate','uses'=>'AdminController@auditionupdate' ]);
 
             Route::post('auditionextra/{id}',['as'=>'adminextrafields','uses'=>'AdminController@adminextra']);
+            Route::get('homepage/edit',['as'=>'adminHomepageEdit','uses'=>'AdminController@homepageedit']);
+            Route::post('homepage/edit',['as'=>'adminHomepageupdate','uses'=>'AdminController@homepageupdate']);
         });
 	});
 	
