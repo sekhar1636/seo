@@ -682,7 +682,7 @@
 
 				                         <div class="form-group" {{ $errors->has("jobType") ? "has-error":"" }}'>
 
-				                            <label for="multiple" class="control-label col-md-3" >Job Types</label>
+				                            <label for="multiple" class="control-label col-md-3" >Will Consider</label>
 
 				                            <div class="col-md-9">
 
