@@ -1446,10 +1446,10 @@
 											 {!! Form::text('show[8]',@$rol[7]['show'] ? $rol[7]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
 										 </div>
 										 <div class="col-md-3">
-											 {!! Form::text('theater[8]',@$rol[7]['theater'],['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+											 {!! Form::text('theater[8]',@$rol[7]['theater'] ? $rol[7]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
 										 </div>
 										 <div class="col-md-3">
-											 {!! Form::text('dir_chor[8]',@$rol[7]['dir_chor'],['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+											 {!! Form::text('dir_chor[8]',@$rol[7]['dir_chor'] ? $rol[7]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
 										 </div>
 									 </div>
 									 <div class="row">
