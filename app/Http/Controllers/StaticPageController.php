@@ -17,13 +17,18 @@ class StaticPageController extends Controller
         }
 
         $active='';
-        if($slug=="actor" || $slug=="howitworks" || $slug=="instructions" || $slug=="auditiontypes" || $slug=="criteria" || $slug=="headshot" || $slug=="resumeadvice")
+        if($slug=="actor" || $slug=="howitworks" || $slug=="instructions" || $slug=="auditiontypes" || $slug=="criteria")
         {
             $active = 'actoractive';
         }
         if($slug=="theater" || $slug=="theaterintro" || $slug=="auditionschedule" || $slug=="theaterregistrationfees" || $slug=="theatercompanies")
         {
             $active = 'theateractive';
+        }
+
+        if($slug=="headshot" || $slug=="resumeadvice")
+        {
+            $active = 'resactive';
         }
 
         if($slug=="staff")

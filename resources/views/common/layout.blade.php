@@ -176,12 +176,6 @@
                                                     <a href="{{route('getStaticPage',['slug'=>'criteria'])}}">Criteria</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('getStaticPage',['slug'=>'headshot'])}}">Headshot Advice</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('getStaticPage',['slug'=>'resumeadvice'])}}">Resume Advice</a>
-                                                </li>
-                                                <li>
                                                     <a href="{{route('getSignup')}}">Register</a>
                                                 </li>
                                             </ul>
@@ -262,6 +256,21 @@
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
+                                        @if(\Auth::check())
+                                        @if(\Auth::user()->payment_status==1)
+                                                <li class="menu-dropdown {{ @$staticactive=='resactive' ? 'active' : '' }}"><a><i class="icon-envelope"></i> Premium content</a>
+                                        <ul class="dropdown-menu pull-left">
+                                        <li>
+                                            <a href="{{route('getStaticPage',['slug'=>'headshot'])}}">Headshot Advice</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('getStaticPage',['slug'=>'resumeadvice'])}}">Resume Advice</a>
+                                        </li>
+
+                                        </ul>
+                                        </li>
+                                        @endif
+@endif
 
                                     </ul>
                                 </div>
