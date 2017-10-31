@@ -233,7 +233,7 @@
                             <div class="row">
                                 <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
                                     <h2>About</h2>
-                                    <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam dolore. </p>
+                                    <p> StrawHat Auditions is New York City’s premiere combined audition service. </p>
                                 </div>
                                 <div class="col-md-3 col-sm-6 col-xs12 footer-block">
                                     <h2>Subscribe Email</h2>
@@ -265,13 +265,13 @@
                                        
                                     </ul>
                                 </div>
-                                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+                               <!-- <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
                                     <h2>Contacts</h2>
                                     <address class="margin-bottom-40"> Phone: 800 123 3456
                                         <br> Email:
                                         <a href="mailto:info@metronic.com">xyz@abc.com</a>
                                     </address>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
