@@ -279,13 +279,48 @@ class ActorController extends Controller
 
     public function userroles(Request $request)
     {
-        $user = new ActorRole;
-        $user->roles_chosen = $request->roles_chosen;
-        $user->show = $request->show;
-        $user->theater = $request->theater;
-        $user->dir_chor = $request->dir_chor;
-        $user->user_id = \Auth::user()->id;
-        $user->save();
+
+        $user_id = \Auth::user()->id;
+        $cus = ActorRole::where('user_id',$user_id)->get();
+
+        if(count($cus))
+        {
+            $delete = ActorRole::where('user_id',$user_id)->delete();
+
+            for($i=1;$i<11;$i++)
+            {
+
+                if(!empty($request->roles_chosen[$i]) || !empty($request->show[$i]) || !empty($request->theater[$i]) || !empty($request->dir_chor[$i])) {
+                    $user = new ActorRole;
+                    $user->roles_chosen = $request->roles_chosen[$i];
+                    $user->show = $request->show[$i];
+                    $user->theater = $request->theater[$i];
+                    $user->dir_chor = $request->dir_chor[$i];
+                    $user->user_id = $user_id;
+                    $user->save();
+                }else{ continue; }
+            }
+        }
+        else
+        {
+            for($i=1;$i<11;$i++)
+            {
+
+                if(!empty($request->roles_chosen[$i]) || !empty($request->show[$i]) || !empty($request->theater[$i]) || !empty($request->dir_chor[$i])) {
+                    $user = new ActorRole;
+                    $user->roles_chosen = $request->roles_chosen[$i];
+                    $user->show = $request->show[$i];
+                    $user->theater = $request->theater[$i];
+                    $user->dir_chor = $request->dir_chor[$i];
+                    $user->user_id = $user_id;
+                    $user->save();
+                }else{ continue; }
+            }
+        }
+
+
+
+
 
         return redirect()->route('actor::actorProfile')->with('success_message', 'user roles Successfully Created');
     }

@@ -666,17 +666,9 @@
 
 				                    </div>
 
-
-
-				                   
-
-				                   
-
 				                </div>
 
 				                <div class="row">
-
-				                   
 
 				                    <div class="col-md-6">
 
@@ -1335,76 +1327,162 @@
 								 <form action="{{route('actor::updateUsersRole')}}" class="form-validate-auto" method="POST">
 									 {{csrf_field()}}
 									 <div class="row">
-										 <div class="col-md-6">
-
-											 <div class="form-group" {{ $errors->has("roles_chosen") ? "has-error":"" }}'>
-
-											 <label for="Roles" class="control-label col-md-3">Roles</label>
-
-											 <div class="col-md-9">
-
-{!! Form::text('roles_chosen',null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
-												 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
-
-											 </div>
-
+										 <div class="col-md-3">
+											 <label>Roles</label>
+										 </div>
+										 <div class="col-md-3">
+											 <label>Shows</label>
+										 </div>
+										 <div class="col-md-3">
+											 <label>Theater</label>
+										 </div>
+										 <div class="col-md-3">
+											 <label>Dir/Choreo/Others</label>
 										 </div>
 									 </div>
-									 <div class="col-md-6">
-
-										 <div class="form-group" {{ $errors->has("roles_chosen") ? "has-error":"" }}'>
-
-										 <label for="Roles" class="control-label col-md-3">Show</label>
-
-										 <div class="col-md-9">
-
-											 {!! Form::text('show',null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
-											 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
-
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[1]',@$rol[0]['roles_chosen'] ? $rol[0]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
 										 </div>
-
+										 <div class="col-md-3">
+											 {!! Form::text('show[1]',@$rol[0]['show'] ? $rol[0]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[1]',@$rol[0]['theater'] ? $rol[0]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[1]',@$rol[0]['dir_chor'] ? $rol[0]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
 									 </div>
-							 </div>
- </div>
-
-
-										 <div class="row">
-											 <div class="col-md-6">
-
-												 <div class="form-group" {{ $errors->has("roles_chosen") ? "has-error":"" }}'>
-
-												 <label for="Roles" class="control-label col-md-3">Theater</label>
-
-												 <div class="col-md-9">
-
-													 {!! Form::text('theater',null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
-													 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
-
-												 </div>
-
-											 </div>
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[2]',@$rol[1]['roles_chosen'] ? $rol[1]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
 										 </div>
- <div class="col-md-6">
-
-	 <div class="form-group" {{ $errors->has("roles_chosen") ? "has-error":"" }}'>
-
-	 <label for="Roles" class="control-label col-md-3">Dir/Chor/Other</label>
-
-	 <div class="col-md-9">
-
-		 {!! Form::text('dir_chor',null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
-		 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
-
-	 </div>
-
- </div>
- </div>
- </div>
+										 <div class="col-md-3">
+											 {!! Form::text('show[2]',@$rol[1]['show'] ? $rol[1]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[2]',@$rol[1]['theater'] ? $rol[1]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[2]',@$rol[1]['dir_chor'] ? $rol[1]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
+									 </div>
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[3]',@$rol[2]['roles_chosen'] ? $rol[2]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('show[3]',@$rol[2]['show'] ? $rol[2]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[3]',@$rol[2]['theater'] ? $rol[2]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[3]',@$rol[2]['dir_chor'] ? $rol[2]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
+									 </div>
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[4]',@$rol[3]['roles_chosen'] ? $rol[3]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('show[4]',@$rol[3]['show'] ? $rol[3]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[4]',@$rol[3]['theater'] ? $rol[3]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[4]',@$rol[3]['dir_chor'] ? $rol[3]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
+									 </div>
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[5]',@$rol[4]['roles_chosen'] ? $rol[4]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('show[5]',@$rol[4]['show'] ? $rol[4]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[5]',@$rol[4]['theater'] ? $rol[4]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[5]',@$rol[4]['dir_chor'] ? $rol[4]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
+									 </div>
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[6]',@$rol[5]['roles_chosen'] ? $rol[5]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('show[6]',@$rol[5]['show'] ? $rol[5]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[6]',@$rol[5]['theater'] ? $rol[5]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[6]',@$rol[5]['dir_chor'] ? $rol[5]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
+									 </div>
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[7]',@$rol[6]['roles_chosen'] ? $rol[6]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('show[7]',@$rol[6]['show'] ? $rol[6]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[7]',@$rol[6]['theater'] ? $rol[6]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[7]',@$rol[6]['dir_chor'] ? $rol[6]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
+									 </div>
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[8]',@$rol[7]['roles_chosen'] ? $rol[7]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('show[8]',@$rol[7]['show'] ? $rol[7]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[8]',@$rol[7]['theater'],['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[8]',@$rol[7]['dir_chor'],['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
+									 </div>
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[9]',@$rol[8]['roles_chosen'] ? $rol[8]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('show[9]',@$rol[8]['show'] ? @$rol[8]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[9]',@$rol[8]['theater'] ? @$rol[8]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[9]',@$rol[8]['dir_chor'] ? $rol[8]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
+									 </div>
+									 <div class="row">
+										 <div class="col-md-3">
+											 {!! Form::text('roles_chosen[10]',@$rol[9]['roles_chosen'] ? $rol[9]['roles_chosen'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your role']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('show[10]',@$rol[9]['show'] ? $rol[9]['show'] : null,['class'=>'form-control','placeholder'=>'Please Enter Your show']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('theater[10]',@$rol[9]['theater'] ? $rol[9]['theater'] : null,['class'=>'form-control','placeholder'=>'Please Enter Theater']) !!}
+										 </div>
+										 <div class="col-md-3">
+											 {!! Form::text('dir_chor[10]',@$rol[9]['dir_chor'] ? $rol[9]['dir_chor'] : null,['class'=>'form-control','placeholder'=>'Director/Choreo/Other']) !!}
+										 </div>
+									 </div>
 										 <div class="margin-top-20">
 
 											 <button type="submit" class="btn green"> Submit </button>
-
-
 
 										 </div>
 <br>
