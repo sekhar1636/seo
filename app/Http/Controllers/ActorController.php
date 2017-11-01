@@ -57,12 +57,14 @@ class ActorController extends Controller
         $audition = (!empty($hardcop[0]['audition_status'])) ? (!empty($hardcop[0]['audition_status'])) : 0;
         $resume = (!empty($hardcop[0]['resume_path'])) ? (!empty($hardcop[0]['resume_path'])) : 0;
 
+        $roles = ActorRole::where('user_id',$user_id)->first();
 
         return view('actor.dashboard')->with([
             'verify' => $verify,
             'hardcopy' => $hardcopy,
             'audition_status' => $audition,
-            'resume' => $resume
+            'resume' => $resume,
+            'roles' => $roles
         ]);
     }
 

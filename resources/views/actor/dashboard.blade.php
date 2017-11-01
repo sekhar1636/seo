@@ -73,7 +73,7 @@
                                             </div>
                                         </div>
                                         @endif
-                                        @if(\Auth::user()->actor->first_name != Null && @$resume != '')
+                                        @if(\Auth::user()->actor->first_name != Null && @$resume != '' && @$roles != '')
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
                                                     <div class="timeline-icon">
@@ -95,7 +95,34 @@
                                             </span>
                                                     </div>
                                                 </div>
-                                                @elseif(@$resume == '')
+                                                @elseif(@$roles == '')
+                                                    <div class="timeline-item">
+                                                        <div class="timeline-badge">
+                                                            <div class="timeline-icon">
+                                                                <i class="icon-user-following font-red"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="timeline-body inactiveBox">
+
+                                                            <div class="timeline-body-head">
+                                                                <div class="timeline-body-head-caption">
+                                                                    <span class="timeline-body-alerttitle font-red-intense">Update User Roles</span>
+
+                                                                </div>
+                                                                <div class="timeline-body-head-actions">
+                                                                    <a href="{{route('actor::getEditProfile',['#tab_1_4'])}}" class="btn btn-danger">Update</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Please Update Atleast one Role.
+
+                                            </span>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    @elseif(@$resume == '')
                                                     <div class="timeline-item">
                                                         <div class="timeline-badge">
                                                             <div class="timeline-icon">

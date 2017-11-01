@@ -73,7 +73,7 @@
                                             </div>
                                         </div>
                                         @endif
-                                        @if(\Auth::user()->staff)
+                                        @if(\Auth::user()->staff && @$staff_roles != '')
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
                                                     <div class="timeline-icon">
@@ -91,6 +91,31 @@
                                                     </div>
                                                     <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Profile Information Updated
+
+                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @elseif(@$staff_roles == '')
+                                            <div class="timeline-item">
+                                                <div class="timeline-badge">
+                                                    <div class="timeline-icon">
+                                                        <i class="icon-user-following font-red"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-body inactiveBox">
+
+                                                    <div class="timeline-body-head">
+                                                        <div class="timeline-body-head-caption">
+                                                            <span class="timeline-body-alerttitle font-red-intense">Update Roles</span>
+
+                                                        </div>
+                                                        <div class="timeline-body-head-actions">
+                                                            <a href="{{route('staff::getEditProfile',['#tab_1_5'])}}" class="btn btn-danger">Update</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Update profile information
 
                                             </span>
                                                     </div>

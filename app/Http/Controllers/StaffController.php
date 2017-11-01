@@ -31,8 +31,10 @@ class StaffController extends Controller
         {
             $verify = 0;
         }
+        $act = ActorRole::where('user_id',\Auth::user()->id)->first();
         return view('staff.dashboard')->with([
-            'verify' => $verify
+            'verify' => $verify,
+            'staff_roles' => $act
         ]);
     }
 
