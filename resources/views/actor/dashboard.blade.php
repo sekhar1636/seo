@@ -281,7 +281,7 @@
                             <!-- END TIMELINE ITEM -->
 
                             @endif
-                                        @if(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy==2 && $audition_status==1)
+                                        @if(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy==2 && $audition_status==1 && @$roles != '')
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
                                                     <div class="timeline-icon">
