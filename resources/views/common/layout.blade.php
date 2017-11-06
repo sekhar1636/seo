@@ -257,8 +257,9 @@
                                             </a>
                                         </li>
                                         @if(\Auth::check())
-                                        @if(\Auth::user()->payment_status==1)
+                                            @if(\Auth::user()->payment_status==1)
                                                 <li class="menu-dropdown {{ @$staticactive=='resactive' ? 'active' : '' }}"><a><i class="icon-envelope"></i> Premium content</a>
+
                                         <ul class="dropdown-menu pull-left">
                                         <li>
                                             <a href="{{route('getStaticPage',['slug'=>'headshot'])}}">Headshot Advice</a>
@@ -269,7 +270,11 @@
 
                                         </ul>
                                         </li>
+                                        @else
+                                                <li><a href="{{ route('getStaticPage',['slug'=>'premcont']) }}"><i class="icon-envelope"></i> Premium Content</a></li>
                                         @endif
+                                        @else
+                                            <li><a href="{{ route('getStaticPage',['slug'=>'premcont']) }}"><i class="icon-envelope"></i> Premium Content</a></li>
 @endif
 
                                     </ul>
