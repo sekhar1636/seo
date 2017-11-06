@@ -246,7 +246,7 @@
                                                         <a href="{{ route('getStaticPage',['slug'=>'aboutstrawhat']) }}">Our Company</a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('getStaticPage',['slug'=>'kirstijaybios']) }}">Who We are?</a>
+                                                        <a href="{{ route('getStaticPage',['slug'=>'kirstijaybios']) }}">Who We Are</a>
                                                     </li>
                                             </ul>
                                         </li>
