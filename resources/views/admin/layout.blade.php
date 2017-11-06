@@ -124,43 +124,50 @@
                                         </li>
                                         <li class="{{ @$useractive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminUsers')}}">
+                                                <i class="icon-users"></i>
                                                 Users
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
                                         <li class="{{ @$faqactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminFaq')}}">
+                                                <i class="icon-question"></i>
                                                 FAQ
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
                                         <li class="{{ @$slideshowactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminSlideshows')}}">
+                                                <i class="icon-film"></i>
                                                 Slideshows
+                                                <span class="arrow"></span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ @$edit ? 'active' : '' }}">
+                                            <a href="{{route('admin::adminHomepageEdit')}}">
+                                                <i class="icon-note"></i>
+                                                Home Page
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
                                         <li class="{{ @$contentactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminContentPages')}}">
+                                                <i class="icon-link"></i>
                                                 Content Pages
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
                                         <li class="{{ @$subscriptionactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminSubscriptions')}}">
+                                                <i class="icon-briefcase"></i>
                                                 Subscription
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
                                         <li class="{{ @$productactive ? 'active' : '' }}">
                                             <a href="{{route('admin::adminProducts')}}">
+                                                <i class="icon-list"></i>
                                                 Products
-                                                <span class="arrow"></span>
-                                            </a>
-                                        </li>
-                                        <li class="{{ @$edit ? 'active' : '' }}">
-                                            <a href="{{route('admin::adminHomepageEdit')}}">
-                                                Edit
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
