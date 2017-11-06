@@ -189,7 +189,7 @@
                                                                 @else
                                                                     <a href="{{route('getStaticPage',['slug'=>'staff'])}}">
                                                                         @endif
-                                                                        <i class="icon-users"></i> Staff/Tech
+                                                                        <i class="icon-note"></i> Staff/Tech
                                                                         <span class="arrow"></span>
                                                                     </a>
 
@@ -203,7 +203,7 @@
                                                                @else
                                                                    <a href="{{route('getStaticPage',['slug'=>'theater'])}}">
                                                                        @endif
-                                                                       <i class="icon-users"></i> Theaters
+                                                                       <i class="icon-star"></i> Theaters
                                                                        <span class="arrow"></span>
                                                                    </a>
                                            <ul class="dropdown-menu pull-left">
