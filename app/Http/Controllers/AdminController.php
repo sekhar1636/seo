@@ -138,8 +138,14 @@ class AdminController extends Controller
             $tes = Slideshow::orderBy('id')->get();
             foreach($tes as $item)
             {
-                $item->status = "0";
-                $item->save();
+                if($item->name == "Contact" || $item->name == "Younger")
+                {
+                    //
+                }
+                else{
+                    $item->status = "0";
+                    $item->save();
+                }
             }
 			Slideshow::create(request(['name','status']));
 			return redirect()->back()->with('success_message', 'Slideshow added successfully.');
@@ -198,17 +204,25 @@ class AdminController extends Controller
                 $not_in_id = Slideshow::OrderBy('id')->get();
                 foreach($not_in_id as $item)
                 {
-                    $item->status = "0";
-                    $item->save();
+                    if($item->name == "Contact" || $item->name == "Younger")
+                    {
+                        //
+                    }
+                    else
+                    {
+                        $item->status = "0";
+                        $item->save();
+                    }
                 }
             }
+        }
 			$slideshow = Slideshow::findOrFail($id);
 			$slideshow->name = $request['name'];
 			$slideshow->status = $request['status'];
 			$slideshow->save();
 
 			return redirect()->route('admin::adminSlideshows')->with('success_message', 'Slideshow edited successfully.');
-		}
+
     }
 	
 	public function slideshowAddSlide($id){
