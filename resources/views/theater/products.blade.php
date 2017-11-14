@@ -22,7 +22,6 @@
     <script src="https://js.stripe.com/v2/"></script>
     <script>
         $(document).ready(function() {
-            //console.log($('#prodect').val());
             $('.pls').click(function(){
                 var as= $(this).attr('data-type');
                 var val = $('#'+as).val();
@@ -288,7 +287,6 @@
                                 <input type="checkbox" class="hidden" name="products[{{$product->id}}][proid]" value="{{$product->id}}" />
                             </span>
 
-                                        <input type="hidden" id="prodect" value="{{ $product->id  }}" />
                                         <a href="javascript" onclick="return false" data-type="{{$s}}" class="btn btn-icon-only red mins" id="mins[{{$s}}]"><i class="fa fa-minus"></i></a><input class="couunt" style="width: 10%; border: none; text-align: center;" type="text" name="couunt[{{$s}}]" id="{{$s}}" value="1"/><a href="javascript" onclick="return false" data-type="{{$r}}" class="btn btn-icon-only green pls" id="pls[{{$r}}]"><i class="fa fa-plus"></i></a>
                                     </div>
 
