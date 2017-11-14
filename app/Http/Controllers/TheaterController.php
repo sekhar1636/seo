@@ -57,8 +57,8 @@ class TheaterController extends Controller
                 if($proid && $varid) {
                     $product = Product::findOrFail($proid);
                     $varient = ProductVariant::findorFail($varid);
-                    $totalPrice = $totalPrice + $varient['price'];
-                    $description .= "\nProduct: " . $product->name . " Price: " . $varient['price'];
+                    $totalPrice = $totalPrice + $prod['price'] * $varient['price'];
+                    $description .= "\nProduct: " . $product->name . " Price: " . $prod['price'] * $varient['price'];
                 }
             }
 
@@ -85,7 +85,7 @@ class TheaterController extends Controller
                     $payment->user_id = \Auth::user()->id;
                     $payment->transaction_id = $request->token;
                     $payment->product_id = $product->id;
-                    $payment->price = $varient['price'];
+                    $payment->price = $prod['price'] * $varient['price'];
                     $payment->save();
                 }
             }

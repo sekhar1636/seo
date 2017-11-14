@@ -22,6 +22,31 @@
     <script src="https://js.stripe.com/v2/"></script>
     <script>
         $(document).ready(function() {
+            //console.log($('#prodect').val());
+            $('.pls').click(function(){
+                var as= $(this).attr('data-type');
+                var val = $('#'+as).val();
+              var vval = parseInt(val)+parseInt(1);
+              $('#'+as).val(vval);
+              $('#r'+as).val(vval);
+            });
+           // var v = $('.pricedetct').find(":selected").text();
+           // console.log(v);
+
+            $('.mins').click(function(){
+                var aas = $(this).attr('data-type');
+                var valec = $('#'+aas).val();
+                if(parseInt(valec) == parseInt(1))
+               {
+                 alert('You must atleast purchase a single one!');
+                 return false;
+               }
+               else{
+                   var minn = parseInt(valec)-parseInt(1);
+               }
+                $('#'+aas).val(minn);
+                $('#r'+aas).val(minn);
+            });
             // Change the key to your one
             Stripe.setPublishableKey('pk_test_rLxd9asqDxgfDCqefyeS05jx');
 
@@ -243,13 +268,18 @@
                     <div class="portlet-body">
                         <form id="paymentForm" class="form-horizontal" method="post" action="{{route('theater::buyProduct')}}" >
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <?php $i=1; $j=1; ?>
                             @foreach($products as $product)
+
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">{{$product->name}}</label>
                                     <div class="col-xs-5">
-                                        <select name="products[{{$product->id}}][varid]" class="form-control">
+                                        <?php $r=$i++; $s=$j++; ?>
+                                            <input name="products[{{$product->id}}][price]" type="hidden" id="r{{$r}}" value=""/>
+                                        <select name="products[{{$product->id}}][varid]" id="select_id{{ $product->id }}" class="form-control pricedetct">
+
                                             @foreach($product->product_variant as $val)
-                                                <option value="{{ $val['id'] }}">{{ $val['product_variant'] ? 'Variant: '.$val['product_variant'] : 'No variant'}} {{ $val['price'] ? 'Price:'.$val['price'] : ' '  }}</option>
+                                                <option value="{{ $val['id'] }}" data-attr="{{ $val['price'] }}">{{ $val['product_variant'] ? 'Variant: '.$val['product_variant'] : 'No variant'}} {{ $val['price'] ? 'Price:'.$val['price'] : ' '  }}</option>
                                             @endforeach
                                         </select>
                                         <p class="product-description">{!!html_entity_decode($product->description)!!}</p>
@@ -257,10 +287,14 @@
                                 <button type="button" class="btn" data-color="primary">Add to Cart</button>
                                 <input type="checkbox" class="hidden" name="products[{{$product->id}}][proid]" value="{{$product->id}}" />
                             </span>
+
+                                        <input type="hidden" id="prodect" value="{{ $product->id  }}" />
+                                        <a href="javascript" onclick="return false" data-type="{{$s}}" class="btn btn-icon-only red mins" id="mins[{{$s}}]"><i class="fa fa-minus"></i></a><input class="couunt" style="width: 10%; border: none; text-align: center;" type="text" name="couunt[{{$s}}]" id="{{$s}}" value="1"/><a href="javascript" onclick="return false" data-type="{{$r}}" class="btn btn-icon-only green pls" id="pls[{{$r}}]"><i class="fa fa-plus"></i></a>
                                     </div>
 
 
                                 </div>
+
                             @endforeach
 
 
