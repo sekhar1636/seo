@@ -324,121 +324,124 @@
                              <div class="page-content">
                                 <div class="container-fluid">
                                     <!-- BEGIN PAGE BREADCRUMBS -->
+@if ($__env->yieldContent('title') == "Home")
 
-                                   <ul class="page-breadcrumb breadcrumb">
-                                        <li>
-                                            <a href="{{route('getIndex')}}">StrawHat</a>
-                                            <i class="fa fa-circle"></i>
-                                        </li>
-                                        <li>
-                                            <span>@yield('title')</span>
-                                        </li>
-                                   </ul>
-                                
-                                @yield('content')
-                               
-                                </div>
-                            </div>
-                            <!-- END PAGE CONTENT BODY -->
-                            <!-- END CONTENT BODY -->
-                        </div>
-                        <!-- END CONTENT -->
-                    
-                    </div>
-                    <!-- END CONTAINER -->
-                </div>
-            </div>
-            <div class="page-wrapper-row">
-                <div class="page-wrapper-bottom">
-                    <!-- BEGIN FOOTER -->
-                    <!-- BEGIN PRE-FOOTER -->
-                    <div class="page-prefooter">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
-                                    <h2>About</h2>
-                                    <p> StrawHat Auditions is New York City’s premiere combined audition service. </p>
-                                </div>
-                                <div class="col-md-3 col-sm-6 col-xs12 footer-block">
-                                    <h2>Subscribe Email</h2>
-                                    <div class="subscribe-form">
-                                        <form action="javascript:;">
-                                            <div class="input-group">
-                                                <input type="text" placeholder="mail@email.com" class="form-control">
-                                                <span class="input-group-btn">
-                                                    <button class="btn" type="submit">Submit</button>
-                                                </span>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                               
-                                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
-                                    <h2>Follow Us On</h2>
-                                    <ul class="social-icons">
-                                        
-                                        <li>
-                                            <a href="javascript:;" data-original-title="facebook" class="facebook"></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;" data-original-title="twitter" class="twitter"></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;" data-original-title="youtube" class="youtube"></a>
-                                        </li>
-                                       
-                                    </ul>
-                                </div>
-                                <!--<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
-                                    <h2>Contacts</h2>
-                                    <address class="margin-bottom-40"> Phone: 800 123 3456
-                                        <br> Email:
-                                        <a href="mailto:info@metronic.com">xyz@abc.com</a>
-                                    </address>
-                                </div>-->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END PRE-FOOTER -->
-                    <!-- BEGIN INNER FOOTER -->
-                    <div class="page-footer">
-                        <div class="container-fluid"> {{ date('Y') }} &copy;
-                            <a target="_blank" href="http://keenthemes.com">StrawHat-Auditions</a>
-                        </div>
-                    </div>
-                    <div class="scroll-to-top">
-                        <i class="icon-arrow-up"></i>
-                    </div>
-                    <!-- END INNER FOOTER -->
-                    <!-- END FOOTER -->
-                </div>
-            </div>
+@else
+                                        <ul class="page-breadcrumb breadcrumb">
+                                            <li>
+                                                <a href="{{route('getIndex')}}">StrawHat</a>
+                                                <i class="fa fa-circle"></i>
+                                            </li>
+                                            <li>
+                                                <span>@yield('title')</span>
+                                            </li>
+                                        </ul>
+@endif
+
+@yield('content')
+
+</div>
+</div>
+<!-- END PAGE CONTENT BODY -->
+<!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+</div>
+<!-- END CONTAINER -->
+</div>
+</div>
+<div class="page-wrapper-row">
+<div class="page-wrapper-bottom">
+<!-- BEGIN FOOTER -->
+<!-- BEGIN PRE-FOOTER -->
+<div class="page-prefooter">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+<h2>About</h2>
+<p> StrawHat Auditions is New York City’s premiere combined audition service. </p>
+</div>
+<div class="col-md-3 col-sm-6 col-xs12 footer-block">
+<h2>Subscribe Email</h2>
+<div class="subscribe-form">
+    <form action="javascript:;">
+        <div class="input-group">
+            <input type="text" placeholder="mail@email.com" class="form-control">
+            <span class="input-group-btn">
+                <button class="btn" type="submit">Submit</button>
+            </span>
         </div>
-   
-        <!--[if lt IE 9]>
-        <script src="../assets/global/plugins/respond.min.js"></script>
-        <script src="../assets/global/plugins/excanvas.min.js"></script> 
-        <script src="../assets/global/plugins/ie8.fix.min.js"></script> 
-        <![endif]-->
-        <!-- BEGIN CORE PLUGINS -->
-        <script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
-        <script src="{{asset('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
-        <script src="{{asset('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
-        <!-- END CORE PLUGINS -->
-        <!-- BEGIN THEME GLOBAL SCRIPTS -->
-        <script src="{{asset('assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
-        <!-- END THEME GLOBAL SCRIPTS -->
-        <!-- BEGIN THEME LAYOUT SCRIPTS -->
-        <script src="{{asset('assets/layouts/layout3/scripts/layout.min.js')}}" type="text/javascript"></script>
-        <!--<script src="{{asset('assets/layouts/layout3/scripts/demo.min.js')}}" type="text/javascript"></script> -->
-        <script src="http://nicpakistan.dev/assets/global/scripts/metronic.js" type="text/javascript"></script>
-        <script src="{{asset('assets/js/list.min.js')}}" type="text/javascript"></script>
-        <script type="text/javascript">
-             Metronic.init(); // init metronic core componets
-        </script>
+    </form>
+</div>
+</div>
 
-        @yield('js')
-    
-    </body>
+<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+<h2>Follow Us On</h2>
+<ul class="social-icons">
+
+    <li>
+        <a href="javascript:;" data-original-title="facebook" class="facebook"></a>
+    </li>
+    <li>
+        <a href="javascript:;" data-original-title="twitter" class="twitter"></a>
+    </li>
+    <li>
+        <a href="javascript:;" data-original-title="youtube" class="youtube"></a>
+    </li>
+
+</ul>
+</div>
+<!--<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+<h2>Contacts</h2>
+<address class="margin-bottom-40"> Phone: 800 123 3456
+    <br> Email:
+    <a href="mailto:info@metronic.com">xyz@abc.com</a>
+</address>
+</div>-->
+</div>
+</div>
+</div>
+<!-- END PRE-FOOTER -->
+<!-- BEGIN INNER FOOTER -->
+<div class="page-footer">
+<div class="container-fluid"> {{ date('Y') }} &copy;
+<a target="_blank" href="http://keenthemes.com">StrawHat-Auditions</a>
+</div>
+</div>
+<div class="scroll-to-top">
+<i class="icon-arrow-up"></i>
+</div>
+<!-- END INNER FOOTER -->
+<!-- END FOOTER -->
+</div>
+</div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../assets/global/plugins/respond.min.js"></script>
+<script src="../assets/global/plugins/excanvas.min.js"></script>
+<script src="../assets/global/plugins/ie8.fix.min.js"></script>
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+<script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="{{asset('assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<script src="{{asset('assets/layouts/layout3/scripts/layout.min.js')}}" type="text/javascript"></script>
+<!--<script src="{{asset('assets/layouts/layout3/scripts/demo.min.js')}}" type="text/javascript"></script> -->
+<script src="http://nicpakistan.dev/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="{{asset('assets/js/list.min.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+Metronic.init(); // init metronic core componets
+</script>
+
+@yield('js')
+
+</body>
 
 </html>
