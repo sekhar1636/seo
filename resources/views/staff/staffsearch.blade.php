@@ -145,9 +145,9 @@
                     <div class="row">
                         <div class="actorContainer">
 
-                            @foreach($staffs as $staff)
+                            @foreach(@$staffs as $staff)
 
-                                <div data-primary-sought="{{ preg_replace('/\s+/', '', \App\Misc::$primary_sought[$staff->primary_sought]) }}" data-secondary-sought="{{ preg_replace('/\s+/', '', \App\Misc::$secondary_sought[$staff->secondary_sought]) }}" class="mix">
+                                <div data-primary-sought="{{ preg_replace('/\s+/', '', \App\Misc::$primary_sought[@$staff->primary_sought]) }}" data-secondary-sought="{{ preg_replace('/\s+/', '', \App\Misc::$secondary_sought[@$staff->secondary_sought]) }}" class="mix">
                                     <div class="col-md-4">
                                         <div class="tile-container">
                                             <div class="tile-thumbnail">
@@ -171,7 +171,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{ $mixClass = "" }}
+                                {{ @$mixClass = "" }}
                             @endforeach
                         </div>
                         <div class="clearfix"></div>

@@ -71,7 +71,7 @@
                                                 <ul class="list-unstyled">
 
                                                     <li>
-                                                        <span class="sale-info"> Availibity</span>
+                                                        <span class="sale-info"> Availability</span>
                                                         <span class="sale-num"> {{$staff->staff->from}} to {{$staff->staff->to}}</span>
                                                     </li>
                                                 </ul>
@@ -79,6 +79,13 @@
                                         </div>
                                     </div>
                                     <!--end col-md-4-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7 profile-info">
+                                        <h1 class="font-green sbold uppercase">Resume</h1>
+                                        <p><a href="{{ asset($staff->resume_path) }}">{{ $staff->name }}'s Resume</a></p>
+                                        <p><a href="tel:{{ $staff->phone_number }}">{{$staff->phone_number}}</a></p>
+                                    </div>
                                 </div>
                                 <!--end row-->
 
