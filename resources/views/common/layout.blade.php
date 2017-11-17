@@ -115,7 +115,10 @@
                                                 </li>
                                             @elseif(Auth::user()->role =="staff")
                                                 <li>
-                                                    <a href="{{route('staff::staffProfile')}}"> My Profile </a>
+                                                    <a href="{{route('staff::getEditProfile')}}"> My Profile </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('staff::staffProfile')}}"> Dashboard </a>
                                                 </li>
                                             @endif
                                            
