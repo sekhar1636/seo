@@ -445,7 +445,7 @@ class StaffController extends Controller
         $membershipPeriod = MembershipPeriod::findOrFail($request->subscription);
         $totalPrice = $totalPrice + $membershipPeriod->price;
         $description.= "StrawHat Subscription\nPlan: ".$membershipPeriod->name." Price: ".$membershipPeriod->price;
-        $size = sizeof($request->products);
+        /*$size = sizeof($request->products);
 
         if($request->products)
         {
@@ -461,7 +461,7 @@ class StaffController extends Controller
                     $description.= "\nProduct: ".$product->name." ".$varient['product_variant']." Price: ".$varient['price'];
                 }
             }
-        }
+        }*/
 
         $totalPrice = $totalPrice*100;
         \Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
@@ -525,7 +525,7 @@ class StaffController extends Controller
             $use->payment_status = 1;
             $use->save();
 
-            if($request->products)
+          /*  if($request->products)
             {
                 foreach($request->products AS $prod){
                     $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
@@ -543,7 +543,7 @@ class StaffController extends Controller
                         $payment->save();
                     }
                 }
-            }
+            }*/
             return redirect()->route('staff::staffProfile')->with('success_message', 'Successfully subscribed.');
         }
     }

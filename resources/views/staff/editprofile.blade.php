@@ -503,7 +503,7 @@
                                                 {!! Form::checkbox('sound',1,@$staff[0]['sound'] ? true:null) !!}
                                                 <label>Sound</label><br>
                                                 {!! Form::checkbox('state_management',1,@$staff[0]['state_management'] ? true:null) !!}
-                                                <label>State Management</label><br>
+                                                <label>Stage Management</label><br>
                                                 {!! Form::checkbox('company_management',1,@$staff[0]['company_management'] ? true:null) !!}
                                                 <label>Company Management</label><br>
                                             </div>
@@ -787,6 +787,7 @@
 
 
                 </div>
+    </form>
                 <br>
                 <table class="table table-striped table-bordered table-advance table-hover">
                     <thead>
@@ -822,25 +823,153 @@
                 </table>
 
             </div>
-    <!-- CHANGE AVATAR TAB -->
-
-    <div class="tab-pane {{  (Session::has('tabactive') ? 'active' : '') }}" id="tab_1_2">
 
 
 
 
+                            <!-- END CHANGE AVATAR TAB -->
+                            <div class="tab-pane" id="tab_1_4">
+                                <form action="{{route('staff::postPortfolio')}}" class="form" method="POST">
+                                    {{ Form::token() }}
+                                    @if(count($staff))
+                                        <input type="hidden" name="port_staff" value="PUT"/>
+                                    @else
+                                        <input type="hidden" name="port_staff" value="POST"/>
+                                    @endif
+                                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                        {{ Form::label('port', 'Portfolio', ['class' => 'col-lg-2 control-label']) }}
+                                        <div class="col-lg-10">
+                                            {{ Form::textarea('portfolio', @($staff[0]['portfolio']) ? $staff[0]['portfolio'] : null, ['class' => 'form-control', 'rows' => 3,  'id' => 'editor']) }}
+                                            <p class="help-block">{{ $errors->first('portfolio', ':message') }}</p>
+                                        </div>
+                                    </div>
 
-        @if(isset($staff[0]['precrop_url']))
+                                    <div class="margin-top-10">
 
-            <img src="{{asset($staff[0]['precrop_url'])}}" width="500" height="500" id="cropbox" />
+                                        <button type="submit" class="btn green"> Submit </button>
 
 
+
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- CHANGE PASSWORD TAB -->
+
+                            <div class="tab-pane" id="tab_1_3">
+
+                                <form action="{{route('staff::postEditPassword')}}" class="form-validate-auto" method="POST">
+
+                                    <div class="form-group" {{ $errors->has("password") ? "has-error":"" }}'>
+
+                                    <label class="control-label">Password</label>
+
+                                    <div class="input-group">
+
+						                        <span class="input-group-addon">
+
+						                            <i class="fa fa-key"></i>
+
+						                        </span>
+
+                                        {{csrf_field()}}
+
+                                        {!! Form::password('password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6']) !!}
+
+
+
+                                    </div>
+
+                                    <span class="help-block"> {{ $errors->first("password") }} </span>
+
+                            </div>
+
+                            <div class="form-group" {{ $errors->has("new_password") ? "has-error":"" }}'>
+
+                            <label class="control-label">New Password</label>
+
+                            <div class="input-group">
+
+						                        <span class="input-group-addon">
+
+						                            <i class="fa fa-key"></i>
+
+						                        </span>
+
+
+
+                                {!! Form::password('new_password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6', 'id'=>'PasswordField']) !!}
+
+
+
+                            </div>
+
+                            <span class="help-block"> {{ $errors->first("new_password") }} </span>
+
+                        </div>
+
+                        <div class="form-group" {{ $errors->has("re_password") ? "has-error":"" }}'>
+
+                        <label class="control-label">Re-type New Password</label>
+
+                        <div class="input-group">
+
+						                        <span class="input-group-addon">
+
+						                            <i class="fa fa-key"></i>
+
+						                        </span>
+
+
+
+                            {!! Form::password('re_password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6', 'equalTo'=>'#PasswordField']) !!}
+
+
+
+                        </div>
+
+                        <span class="help-block"> {{ $errors->first("re_password") }} </span>
+
+                    </div>
+
+
+
+                    <div class="margin-top-10">
+
+                        <button type="submit" class="btn green"> Change Password </button>
+
+
+
+                    </div>
+
+                    </form>
+
+                </div>
+
+                <!-- END CHANGE PASSWORD TAB -->
+
+
+                <!-- CHANGE AVATAR TAB -->
+
+        <div class="tab-pane {{  (Session::has('tabactive') ? 'active' : '') }}" id="tab_1_2">
+
+            @if(isset($staff[0]['precrop_url']))
 
             <!-- This is the form that our event handler fills -->
 
             <form style="margin-top: 30px;" action="{{route('staff::postCropPhotoUpdate')}}" method="post" onsubmit="return checkCoords();">
 
                 {{csrf_field()}}
+                    <div class="form-group clearfix {{ $errors->has('photo') ? 'has-error' : '' }}">
+
+                        <!--  <label class="control-label col-md-3">Photo</label> -->
+
+                        <div class="col-md-9">
+
+                            <div class="fileinput {{ @$slider->photo_url ? 'fileinput-exists' : 'fileinput-new' }}" data-provides="fileinput">
+
+                                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                    <img src="{{asset($staff[0]['precrop_url'])}}" width="500" height="500" id="cropbox" />
+                                </div>
 
                 <input type="hidden" id="x" name="x" />
 
@@ -849,16 +978,21 @@
                 <input type="hidden" id="w" name="w" />
 
                 <input type="hidden" id="h" name="h" />
+                                <div class="fileinput-buttons">
 
                 <input type="submit" value="Crop Image" class="btn btn-large btn-inverse" />
 
                 <a href="{{route('staff::getDeletePhoto')}}" class="btn btn-large btn-danger" >Delete Picture</a>
-
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </form>
+
 
         @else
 
-            <form action="{{route('staff::postPhotoUpdate')}}" enctype="multipart/form-data" role="form" method="POST">
+            <form action="{{route('staff::postPhotoUpdate')}}" enctype="multipart/form-data" role="form" method="post">
 
                 {{csrf_field()}}
 
@@ -917,129 +1051,11 @@
             </form>
 
         @endif
-
-
-    </div>
-
-    <!-- END CHANGE AVATAR TAB -->
-                            <div class="tab-pane" id="tab_1_4">
-                                <form action="{{route('staff::postPortfolio')}}" class="form" method="POST">
-                                    {{ Form::token() }}
-                                    @if(count($staff))
-                                        <input type="hidden" name="port_staff" value="PUT"/>
-                                    @else
-                                        <input type="hidden" name="port_staff" value="POST"/>
-                                    @endif
-                                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                        {{ Form::label('port', 'Portfolio', ['class' => 'col-lg-2 control-label']) }}
-                                        <div class="col-lg-10">
-                                            {{ Form::textarea('portfolio', @($staff[0]['portfolio']) ? $staff[0]['portfolio'] : null, ['class' => 'form-control', 'rows' => 3,  'id' => 'editor']) }}
-                                            <p class="help-block">{{ $errors->first('portfolio', ':message') }}</p>
-                                        </div>
-                                    </div>
-
-                                        <div class="margin-top-10">
-
-                                            <button type="submit" class="btn green"> Submit </button>
+                        </div>
 
 
 
-                                        </div>
-                                </form>
-                            </div>
-    <!-- CHANGE PASSWORD TAB -->
 
-    <div class="tab-pane" id="tab_1_3">
-
-        <form action="{{route('staff::postEditPassword')}}" class="form-validate-auto" method="POST">
-
-            <div class="form-group" {{ $errors->has("password") ? "has-error":"" }}'>
-
-            <label class="control-label">Password</label>
-
-            <div class="input-group">
-
-						                        <span class="input-group-addon">
-
-						                            <i class="fa fa-key"></i>
-
-						                        </span>
-
-                {{csrf_field()}}
-
-                {!! Form::password('password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6']) !!}
-
-
-
-            </div>
-
-            <span class="help-block"> {{ $errors->first("password") }} </span>
-
-    </div>
-
-    <div class="form-group" {{ $errors->has("new_password") ? "has-error":"" }}'>
-
-    <label class="control-label">New Password</label>
-
-    <div class="input-group">
-
-						                        <span class="input-group-addon">
-
-						                            <i class="fa fa-key"></i>
-
-						                        </span>
-
-
-
-        {!! Form::password('new_password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6', 'id'=>'PasswordField']) !!}
-
-
-
-    </div>
-
-    <span class="help-block"> {{ $errors->first("new_password") }} </span>
-
-    </div>
-
-    <div class="form-group" {{ $errors->has("re_password") ? "has-error":"" }}'>
-
-    <label class="control-label">Re-type New Password</label>
-
-    <div class="input-group">
-
-						                        <span class="input-group-addon">
-
-						                            <i class="fa fa-key"></i>
-
-						                        </span>
-
-
-
-        {!! Form::password('re_password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6', 'equalTo'=>'#PasswordField']) !!}
-
-
-
-    </div>
-
-    <span class="help-block"> {{ $errors->first("re_password") }} </span>
-
-    </div>
-
-
-
-    <div class="margin-top-10">
-
-        <button type="submit" class="btn green"> Change Password </button>
-
-
-
-    </div>
-
-    </form>
-
-    </div>
-
-    <!-- END CHANGE PASSWORD TAB -->
 
     </div>
 
