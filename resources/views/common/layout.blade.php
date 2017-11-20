@@ -270,7 +270,18 @@
                                         <li>
                                             <a href="{{route('getStaticPage',['slug'=>'resumeadvice'])}}">Resume Advice</a>
                                         </li>
-
+                                            <li>
+                                                <a href="{{route('getStaticPage',['slug'=>'prepareforauditioninglist'])}}">Auditioning List</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('getStaticPage',['slug'=>'gotanaudition'])}}">Got An Audition</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('getStaticPage',['slug'=>'postaudition'])}}">Post An audition</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('getStaticPage',['slug'=>'dreadedlist'])}}">Dreaded List</a>
+                                            </li>
                                         </ul>
                                         </li>
                                         @else
