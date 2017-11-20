@@ -547,6 +547,10 @@ class StaffController extends Controller
             return redirect()->route('staff::staffProfile')->with('success_message', 'Successfully subscribed.');
         }
     }
+    public function staffoaddownl($id){
+        $user = User::Findorfail($id);
+        return response()->download(storage_path("app/public/{$user->staff->resume_path}"));
+    }
 
 
 }

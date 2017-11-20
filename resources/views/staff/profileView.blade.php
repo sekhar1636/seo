@@ -83,7 +83,7 @@
                                 <div class="row">
                                     <div class="col-md-7 profile-info">
                                         <h1 class="font-green sbold uppercase">Resume</h1>
-                                        <p><a href="{{ URL::to('/') }}/files/{{$staff->staff->resume_path}}" target="_blank">{{ $staff->name }}'s Resume</a></p>
+                                        <p><a href="{{ route('staff::staffDownloadResume',[$staff->id]) }}" target="_blank">{{ $staff->name }}'s Resume</a></p>
                                         <p><a href="tel:{{ $staff->phone_number }}">{{$staff->phone_number}}</a></p>
                                     </div>
                                 </div>
