@@ -73,6 +73,32 @@
                                             </div>
                                         </div>
                                         @endif
+                                        @if(\Auth::user()->actor->first_name == null)
+                                            <div class="timeline-item">
+                                                <div class="timeline-badge">
+                                                    <div class="timeline-icon">
+                                                        <i class="icon-user-following font-red"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-body inactiveBox">
+
+                                                    <div class="timeline-body-head">
+                                                        <div class="timeline-body-head-caption">
+                                                            <span class="timeline-body-alerttitle font-red-intense">Start Profile</span>
+
+                                                        </div>
+                                                        <div class="timeline-body-head-actions">
+                                                            <a href="{{route('actor::getEditProfile',['#tab_1_1'])}}" class="btn btn-danger">Start Profile</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="timeline-body-content">
+                                            <span class="font-grey-cascade"> Start Create Your profile and be a star.
+
+                                            </span>
+                                                    </div>
+                                                </div>
+
+                                                @else
                                         @if(\Auth::user()->actor->first_name != Null && @$resume != '' && @$roles != '')
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
@@ -173,6 +199,7 @@
                                                     </div>
                                                 </div>
 
+                                        @endif
                                         @endif
                                     <!-- END TIMELINE ITEM -->
                                         <!-- TIMELINE ITEM -->
@@ -365,6 +392,10 @@
                 </div>
             </div>
         </div>
+                        <div class="col-md-12">
+                            <p style="font-weight:bold">Terms And Conditions</p>
+                            <p>By creating a profile on the StrawHat Auditions website, I certify that I have read the registration and application instructions fully and that the information in this application is truthful and correct. I understand that payment of the registration fee does not guarantee that I will be scheduled for an audition, only that I will receive consideration for same, and that this registration fee is non-refundable. I understand that StrawHat Auditions is not to be held responsible for any errors of omissions in the publication or reproduction of the materials I have supplied, nor are they liable for any damages arising out of or connected to the use or inability to use their web site, www.strawhat-auditions.com. I understand that StrawHat Auditions is not a licensed booking agent or manager, nor is it engaged in any way in the operation of a talent or employment agency. I do not expect StrawHat to obtain employment for me, but only to make the physical arrangements to facilitate my audition for potential theatrical employers. Any employment related transactions are solely between me and a theatrical employer with no commission or management fee due or payable to <i>StrawHat Auditions.</i></p>
+                        </div>
     </div>
     </div>
 @endsection
