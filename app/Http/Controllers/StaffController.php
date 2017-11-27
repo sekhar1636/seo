@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use App\ActorRole;
 
 
+
 class StaffController extends Controller
 {
     public function getProfile(){
@@ -547,10 +548,14 @@ class StaffController extends Controller
             return redirect()->route('staff::staffProfile')->with('success_message', 'Successfully subscribed.');
         }
     }
-    public function staffoaddownl($id){
+    /*public function staffoaddownl($id){
         $user = User::Findorfail($id);
-        return response()->download(storage_path("app/public/{$user->staff->resume_path}"));
-    }
+        $file_path = asset($user->staff->resume_path);
+        $headers = ['Content-Type: application/pdf'];
+        $newName = 'resumedownload'.time().'.pdf';
+
+        return response()->download($file_path, $newName, $headers);
+    }*/
 
 
 }

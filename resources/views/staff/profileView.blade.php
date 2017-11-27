@@ -47,11 +47,11 @@
 
                                         <p>
                                         <b>Primary Sought : </b>
-                                        {{ \App\Misc::$primary_sought[$staff->staff->primary_sought] }}
+                                        {{ \App\Misc::$primary_sought[@$staff->staff->primary_sought ? $staff->staff->primary_sought : ''] }}
                                         </p>
                                         <p>
                                         <b>Secondary Sought : </b>
-                                        {{\App\Misc::$secondary_sought[$staff->staff->secondary_sought]}}
+                                        {{\App\Misc::$secondary_sought[@$staff->staff->secondary_sought ? $staff->staff->secondary_sought : '']}}
 
                                         </p>
 
@@ -83,8 +83,8 @@
                                 <div class="row">
                                     <div class="col-md-7 profile-info">
                                         <h1 class="font-green sbold uppercase">Resume</h1>
-                                        <p><a href="{{ route('staff::staffDownloadResume',[$staff->id]) }}" target="_blank">{{ $staff->name }}'s Resume</a></p>
-                                        <p><a href="tel:{{ $staff->phone_number }}">{{$staff->phone_number}}</a></p>
+                                        <p><a target="_blank" href="{{ asset($staff->staff->resume_path) }}">{{ $staff->name }}'s Resume</a></p>
+                                        <p><a href="tel:{{ $staff->staff->phone_number }}">{{$staff->staff->phone_number}}</a></p>
                                     </div>
                                 </div>
                                 <!--end row-->

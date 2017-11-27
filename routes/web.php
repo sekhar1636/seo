@@ -83,7 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('password', ['as'=>'postEditPassword', 'uses'=>'StaffController@postEditPassword']);
             Route::post('edit/portfolio',['as'=>'postPortfolio','uses'=>'StaffController@updatePortfolio']);
             Route::post('updatestaffrole',['as'=>'updateStaffsRole','uses'=>'StaffController@staffroles']);
-            Route::get('download/resume/{id}',['as'=>'staffDownloadResume', 'uses'=>'StaffController@staffoaddownl']);
+            //Route::get('download/resume/{id}',['as'=>'staffDownloadResume', 'uses'=>'StaffController@staffoaddownl']);
 		});
 	});
 
