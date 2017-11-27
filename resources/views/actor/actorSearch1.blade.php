@@ -247,7 +247,7 @@
 								<div class="tile-container">
 									<div class="tile-thumbnail">
 										<a href="javascript:;">
-											<img src="{{ $actor->photo_url }}" />
+											<img src="{{ asset($actor->photo_url) }}" />
 										</a>
 									</div>
 									<div class="tile-title">
