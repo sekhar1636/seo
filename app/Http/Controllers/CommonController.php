@@ -28,11 +28,13 @@ class CommonController extends Controller
         $slideshows = [];
         $slides = [];
         //Home Page slider
-	    $slides = Slideshow::where('status',1)->get();
+        $homepage = Homepage::where('id',1)->get();
+        $hom = $homepage[0]['content'];
+
+	    $slides = Slideshow::where('id',$homepage[0]['slide_id'])->get();
 	    $slideshows = Slide::where("slideshow_id", $slides[0]['id'])->get();
 
-        $homepage = Homepage::select('content')->where('id',1)->get();
-        $hom = $homepage[0]['content'];
+
 	    return view('common.index', compact('slideshows'))->with(['homeactive'=>'active','homepage'=>$hom]);
 	}
 

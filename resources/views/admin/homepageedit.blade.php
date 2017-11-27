@@ -59,7 +59,16 @@
                                                     <p class="help-block">{{ $errors->first('description', ':message') }}</p>
                                                 </div>
                                             </div>
-
+<div class="form-group">
+    {{ Form::label('slide','SlideShow',['class'=>'col-lg-2 control-label']) }}
+    <div class="col-md-3">
+        <select name="slideshow" class="form-control  account-type-select">
+            @foreach(@$slideshow as $slidesho)
+                <option value="{{ $slidesho['id'] }}" @if(@$slide == $slidesho['id']) selected @endif>{{ $slidesho['name'] }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
                                             <!-- Submit Button -->
                                             <div class="form-group">
                                                 <div class="col-lg-10 col-lg-offset-2">

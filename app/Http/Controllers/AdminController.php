@@ -1483,15 +1483,18 @@ class AdminController extends Controller
 
     public function homepageedit()
     {
+        $slideshow = Slideshow::orderBy('id','created_at')->get();
         $content = Homepage::select('content')->where('id',1)->get();
+        $slid_select = Homepage::select('slide_id')->where('id',1)->get();
         $cont = $content[0]['content'];
-        return view('admin.homepageedit')->with(['content' => $cont,'edit'=>'active']);
+        return view('admin.homepageedit')->with(['content' => $cont,'edit'=>'active','slideshow'=>$slideshow,'slide'=>$slid_select[0]['slide_id']]);
     }
 
     protected function homepageupdate(Request $request)
     {
         $cont_upd = Homepage::findorFail(1);
         $cont_upd->content = $request->content;
+        $cont_upd->slide_id = $request->slideshow;
         $cont_upd->save();
         return redirect()->back()->with('success_message','Content Updated');
     }
