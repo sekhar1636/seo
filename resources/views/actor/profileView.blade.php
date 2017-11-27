@@ -30,7 +30,7 @@
                         <div class="col-md-3">
                             <ul class="list-unstyled profile-nav">
                                 <li>
-                                    <img src="{{isset($actor->actor->photo_url) ? asset($actor->actor->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
+                                    <img src="{{@$actor->actor->photo_url ? asset($actor->actor->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
                                    
                                 </li>
                             </ul>
@@ -38,56 +38,56 @@
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-7 profile-info">
-                                    <h1 class="font-green sbold uppercase">{{$actor->actor->first_name}} {{$actor->actor->last_name}}</h1>
+                                    <h1 class="font-green sbold uppercase">{{@$actor->actor->first_name ? $actor->actor->first_name : '' }} {{ @$actor->actor->last_name ? $actor->actor->last_name : ''  }}</h1>
                                     </p>
-                                        <a href="mailto:{{$actor->email}}">{{$actor->email}} </a>
+                                        <a href="mailto:{{ @$actor->email ? $actor->email : '' }}">{{ @$actor->email ? $actor->email : '' }} </a>
                                     </p>
                                     </p>
                                         <b>Age : </b>
-                                        <span class="label label-success label-sm"> {{$actor->actor->age}} </span>
+                                        <span class="label label-success label-sm"> {{ @$actor->actor->age ? $actor->actor->age : '' }} </span>
                                       
                                     </p>
 
                                      </p>
                                         <b>Eyes : </b>
-                                        {{$actor->actor->eyes}} 
+                                        {{ @$actor->actor->eyes ? $actor->actor->eyes : '' }}
                                         <b>Hair : </b>
-                                        {{$actor->actor->hair}} 
+                                        {{ @$actor->actor->hair ? $actor->actor->hair : '' }}
                                       
                                     </p>
                                    
                                     </p>
                                         <b>Height : </b>
-                                        {{$actor->actor->feet}}'{{$actor->actor->feet}}"
+                                        {{ @$actor->actor->feet ? $actor->actor->feet : ''}}'{{ @$actor->actor->feet ? $actor->actor->feet : ''}}"
                                         <b>Weight : </b>
-                                        {{$actor->actor->weight}} lbs
+                                        {{ @$actor->actor->weight ? $actor->actor->weight : ''}} lbs
                                       
                                     </p>
                                     </p>
                                         <b>Role Type : </b>
-                                        {{$actor->actor->ethnicity}} 
+                                        {{ @$actor->actor->ethnicity ? $actor->actor->ethnicity : '' }}
                                         <b>Vocal Range : </b>
-                                        {{$actor->actor->vocalRange}} 
+                                        {{ @$actor->actor->vocalRange ? $actor->actor->vocalRange : '' }}
                                     </p>
                                      
                                      </p>
                                         <b>Dance : </b>
-                                        {{$actor->actor->dance}} 
+                                        {{ @$actor->actor->dance ? $actor->actor->dance : '' }}
 
                                         <b>Instruments : </b>
-                                        {{$actor->actor->instrument}} 
+                                        {{ @$actor->actor->instrument ? $actor->actor->instrument : ''}}
                                     </p>
                                 
                                      </p>
                                         <b>Technical Skills : </b>
-                                        {{$actor->actor->technical}} 
+                                        {{ @$actor->actor->technical ? $actor->actor->technical : '' }}
                                           <b>Other Skills :  </b>
-                                        {{$actor->actor->misc}} 
+                                        {{ @$actor->actor->misc ? $actor->actor->misc : '' }}
                                     </p>
                                 
                                     </p>
                                         <b>School : </b>
-                                        <span class="label label-success label-sm"> {{$actor->actor->school}} </span>
+                                        <span class="label label-success label-sm"> {{ @$actor->actor->school ? $actor->actor->school : '' }} </span>
                                       
                                     </p>
                                 
@@ -107,17 +107,17 @@
                                                     <span class="sale-info"> Applied For
                                                         <i class="fa fa-img-up"></i>
                                                     </span>
-                                                    <span class="sale-num"> {{$actor->actor->auditionType}} </span>
+                                                    <span class="sale-num"> {{ @$actor->actor->auditionType ? $actor->actor->auditionType : ''}} </span>
                                                 </li>
                                                 <li>
                                                     <span class="sale-info">Will Consider
                                                         <i class="fa fa-img-down"></i>
                                                     </span>
-                                                    <span class="sale-num"> {{$actor->actor->jobType}} </span>
+                                                    <span class="sale-num"> {{ @$actor->actor->jobType ? $actor->actor->jobType : ''}} </span>
                                                 </li>
                                                 <li>
                                                     <span class="sale-info"> Availibity</span>
-                                                    <span class="sale-num"> {{$actor->actor->from}} to {{$actor->actor->to}}</span>
+                                                    <span class="sale-num"> {{ @$actor->actor->from ? $actor->actor->from : '' }} to {{ @$actor->actor->to ? $actor->actor->to : ''}}</span>
                                                 </li>
                                             </ul>
                                         </div>

@@ -621,7 +621,7 @@ class ActorController extends Controller
     /** View user */
     public function view($id){
         $actor = User::findOrFail($id);
-        $actor_role = ActorRole::where('user_id', \Auth::User()->id)->orderBy('desc')->get();
+        $actor_role = ActorRole::where('user_id', \Auth::User()->id)->get();
         return view('actor.profileView')->with([
             'actor'=> $actor,
             'actor_role' => $actor_role
