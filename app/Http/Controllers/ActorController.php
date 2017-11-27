@@ -658,7 +658,7 @@ class ActorController extends Controller
         $destinationPath = 'assets/photos'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
-        $fileName = \Auth::user()->name.rand(11111,99999).'.'.$extension; // renameing image
+        $fileName = trim(\Auth::user()->name).rand(11111,99999).'.'.$extension; // renameing image
         $file->move(public_path($destinationPath), $fileName);
 
 
@@ -748,7 +748,7 @@ class ActorController extends Controller
 
         $destinationPath = 'assets/photos'; // upload path
 
-        $fileName = \Auth::user()->name.rand(11111,99999).'.jpg'; // renameing image
+        $fileName = trim(\Auth::user()->name).rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName;
 
         $actor->photo_path = $originalPath;
