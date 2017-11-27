@@ -100,7 +100,7 @@
                     <div class="c-content-title-1 c-inverse">
                         <h3 class="uppercase">Need to know more?</h3>
                         <div class="c-line-left"></div>
-                        <p class="c-font-lowercase">Try visiting our FAQ page to learn more about our greatest ever expanding theme, Metronic.</p>
+                        <p class="c-font-lowercase">Visit our FAQ page</p>
                         <a style="margin-top: 10px;" href="{{route('getFaq')}}"><button class="btn grey-cararra font-dark">Visit Now</button></a>
                     </div>
                 </div>
