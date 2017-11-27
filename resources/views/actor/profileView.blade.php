@@ -30,7 +30,7 @@
                         <div class="col-md-3">
                             <ul class="list-unstyled profile-nav">
                                 <li>
-                                    <img src="{{isset($actor->actor->photo_url) ? $actor->actor->photo_url : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
+                                    <img src="{{isset($actor->actor->photo_url) ? asset($actor->actor->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
                                    
                                 </li>
                             </ul>
@@ -118,6 +118,30 @@
                                                 <li>
                                                     <span class="sale-info"> Availibity</span>
                                                     <span class="sale-num"> {{$actor->actor->from}} to {{$actor->actor->to}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="portlet-title">
+                                            <div class="caption font-red sbold"> Personal Info </div>
+
+
+
+                                        </div>
+                                        <div class="portlet-body">
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <span class="sale-info"> Resume
+                                                        <i class="fa fa-img-up"></i>
+                                                    </span>
+                                                    <span class="sale-num">@if(@$actor->actor->resume_path)
+                                                            <a href="{{ asset($actor->actor->resume_path) }}" target="_blank"> {{$actor->actor->first_name.' '.$actor->actor->last_name}}'s Resume </a>
+                                                        @else
+                                                           Not Exist
+                                                        @endif</span>
+                                                </li>
+                                                <li>
+                                                    <span class="sale-info"> Phone Number</span>
+                                                    <span class="sale-num">@if(@$actor->actor->phone_number)<a href="tel:{{ $actor->actor->phone_number }}">{{ $actor->actor->phone_number }}</a> @else Not Exist @endif</span>
                                                 </li>
                                             </ul>
                                         </div>

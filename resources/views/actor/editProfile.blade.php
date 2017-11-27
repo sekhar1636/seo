@@ -868,11 +868,22 @@
 
 				                 	</div>
 
-				                 </div>
-
-				               
-
 				            </div>
+ <div class="row">
+	 <div class="col-md-9">
+		 <div class="form-group">
+
+			 <label class="control-label col-md-3">Phone Number</label>
+
+			 <div class="col-md-6">
+				 {{ Form::text('phone_number',@$actor[0]['phone_number'],['class'=>'form-control','placeholder'=>'Enter Your Phone Number Here']) }}
+			 </div>
+		 </div>
+
+	 </div>
+
+ </div>
+ </div>
 
 				            <div class="form-actions">
 

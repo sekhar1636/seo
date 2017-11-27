@@ -934,9 +934,24 @@ function initTable(tableId, data) {
 
 				                 </div>
 
-				               
+ <div class="row">
+	 <div class="col-md-9">
+		 <div class="form-group">
 
-				            </div>
+			 <label class="control-label col-md-3">Phone Number</label>
+
+			 <div class="col-md-6">
+				 {{ Form::text('phone_number',@$actor->phone_number ? $actor->phone_number : '',['class'=>'form-control','placeholder'=>'Enter Your Phone Number Here']) }}
+			 </div>
+		 </div>
+
+	 </div>
+
+ </div>
+
+
+
+ </div>
 
 				            <div class="form-actions">
 

@@ -613,6 +613,7 @@ class AdminController extends Controller
         $actor->dance = implode(',', $request->get('dance'));
         $actor->instrument = implode(',', $request->get('instrument'));
         $actor->misc = implode(',', $request->get('misc'));
+        $actor->phone_number = $request->phone_number;
         if($request->hasFile('resume')) {
            $this->uploadResume($actor,$request->file('resume'), $request->get('name'));      
         }
