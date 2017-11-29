@@ -54,7 +54,7 @@
                             <div class="container-fluid">
                                 <!-- BEGIN LOGO -->
                                 <div class="page-logo" style="width:330px;">
-                                    <a href="{{route('getIndex')}}" style="font-size: 20px; text-transform: uppercase;text-decoration: none;">
+                                    <a href="{{route('getIndex')}}" style="/*font-size: 20px;*/ text-transform: uppercase;text-decoration: none;">
                                         <img src="{{asset('assets/images/straw99.gif')}}" alt="StrawHat Auditions" style="width: 81px;
                                         margin-top: 5px; " class="logo-default"> StrawHat Auditions
                                     </a>
