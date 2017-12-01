@@ -15,7 +15,7 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('assets/apps/scripts/timeline.min.js')}}" type="text/javascript"></script>
+    <!--<script src="//asset('assets/apps/scripts/timeline.min.js')}}" type="text/javascript"></script>-->
 
 @endsection
 @section('content')
