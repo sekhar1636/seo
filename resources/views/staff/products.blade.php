@@ -4,7 +4,7 @@
 @section('title', 'Buy Products')
 
 @section('style')
-    <link rel="stylesheet" href="http://formvalidation.io/vendor/formvalidation/css/formValidation.min.css">
+    <link rel="stylesheet" href="{{asset('assets/css/formValidation.min.css')}}">
     <style type="text/css">
         .activeBox{
             border:1px solid rgba(68,182,174,1);
@@ -17,8 +17,8 @@
 
 @section('js')
     <script src="{{asset('assets/apps/scripts/timeline.min.js')}}" type="text/javascript"></script>
-    <script src="http://formvalidation.io/vendor/formvalidation/js/formValidation.min.js"></script>
-    <script src="http://formvalidation.io/vendor/formvalidation/js/framework/bootstrap.min.js"></script>
+    <script src="{{asset('assets/js/formValidation.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="https://js.stripe.com/v2/"></script>
     <script>
         $(document).ready(function() {
