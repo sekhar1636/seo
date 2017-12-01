@@ -237,7 +237,7 @@ class StaffController extends Controller
     }
 
     public function uploadResume($staff,$file, $name){
-        $destinationPath = 'assets/files'; // upload path
+        $destinationPath = 'assets/files/resumes/staff'; // upload path
         $extension = $file->getClientOriginalExtension();
         $fileName = $name.rand(11111,99999).'.'.$extension; // renameing image
         $file->move(public_path($destinationPath), $fileName);
@@ -306,7 +306,7 @@ class StaffController extends Controller
             $staff = new Staff;
         }
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/staff'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = \Auth::user()->name.rand(11111,99999).'.'.$extension; // renameing image
@@ -364,7 +364,7 @@ class StaffController extends Controller
 
         $staff = Staff::where('user_id', \Auth::user()->id)->first();
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/staff'; // upload path
 
         $fileName = \Auth::user()->name.rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName;

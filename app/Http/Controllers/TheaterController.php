@@ -222,7 +222,7 @@ class TheaterController extends Controller
             $theater = new Theater;
         }
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/theater'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = \Auth::user()->name.rand(11111,99999).'.'.$extension; // renameing image
@@ -280,7 +280,7 @@ class TheaterController extends Controller
 
         $theater = Theater::where('user_id', \Auth::user()->id)->first();
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/theater'; // upload path
 
         $fileName = \Auth::user()->name.rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName;

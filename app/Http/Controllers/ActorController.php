@@ -248,7 +248,7 @@ class ActorController extends Controller
     }
 
     public function uploadResume($actor,$file, $name){
-        $destinationPath = 'assets/files'; // upload path
+        $destinationPath = 'assets/files/resumes/actor'; // upload path
         $extension = $file->getClientOriginalExtension();
         $fileName = $name.rand(11111,99999).'.'.$extension; // renameing image
         $file->move(public_path($destinationPath), $fileName);
@@ -655,7 +655,7 @@ class ActorController extends Controller
             $actor = new \App\Actor;
         }
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/actor'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = trim(\Auth::user()->name).rand(11111,99999).'.'.$extension; // renameing image
@@ -746,7 +746,7 @@ class ActorController extends Controller
 
         $actor = \App\Actor::where('user_id', \Auth::user()->id)->first();
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/actor'; // upload path
 
         $fileName = trim(\Auth::user()->name).rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName;
