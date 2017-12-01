@@ -286,7 +286,7 @@
                     <!-- BEGIN INNER FOOTER -->
                     <div class="page-footer">
                         <div class="container-fluid"> {{ date('Y') }} &copy;
-                            <a target="_blank" href="{{ route('admin::adminDashboard') }}">StrawHat-Auditions</a>
+                            <a target="_blank" href="{{ route('getIndex') }}">StrawHat-Auditions</a>
                         </div>
                     </div>
                     <div class="scroll-to-top">
