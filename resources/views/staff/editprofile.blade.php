@@ -150,7 +150,7 @@
 
 
 
-    <script src="{{asset('js/main.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/js/main.js')}}" type="text/javascript"></script>
 
 @endsection
 
