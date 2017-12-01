@@ -441,9 +441,9 @@
 </div>
 
 <!--[if lt IE 9]>
-<script src="../assets/global/plugins/respond.min.js"></script>
-<script src="../assets/global/plugins/excanvas.min.js"></script>
-<script src="../assets/global/plugins/ie8.fix.min.js"></script>
+<script src="{{ asset('assets/global/plugins/respond.min.js') }}"></script>
+<script src="{{ asset('assets/global/plugins/excanvas.min.js') }}"></script>
+<script src="{{ asset('assets/global/plugins/ie8.fix.min.js') }}"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
 <script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
