@@ -314,7 +314,7 @@
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="{{asset('assets/layouts/layout3/scripts/layout.min.js')}}" type="text/javascript"></script>
         <!--<script src="{{asset('assets/layouts/layout3/scripts/demo.min.js')}}" type="text/javascript"></script> -->
-        <script src="http://nicpakistan.dev/assets/global/scripts/metronic.js" type="text/javascript"></script>
+        <script src="{{asset('assets/global/scripts/metronic.js')}}" type="text/javascript"></script>
         <script type="text/javascript">
              Metronic.init(); // init metronic core componets
         </script>
