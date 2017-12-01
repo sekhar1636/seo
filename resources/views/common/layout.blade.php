@@ -144,7 +144,7 @@
                                 <!-- BEGIN MEGA MENU -->
                                 <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
                                 <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
-                                <div class="hor-menu col-md-9">
+                                <div class="hor-menu col-md-10">
                                     <ul class="nav navbar-nav">
                                         <li class="{{ @$homeactive ? 'active' : '' }}">
                                             <a href="{{route('getIndex')}}">
@@ -295,7 +295,7 @@
                                 </div>
                                 <!-- END MEGA MENU -->
                                 <!-- BEGIN HEADER SEARCH BOX -->
-                                <form class="search-form col-md-3" method="GET">
+                                <form class="search-form col-md-2" method="GET">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Search" name="query">
                                         <span class="input-group-btn">
