@@ -774,7 +774,7 @@ class AdminController extends Controller
     }
 
     public function uploadResume($actor,$file, $name){
-        $destinationPath = 'assets/files'; // upload path
+        $destinationPath = 'assets/files/resumes/actor'; // upload path
         $extension = $file->getClientOriginalExtension();
         $fileName = $name.rand(11111,99999).'.'.$extension; // renameing image
         $file->move(public_path($destinationPath), $fileName);
@@ -809,7 +809,7 @@ class AdminController extends Controller
             $actor = new \App\Actor;
         }
         
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/actor'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = trim($user->name).rand(11111,99999).'.'.$extension; // renameing image
@@ -865,7 +865,7 @@ class AdminController extends Controller
             $theater = new Theater;
         }
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/theater'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = trim($user->name).rand(11111,99999).'.'.$extension; // renameing image
@@ -921,7 +921,7 @@ class AdminController extends Controller
             $staff = new Staff;
         }
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/staff'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = trim($user->name).rand(11111,99999).'.'.$extension; // renameing image
@@ -1055,7 +1055,7 @@ class AdminController extends Controller
         imagecopyresampled($dst_r,$img_r,0,0,$request->get('x'),$request->get('y'),
         $targ_w,$targ_h,$request->get('w'),$request->get('h'));
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/theater'; // upload path
 
         $fileName = trim($user->name).rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName;
@@ -1098,7 +1098,7 @@ class AdminController extends Controller
         imagecopyresampled($dst_r,$img_r,0,0,$request->get('x'),$request->get('y'),
             $targ_w,$targ_h,$request->get('w'),$request->get('h'));
 
-        $destinationPath = 'assets/photos'; // upload path
+        $destinationPath = 'assets/photos/staff'; // upload path
 
         $fileName = trim($user->name).rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName;
