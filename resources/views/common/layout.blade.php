@@ -458,6 +458,8 @@
 <!--<script src="{{asset('assets/layouts/layout3/scripts/demo.min.js')}}" type="text/javascript"></script> -->
 <script src="{{asset('assets/global/scripts/metronic.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/list.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/formValidation.min.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript">
 Metronic.init(); // init metronic core componets
 </script>

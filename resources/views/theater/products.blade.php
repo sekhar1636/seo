@@ -17,8 +17,6 @@
 
 @section('js')
     {{--<script src="//asset('assets/apps/scripts/timeline.min.js')}}" type="text/javascript"></script>--}}
-    <script src="{{asset('assets/js/formValidation.min.js')}}"></script>
-    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="https://js.stripe.com/v2/"></script>
     <script>
         $(document).ready(function() {
