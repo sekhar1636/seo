@@ -373,7 +373,7 @@ class ActorController extends Controller
         }*/
 
         $totalPrice = $totalPrice*100;
-        \Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         try{
             $result = \Stripe\Charge::create(array(
                 "amount" => $totalPrice,
@@ -655,7 +655,7 @@ class ActorController extends Controller
             $actor = new \App\Actor;
         }
 
-        $destinationPath = 'assets/photos/actor'; // upload path
+        $destinationPath = 'files/profiles/actor'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = trim(\Auth::user()->name).rand(11111,99999).'.'.$extension; // renameing image
