@@ -131,7 +131,7 @@
                                     </li>
                                     <li>
                                         <span class="sale-info">Website</span>
-                                        <span class="sale-num"><a href="http://{{ $theater->theater->website }}" target="_blank">{{ $theater->name }}'s Website</a> </span>
+                                        <span class="sale-num"><a href="https://{{ $theater->theater->website }}" target="_blank">{{ $theater->name }}'s Website</a> </span>
                                     </li>
                                 </ul>
                             </div>

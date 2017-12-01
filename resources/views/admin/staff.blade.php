@@ -14,7 +14,7 @@
     <link href="{{asset('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="{{asset('assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
 
     <link href="{{asset('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css')}}" rel="stylesheet" type="text/css" />
 
@@ -73,7 +73,7 @@
     <script src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script>
     <script src="https://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>
     <script src="https://datatables.yajrabox.com/js/handlebars.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function(){
