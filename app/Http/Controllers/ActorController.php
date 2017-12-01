@@ -99,7 +99,7 @@ class ActorController extends Controller
 
         }
         $totalPrice = $totalPrice*100;
-        Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
+        Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $result = \Stripe\Charge::create(array(
             "amount" => $totalPrice,
             "currency" => "usd",
