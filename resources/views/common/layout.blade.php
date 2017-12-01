@@ -422,6 +422,14 @@
 <div class="container-fluid"> {{ date('Y') }} &copy;
 <a target="_blank" href="{{ route('getIndex') }}">StrawHat-Auditions</a>
 </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-35492583-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-35492583-1');
+    </script>
 </div>
 <div class="scroll-to-top">
 <i class="icon-arrow-up"></i>
