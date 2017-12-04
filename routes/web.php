@@ -36,6 +36,13 @@ Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@v
 Route::get('/staffs/{id}/view',['as'=>'getStaffView', 'uses'=>'StaffController@view']);
 Route::get('/theaters/{id}/view',['as'=>'getTheaterView','uses'=>'TheaterController@view']);
 
+Route::get('/secret-cookie', function() {
+	$response = new Illuminate\Http\Response('Cookie installed');
+	$response->withCookie(cookie()->forever('secret-cookie', 'WebTestMDT'));
+	return $response;
+});
+
+
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'TheaterController@getTheater']);
 	Route::get('/staffs', ['as'=>'getStaffs', 'uses'=>'StaffController@getStaff']);

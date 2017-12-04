@@ -21,7 +21,7 @@
     <script>
         $(document).ready(function() {
             // Change the key to your one
-            Stripe.setPublishableKey('pk_test_rLxd9asqDxgfDCqefyeS05jx');
+            Stripe.setPublishableKey("<?php echo $_ENV['STRIPE_KEY']; ?>");
 
 
             $('.button-checkbox').each(function () {

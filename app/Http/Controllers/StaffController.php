@@ -90,7 +90,7 @@ class StaffController extends Controller
                     $varient = ProductVariant::findorFail($varid);
                     $payment = new Payment;
                     $payment->user_id = \Auth::user()->id;
-                    $payment->transaction_id = $request->token;
+                    $payment->transaction_id = $result->id;
                     $payment->product_id = $product->id;
                     $payment->price = $varient['price'];
                     $payment->save();
@@ -100,6 +100,8 @@ class StaffController extends Controller
         }
 
     }
+    
+   
 
     public function edit(){
         $staffid = \Auth::user()->id;
@@ -237,7 +239,7 @@ class StaffController extends Controller
     }
 
     public function uploadResume($staff,$file, $name){
-        $destinationPath = 'assets/files/resumes/staff'; // upload path
+        $destinationPath = 'files/resumes/staff'; // upload path
         $extension = $file->getClientOriginalExtension();
         $fileName = $name.rand(11111,99999).'.'.$extension; // renameing image
         $file->move(public_path($destinationPath), $fileName);
@@ -249,7 +251,6 @@ class StaffController extends Controller
         $staffs = \App\User::join('staff','staff.user_id', '=', 'users.id')
             ->where('payment_status',1)->orderBy('name', 'asc')
             ->get();
-
         return view('staff.staffsearch')->with([
             'staffs'=>$staffs,
             'staffactive' => 'active'
@@ -287,7 +288,7 @@ class StaffController extends Controller
                 "photo"=>"required|image|dimensions:max_width=600",
             ],
             [
-                'photo.dimensions'=>'Photo width must be lest than 600.'
+                'photo.dimensions'=>'Your photo must be less than 600px wide'
             ]
         );
         if ($validator->fails()) {
@@ -306,7 +307,7 @@ class StaffController extends Controller
             $staff = new Staff;
         }
 
-        $destinationPath = 'assets/photos/staff'; // upload path
+        $destinationPath = 'files/profiles/staff'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = \Auth::user()->name.rand(11111,99999).'.'.$extension; // renameing image
@@ -364,7 +365,7 @@ class StaffController extends Controller
 
         $staff = Staff::where('user_id', \Auth::user()->id)->first();
 
-        $destinationPath = 'assets/photos/staff'; // upload path
+        $destinationPath = 'files/profiles/staff'; // upload path
 
         $fileName = \Auth::user()->name.rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName;
@@ -407,6 +408,16 @@ class StaffController extends Controller
             return redirect()->back()->with('error_message', 'Incorrect password! Please enter correct password.');
         }
     }
+    
+       /**for state list**/
+    public function getStateWithSelected(){
+        $states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado ","Connecticut ","Delaware ","District of Columbia ","Florida ",
+            "Georgia ","Hawaii ","Idaho ","Illinois ","Indiana ","Iowa ","Kansas ","Kentucky ","Louisiana ","Maine ","Maryland ","Massachusetts ",
+            "Michigan ","Minnesota ","Mississippi ","Missouri ","Montana ","Nebraska ","Nevada ","New Hampshire ","New Jersey ","New Mexico ",
+            "New York ","North Carolina ","North Dakota ","Ohio ","Oklahoma ","Oregon ","Pennsylvania ","Puerto Rico ","Rhode Island ","South Carolina ",
+            "South Dakota ","Tennessee ","Texas ","Utah ","Vermont ","Virginia ","Washington ","West Virginia ","Wisconsin ","Wyoming "];
+        return $states;
+    }
 
     public function payment()
     {
@@ -423,7 +434,8 @@ class StaffController extends Controller
             //$products = Product::findorfail(2);
             //$n = $products->product_variant;
             //dd($n);
-            return view('staff.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods]);
+            $states = $this->getStateWithSelected();
+            return view('staff.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods, 'states' => $states]);
         }
     }
 
@@ -484,7 +496,7 @@ class StaffController extends Controller
             //save the payment details for subscription
             $payment = new Payment;
             $payment->user_id = \Auth::user()->id;
-            $payment->transaction_id = $request->token;
+            $payment->transaction_id = $result->id;
             $payment->membership_period_id = $membershipPeriod->id;
             $payment->price = $membershipPeriod->price;
             $payment->save();

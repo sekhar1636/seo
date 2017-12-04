@@ -118,7 +118,7 @@ class ActorController extends Controller
                     $varient = ProductVariant::findorFail($varid);
                     $payment = new Payment;
                     $payment->user_id = \Auth::user()->id;
-                    $payment->transaction_id = $request->token;
+                    $payment->transaction_id = $result->id;
                     $payment->product_id = $product->id;
                     $payment->price = $varient['price'];
                     $payment->save();
@@ -180,12 +180,12 @@ class ActorController extends Controller
                 'school' => "required|max:150|min:3",
                 'auditionType'=>'required',
                 'vocalRange'=>'required',
-                'jobType'=>'required',
-                'dance'=>'required',
-                'technical'=>'required',
+                //'jobType'=>'required',
+                //'dance'=>'required',
+                //'technical'=>'required',
                 'ethnicity'=>'required',
-                'instrument'=>'required',
-                'misc'=>'required',
+                /*'instrument'=>'required',
+                'misc'=>'required',*/
                 'from'=>'required',
                 'to'=>'required'
             ]
@@ -225,12 +225,12 @@ class ActorController extends Controller
         $actor->to = $to_date;
         $actor->auditionType = $request->get('auditionType');
         $actor->vocalRange = $request->get('vocalRange');
-        $actor->jobType = implode(',', $request->get('jobType'));
-        $actor->technical = implode(',', $request->get('technical'));
-        $actor->ethnicity = implode(',', $request->get('ethnicity'));
-        $actor->dance = implode(',', $request->get('dance'));
-        $actor->instrument = implode(',', $request->get('instrument'));
-        $actor->misc = implode(',', $request->get('misc'));
+        $actor->jobType = $request->get('jobType') ? implode(',', $request->get('jobType')) : '';
+        $actor->technical = $request->get('technical') ? implode(',', $request->get('technical')) : '';
+        $actor->ethnicity = $request->get('ethnicity') ? implode(',', $request->get('ethnicity')) : '';
+        $actor->dance = $request->get('dance') ? implode(',', $request->get('dance')) : '';
+        $actor->instrument = $request->get('instrument') ? implode(',', $request->get('instrument')) : '';
+        $actor->misc = $request->get('misc') ? implode(',', $request->get('misc')) : '';
         $actor->phone_number = $request->phone_number;
         if($request->hasFile('resume')) {
             $this->uploadResume($actor,$request->file('resume'), $request->get('name'));
@@ -241,14 +241,14 @@ class ActorController extends Controller
             }
         }else{
             if($actor->save()){
-                return redirect()->route('actor::actorProfile')->with('success_message', 'Profile Data Successfully Created');
+                return redirect()->back()->with('success_message', 'Profile Data Successfully Created');
             }
         }
 
     }
 
     public function uploadResume($actor,$file, $name){
-        $destinationPath = 'assets/files/resumes/actor'; // upload path
+        $destinationPath = 'files/resumes/actor'; // upload path
         $extension = $file->getClientOriginalExtension();
         $fileName = $name.rand(11111,99999).'.'.$extension; // renameing image
         $file->move(public_path($destinationPath), $fileName);
@@ -345,9 +345,19 @@ class ActorController extends Controller
             //$products = Product::findorfail(2);
             //$n = $products->product_variant;
             //dd($n);
-            return view('actor.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods]);
+            $states = $this->getStateWithSelected();
+            return view('actor.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods, 'states' => $states]);
         }
 
+    }
+    /**for state list**/
+    public function getStateWithSelected(){
+        $states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado ","Connecticut ","Delaware ","District of Columbia ","Florida ",
+            "Georgia ","Hawaii ","Idaho ","Illinois ","Indiana ","Iowa ","Kansas ","Kentucky ","Louisiana ","Maine ","Maryland ","Massachusetts ",
+            "Michigan ","Minnesota ","Mississippi ","Missouri ","Montana ","Nebraska ","Nevada ","New Hampshire ","New Jersey ","New Mexico ",
+            "New York ","North Carolina ","North Dakota ","Ohio ","Oklahoma ","Oregon ","Pennsylvania ","Puerto Rico ","Rhode Island ","South Carolina ",
+            "South Dakota ","Tennessee ","Texas ","Utah ","Vermont ","Virginia ","Washington ","West Virginia ","Wisconsin ","Wyoming "];
+        return $states;
     }
 
     public function paymentStore(Request $request){
@@ -373,13 +383,14 @@ class ActorController extends Controller
         }*/
 
         $totalPrice = $totalPrice*100;
-        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+        \Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
         try{
             $result = \Stripe\Charge::create(array(
                 "amount" => $totalPrice,
                 "currency" => "usd",
                 "source" => $request->token,
-                "description" => $description
+                "description" => $description,
+                "meta-data" => array("name" => "$request->card_name"),
             ));
 
         } catch (\Stripe\Error\Card $e) {
@@ -406,7 +417,8 @@ class ActorController extends Controller
             //save the payment details for subscription
             $payment = new Payment;
             $payment->user_id = \Auth::user()->id;
-            $payment->transaction_id = $request->token;
+            $payment->transaction_id = $result->id;
+            //$request->token;
             $payment->membership_period_id = $membershipPeriod->id;
             $payment->price = $membershipPeriod->price;
             $payment->save();
@@ -608,6 +620,7 @@ class ActorController extends Controller
     public function actorPhotoDelete(){
         $actor = Actor::where('user_id', \Auth::User()->id)->first();
         unlink(public_path().'/'.$actor->precrop_path);
+        //dd(public_path().'before   /     after'.$actor->precrop_path);
         $actor->precrop_url = null;
         $actor->precrop_path = null;
 
@@ -638,7 +651,7 @@ class ActorController extends Controller
                 "photo"=>"required|image|dimensions:max_width=600",
             ],
             [
-                'photo.dimensions'=>'Photo width must be lest than 600.'
+                'photo.dimensions'=>'Your photo must be less than 600px wide'
             ]
         );
         if ($validator->fails()) {
@@ -655,7 +668,7 @@ class ActorController extends Controller
             $actor = new \App\Actor;
         }
 
-        $destinationPath = 'files/profiles/actor'; // upload path
+        $destinationPath = 'assets/photos/actor'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = trim(\Auth::user()->name).rand(11111,99999).'.'.$extension; // renameing image
@@ -722,7 +735,7 @@ class ActorController extends Controller
         $targ_w = $targ_h = 230;
         $jpeg_quality = 90;
         $src = \Auth::user()->actor->precrop_url;
-
+        //dd($src);
         $exploded = explode('.',$src);
         $ext = $exploded[count($exploded) - 1];
 
@@ -746,7 +759,7 @@ class ActorController extends Controller
 
         $actor = \App\Actor::where('user_id', \Auth::user()->id)->first();
 
-        $destinationPath = 'assets/photos/actor'; // upload path
+        $destinationPath = 'files/profiles/actor'; // upload path
 
         $fileName = trim(\Auth::user()->name).rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName;

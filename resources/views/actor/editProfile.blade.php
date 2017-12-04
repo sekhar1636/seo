@@ -662,7 +662,7 @@
 
                                                                     <div class="col-md-9">
 
-                                                                        {!! Form::select('jobType[]',App\Misc::$jobTypes, isset($actor[0]['jobType']) ? explode(',', $actor[0]['jobType']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+                                                                        {!! Form::select('jobType[]',App\Misc::$jobTypes, isset($actor[0]['jobType']) ? explode(',', $actor[0]['jobType']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
                                                                         <span class="help-block"> {{ $errors->first("jobType") }} </span>
 
@@ -683,7 +683,7 @@
 
                                                                     <div class="col-md-9">
 
-                                                                        {!! Form::select('dance[]',App\Misc::$dance, isset($actor[0]['dance']) ? explode(',', $actor[0]['dance']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+                                                                        {!! Form::select('dance[]',App\Misc::$dance, isset($actor[0]['dance']) ? explode(',', $actor[0]['dance']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
                                                                         <span class="help-block"> {{ $errors->first("dance") }} </span>
 
@@ -710,7 +710,7 @@
 
                                                                     <div class="col-md-9">
 
-                                                                        {!! Form::select('technical[]',App\Misc::$technical, isset($actor[0]['technical']) ? explode(',', $actor[0]['technical']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+                                                                        {!! Form::select('technical[]',App\Misc::$technical, isset($actor[0]['technical']) ? explode(',', $actor[0]['technical']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
                                                                         <span class="help-block"> {{ $errors->first("technical") }} </span>
 
@@ -731,7 +731,7 @@
 
                                                                     <div class="col-md-9">
 
-                                                                        {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor[0]['instrument']) ? explode(',', $actor[0]['instrument']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+                                                                        {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor[0]['instrument']) ? explode(',', $actor[0]['instrument']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
                                                                         <span class="help-block"> {{ $errors->first("instrument") }} </span>
 
@@ -781,9 +781,7 @@
 
                                                                     <div class="col-md-9">
 
-                                                                        <div class="input-group input-large date-picker input-daterange"
-                                                                             data-date="2012/11/10"
-                                                                             data-date-format="yyyy/mm/dd">
+                                                                        <div class="input-group input-large date-picker input-daterange" data-date-format="dd/mm/yyyy">
 
                                                                             {!! Form::text('from', \Carbon\Carbon::parse(@$actor[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required', 'readonly']) !!}
 

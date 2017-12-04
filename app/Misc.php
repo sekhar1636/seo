@@ -39,7 +39,8 @@ class Misc
         '21' => 'Scenic Artist',
         '22' => 'Sound',
         '23' => 'State Management',
-        '24' => 'Company Management'
+        '24' => 'Company Management',
+        '' => ''
     ];
 
     public static $secondary_sought = [
@@ -66,7 +67,8 @@ class Misc
         '21' => 'Scenic Artist',
         '22' => 'Sound',
         '23' => 'State Management',
-        '24' => 'Company Management'
+        '24' => 'Company Management',
+        '' => ''
     ];
 
     public static $musical_performers = [

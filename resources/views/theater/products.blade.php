@@ -45,7 +45,7 @@
                 $('#r'+aas).val(minn);
             });
             // Change the key to your one
-            Stripe.setPublishableKey('pk_test_rLxd9asqDxgfDCqefyeS05jx');
+            Stripe.setPublishableKey("<?php echo $_ENV['STRIPE_KEY']; ?>");
 
 
             $('.button-checkbox').each(function () {
@@ -308,12 +308,34 @@
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">Expiration</label>
                                 <div class="col-xs-3">
-                                    <input type="text" class="form-control" placeholder="Month" data-stripe="exp-month" />
-                                </div>
-                                <div class="col-xs-2">
-                                    <input type="text" class="form-control" placeholder="Year" data-stripe="exp-year" />
-                                </div>
-                            </div>
+                                    <!--<input type="text" class="form-control" placeholder="Month" data-stripe="exp-month" />-->
+                                    <select class="form-control" data-stripe="exp-month">
+                      <option value="01">January</option>
+                      <option value="02">February</option>
+                      <option value="03">March</option>
+                      <option value="04">April</option>
+                      <option value="05">May</option>
+                      <option value="06">June</option>
+                      <option value="07">July</option>
+                      <option value="08">August</option>
+                      <option value="09">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                      
+                      </select>
+                                </div><?php
+                $year = date('Y');
+                ?>
+ <div class="col-xs-2">
+                    <select class="form-control" data-stripe="exp-year">
+                    <?php for($i=$year; $i<($year+15); $i++){ ?>
+                      <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                      <!--<input type="text" class="form-control" placeholder="Year" data-stripe="exp-year" />-->
+                    <?php } ?>
+                    </select>
+                </div>
+              </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">CVV</label>
                                 <div class="col-xs-2">
@@ -343,7 +365,12 @@
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">State</label>
                                 <div class="col-xs-2">
-                                    <input type="text" class="form-control" placeholder="Enter State" data-stripe="address_state" />
+                                    <!--<input type="text" class="form-control" placeholder="Enter State" data-stripe="address_state" />-->
+                  <select class="form-control" data-stripe="address_state">
+                  <?php foreach ($states as $state){?>
+                    <option value="<?=trim($state)?>"><?=$state?></option>
+                  <?php } ?>
+                  </select>
                                 </div>
                                 <label class="col-xs-1 control-label">Country</label>
                                 <div class="col-xs-2">

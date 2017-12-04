@@ -1100,7 +1100,7 @@ function initTable(tableId, data) {
 
 			 <div class="col-md-9">
 
-				 <label for="Roles" class="control-label col-md-3">Roles</label>
+				 <label for="Roles" class="control-label col-md-3">Paper Work Status</label>
 
 				 <div class="col-md-9">
 

@@ -42,7 +42,8 @@ class TheaterController extends Controller
     protected function products()
     {
         $products = Product::latest()->orderBy('id', 'desc')->get();
-        return view("theater.products",compact('products'));
+        $states = $this->getStateWithSelected();
+        return view("theater.products",compact('products'))->with(['states' => $states]);
     }
 
     public function productBuy(Request $request){
@@ -83,7 +84,7 @@ class TheaterController extends Controller
                     $varient = ProductVariant::findorFail($varid);
                     $payment = new Payment;
                     $payment->user_id = \Auth::user()->id;
-                    $payment->transaction_id = $request->token;
+                    $payment->transaction_id = $result->id;
                     $payment->product_id = $product->id;
                     $payment->price = $prod['price'] * $varient['price'];
                     $payment->save();
@@ -203,7 +204,7 @@ class TheaterController extends Controller
                 "photo"=>"required|image|dimensions:max_width=600",
             ],
             [
-                'photo.dimensions'=>'Photo width must be lest than 600.'
+                'photo.dimensions'=>'Your photo must be less than 600px wide'
             ]
         );
         if ($validator->fails()) {
@@ -222,7 +223,7 @@ class TheaterController extends Controller
             $theater = new Theater;
         }
 
-        $destinationPath = 'assets/photos/theater'; // upload path
+        $destinationPath = 'files/profiles/theater'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
         $fileName = \Auth::user()->name.rand(11111,99999).'.'.$extension; // renameing image
@@ -280,7 +281,7 @@ class TheaterController extends Controller
 
         $theater = Theater::where('user_id', \Auth::user()->id)->first();
 
-        $destinationPath = 'assets/photos/theater'; // upload path
+        $destinationPath = 'files/profiles/theater'; // upload path
 
         $fileName = \Auth::user()->name.rand(11111,99999).'.jpg'; // renameing image
         $originalPath = $destinationPath.'/'.$fileName;
@@ -323,6 +324,15 @@ class TheaterController extends Controller
             return redirect()->back()->with('error_message', 'Incorrect password! Please enter correct password.');
         }
     }
+     /**for state list**/
+    public function getStateWithSelected(){
+        $states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado ","Connecticut ","Delaware ","District of Columbia ","Florida ",
+            "Georgia ","Hawaii ","Idaho ","Illinois ","Indiana ","Iowa ","Kansas ","Kentucky ","Louisiana ","Maine ","Maryland ","Massachusetts ",
+            "Michigan ","Minnesota ","Mississippi ","Missouri ","Montana ","Nebraska ","Nevada ","New Hampshire ","New Jersey ","New Mexico ",
+            "New York ","North Carolina ","North Dakota ","Ohio ","Oklahoma ","Oregon ","Pennsylvania ","Puerto Rico ","Rhode Island ","South Carolina ",
+            "South Dakota ","Tennessee ","Texas ","Utah ","Vermont ","Virginia ","Washington ","West Virginia ","Wisconsin ","Wyoming "];
+        return $states;
+    }
 
     public function payment()
     {
@@ -339,7 +349,8 @@ class TheaterController extends Controller
             //$products = Product::findorfail(2);
             //$n = $products->product_variant;
             //dd($n);
-            return view('theater.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods]);
+            $states = $this->getStateWithSelected();
+            return view('theater.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods, 'states' => $states]);
         }
     }
 
@@ -399,7 +410,7 @@ class TheaterController extends Controller
             //save the payment details for subscription
             $payment = new Payment;
             $payment->user_id = \Auth::user()->id;
-            $payment->transaction_id = $request->token;
+            $payment->transaction_id = $result->id;
             $payment->membership_period_id = $membershipPeriod->id;
             $payment->price = $membershipPeriod->price;
             $payment->save();
