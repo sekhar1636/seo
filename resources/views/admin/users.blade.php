@@ -197,7 +197,7 @@ $(document).ready(function() {
                                 <td>Name</td>
                                 <td>Email</td>
                                 <td>Subscription</td>
-                                <td>Check/Hard copy</td>
+                                <td>Payment/Status</td>
                                 <td>Audition</td>
                                 <td>Active</td>
                             </tr>
