@@ -407,9 +407,9 @@ class ActorController extends Controller
             $result = \Stripe\Charge::create(array(
                 "amount" => $totalPrice,
                 "currency" => "usd",
+                "receipt_email" => \Auth::user()->email,
                 "source" => $request->token,
                 "description" => $description,
-                "meta-data" => array("name" => "$request->card_name"),
             ));
 
         } catch (\Stripe\Error\Card $e) {
