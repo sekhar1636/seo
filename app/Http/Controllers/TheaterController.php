@@ -69,6 +69,7 @@ class TheaterController extends Controller
         $result = \Stripe\Charge::create(array(
             "amount" => $totalPrice,
             "currency" => "usd",
+            "receipt_email" => \Auth::user()->email,
             "source" => $request->token,
             "description" => $description
         ));
@@ -395,6 +396,7 @@ class TheaterController extends Controller
         $result = \Stripe\Charge::create(array(
             "amount" => $totalPrice,
             "currency" => "usd",
+            "receipt_email" => \Auth::user()->email,
             "source" => $request->token,
             "description" => $description
         ));
