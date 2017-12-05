@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('photo/update', ['as'=>'postPhotoUpdate', 'uses'=>'ActorController@postPhotoUpdate']);
 			Route::post('photo/crop', ['as'=>'postCropPhotoUpdate', 'uses'=>'ActorController@postCropPhotoUpdate']);
 			Route::get('photo/delete', ['as'=>'getDeletePhoto', 'uses'=>'ActorController@actorPhotoDelete']);
+            Route::get('resume/delete', ['as'=>'getDeleteResume', 'uses'=>'ActorController@actorResumeDelete']);
 			Route::get('products', ['as'=>'products', 'uses'=>'ActorController@products']);
 			Route::post('product/buy', ['as'=>'buyProduct', 'uses'=>'ActorController@productBuy']);
 			Route::post('updaterole',['as'=>'updateUsersRole','uses'=>'ActorController@userroles']);

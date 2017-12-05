@@ -247,12 +247,31 @@ class ActorController extends Controller
 
     }
 
-    public function uploadResume($actor,$file, $name){
+    public function uploadResume($actor, $file, $name){
         $destinationPath = 'files/resumes/actor'; // upload path
         $extension = $file->getClientOriginalExtension();
         $fileName = $name.rand(11111,99999).'.'.$extension; // renameing image
         $file->move(public_path($destinationPath), $fileName);
+        if(\File::exists(public_path($actor->resume_path))){
+            \File::delete(public_path($actor->resume_path));
+        }
+        //unlink($actor->resume_path);
         $actor->resume_path = $destinationPath.'/'.$fileName;
+    }
+
+    public function actorResumeDelete(){
+
+        $actor = Actor::where('user_id', \Auth::User()->id)->first();
+        if(\File::exists(public_path($actor->resume_path))){
+            \File::delete(public_path($actor->resume_path));
+        }
+        $actor->resume_path = null;
+
+        if($actor->update()){
+            return redirect()->back()->with('success_message', 'Resume successfully deleted.');
+        }else{
+            return redirect()->back()->with('error_message', 'Resume not deleted. Try again!');
+        }
     }
 
     public function postEditPassword(Request $request){

@@ -345,7 +345,8 @@
 
                                         <!-- PERSONAL INFO TAB -->
 
-                                        <div class="tab-pane {{  (Session::has('tabactive') ? '' : 'active') }}" id="tab_1_1">
+                                        <div class="tab-pane {{  (Session::has('tabactive') ? '' : 'active') }}"
+                                             id="tab_1_1">
 
                                             <div class="portlet-body form">
 
@@ -781,7 +782,8 @@
 
                                                                     <div class="col-md-9">
 
-                                                                        <div class="input-group input-large date-picker input-daterange" data-date-format="dd/mm/yyyy">
+                                                                        <div class="input-group input-large date-picker input-daterange"
+                                                                             data-date-format="dd/mm/yyyy">
 
                                                                             {!! Form::text('from', \Carbon\Carbon::parse(@$actor[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required', 'readonly']) !!}
 
@@ -856,11 +858,14 @@
                                                                 </div>
 
                                                             </div>
-{{--<div class="col-md-3">
-    @if(@$actor[0]['resume_path'] != '')
-        <a href="#" download="{{ asset($actor->resume_path) }}">Resume Download</a>
-    @endif
-</div>--}}
+                                                            <div class="col-md-3">
+                                                                @if(isset($actor[0]['resume_path']))
+                                                                    <a href="{{ asset($actor[0]['resume_path']) }}" target="_blank" class="btn btn-xs btn-primary"><i class="glyhpicon glyphicon-download"></i>Download</a>
+                                                                    <a href="{{route('actor::getDeleteResume')}}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Remove </a>
+                                                                @else
+                                                                    <p>No resume</p>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-9">
