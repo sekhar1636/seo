@@ -856,7 +856,11 @@
                                                                 </div>
 
                                                             </div>
-
+{{--<div class="col-md-3">
+    @if(@$actor[0]['resume_path'] != '')
+        <a href="#" download="{{ asset($actor->resume_path) }}">Resume Download</a>
+    @endif
+</div>--}}
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-9">

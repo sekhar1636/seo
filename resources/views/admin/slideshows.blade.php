@@ -7,17 +7,17 @@
 
 
 @section('style')
-<link href="https://datatables.yajrabox.com/css/datatables.bootstrap.css" rel="stylesheet">
+    <link href="{{asset('assets/css/datatables.bootstrap.css')}}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/datatable-custom.css')}}">
 @endsection
 
 
 
 @section('js')
-<script src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script>
-<script src="https://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>
-<script src="https://datatables.yajrabox.com/js/handlebars.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.0.0/jquery.mark.min.js"></script>
+    <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.bootstrap.js')}}"></script>
+    <script src="{{asset('assets/js/handlebars.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.0.0/jquery.mark.min.js"></script>
 <script type="text/javascript">
 var template = Handlebars.compile($("#details-template").html());
 var table =$('#slideshow-table').DataTable({

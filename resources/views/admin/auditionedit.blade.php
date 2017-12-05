@@ -7,7 +7,7 @@
 
 
 @section('style')
-    <link href="https://datatables.yajrabox.com/css/datatables.bootstrap.css" rel="stylesheet">
+    <link href="{{asset('assets/css/datatables.bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 

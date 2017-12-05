@@ -7,7 +7,7 @@
 
 
 @section('style')
-    <link href="https://datatables.yajrabox.com/css/datatables.bootstrap.css" rel="stylesheet">
+    <link href="{{asset('assets/css/datatables.bootstrap.css')}}" rel="stylesheet">
 
     <link href="{{asset('assets/pages/css/profile.min.css')}}" rel="stylesheet" type="text/css" />
 
@@ -70,9 +70,9 @@
 
     <script type="text/javascript" src="{{asset('assets/js/additional-methods.min.js')}}"></script>
 
-    <script src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script>
-    <script src="https://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>
-    <script src="https://datatables.yajrabox.com/js/handlebars.js"></script>
+    <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.bootstrap.js')}}"></script>
+    <script src="{{asset('assets/js/handlebars.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
     <script type="text/javascript">
 

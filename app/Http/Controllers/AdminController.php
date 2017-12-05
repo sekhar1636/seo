@@ -349,7 +349,7 @@ class AdminController extends Controller
 				return $action;
             })
 			->editColumn('status', function ($user) {
-                return ($user->status)? "Active" : "De-Activated";
+                return ($user->status==1)? "Active" : "De-Activated";
             })
 			->editColumn('payment_status', function ($user) {
                 return ($user->payment_status)? "Yes" : "No";

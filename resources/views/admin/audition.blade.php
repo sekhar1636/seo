@@ -7,7 +7,7 @@
 
 
 @section('style')
-    <link href="https://datatables.yajrabox.com/css/datatables.bootstrap.css" rel="stylesheet">
+    <link href="{{asset('assets/css/datatables.bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
@@ -17,9 +17,9 @@
     <script src="{{asset('assets/global/plugins/moment.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.bootstrap.js')}}"></script>
 
-    <script src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script>
-    <script src="https://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>
     <script type="text/javascript">
         $('#audition-table').DataTable({
             processing: true,

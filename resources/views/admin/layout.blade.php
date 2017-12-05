@@ -34,7 +34,7 @@
         @yield('style')
 
         <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="favicon.ico" /> </head>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" /> </head>
     <!-- END HEAD -->
 
     <style type="text/css">
