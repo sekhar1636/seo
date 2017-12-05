@@ -157,7 +157,7 @@
                                                 @if(\Auth::user()->payment_status==1)
                                             <a href="{{ route('getActors') }}">
                                                 @else
-                                                    <a href="{{route('theater::theaterProfile')}}">
+                                                    <a href="{{route('actor::actorProfile')}}">
                                                 @endif
                                             @else
                                                   <a href="{{route('getStaticPage',['slug'=>'actor'])}}">
