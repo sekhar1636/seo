@@ -858,13 +858,21 @@
                                                                 </div>
 
                                                             </div>
-                                                            <div class="col-md-3">
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                              <div class="form-group">
+                                                            <label class="control-label col-md-3">Actor Resume</label>
+                                                            <div class="col-md-6">
                                                                 @if(isset($actor[0]['resume_path']))
-                                                                    <a href="{{ asset($actor[0]['resume_path']) }}" target="_blank" class="btn btn-xs btn-primary">Download Resume</a>
+                                                                    <a href="{{ asset($actor[0]['resume_path']) }}" target="_blank" class="btn btn-xs btn-primary"><i class="fa fa-download"></i>Download</a>
                                                                     <a href="{{route('actor::getDeleteResume')}}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Remove </a>
                                                                 @else
                                                                     <p>No resume</p>
                                                                 @endif
+                                                            </div>
+                                                            </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">

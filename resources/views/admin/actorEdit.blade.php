@@ -933,7 +933,19 @@ function initTable(tableId, data) {
 				                 	</div>
 
 				                 </div>
+ @if(isset($actor->resume_path))
+ <div class="row">
+	 <div class="col-md-9">
+		 <div class="form-group">
+			 <label class="control-label col-md-3">Actor Resume</label>
+			 <div class="col-md-6">
 
+					 <a href="{{ asset($actor->resume_path) }}" target="_blank" class="btn btn-xs btn-primary"><i class="fa fa-download"></i>Download</a>
+			 </div>
+		 </div>
+	 </div>
+ </div>
+@endif
  <div class="row">
 	 <div class="col-md-9">
 		 <div class="form-group">
