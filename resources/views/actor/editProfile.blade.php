@@ -860,7 +860,7 @@
                                                             </div>
                                                             <div class="col-md-3">
                                                                 @if(isset($actor[0]['resume_path']))
-                                                                    <a href="{{ asset($actor[0]['resume_path']) }}" target="_blank" class="btn btn-xs btn-primary"><i class="glyhpicon glyphicon-download"></i>Download</a>
+                                                                    <a href="{{ asset($actor[0]['resume_path']) }}" target="_blank" class="btn btn-xs btn-primary">Download Resume</a>
                                                                     <a href="{{route('actor::getDeleteResume')}}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Remove </a>
                                                                 @else
                                                                     <p>No resume</p>
