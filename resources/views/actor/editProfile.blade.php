@@ -1204,7 +1204,7 @@
                                                                     <label>Saturday Morning</label>
                                                                     {!! Form::checkbox('saturday_af',1,@$ax->saturday_af ? true :null) !!}
                                                                     <label>Saturday Afternoon</label>
-                                                                    {!! Form::checkbox('sunday_m',1,@$ax->sunday__m ? true:null) !!}
+                                                                    {!! Form::checkbox('sunday_m',1,@$ax->sunday_m ? true:null) !!}
                                                                     <label>Sunday Morning</label>
                                                                     {!! Form::checkbox('sunday_af',1,@$ax->sunday_af ? true:null) !!}
                                                                     <label>Sunday Afternoon</label>
