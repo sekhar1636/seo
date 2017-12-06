@@ -268,14 +268,14 @@ $(document).ready(function() {
                 <div class="form-group">
                 <label class="col-xs-3 control-label">Credit card number</label>
                 <div class="col-xs-5">
-                  <input type="text" class="form-control" data-stripe="number" />
+                  <input type="text" class="form-control" data-stripe="number" name="card_number" />
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-xs-3 control-label">Expiration</label>
                 <div class="col-xs-3">
                   <!--<input type="text" class="form-control" placeholder="Month" data-stripe="exp-month" />-->
-                  <select class="form-control" data-stripe="exp-month">
+                  <select class="form-control" data-stripe="exp-month" name="expiry_month">
                       <option value="01">January</option>
                       <option value="02">February</option>
                       <option value="03">March</option>
@@ -295,7 +295,7 @@ $(document).ready(function() {
                 $year = date('Y');
                 ?>
                 <div class="col-xs-2">
-                    <select class="form-control" data-stripe="exp-year">
+                    <select class="form-control" data-stripe="exp-year" name="expiry_year">
                     <?php for($i=$year; $i<($year+15); $i++){ ?>
                       <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                       <!--<input type="text" class="form-control" placeholder="Year" data-stripe="exp-year" />-->
@@ -306,7 +306,7 @@ $(document).ready(function() {
               <div class="form-group">
                 <label class="col-xs-3 control-label">CVV</label>
                 <div class="col-xs-2">
-                  <input type="text" class="form-control" data-stripe="cvc" />
+                  <input type="text" class="form-control" data-stripe="cvc" name="cvv" />
                 </div>
               </div>
               
@@ -346,7 +346,7 @@ $(document).ready(function() {
               
               <div class="form-group">
                 <div class="col-xs-9 col-xs-offset-3">
-                  <button type="submit" class="btn btn-primary">Subscribe</button>
+                  <button type="submit" class="btn btn-primary" onclick="repositionFeedback()">Subscribe</button>
                 </div>
               </div>
               <input type="hidden" name="token" value="" />

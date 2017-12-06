@@ -99,6 +99,18 @@
                         validating: 'glyphicon glyphicon-refresh'
                     },
                     fields: {
+                        name: {
+                            selector: '[data-stripe="name"]',
+                            row: '.col-xs-3',
+                            string: {
+                                message: 'The card holder name contains only character not number'
+                            },
+                            validators: {
+                                notEmpty: {
+                                    message: 'Card Holder Name is Required'
+                                }
+                            }
+                        },
                         ccNumber: {
                             selector: '[data-stripe="number"]',
                             validators: {
@@ -266,18 +278,24 @@
 
                                     </div>
                                 //endforeach -->
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">Name On Card</label>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" name="card_name" data-stripe="name" />
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">Credit card number</label>
                                     <div class="col-xs-5">
-                                        <input type="text" class="form-control" data-stripe="number" />
+                                        <input type="text" class="form-control" data-stripe="number" name="card_number" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">Expiration</label>
                                     <div class="col-xs-3">
                                         <!--<input type="text" class="form-control" placeholder="Month" data-stripe="exp-month" />-->
-                                        <select class="form-control" data-stripe="exp-month">
+                                        <select class="form-control" data-stripe="exp-month" name="expiry_month">
                       <option value="01">January</option>
                       <option value="02">February</option>
                       <option value="03">March</option>
@@ -297,7 +315,7 @@
                 $year = date('Y');
                 ?>
                 <div class="col-xs-2">
-                    <select class="form-control" data-stripe="exp-year">
+                    <select class="form-control" data-stripe="exp-year" name="expiry_year">
                     <?php for($i=$year; $i<($year+15); $i++){ ?>
                       <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                       <!--<input type="text" class="form-control" placeholder="Year" data-stripe="exp-year" />-->
@@ -308,7 +326,7 @@
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">CVV</label>
                                     <div class="col-xs-2">
-                                        <input type="text" class="form-control" data-stripe="cvc" />
+                                        <input type="text" class="form-control" data-stripe="cvc" name="cvv" />
                                     </div>
                                 </div>
 

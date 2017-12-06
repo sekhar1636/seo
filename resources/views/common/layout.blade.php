@@ -461,11 +461,25 @@
 <script src="{{asset('assets/js/formValidation.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript">
+
 Metronic.init(); // init metronic core componets
 </script>
 
 @yield('js')
+<script>
+    $('[name=card_name], [name=cvv], [name=card_number], [name=expiry_month], [name=expiry_year]').on('keyup', function(){
+       repositionFeedback();
+    });
 
+    function repositionFeedback(){
+        allElements = document.querySelectorAll('.form-control-feedback');
+        for(i=0; i<allElements.length; i++){
+            curElt = allElements[i];
+            curElt.style.marginTop = "9px";
+            curElt.style.right = "20px";
+        }
+    }
+</script>
 </body>
 
 </html>
