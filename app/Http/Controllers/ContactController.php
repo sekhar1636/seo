@@ -38,7 +38,7 @@ class ContactController extends Controller
         $user = "";
         try {
             \Mail::send('email.contact', ['name'=>$request->get('username'),'email'=>$request->get('mail') ,'description'=>$request->get('description') ], function ($m) use ($user) {
-                $m->to('qundeelahmad@gmail.com')->subject('User Contact');
+                $m->to('info@strawhat-auditions.com')->subject('User Contact');
             });
             return redirect()->back()->with('success_message', 'Feedback successfully sent');
         } catch (Exception $e) {
