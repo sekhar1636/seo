@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('product/buy', ['as'=>'buyProduct', 'uses'=>'ActorController@productBuy']);
 			Route::post('updaterole',['as'=>'updateUsersRole','uses'=>'ActorController@userroles']);
 			Route::post('audiupdate',['as'=>'actoraudifields','uses'=>'ActorController@actoraudifields']);
+            Route::get('userPaymentDataTable/{id}', ['as'=>'actorUserPaymentDataTable', 'uses'=>'ActorController@userPaymentDatatable']);
+            Route::get('userTransactionDetails/{id}', ['as'=>'actorUserTransactionDetails', 'uses'=>'ActorController@userTransactionDetails']);
 		});
 	});
 

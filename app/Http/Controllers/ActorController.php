@@ -17,6 +17,8 @@ use App\Payment;
 use App\Jobs\SendVerificationMail;
 use Carbon\Carbon;
 use App\AuditionExtra;
+use Yajra\Datatables\Facades\Datatables;
+use DB;
 
 class ActorController extends Controller
 {
@@ -246,7 +248,28 @@ class ActorController extends Controller
         }
 
     }
+    public function userPaymentDatatable($id){
+        DB::statement(DB::raw('set @rownum=0'));
+        $invoices = Payment::where("user_id","=",$id)->selectRaw("@rownum  := @rownum  + 1 AS id,sum(price) as total_price,transaction_id")->groupBy('transaction_id');
+        return Datatables::of($invoices)
+            ->addColumn('details_url', function($invoice) {
+                return route('actor::actorUserTransactionDetails',$invoice->transaction_id);
+            })
+            ->make(true);
+    }
 
+    public function userTransactionDetails($id){
+        $payments = Payment::where("transaction_id","=",$id);
+        return Datatables::of($payments)
+            ->addColumn('item', function($payment) {
+                if($payment->product_id===NULL){
+                    return "Subscription Fee";
+                }else{
+                    return "Product Charges";
+                }
+            })
+            ->make(true);
+    }
     public function uploadResume($actor, $file, $name){
         $destinationPath = 'files/resumes/actor'; // upload path
         $extension = $file->getClientOriginalExtension();

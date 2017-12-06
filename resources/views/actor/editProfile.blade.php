@@ -74,6 +74,9 @@
     <script type="text/javascript" src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 
     <script type="text/javascript" src="{{asset('assets/js/additional-methods.min.js')}}"></script>
+    <script src="{{asset('assets/js/handlebars.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.bootstrap.js')}}"></script>
 
 
 
@@ -92,6 +95,64 @@
                 minSize: [75, 75],
                 aspectRatio: 1
             });
+            //
+            var template = Handlebars.compile($("#details-template").html());
+            var table =$('#payments-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{route("actor::actorUserPaymentDataTable",$actor[0]['user_id'])}}',
+                columns: [
+                    {data: 'transaction_id'},
+                    {data: 'total_price'},
+                    {
+                        className:      'details-control',
+                        orderable: false,
+                        searchable: false,
+                        data:           null,
+                        defaultContent: '<button class="btn btn-primary">View Details</button>'
+                    }
+                ]
+            });
+
+// Add event listener for opening and closing details
+            $('#payments-table tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+                var tableId = 'posts-' + row.data().id;
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    $(this).html('<button class="btn btn-primary">View Details</button>');
+                    row.child.hide();
+                    tr.removeClass('shown');
+                } else {
+                    // Open this row
+                    $(this).html('<button class="btn btn-danger">Hide Details</button>');
+                    row.child(template(row.data())).show();
+                    initTable(tableId, row.data());
+                    tr.addClass('shown');
+                    tr.next().find('td').addClass('no-padding bg-gray');
+                }
+            });
+
+            function initTable(tableId, data) {
+                $('#' + tableId).DataTable({
+                    processing: true,
+                    serverSide: true,
+                    searching: false,
+                    paging: false,
+                    bInfo: false,
+                    ajax: data.details_url,
+                    columns: [
+                        {data: 'id'},
+                        {data: 'item'},
+                        {data: 'price'},
+                        {data: 'created_at'}
+                    ]
+                })
+            }
+
+           //
         });
 
 
@@ -263,10 +324,16 @@
 
                                     <a href="#tab_1_5" data-toggle="tab">
 
-                                        <i class="icon-layers"></i> Audition </a>
+                                        <i class="fa fa-institution"></i> Audition </a>
 
                                 </li>
+                                <li>
 
+                                    <a href="#tab_1_6" data-toggle="tab">
+
+                                        <i class="fa fa-sticky-note-o"></i> Invoices </a>
+
+                                </li>
                             </ul>
 
                         </div>
@@ -333,7 +400,11 @@
                                             <a href="#tab_1_5" data-toggle="tab">Audition</a>
 
                                         </li>
+                                        <li>
 
+                                            <a href="#tab_1_6" data-toggle="tab">Invoices</a>
+
+                                        </li>
 
                                     </ul>
 
@@ -1560,6 +1631,32 @@
                                             </form>
                                         </div>
                                         <!--End role tab-->
+                                        <div class="tab-pane" id="tab_1_6">
+                                            <table id="payments-table" class="table">
+                                                <thead>
+                                                <tr>
+                                                    <td>Transaction ID</td>
+                                                    <td>Total Price</td>
+                                                    <td></td>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                            <script id="details-template" type="text/x-handlebars-template">
+                                                <div class="label label-info">Transaction Details</div>
+                                                <table class="table details-table" id="posts-@{{id}}">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Price</th>
+                                                        <th>Item</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                    </thead>
+                                                </table>
+                                            </script>
+
+                                        </div>
+                                        <!--End invoice tab-->
                                     </div>
 
                                 </div>
