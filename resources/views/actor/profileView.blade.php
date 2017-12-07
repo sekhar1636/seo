@@ -87,8 +87,11 @@
                                 
                                     </p>
                                         <b>School : </b>
-                                        <span class="label label-success label-sm"> {{ @$actor->actor->school ? $actor->actor->school : '' }} </span>
-                                      
+                                    @if(@$actor->actor->school)
+                                        <span class="label label-success label-sm"> {{$actor->actor->school}} </span>
+                                    @else
+                                          <span>NA</span>
+                                      @endif
                                     </p>
                                 
                                 </div>
@@ -133,15 +136,15 @@
                                                     <span class="sale-info"> Resume
                                                         <i class="fa fa-img-up"></i>
                                                     </span>
-                                                    <span class="sale-num">@if(@$actor->actor->resume_path)
-                                                            <a href="{{ asset($actor->actor->resume_path) }}" target="_blank"> {{$actor->actor->first_name.' '.$actor->actor->last_name}}'s Resume </a>
+                                                    @if(@$actor->actor->resume_path)
+                                                        <span class="sale-num"> <a href="{{ asset($actor->actor->resume_path) }}" target="_blank"> {{$actor->actor->first_name.' '.$actor->actor->last_name}}'s Resume </a></span>
                                                         @else
-                                                           Not Exist
-                                                        @endif</span>
+                                                           <span class="sale-num">NA</span>
+                                                        @endif
                                                 </li>
                                                 <li>
                                                     <span class="sale-info"> Phone Number</span>
-                                                    <span class="sale-num">@if(@$actor->actor->phone_number)<a href="tel:{{ $actor->actor->phone_number }}">{{ $actor->actor->phone_number }}</a> @else Not Exist @endif</span>
+                                                    @if(@$actor->actor->phone_number)<span class="sale-num"><a href="tel:{{ $actor->actor->phone_number }}">{{ $actor->actor->phone_number }}</a> </span>@else <span class="sale-num">NA</span> @endif
                                                 </li>
                                             </ul>
                                         </div>

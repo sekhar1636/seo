@@ -360,7 +360,7 @@
                                                             <div class="form-group" {{ $errors->has("email") ? "has-error":"" }}>
                                                                 <label class="control-label col-md-3">Email</label>
                                                                 <div class="col-md-9">
-                                                                    {!! Form::text('email',isset($staff[0]['email']) ? $staff[0]['email'] : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                                    {!! Form::text('email',isset($staff[0]['email']) ? $staff[0]['email'] : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'65']) !!}
                                                                     <span class="help-block"> {{ $errors->first("email") }} </span>
                                                                 </div>
                                                             </div>

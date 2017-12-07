@@ -676,11 +676,20 @@ class ActorController extends Controller
     /** View user */
     public function view($id){
         $actor = User::findOrFail($id);
-        $actor_role = ActorRole::where('user_id', $id)->orderBy('id', 'asc')->get();
-        return view('actor.profileView')->with([
-            'actor'=> $actor,
-            'actor_role' => $actor_role
-        ]);
+        $actor_inside = Actor::where('user_id',$id)->get();
+        if($actor->payment_status == 1 && $actor_inside[0]['first_name'] != NULL && $actor_inside[0]['last_name']!= NULL && $actor_inside[0]['photo_path']!= NULL)
+        {
+            $actor_role = ActorRole::where('user_id', $id)->orderBy('id', 'asc')->get();
+
+            return view('actor.profileView')->with([
+                'actor'=> $actor,
+                'actor_role' => $actor_role
+            ]);
+        }
+        else
+        {
+            return redirect()->back()->with('error_message','Sorry Actor Profile is incomplete');
+        }
     }
 
     /*
