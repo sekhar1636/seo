@@ -594,7 +594,7 @@ class ActorController extends Controller
     public function getActors(){
 
         $actors = \App\User::join('actors','actors.user_id', '=', 'users.id')
-            ->where('payment_status',1)->orderBy('first_name', 'asc')
+            ->where('payment_status',1)->whereNotNull('photo_path')->orderBy('first_name', 'asc')
             ->get();
 
         $actorList = "";

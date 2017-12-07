@@ -237,11 +237,14 @@
             <div class="col-lg-8">
                 <div class="row">
                     <div class="actorContainer">
-					
 					@foreach($actorList as $actor)
+                        @if(($actor->first_name)&&($actor->last_name)&&($actor->auditionType)&&($actor->from)&&($actor->to) != NULL)
+                        <div style="display: none;">
 						{{
+
 							$mixClass = $actor->gender . ' '. \App\Http\Controllers\ActorController::prepareData($actor->ethnicity). ' '. \App\Http\Controllers\ActorController::prepareData($actor->misc). ' '. \App\Http\Controllers\ActorController::prepareData($actor->technical). ' '. \App\Http\Controllers\ActorController::prepareData($actor->dance). ' '. \App\Http\Controllers\ActorController::prepareData($actor->jobType). ' '. \App\Http\Controllers\ActorController::prepareData($actor->instrument) .' '. \App\Http\Controllers\ActorController::getAvailability($actor->from, $actor->to)
 						}}
+                        </div>
 						<div data-first-name="{{ strtolower($actor->first_name) }}" data-last-name="{{ strtolower($actor->last_name) }}" data-audition-type="{{ preg_replace('/\s+/', '', $actor->auditionType) }}" data-skill-vocal="{{ preg_replace('/\s+/', '', $actor->vocalRange) }}" class="mix {{ $mixClass }}">
 							<div class="col-md-4">
 								<div class="tile-container">
@@ -269,6 +272,7 @@
 							</div>
 						</div>
 						{{ $mixClass = "" }}
+                            @endif
 					@endforeach
                     </div>
                     <div class="clearfix"></div>
