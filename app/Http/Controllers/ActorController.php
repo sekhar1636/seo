@@ -142,7 +142,7 @@ class ActorController extends Controller
         }
         $uid = \Auth::user()->id;
         $actor = Actor::where('user_id',$uid)->get();
-        $roles = ActorRole::where('user_id',$uid)->get();
+        $roles = ActorRole::where('user_id',$uid)->orderBy('id','asc')->get();
         $ae = AuditionExtra::updateorcreate(['user_id'=>$uid],['user_id',$uid]);
         $audition_extra = AuditionExtra::where('user_id',$uid)->get();
         if(count($audition_extra)){
@@ -676,7 +676,7 @@ class ActorController extends Controller
     /** View user */
     public function view($id){
         $actor = User::findOrFail($id);
-        $actor_role = ActorRole::where('user_id', $id)->get();
+        $actor_role = ActorRole::where('user_id', $id)->orderBy('id', 'asc')->get();
         return view('actor.profileView')->with([
             'actor'=> $actor,
             'actor_role' => $actor_role
