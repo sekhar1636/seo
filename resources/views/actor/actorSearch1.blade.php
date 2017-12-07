@@ -129,7 +129,7 @@
                         <select class="form-control">
                             <option value="">--Audition Type--</option>
                             @foreach(\App\Misc::$auditionType as $key=>$at)
-                            <option value="[data-audition-type={{preg_replace('/\s+/', '', $at)}}]">{{$at}}</option>
+                            <option value="[data-audition-type={{preg_replace('/\s+/', '', $at=="Song & Monologue" ? "Song-n-Monologue" : $at)}}]">{{$at}}</option>
                          
                             @endforeach
                         </select>
@@ -240,7 +240,7 @@
 					@foreach($actorList as $actor)
                         @if(($actor->first_name)&&($actor->last_name)&&($actor->auditionType)&&($actor->from)&&($actor->to) != NULL)
 
-						<div data-first-name="{{ strtolower($actor->first_name) }}" data-last-name="{{ strtolower($actor->last_name) }}" data-audition-type="{{ preg_replace('/\s+/', '', $actor->auditionType) }}" data-skill-vocal="{{ preg_replace('/\s+/', '', $actor->vocalRange) }}" class="mix {{
+						<div data-first-name="{{ strtolower($actor->first_name) }}" data-last-name="{{ strtolower($actor->last_name) }}" data-audition-type="{{ preg_replace('/\s+/', '', $actor->auditionType=="Song & Monologue" ? "Song-n-Monologue" : $actor->auditionType) }}" data-skill-vocal="{{ preg_replace('/\s+/', '', $actor->vocalRange) }}" class="mix {{
 
 							$mixClass = $actor->gender . ' '. \App\Http\Controllers\ActorController::prepareData($actor->ethnicity). ' '. \App\Http\Controllers\ActorController::prepareData($actor->misc). ' '. \App\Http\Controllers\ActorController::prepareData($actor->technical). ' '. \App\Http\Controllers\ActorController::prepareData($actor->dance). ' '. \App\Http\Controllers\ActorController::prepareData($actor->jobType). ' '. \App\Http\Controllers\ActorController::prepareData($actor->instrument) .' '. \App\Http\Controllers\ActorController::getAvailability($actor->from, $actor->to)
 						}}">

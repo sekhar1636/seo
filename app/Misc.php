@@ -137,7 +137,7 @@ class Misc
 
 	public static $auditionType = [
 		'Monologue Only' => 'Monologue Only',
-		'Song & Monologue' => 'Song & Monologue',		
+		'Song & Monologue' => 'Song & Monologue',
 		'Dancer Who Sings'=>'Dancer Who Sings'
 	];
 
