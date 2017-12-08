@@ -181,6 +181,12 @@
                                                 <li>
                                                     <a href="{{route('getSignup')}}">Register</a>
                                                 </li>
+                                                <li>
+                                                    <a href="{{route('getStaticPage',['slug'=>'headshot'])}}">Headshot Advice</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('getStaticPage',['slug'=>'resumeadvice'])}}">Resume Advice</a>
+                                                </li>
                                             </ul>
                                         <li class="{{ @$staffactive ? 'active' : @$staticactive=='staffactive' ? 'active' : '' }}">
                                             @if(Auth::check())
@@ -264,12 +270,6 @@
                                                 <li class="menu-dropdown {{ @$staticactive=='resactive' ? 'active' : '' }}"><a><i class="icon-envelope"></i> Premium content</a>
 
                                         <ul class="dropdown-menu pull-left">
-                                        <li>
-                                            <a href="{{route('getStaticPage',['slug'=>'headshot'])}}">Headshot Advice</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('getStaticPage',['slug'=>'resumeadvice'])}}">Resume Advice</a>
-                                        </li>
                                             <li>
                                                 <a href="{{route('getStaticPage',['slug'=>'dreadedlist'])}}">Dreaded List</a>
                                             </li>

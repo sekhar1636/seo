@@ -100,9 +100,9 @@
                                     <div class="portlet sale-summary">
                                         <div class="portlet-title">
                                             <div class="caption font-red sbold"> Job Info </div>
-                                            <div class="tools">
+                                            <!--<div class="tools">
                                                 <a class="reload" href="javascript:;"> </a>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="portlet-body">
                                             <ul class="list-unstyled">

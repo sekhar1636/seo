@@ -375,7 +375,7 @@
 
                                                                 <div class="col-md-9">
 
-                                                                    {!! Form::text('company_name',isset($theater[0]['company_name']) ? $theater[0]['company_name'] : null , ['class' => 'form-control', 'placeholder' => 'Comapany Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                                    {!! Form::text('company_name',isset($theater[0]['company_name']) ? $theater[0]['company_name'] : null , ['class' => 'form-control', 'placeholder' => 'Comapany Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'65']) !!}
 
                                                                     <span class="help-block"> {{ $errors->first("company_name") }} </span>
 
@@ -393,7 +393,7 @@
 
                                                             <div class="col-md-9">
 
-                                                                {!! Form::text('contact_number',isset($theater[0]['contact_number']) ? $theater[0]['contact_number'] : null , ['class' => 'form-control', 'placeholder' => 'Contact Number', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                                {!! Form::text('contact_number',isset($theater[0]['contact_number']) ? $theater[0]['contact_number'] : null , ['class' => 'form-control', 'placeholder' => 'Contact Number', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'40']) !!}
 
                                                                 <span class="help-block"> {{ $errors->first("contact_number") }} </span>
 
@@ -417,7 +417,7 @@
 
                                                     <div class="col-md-9">
 
-                                                        {!! Form::text('email',isset($theater[0]['email']) ? $theater[0]['email'] : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'75']) !!}
+                                                        {!! Form::text('email',isset($theater[0]['email']) ? $theater[0]['email'] : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'150']) !!}
 
                                                         <span class="help-block"> {{ $errors->first("email") }} </span>
 
@@ -433,7 +433,7 @@
 
                                             <div class="col-md-9">
 
-                                                {!! Form::text('website',isset($theater[0]['website']) ? $theater[0]['website'] : null , ['class' => 'form-control', 'placeholder' => 'Website', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                {!! Form::text('website',isset($theater[0]['website']) ? $theater[0]['website'] : null , ['class' => 'form-control', 'placeholder' => 'Website', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'150']) !!}
 
                                                 <span class="help-block"> {{ $errors->first("website") }} </span>
 
@@ -470,7 +470,7 @@
 
                                         <div class="col-md-9">
 
-                                            {!! Form::text('telephone',isset($theater[0]['telephone']) ? $theater[0]['telephone'] : null , ['class' => 'form-control', 'placeholder' => 'Telephone', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                            {!! Form::text('telephone',isset($theater[0]['telephone']) ? $theater[0]['telephone'] : null , ['class' => 'form-control', 'placeholder' => 'Telephone', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'100']) !!}
 
                                             <span class="help-block"> {{ $errors->first("zipcode") }} </span>
 
@@ -490,7 +490,7 @@
 
                                     <div class="col-md-9">
 
-                                        {!! Form::text('fax',isset($theater[0]['fax']) ? $theater[0]['fax'] : null, ['class' => 'form-control', 'placeholder' => 'Fax','minlength'=>'3', 'maxlength'=>'20']) !!}
+                                        {!! Form::text('fax',isset($theater[0]['fax']) ? $theater[0]['fax'] : null, ['class' => 'form-control', 'placeholder' => 'Fax','minlength'=>'3', 'maxlength'=>'100']) !!}
 
                                         <span class="help-block"> {{ $errors->first("fax") }} </span>
 
@@ -591,7 +591,7 @@
                             </th>
                                 <tbody>
                                 <tr><td>{!! Form::text('name_table_1',@$theater[0]['name_table_1'] ? $theater[0]['name_table_1'] : null,['class' => 'form-control', 'placeholder' => ' Name', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td><td>{!! Form::text('title_table_1',@$theater[0]['title_table_1'] ? $theater[0]['title_table_1'] : null,['class' => 'form-control', 'placeholder' => 'Title', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td></tr>
-                                <tr><td>{!! Form::text('name_table_2',@$theater[0]['name_table_2'] ? $theater[0]['name_table_2'] : null,['class' => 'form-control', 'placeholder' => ' Name', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td><td>{!! Form::text('title_table_2',@$theater[0]['title_table_2'] ? $theater[0]['title_table_2'] : null,['class' => 'form-control', 'placeholder' => 'Title', 'minlength'=>'3', 'maxlength'=>'20']) !!}</td></tr>
+                                <tr><td>{!! Form::text('name_table_2',@$theater[0]['name_table_2'] ? $theater[0]['name_table_2'] : null,['class' => 'form-control', 'placeholder' => ' Name', 'minlength'=>'3', 'maxlength'=>'249']) !!}</td><td>{!! Form::text('title_table_2',@$theater[0]['title_table_2'] ? $theater[0]['title_table_2'] : null,['class' => 'form-control', 'placeholder' => 'Title', 'minlength'=>'3', 'maxlength'=>'249']) !!}</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -624,7 +624,7 @@
             <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
             <label class="control-label col-md-6"><strong>Email to send the videos</strong></label>
             <div class="col-md-6">
-                {!! Form::text('email_videos',isset($theater[0]['email_videos']) ? $theater[0]['email_videos'] : null , ['class' => 'form-control', 'placeholder' => 'Email to send Videos', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'250']) !!}
+                {!! Form::text('email_videos',isset($theater[0]['email_videos']) ? $theater[0]['email_videos'] : null , ['class' => 'form-control', 'placeholder' => 'Email to send Videos', 'minlength'=>'3', 'maxlength'=>'250']) !!}
             </div>
             </div>
         </div>
