@@ -742,7 +742,7 @@ function initTable(tableId, data) {
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('jobType[]',App\Misc::$jobTypes, isset($actor->jobType) ? explode(',', $actor->jobType): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('jobType[]',App\Misc::$jobTypes, isset($actor->jobType) ? explode(',', $actor->jobType): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("jobType") }} </span>
 
@@ -788,7 +788,7 @@ function initTable(tableId, data) {
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('technical[]',App\Misc::$technical, isset($actor->technical) ? explode(',', $actor->technical): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('technical[]',App\Misc::$technical, isset($actor->technical) ? explode(',', $actor->technical): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("technical") }} </span>
 
@@ -808,7 +808,7 @@ function initTable(tableId, data) {
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor->instrument) ? explode(',', $actor->instrument): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor->instrument) ? explode(',', $actor->instrument): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("instrument") }} </span>
 
@@ -838,7 +838,7 @@ function initTable(tableId, data) {
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('misc[]',App\Misc::$misc, isset($actor->misc) ? explode(',', $actor->misc): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('misc[]',App\Misc::$misc, isset($actor->misc) ? explode(',', $actor->misc): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("misc") }} </span>
 
