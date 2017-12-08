@@ -450,7 +450,7 @@ function initTable(tableId, data) {
 
 				                                <div class="col-md-9">
 
-				                                {!! Form::text('first_name',@$actor->first_name, ['class' => 'form-control', 'placeholder' => ' First Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+				                                {!! Form::text('first_name',@$actor->first_name, ['class' => 'form-control', 'placeholder' => ' First Name', 'required'=>'required', 'minlength'=>'2', 'maxlength'=>'20']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("first_name") }} </span>
 
@@ -494,7 +494,7 @@ function initTable(tableId, data) {
 
 				                                <div class="col-md-9">
 
-				                                {!! Form::text('last_name',@$actor->last_name, ['class' => 'form-control', 'placeholder' => ' Last Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+				                                {!! Form::text('last_name',@$actor->last_name, ['class' => 'form-control', 'placeholder' => ' Last Name', 'required'=>'required', 'minlength'=>'2', 'maxlength'=>'20']) !!}
 
 				                                <span class="help-block"> {{ $errors->first("last_name") }} </span>
 
