@@ -437,7 +437,7 @@
 
                                                                 <div class="col-md-9">
 
-                                                                    {!! Form::text('company_name',isset($theater->company_name) ? $theater->company_name : null , ['class' => 'form-control', 'placeholder' => 'Comapany Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                                    {!! Form::text('company_name',isset($theater->company_name) ? $theater->company_name : null , ['class' => 'form-control', 'placeholder' => 'Company Name', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'65']) !!}
 
                                                                     <span class="help-block"> {{ $errors->first("company_name") }} </span>
 
@@ -479,7 +479,7 @@
 
                                                     <div class="col-md-9">
 
-                                                        {!! Form::text('email',isset($theater->email) ? $theater->email : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                        {!! Form::text('email',isset($theater->email) ? $theater->email : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'65']) !!}
 
                                                         <span class="help-block"> {{ $errors->first("email") }} </span>
 
@@ -495,7 +495,7 @@
 
                                                 <div class="col-md-9">
 
-                                                    {!! Form::text('website',isset($theater->website) ? $theater->website : null , ['class' => 'form-control', 'placeholder' => 'Website', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                    {!! Form::text('website',isset($theater->website) ? $theater->website : null , ['class' => 'form-control', 'placeholder' => 'Website', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'150']) !!}
 
                                                     <span class="help-block"> {{ $errors->first("website") }} </span>
 
@@ -515,7 +515,7 @@
 
                                             <div class="col-md-9">
 
-                                                {!! Form::text('mailing',isset($theater->mailing) ? $theater->mailing : null, ['class' => 'form-control', 'placeholder' => 'Mailing', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                                                {!! Form::text('mailing',isset($theater->mailing) ? $theater->mailing : null, ['class' => 'form-control', 'placeholder' => 'Mailing', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'100']) !!}
 
                                                 <span class="help-block"> {{ $errors->first("email") }} </span>
 
