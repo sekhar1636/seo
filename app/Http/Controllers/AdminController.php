@@ -570,12 +570,12 @@ class AdminController extends Controller
                 'school' => "required|max:150|min:3",
                 'auditionType'=>'required',
                 'vocalRange'=>'required',
-                'jobType'=>'required',
-                'dance'=>'required',
-                'technical'=>'required',
+                //'jobType'=>'required',
+                //'dance'=>'required',
+                //'technical'=>'required',
                 'ethnicity'=>'required',
-                'instrument'=>'required',
-                'misc'=>'required',
+                /*'instrument'=>'required',
+                'misc'=>'required',*/
                 'from'=>'required',
                 'to'=>'required'
             ]
@@ -607,12 +607,13 @@ class AdminController extends Controller
         $actor->to = $request->get('to');
         $actor->auditionType = $request->get('auditionType');
         $actor->vocalRange = $request->get('vocalRange');
-        $actor->jobType = implode(',', $request->get('jobType'));
-        $actor->technical = implode(',', $request->get('technical'));
-        $actor->ethnicity = implode(',', $request->get('ethnicity'));
-        $actor->dance = implode(',', $request->get('dance'));
-        $actor->instrument = implode(',', $request->get('instrument'));
-        $actor->misc = implode(',', $request->get('misc'));
+        $actor->jobType = $request->get('jobType') ? implode(',', $request->get('jobType')) : '';
+        $actor->technical = $request->get('technical') ? implode(',', $request->get('technical')) : '';
+        $actor->ethnicity = $request->get('ethnicity') ? implode(',', $request->get('ethnicity')) : '';
+        $actor->dance = $request->get('dance') ? implode(',', $request->get('dance')) : '';
+        $actor->instrument = $request->get('instrument') ? implode(',', $request->get('instrument')) : '';
+        $actor->misc = $request->get('misc') ? implode(',', $request->get('misc')) : '';
+        
         $actor->phone_number = $request->phone_number;
         if($request->hasFile('resume')) {
            $this->uploadResume($actor,$request->file('resume'), $request->get('name'));      

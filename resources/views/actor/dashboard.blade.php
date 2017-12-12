@@ -245,12 +245,18 @@
                                             <div class="timeline-body-head">
                                                 <div class="timeline-body-head-caption">
                                                     <span class="timeline-body-alerttitle font-red">Photo And Resume</span>
-
+                                                </div>
+                                                <div class="timeline-body-head-actions">
+                                                       @if(\Auth::user()->payment_status == 1 && @$act->photo_path != '' && @$act->photo_url != '' && @$act->instrument != '' && @$act->ethnicity != '' && @$act->technical != '' && @$act->dance != '' && @$verify == 1)
+													   	<a href="{{ route('actor::actorPreview') }}" class="btn btn-primary">Print Application</a>
+													   @endif  
                                                 </div>
                                             </div>
                                             <div class="timeline-body-content">
                                             <span class="font-grey-cascade">Send in a check and a Hard Copy of your Resume & Photo
                                             </span>
+
+                                            
                                             </div>
                                         </div>
                                     </div>
@@ -390,11 +396,6 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                                    @if(\Auth::user()->payment_status == 1 && @$act->photo_path != '' && @$act->photo_url != '' && @$act->instrument != '' && @$act->ethnicity != '' && @$act->technical != '' && @$act->dance != '' && @$verify == 1)
-                                        <div class="margin-top-10 col-xs-4 col-xs-offset-4">
-                                            <a href="{{ route('actor::actorPreview') }}" class="btn btn-primary">Print Application</a>
-                                        </div>
-                                    @endif
             </div>
 
                         </div>

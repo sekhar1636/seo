@@ -769,7 +769,7 @@ function initTable(tableId, data) {
 
 				                            <div class="col-md-9">
 
-				                                {!! Form::select('dance[]',App\Misc::$dance, isset($actor->dance) ? explode(',', $actor->dance): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+				                                {!! Form::select('dance[]',App\Misc::$dance, isset($actor->dance) ? explode(',', $actor->dance): '', [  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
 				                                <span class="help-block"> {{ $errors->first("dance") }} </span>
 
