@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use App\AuditionExtra;
 use Yajra\Datatables\Facades\Datatables;
 use DB;
+use PDF;
 
 class ActorController extends Controller
 {
@@ -60,13 +61,15 @@ class ActorController extends Controller
         $resume = (!empty($hardcop[0]['resume_path'])) ? (!empty($hardcop[0]['resume_path'])) : 0;
 
         $roles = ActorRole::where('user_id',$user_id)->first();
+        $act = Actor::where('user_id',$user_id)->first();
 
         return view('actor.dashboard')->with([
             'verify' => $verify,
             'hardcopy' => $hardcopy,
             'audition_status' => $audition,
             'resume' => $resume,
-            'roles' => $roles
+            'roles' => $roles,
+            'act' => $act
         ]);
     }
 
@@ -840,6 +843,20 @@ class ActorController extends Controller
         }
     }
 
+    public function preview(){
+        $actor = \App\Actor::where('user_id', \Auth::user()->id)->get();
+        $audition_extra = AuditionExtra::where('user_id', \Auth::user()->id)->get();
+        return view('pdf.printapp')->with(['actor' => $actor, 'ae' => $audition_extra]);
+    }
+
+    public function pdf()
+    {
+        $actor = \App\Actor::where('user_id', \Auth::user()->id)->get();
+        $audition_extra = AuditionExtra::where('user_id', \Auth::user()->id)->get();
+        $pdf = PDF::loadView('pdf.printapp', ['actor' => $actor, 'ae' => $audition_extra, 'but' => 'hidden']);
+        //return $pdf->stream('pdf.invoice');
+        return $pdf->download('test.pdf');
+    }
 
 
 }

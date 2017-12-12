@@ -15,6 +15,10 @@ class Actor extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function actor()
+    {
+        return $this->hasOne('App\AuditionExtra');
+    }
     public function setPhoto($file, $saveDB = true)
     {
         // Medium
