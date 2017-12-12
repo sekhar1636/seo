@@ -377,6 +377,7 @@
 <p> StrawHat Auditions is New York City’s premiere combined audition service. </p>
 </div>
 <div class="col-md-3 col-sm-6 col-xs12 footer-block">
+<!--
 <h2>Subscribe Email</h2>
 <div class="subscribe-form">
     <form action="javascript:;">
@@ -388,8 +389,8 @@
         </div>
     </form>
 </div>
+-->
 </div>
-
 <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
 <h2>Follow Us On</h2>
 <ul class="social-icons">
