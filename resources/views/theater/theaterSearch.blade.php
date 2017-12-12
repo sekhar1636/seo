@@ -175,10 +175,10 @@
                                             </div>
                                             <div class="tile-title">
                                                 <h3>
-                                                    <a href="javascript:;">{{ $theater->name }}</a>
+                                                    <a href="javascript:;">{{ $theater->company_name }}</a>
                                                 </h3>
 
-                                                <a href="{{route('getTheaterView', $theater->user_id) }}" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> {{ $theater->name }} </a>
+                                                <a href="{{route('getTheaterView', $theater->user_id) }}" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> {{ $theater->company_name }} </a>
                                             </div>
                                         </div>
                                     </div>
