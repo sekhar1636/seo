@@ -328,6 +328,12 @@
 
                                 </li>
 
+                                <li>
+                                    <a href="#tab_1_4" data-toggle="tab">
+                                        <i class="icon-key"></i> Change Password
+                                    </a>
+                                </li>
+
                             </ul>
 
                         </div>
@@ -384,7 +390,9 @@
 
                                         </li>
 
-
+                                        <li {{ (Session::has('tabactive') ? 'class=active' : '') }}>
+                                            <a href="#tab_1_4" data-toggle="tab">Change Password</a>
+                                        </li>
                                     </ul>
 
                                 </div>
@@ -994,7 +1002,64 @@
     </div>
 
     <!-- END CHANGE PASSWORD TAB -->
+    <div class="tab-pane" id="tab_1_4">
+        <form action="{{route('admin::postEditPassword',$id)}}"
+              class="form-validate-auto" method="POST">
+            {{csrf_field()}}
+            <div class="form-group" {{ $errors->has("new_password") ? "has-error":"" }}>
 
+                <label class="control-label">New Password</label>
+
+                <div class="input-group">
+
+						                        <span class="input-group-addon">
+
+						                            <i class="fa fa-key"></i>
+
+						                        </span>
+
+
+                    {!! Form::password('new_password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6', 'id'=>'PasswordField']) !!}
+
+
+                </div>
+
+                <span class="help-block"> {{ $errors->first("new_password") }} </span>
+
+            </div>
+
+            <div class="form-group" {{ $errors->has("re_password") ? "has-error":"" }}>
+
+                <label class="control-label">Re-type New Password</label>
+
+                <div class="input-group">
+
+						                        <span class="input-group-addon">
+
+						                            <i class="fa fa-key"></i>
+
+						                        </span>
+
+
+                    {!! Form::password('re_password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6', 'equalTo'=>'#PasswordField']) !!}
+
+
+                </div>
+
+                <span class="help-block"> {{ $errors->first("re_password") }} </span>
+
+            </div>
+
+
+            <div class="margin-top-10">
+
+                <button type="submit" class="btn green"> Change Password</button>
+
+
+            </div>
+
+        </form>
+    </div>
 
 
 

@@ -1498,4 +1498,24 @@ class AdminController extends Controller
         $cont_upd->save();
         return redirect()->back()->with('success_message','Content Updated');
     }
+
+    protected function postEditPassword($id,Request $request){
+            $validator = \Validator::make($request->all(),
+                [
+                    //'password' => "required|max:15|min:6",
+                    'new_password' => "required|max:15|min:6",
+                    're_password' => "required|max:15|min:6",
+                ]
+            );
+            if ($validator->fails()) {
+                return redirect()
+                    ->back()
+                    ->withErrors($validator->errors())
+                    ->withInput();
+            }
+            $user = User::findorfail($id);
+                $user->password = bcrypt($request->get('new_password'));
+                $user->update();
+        return redirect()->back()->with('success_message', 'Password successfully updated.');
+        }
 }

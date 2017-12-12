@@ -73,6 +73,8 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('audiupdate',['as'=>'actoraudifields','uses'=>'ActorController@actoraudifields']);
             Route::get('userPaymentDataTable/{id}', ['as'=>'actorUserPaymentDataTable', 'uses'=>'ActorController@userPaymentDatatable']);
             Route::get('userTransactionDetails/{id}', ['as'=>'actorUserTransactionDetails', 'uses'=>'ActorController@userTransactionDetails']);
+            Route::get('/preview',['as'=>'actorPreview','uses'=>'ActorController@preview']);
+            Route::get('/pdf',['as'=>'actorPdf','uses'=>'ActorController@pdf']);
 		});
 	});
 
@@ -204,6 +206,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('auditionextra/{id}',['as'=>'adminextrafields','uses'=>'AdminController@adminextra']);
             Route::get('homepage/edit',['as'=>'adminHomepageEdit','uses'=>'AdminController@homepageedit']);
             Route::post('homepage/edit',['as'=>'adminHomepageupdate','uses'=>'AdminController@homepageupdate']);
+
+            //Admin Password edit
+            Route::post('password/use/{id}', ['as'=>'postEditPassword', 'uses'=>'AdminController@postEditPassword']);
         });
 	});
 	
