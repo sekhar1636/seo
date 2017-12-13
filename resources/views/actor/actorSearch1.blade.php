@@ -238,8 +238,7 @@
                 <div class="row">
                     <div class="actorContainer">
 					@foreach($actorList as $actor)
-                        @if(($actor->first_name)&&($actor->last_name)&&($actor->auditionType)&&($actor->from)&&($actor->to) != NULL && $actor->payment_status == 1 && $actor->instrument != '' && $actor->ethnicity != '' && $actor->technical != '' && $actor->dance != '' && $actor->phone_number != '' && $actor->verified == 1 && $actor->email != '' && $actor->gender != '' && $actor->age != '' && $actor->vocalRange != '' && $actor->height != '' && $actor->weight != '' && $actor->hair != '' && $actor->eyes != '' && $actor->misc != '' && $actor->photo_path != '' && $actor->photo_url != '')
-
+                        @if(($actor->email)&&($actor->first_name)&&($actor->last_name)&&($actor->auditionType)&&($actor->from)&&($actor->to)&&($actor->ethnicity)&&($actor->gender)&&($actor->age)&&($actor->vocalRange)&&($actor->feet)&&($actor->inch)&&($actor->hair)&&($actor->eyes)&&($actor->photo_path)&&($actor->photo_url)&&($actor->weight)&&($actor->school) != NULL && $actor->payment_status == 1 && $actor->verified == 1)
 						<div data-first-name="{{ strtolower($actor->first_name) }}" data-last-name="{{ strtolower($actor->last_name) }}" data-audition-type="{{ preg_replace('/\s+/', '', $actor->auditionType=="Song & Monologue" ? "Song-n-Monologue" : $actor->auditionType) }}" data-skill-vocal="{{ preg_replace('/\s+/', '', $actor->vocalRange) }}" class="mix {{
 
 							$mixClass = $actor->gender . ' '. \App\Http\Controllers\ActorController::prepareData($actor->ethnicity). ' '. \App\Http\Controllers\ActorController::prepareData($actor->misc). ' '. \App\Http\Controllers\ActorController::prepareData($actor->technical). ' '. \App\Http\Controllers\ActorController::prepareData($actor->dance). ' '. \App\Http\Controllers\ActorController::prepareData($actor->jobType). ' '. \App\Http\Controllers\ActorController::prepareData($actor->instrument) .' '. \App\Http\Controllers\ActorController::getAvailability($actor->from, $actor->to)
@@ -270,6 +269,7 @@
 							</div>
 						</div>
 						{{ $mixClass = "" }}
+
                             @endif
 					@endforeach
                     </div>
