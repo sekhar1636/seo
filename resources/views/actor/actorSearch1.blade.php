@@ -248,7 +248,7 @@
 								<div class="tile-container">
 									<div class="tile-thumbnail">
 										<a href="{{route('getActorView', $actor->user_id) }}" target="_blank">
-                                            <img src="{{ asset($actor->photo_url) }}"/>
+                                            <img src="{{ $actor->photo_url ? asset($actor->photo_url) : asset('assets/images/photos/default-medium.jpg') }}"/>
 										</a>
 									</div>
 									<div class="tile-title">

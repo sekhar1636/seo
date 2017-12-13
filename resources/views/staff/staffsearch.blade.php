@@ -152,7 +152,7 @@
                                         <div class="tile-container">
                                             <div class="tile-thumbnail">
                                                 <a href="javascript:;">
-                                                    <img src="{{ $staff->photo_url }}" />
+                                                    <img src="{{ $staff->photo_url ? asset($staff->photo_url) : asset('assets/images/photos/default-medium.jpg') }}" />
                                                 </a>
                                             </div>
                                             <div class="tile-title">

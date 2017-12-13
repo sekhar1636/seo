@@ -170,7 +170,7 @@
                                         <div class="tile-container">
                                             <div class="tile-thumbnail">
                                                 <a href="javascript:;">
-                                                    <img src="{{ $theater->photo_url }}" />
+                                                    <img src="{{ $theater->photo_url ? asset($theater->photo_url) : asset('assets/images/photos/default-user-image.png') }}" />
                                                 </a>
                                             </div>
                                             <div class="tile-title">
