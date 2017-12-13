@@ -238,7 +238,7 @@
                 <div class="row">
                     <div class="actorContainer">
 					@foreach($actorList as $actor)
-                        @if(($actor->first_name)&&($actor->last_name)&&($actor->auditionType)&&($actor->from)&&($actor->to) != NULL && $actor->payment_status == 1 && $actor->instrument != '' && $actor->ethnicity != '' && $actor->technical != '' && $actor->dance != '' && $actor->phone_number != '' && $verify == 1 && \Auth::user()->email != '' && $actor->gender != '' && $actor->age != '' && $actor->vocalRange != '' && $actor->height != '' && $actor->weight != '' && $actor->hair != '' && $actor->eyes != '' && $actor->misc != '' && $actor->photo_path != '' && $actor->photo_url != '')
+                        @if(($actor->first_name)&&($actor->last_name)&&($actor->auditionType)&&($actor->from)&&($actor->to) != NULL && $actor->payment_status == 1 && $actor->instrument != '' && $actor->ethnicity != '' && $actor->technical != '' && $actor->dance != '' && $actor->phone_number != '' && $verify == 1 && $actor->email != '' && $actor->gender != '' && $actor->age != '' && $actor->vocalRange != '' && $actor->height != '' && $actor->weight != '' && $actor->hair != '' && $actor->eyes != '' && $actor->misc != '' && $actor->photo_path != '' && $actor->photo_url != '')
 
 						<div data-first-name="{{ strtolower($actor->first_name) }}" data-last-name="{{ strtolower($actor->last_name) }}" data-audition-type="{{ preg_replace('/\s+/', '', $actor->auditionType=="Song & Monologue" ? "Song-n-Monologue" : $actor->auditionType) }}" data-skill-vocal="{{ preg_replace('/\s+/', '', $actor->vocalRange) }}" class="mix {{
 
