@@ -69,7 +69,7 @@ class ActorController extends Controller
             'audition_status' => $audition,
             'resume' => $resume,
             'roles' => $roles,
-            'act' => $act
+            'act' => $act,
         ]);
     }
 
@@ -846,14 +846,16 @@ class ActorController extends Controller
     public function preview(){
         $actor = \App\Actor::where('user_id', \Auth::user()->id)->get();
         $audition_extra = AuditionExtra::where('user_id', \Auth::user()->id)->get();
-        return view('pdf.printapp')->with(['actor' => $actor, 'ae' => $audition_extra]);
+        $email = \Auth::user()->email;
+        return view('pdf.printapppreview')->with(['actor' => $actor, 'ae' => $audition_extra, 'email' => $email]);
     }
 
     public function pdf()
     {
         $actor = \App\Actor::where('user_id', \Auth::user()->id)->get();
         $audition_extra = AuditionExtra::where('user_id', \Auth::user()->id)->get();
-        $pdf = PDF::loadView('pdf.printapp', ['actor' => $actor, 'ae' => $audition_extra, 'but' => 'hidden']);
+        $email = \Auth::user()->email;
+        $pdf = PDF::loadView('pdf.printapp', ['actor' => $actor, 'ae' => $audition_extra, 'email' => $email]);
         //return $pdf->stream('pdf.invoice');
         return $pdf->download('test.pdf');
     }

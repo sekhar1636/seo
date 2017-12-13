@@ -247,7 +247,7 @@
                                                     <span class="timeline-body-alerttitle font-red">Photo And Resume</span>
                                                 </div>
                                                 <div class="timeline-body-head-actions">
-                                                       @if(\Auth::user()->payment_status == 1 && @$act->photo_path != '' && @$act->photo_url != '' && @$act->instrument != '' && @$act->ethnicity != '' && @$act->technical != '' && @$act->dance != '' && @$verify == 1)
+                                                    @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->instrument != '' && @$act->ethnicity != '' && @$act->technical != '' && @$act->dance != '' && @$act->phone_number != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->height != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->misc != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
 													   	<a href="{{ route('actor::actorPreview') }}" class="btn btn-primary">Print Application</a>
 													   @endif  
                                                 </div>

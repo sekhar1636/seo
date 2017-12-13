@@ -1,13 +1,35 @@
+@extends('common.layout')
+
+
+@section('content')
+<div class="page-content-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <style>
+                .breadcrumb{
+                    display: none;
+                }
+                hr{
+                    border-top: 1px solid black;
+                    background-color: black;
+                }
+                .portlet{
+                    width: 765px;
+                    margin:0 auto;
+                    font-size:12px;
+                    page-break-after: always;
+                }
+                .portlet:last-child{
+                    page-break-after: avoid;
+                }
+            </style>
+            <div class="portlet light portlet-fit ">
+                <div class="portlet-body">
 <h2 style="text-align: center;"><img src="{{ asset('assets/images/straw99.gif') }}" style="width:8%; height: 8%;"/> STRAWHAT AUDITIONS APPLICATION PRINT-OUT</h2>
 <p style="font-weight: bold;">Mail To: StrawHat Auditions, 1771 Post Road East #315, Westport, CT 06880</p>
 <p style="font-weight: bold;">Application Deadline: February 1st All Materials Must Be Received by Our Office as of Noon on This Date !</p>
-<style>
-    hr{
-        border-top: 1px solid black;
-        background-color: black;
-    }
-</style>
-<hr/>
+
+    <hr/>
 <table>
     <tr><td><h4 style="font-weight: bold; text-decoration: underline;">Contact Information</h4></td><td colspan="2"></td></tr>
     <tr><td colspan="1"><p><strong>First Name:</strong>&nbsp;{{ $actor[0]['first_name'] }} <strong>Last Name:</strong>&nbsp;{{ $actor[0]['last_name'] }}</p></td><td colspan="2"><p><strong>AUDITION AVAILABILITY:</strong>&nbsp;{{ $ae[0]['friday_m']==1 ? 'Friday Morning' : null.''.$ae[0]['friday_af']==1 ? 'Friday Afternoon' : null.''.$ae[0]['saturday_m']==1 ? 'Saturday Morning' : null.''.$ae[0]['saturday_af'] ? 'Saturday Afternoon' : null.''.$ae[0]['sunday_m'] ? 'Sunday Morning' : null.''.$ae[0]['sunday_af'] ? 'Sunday Afternoon' : null }}</p></td></tr>
@@ -36,3 +58,21 @@
     <tr><td colspan="3"><p>Date: ______________</p></td></tr>
     <tr><td colspan="3"><p>Signed and Acknowledged by: ________________________________________________________</p></td></tr>
 </table>
+                </div>
+
+            </div>
+            </div>
+
+        </div>
+    <div class="clearfix"></div>
+</div>
+<form method="get" action="{{ route('actor::actorPdf')}}">
+    <div class="col-md-3"></div>
+    <div class="col-md-5">
+        <button type="submit" class="btn btn-primary">Print Application</button>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ route('actor::actorProfile') }}" class="btn btn-danger">Back</a>
+    </div>
+</form>
+@endsection
