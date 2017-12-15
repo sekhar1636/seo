@@ -22,6 +22,11 @@ $(document).keypress(function (e) {
 @section('content')
 <div class="content box-setting">
     <div class="row">
+        <div class="col-md-6 hidden-md hidden-lg">
+            <p style="font-weight:bold">Terms And Conditions</p>
+            <p>By creating a profile on the StrawHat Auditions website, I certify that I have read the registration and application instructions fully and that the information in this application is truthful and correct. <span style="font-weight: bold;">I understand that payment of the registration fee does not guarantee that I will be scheduled for an audition, only that I will receive consideration for same, and that this registration fee is non-refundable.</span> I understand that StrawHat Auditions is not to be held responsible for any errors of omissions in the publication or reproduction of the materials I have supplied, nor are they liable for any damages arising out of or connected to the use or inability to use their web site, www.strawhat-auditions.com. I understand that StrawHat Auditions is not a licensed booking agent or manager, nor is it engaged in any way in the operation of a talent or employment agency. I do not expect StrawHat to obtain employment for me, but only to make the physical arrangements to facilitate my audition for potential theatrical employers. Any employment related transactions are solely between me and a theatrical employer with no commission or management fee due or payable to <i>StrawHat Auditions.</i></p>
+        </div>
+
       <div class="col-md-6">
             <!-- BEGIN LOGIN FORM -->
             <form method="post" class="login-form form-validate-auto">
@@ -84,7 +89,7 @@ $(document).keypress(function (e) {
                 </div>
             </form>
 </div>
-<div class="col-md-6">
+<div class="col-md-6 hidden-sm hidden-xs">
     <p style="font-weight:bold">Terms And Conditions</p>
     <p>By creating a profile on the StrawHat Auditions website, I certify that I have read the registration and application instructions fully and that the information in this application is truthful and correct. <span style="font-weight: bold;">I understand that payment of the registration fee does not guarantee that I will be scheduled for an audition, only that I will receive consideration for same, and that this registration fee is non-refundable.</span> I understand that StrawHat Auditions is not to be held responsible for any errors of omissions in the publication or reproduction of the materials I have supplied, nor are they liable for any damages arising out of or connected to the use or inability to use their web site, www.strawhat-auditions.com. I understand that StrawHat Auditions is not a licensed booking agent or manager, nor is it engaged in any way in the operation of a talent or employment agency. I do not expect StrawHat to obtain employment for me, but only to make the physical arrangements to facilitate my audition for potential theatrical employers. Any employment related transactions are solely between me and a theatrical employer with no commission or management fee due or payable to <i>StrawHat Auditions.</i></p>
 </div>
