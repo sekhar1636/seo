@@ -247,7 +247,10 @@ class StaffController extends Controller
     }
 
     public function getStaff(){
+        if(\Auth::check()){
 
+        if(\Auth::user()->payment_status==1)
+        {
         $staffs = \App\User::join('staff','staff.user_id', '=', 'users.id')
             ->where('payment_status',1)->orderBy('name', 'asc')
             ->get();
@@ -255,6 +258,11 @@ class StaffController extends Controller
             'staffs'=>$staffs,
             'staffactive' => 'active'
         ]);
+            }
+        }
+        else{
+            return redirect()->route('getIndex')->with('error_message','Not Authorised!!!!');
+        }
     }
 
     public function staffPhotoDelete(){

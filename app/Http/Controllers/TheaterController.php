@@ -478,6 +478,10 @@ class TheaterController extends Controller
     }
 
     public function getTheater(){
+        if(\Auth::check())
+        {
+            if(\Auth::user()->payment_status==1)
+            {
         $theaters = \App\User::join('theaters','theaters.user_id', '=', 'users.id')
             ->where('payment_status',1)->orderBy('name', 'asc')
             ->get();
@@ -486,6 +490,11 @@ class TheaterController extends Controller
             'theaters'=>$theaters,
             'theateractive' => 'active'
         ]);
+            }
+        }
+        else{
+            return redirect()->route('getIndex')->with('error_message','Not Authorised!!!');
+        }
     }
     /**for preparing data**/
     public static function prepareData($data){
