@@ -41,6 +41,27 @@ class StaticPageController extends Controller
             $active = 'moreactive';
         }
 
+        if($slug=="dreadedlist" || $slug=="gotanaudition" || $slug=="prepareforauditioninglist" || $slug=="postaudition"){
+            if(\Auth::check()){
+                if(\Auth::user()->payment_status == 1)
+                {
+                    return view('staticpage.content')->with([
+                        'description' => $desc,
+                        'title' => $title,
+                        'status' => $status,
+                        'divactive' => 'active',
+                        'staticactive' => $active
+                    ]);
+                }
+                else{
+                    return redirect()->route('getIndex')->with('error_message','Sorry!');
+                }
+            }
+            else{
+                return redirect()->route('getIndex')->with('error_message','Sorry!');
+            }
+        }
+
         return view('staticpage.content')->with([
             'description' => $desc,
             'title' => $title,
