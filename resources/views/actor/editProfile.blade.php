@@ -662,7 +662,7 @@
 
                                                                     <div class="col-md-9">
 
-                                                                        {!! Form::text('school', @$actor[0]['school'], ['class' => 'form-control', 'placeholder' => 'School', 'required'=>'required','maxlength'=>'150', 'minlength'=>'3']) !!}
+                                                                        {!! Form::text('school', @$actor[0]['school'], ['class' => 'form-control', 'placeholder' => 'School','maxlength'=>'150', 'minlength'=>'3']) !!}
 
                                                                         <span class="help-block"> {{ $errors->first("school") }} </span>
 
@@ -691,7 +691,7 @@
 
                                                                     <div class="col-md-9">
 
-                                                                        {!! Form::select('auditionType',['' => 'Select Audition Type'] +App\Misc::$auditionType, @$actor[0]['auditionType'], ['in' => 'App\Misc::$auditionType',  'required' => 'required',  'class' => 'form-control  account-type-select']) !!}
+                                                                        {!! Form::select('auditionType',['' => 'Select Audition Type'] +App\Misc::$auditionType, @$actor[0]['auditionType'], ['in' => 'App\Misc::$auditionType', 'class' => 'form-control  account-type-select']) !!}
 
                                                                         <span class="help-block"> {{ $errors->first("auditionType") }} </span>
 

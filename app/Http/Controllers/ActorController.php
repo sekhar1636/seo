@@ -182,7 +182,7 @@ class ActorController extends Controller
                 'hair'=>'required|max:20',
                 'eyes'=>'required|max:20',
                 'weight'=>'required|max:4',
-                'school' => "required|max:150|min:3",
+                //'school' => "required|max:150|min:3",
                 'auditionType'=>'required',
                 'vocalRange'=>'required',
                 //'jobType'=>'required',
