@@ -345,7 +345,7 @@
                                         <div class="tab-pane {{  (Session::has('tabactive') ? '' : 'active') }}" id="tab_1_1">
                                             <div class="portlet-body form">
                                                 <!-- BEGIN FORM-->
-                                                <form method="POST" class="form-horizontal form-validate-auto" enctype="multipart/form-data">
+                                                <form method="POST" class="form-horizontal" enctype="multipart/form-data">
                                                     {{csrf_field()}}
                                                     <div class="form-body">
                                                         <h3 class="form-section">Personal Information</h3>
@@ -357,11 +357,10 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <div class="form-group" {{ $errors->has("email") ? "has-error":"" }}>
+                                                            <div class="form-group">
                                                                 <label class="control-label col-md-3">Email</label>
                                                                 <div class="col-md-9">
-                                                                    {!! Form::text('email',isset($staff[0]['email']) ? $staff[0]['email'] : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'65']) !!}
-                                                                    <span class="help-block"> {{ $errors->first("email") }} </span>
+                                                                    {!! Form::text('email',isset($staff[0]['email']) ? $staff[0]['email'] : null, ['class' => 'form-control', 'placeholder' => ' Email', 'minlength'=>'3', 'maxlength'=>'65']) !!}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -374,12 +373,12 @@
 
                                                                     <div class="input-group input-large date-picker input-daterange"  data-date-format="dd/mm/yyyy">
 
-                                                                        {!! Form::text('from', \Carbon\Carbon::parse(@$staff[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required','readonly']) !!}
+                                                                        {!! Form::text('from', \Carbon\Carbon::parse(@$staff[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From','readonly']) !!}
 
 
                                                                         <span class="input-group-addon"> to </span>
 
-                                                                        {!! Form::text('to', \Carbon\Carbon::parse(@$staff[0]['to'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'required'=>'required','readonly']) !!}
+                                                                        {!! Form::text('to', \Carbon\Carbon::parse(@$staff[0]['to'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'readonly']) !!}
                                                                     </div>
 
                                                                     <!-- /input-group -->
@@ -398,7 +397,7 @@
 
                                                             <div class="col-md-9">
 
-                                                                {!! Form::select('primary_sought',['' => 'Select', 1 => 'Accompanist', 2 => 'Administration',3 => 'Box Office', 4 => 'Carpentry', 5 => 'Choreography', 6 => 'Costume Design', 7 => 'Sewing', 8 => 'Technical Director', 9 => 'Graphics', 10 => 'House Management', 11 => 'Lighting Design', 12 => 'Electrics', 13 => 'Director', 14 => 'Musical Director', 15 => 'Photography', 16 => 'Video', 17 => 'Props',18=>'Publicity',19=>'Running Crew',20=>'Scenic Artist',21=>'Set Design',22=>'Sound',23=>'State Management',24=>'Company Management'], @$staff[0]['primary_sought'] ? $staff[0]['primary_sought'] : '', ['required' => 'required',  'class' => 'form-control', 'id' => "primary_sought"]) !!}
+                                                                {!! Form::select('primary_sought',['' => 'Select', 1 => 'Accompanist', 2 => 'Administration',3 => 'Box Office', 4 => 'Carpentry', 5 => 'Choreography', 6 => 'Costume Design', 7 => 'Sewing', 8 => 'Technical Director', 9 => 'Graphics', 10 => 'House Management', 11 => 'Lighting Design', 12 => 'Electrics', 13 => 'Director', 14 => 'Musical Director', 15 => 'Photography', 16 => 'Video', 17 => 'Props',18=>'Publicity',19=>'Running Crew',20=>'Scenic Artist',21=>'Set Design',22=>'Sound',23=>'State Management',24=>'Company Management'], @$staff[0]['primary_sought'] ? $staff[0]['primary_sought'] : '', ['class' => 'form-control', 'id' => "primary_sought"]) !!}
 
                                                                 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
 
@@ -410,7 +409,7 @@
 
                                                             <div class="col-md-9">
 
-                                                                {!! Form::select('secondary_sought',['' => 'Select', 1 => 'Accompanist', 2 => 'Administration',3 => 'Box Office', 4 => 'Carpentry', 5 => 'Choreography', 6 => 'Costume Design', 7 => 'Sewing', 8 => 'Technical Director', 9 => 'Graphics', 10 => 'House Management', 11 => 'Lighting Design', 12 => 'Electrics', 13 => 'Director', 14 => 'Musical Director', 15 => 'Photography', 16 => 'Video', 17 => 'Props',18=>'Publicity',19=>'Running Crew',20=>'Scenic Artist',21=>'Set Design',22=>'Sound',23=>'State Management',24=>'Company Management'], @$staff[0]['secondary_sought'] ? $staff[0]['secondary_sought'] : '', ['required' => 'required',  'class' => 'form-control', 'id' => "secondary_sought"]) !!}
+                                                                {!! Form::select('secondary_sought',['' => 'Select', 1 => 'Accompanist', 2 => 'Administration',3 => 'Box Office', 4 => 'Carpentry', 5 => 'Choreography', 6 => 'Costume Design', 7 => 'Sewing', 8 => 'Technical Director', 9 => 'Graphics', 10 => 'House Management', 11 => 'Lighting Design', 12 => 'Electrics', 13 => 'Director', 14 => 'Musical Director', 15 => 'Photography', 16 => 'Video', 17 => 'Props',18=>'Publicity',19=>'Running Crew',20=>'Scenic Artist',21=>'Set Design',22=>'Sound',23=>'State Management',24=>'Company Management'], @$staff[0]['secondary_sought'] ? $staff[0]['secondary_sought'] : '', ['class' => 'form-control', 'id' => "secondary_sought"]) !!}
 
                                                                 <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
 

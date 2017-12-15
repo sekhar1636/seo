@@ -115,7 +115,7 @@ class StaffController extends Controller
 
     public function update(Request $request)
     {
-        $validator = \Validator::make($request->all(),
+        /*$validator = \Validator::make($request->all(),
             [
             ]);
         if ($validator->fails()) {
@@ -123,7 +123,7 @@ class StaffController extends Controller
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
-        }
+        }*/
         if($request->tes == "PUT"){
             $staff = Staff::where('user_id',\Auth::user()->id)->first();
         }
