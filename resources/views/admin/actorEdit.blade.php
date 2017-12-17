@@ -264,7 +264,7 @@ function initTable(tableId, data) {
                     <div class="profile-usertitle">
 
                         <div class="profile-usertitle-name"> {{$user->name}}</div>
-                        <div class="profile-usertitle-name"><a href="mailto:marco@webmdt.com"> {{$user->email}}</a></div>
+                        <div class="profile-usertitle-name"><a href="mailto:{{$user->email}}"> {{$user->email}}</a></div>
 
                     </div>
 
