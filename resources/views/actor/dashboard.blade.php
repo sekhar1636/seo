@@ -260,6 +260,33 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @elseif(@$hardcopy == 2)
+                                                                <div class="timeline-item">
+                                                                    <div class="timeline-badge">
+                                                                        <div class="timeline-icon">
+                                                                            <i class="icon-picture font-red"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="timeline-body inactiveBox">
+
+                                                                        <div class="timeline-body-head">
+                                                                            <div class="timeline-body-head-caption">
+                                                                                <span class="timeline-body-alerttitle font-red">Print Application</span>
+                                                                            </div>
+                                                                            <div class="timeline-body-head-actions">
+                                                                                @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->instrument != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->misc != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
+                                                                                    <a href="{{ route('actor::actorPreview') }}" class="btn btn-danger">Print Application</a>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Print Your Application Form
+                                            </span>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                     @endif
                                     @if(@$hardcopy==1 && @$hardcopy != 2)
                                         <div class="timeline-item">
