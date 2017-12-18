@@ -596,7 +596,7 @@
 
 
 
-                                                                        {!! Form::select('inch',[''=>'inch']+App\Misc::$inch, @$actor[0]['inch'], ['required' => 'required',  'class' => 'newSelect']) !!}
+                                                                        {!! Form::select('inch',App\Misc::$inch, @$actor[0]['inch'], ['required' => 'required',  'class' => 'newSelect']) !!}
 
 
                                                                         <span class="help-block"> {{ $errors->first("feet") }} </span>
