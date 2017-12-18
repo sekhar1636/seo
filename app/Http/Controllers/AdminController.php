@@ -1197,7 +1197,6 @@ class AdminController extends Controller
 		//return $request->all();
 		$validator = \Validator::make($request->all(),
             [
-                "price"=>"required",
 				'start_date' => "required",
 				'end_date' => "required",
                 'type' => "required",
@@ -1235,9 +1234,8 @@ class AdminController extends Controller
     }
 	
 	public function subscriptionUpdate(Request $request, $id){
-		$validator = \Validator::make($request->all(),
+	    $validator = \Validator::make($request->all(),
             [
-                "price"=>"required",
 				'start_date' => "required",
 				'end_date' => "required",
 				'name' => "required",
@@ -1253,6 +1251,7 @@ class AdminController extends Controller
 			$membershipPeriod = MembershipPeriod::findOrFail($id);
 			$membershipPeriod->name = $request->get('name');
 			$membershipPeriod->price = $request->get('price');
+			$membershipPeriod->type = $request->get('type');
 			$membershipPeriod->start_date = date("Y-m-d",strtotime($request->get('start_date')));
 			$membershipPeriod->end_date = date("Y-m-d",strtotime($request->get('end_date')));
 			$membershipPeriod->status = $request->get('status');

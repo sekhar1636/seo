@@ -466,11 +466,11 @@ class StaffController extends Controller
                 ->withInput();
         }
 
-        $description = "";
-        $totalPrice = 0;
+       // $description = "";
+        //$totalPrice = 0;
         $membershipPeriod = MembershipPeriod::findOrFail($request->subscription);
-        $totalPrice = $totalPrice + $membershipPeriod->price;
-        $description.= "StrawHat Subscription\nPlan: ".$membershipPeriod->name." Price: ".$membershipPeriod->price;
+        //$totalPrice = $totalPrice + $membershipPeriod->price;
+        //$description.= "StrawHat Subscription\nPlan: ".$membershipPeriod->name." Price: ".$membershipPeriod->price;
         /*$size = sizeof($request->products);
 
         if($request->products)
@@ -489,7 +489,7 @@ class StaffController extends Controller
             }
         }*/
 
-        $totalPrice = $totalPrice*100;
+       /* $totalPrice = $totalPrice*100;
         \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $result = \Stripe\Charge::create(array(
             "amount" => $totalPrice,
@@ -497,23 +497,18 @@ class StaffController extends Controller
             "receipt_email" => \Auth::user()->email,
             "source" => $request->token,
             "description" => $description
-        ));
-
-        if(!isset($result->status)){
-            return redirect()->back()->with('error_message', 'Something went wrong. Error:'.$result->type);
-        }else{
-            $membership = new Membership;
+        ));*/$membership = new Membership;
             $membership->membership_period_id = $membershipPeriod->id;
             $membership->user_id = \Auth::user()->id;
             $membership->save();
 
             //save the payment details for subscription
-            $payment = new Payment;
+           /* $payment = new Payment;
             $payment->user_id = \Auth::user()->id;
             $payment->transaction_id = $result->id;
             $payment->membership_period_id = $membershipPeriod->id;
             $payment->price = $membershipPeriod->price;
-            $payment->save();
+            $payment->save(); */
 
             //subscription table
             $subes = SubscriptionPackage::where('user_id',\Auth::user()->id)->get();
@@ -523,7 +518,7 @@ class StaffController extends Controller
 
                 if (!empty($sub)) {
                     $sub->name = $membershipPeriod->name;
-                    $sub->stripe_id = $result->id;
+                    $sub->stripe_id = "due to staff";
                     $sub->stripe_plan = $membershipPeriod->type;
                     $sub->quantity = 1;
                     $sub->trial_ends_at = $membershipPeriod->start_date;
@@ -538,7 +533,7 @@ class StaffController extends Controller
                 $stripe_sub = new SubscriptionPackage;
                 $stripe_sub->user_id = \Auth::user()->id;
                 $stripe_sub->name = $membershipPeriod->name;
-                $stripe_sub->stripe_id = $result->id;
+                $stripe_sub->stripe_id = "due to staff";
                 $stripe_sub->stripe_plan = $membershipPeriod->type;
                 $stripe_sub->quantity = 1;
                 $stripe_sub->trial_ends_at = $membershipPeriod->start_date;
@@ -572,7 +567,7 @@ class StaffController extends Controller
                 }
             }*/
             return redirect()->route('staff::staffProfile')->with('success_message', 'Successfully subscribed.');
-        }
+
     }
     /*public function staffoaddownl($id){
         $user = User::Findorfail($id);

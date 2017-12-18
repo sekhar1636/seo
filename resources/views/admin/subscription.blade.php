@@ -42,6 +42,24 @@ $(document).ready(function() {
     $(this).datepicker({
 	});
 });
+    $('#staff_price').hide();
+    $('#staff_select').on('change', function(){
+        var find = $('#staff_select').val();
+        if(find == 'Staff'){
+            $('#staff_price').hide();
+            $('#price').val("0");
+        }
+        else {
+            $('#staff_price').show();
+        }
+    });
+    $('#sub_id').click(function(){
+       var find = $('#staff_select').val();
+       if(find == 'Staff')
+       {
+           $('#price').val("0");
+       }
+    });
 });
 </script> 
 @endsection
@@ -105,16 +123,16 @@ $(document).ready(function() {
                     </div>
                     
                     <!-- input Area -->
-                    <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}"> {{ Form::label('price', 'Price', ['class' => 'col-lg-2 control-label']) }}
-                      <div class="col-lg-10"> {{ Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Enter Price','required'=>'required']) }}
+                    <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}" id="staff_price"> {{ Form::label('price', 'Price', ['class' => 'col-lg-2 control-label']) }}
+                      <div class="col-lg-10"> {{ Form::text('price', null, ['class' => 'form-control','id' => 'price', 'placeholder' => 'Enter Price','required'=>'required']) }}
                         <p class="help-block">{{ $errors->first('price', ':message') }}</p>
                       </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                    <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}" >
                       {{ Form::label('type_lab', 'Type', ['class' => 'col-lg-2 control-label'] )  }}
                       <div class="col-lg-10">
-                        {{  Form::select('type', ['Actor'=>'Actor', 'Theater'=>'Theater', 'Staff' => 'Staff'],null, array('class' => 'form-control', 'placeholder'=>'Select Type', 'required'=>'required')) }}
+                        {{  Form::select('type', ['Actor'=>'Actor', 'Theater'=>'Theater', 'Staff' => 'Staff'],null, array('class' => 'form-control', 'placeholder'=>'Select Type', 'id' => 'staff_select', 'required'=>'required')) }}
                         <p class="help-block">{{ $errors->first('type', ':message') }}</p>
                       </div>
                     </div>
@@ -134,7 +152,7 @@ $(document).ready(function() {
                     
                     <!-- Submit Button -->
                     <div class="form-group">
-                      <div class="col-lg-10 col-lg-offset-2"> {{ Form::submit('Add Plan', ['class' => 'btn btn-lg btn-info pull-right'] ) }} </div>
+                      <div class="col-lg-10 col-lg-offset-2"> {{ Form::submit('Add Plan', ['class' => 'btn btn-lg btn-info pull-right', 'id' => 'sub_id'] ) }} </div>
                     </div>
                     {{ Form::close() }} </div>
                   <!-- END TAB --> 
