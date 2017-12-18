@@ -204,18 +204,23 @@ class ActorController extends Controller
 
         if($request->tes == "PUT")
         {
-            $actor = Actor::where('user_id',\Auth::user()->id)->first();
+            $id = \Auth::user()->id;
+            $actor = Actor::where('user_id',$id)->first();
+
         }
         else
         {
             $actor = new Actor;
-
         }
 
         $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
         $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
 
-        $actor->user_id = \Auth::user()->id;
+        $id = \Auth::user()->id;
+        $user = User::findorfail($id);
+        $user->name = $request->get('display_name');
+        $user->save();
+        $actor->user_id = $id;
         $actor->first_name = $request->get('first_name');
         $actor->last_name = $request->get('last_name');
         $actor->age = $request->get('age');

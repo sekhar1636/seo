@@ -123,7 +123,12 @@ class TheaterController extends Controller
             $theater = new Theater;
         }
 
-        $theater->user_id = \Auth::user()->id;
+        $id = \Auth::user()->id;
+        $user = User::findorfail($id);
+        $user->name = $request->get('display_name');
+        $user->save();
+
+        $theater->user_id = $id;
         $theater->company_name = $request->company_name;
         $theater->email = $request->email;
         $theater->contact_number = $request->contact_number;

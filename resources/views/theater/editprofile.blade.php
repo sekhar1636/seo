@@ -362,8 +362,16 @@
                                                         @endif
 
 
-
-
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3"><strong>Display Name</strong></label>
+                                                                    <div class="col-md-9">
+                                                                    {!! Form::text('display_name',\Auth::user()->name ? \Auth::user()->name : null, ['class' => 'form-control', 'placeholder' => 'Display Name']) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
 
                                                         <div class="row">
 

@@ -135,7 +135,12 @@ class StaffController extends Controller
         $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
         $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
 
-        $staff->user_id = \Auth::user()->id;
+        $id = \Auth::user()->id;
+        $user = User::findorfail($id);
+        $user->name = $request->get('display_name');
+        $user->save();
+
+        $staff->user_id = $id;
         $staff->email = $request->email;
         $staff->from = $from_date;
         $staff->to = $to_date;
