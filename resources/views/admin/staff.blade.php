@@ -435,6 +435,20 @@
                                                         @endif
 
                                                         <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group {{ $errors->has("display_name") ? "has-error":"" }}">
+                                                                    <label class="control-label col-md-3">Display Name</label>
+                                                                    <div class="col-md-9">
+                                                                        {!! Form::text('display_name',$user->name ? $user->name : null, ['class' => 'form-control', 'placeholder' => 'Display Name']) !!}
+
+                                                                        <span class="help-block"> {{ $errors->first("display_name") }} </span>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group" {{ $errors->has("email") ? "has-error":"" }}'>

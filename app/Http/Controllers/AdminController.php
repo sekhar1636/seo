@@ -591,7 +591,9 @@ class AdminController extends Controller
         }else{
             $actor = new \App\Actor;
         }
-        	
+        $user = findorfail($id);
+        $user->name = $request->get('display_name');
+        $user->save();
     	$actor->user_id = $id;
         $actor->first_name = $request->get('first_name');
         $actor->last_name = $request->get('last_name');
@@ -647,7 +649,9 @@ class AdminController extends Controller
         }else{
             $theater = new Theater;
         }
-
+        $user = findorfail($id);
+        $user->name = $request->get('display_name');
+        $user->save();
         $theater->user_id = $id;
         $theater->company_name = $request->company_name;
         $theater->email = $request->email;
@@ -721,7 +725,9 @@ class AdminController extends Controller
 
         $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
         $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
-
+        $user = findorfail($id);
+        $user->name = $request->get('display_name');
+        $user->save();
         $staff->user_id = $id;
         $staff->email = $request->email;
         $staff->from = $from_date;
