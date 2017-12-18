@@ -116,18 +116,19 @@ class Misc
 	];
 
 	public static $inch = [
-		'1' => '1 inches',
-		'2' => '2 inches',	
-		'3' => '3 inches',	
-		'4' => '4 inches',	
-		'5' => '5 inches',	
-		'6' => '6 inches',	
-		'7' => '7 inches',	
-		'8' => '8 inches',	
-		'9' => '9 inches',	
-		'10' => '10 inches',	
-		'11' => '11 inches',	
-		'12' => '12 inches',		
+	    '0' => '0 inch',
+		'1' => '1 inch',
+		'2' => '2 inches',
+		'3' => '3 inches',
+		'4' => '4 inches',
+		'5' => '5 inches',
+		'6' => '6 inches',
+		'7' => '7 inches',
+		'8' => '8 inches',
+		'9' => '9 inches',
+		'10' => '10 inches',
+		'11' => '11 inches',
+		'12' => '12 inches',
 	];
 
 	public static $genders = [
