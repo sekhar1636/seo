@@ -247,7 +247,7 @@
                                                     <span class="timeline-body-alerttitle font-red">Photo And Resume</span>
                                                 </div>
                                                 <div class="timeline-body-head-actions">
-                                                    @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->instrument != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->misc != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
+                                                    @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
 													   	<a href="{{ route('actor::actorPreview') }}" class="btn btn-primary">Print Application</a>
 													   @endif  
                                                 </div>
@@ -274,7 +274,7 @@
                                                                                 <span class="timeline-body-alerttitle font-red">Print Application</span>
                                                                             </div>
                                                                             <div class="timeline-body-head-actions">
-                                                                                @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->instrument != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->misc != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
+                                                                                @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
                                                                                     <a href="{{ route('actor::actorPreview') }}" class="btn btn-danger">Print Application</a>
                                                                                 @endif
                                                                             </div>
