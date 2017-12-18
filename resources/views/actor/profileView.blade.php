@@ -58,7 +58,7 @@
                                    
                                     </p>
                                         <b>Height : </b>
-                                        {{ @$actor->actor->feet ? $actor->actor->feet : ''}}'{{ @$actor->actor->feet ? $actor->actor->feet : ''}}"
+                                        {{ @$actor->actor->feet ? $actor->actor->feet : ''}}'{{ @$actor->actor->inch ? $actor->actor->inch : ''}}"
                                         <b>Weight : </b>
                                         {{ @$actor->actor->weight ? $actor->actor->weight : ''}} lbs
                                       
