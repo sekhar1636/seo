@@ -1429,6 +1429,17 @@ class AdminController extends Controller
 
     }
 
+    public function static_create(Request $request){
+	    $static_page = new StaticPage;
+	    $static_page->slug = $request->slug;
+	    $static_page->page_description = $request->description;
+	    $static_page->status = $request->status;
+	    $static_page->page_title = $request->title;
+	    $static_page->save();
+
+	    return redirect()->back()->with('success_message', 'Page Created Successfully');
+    }
+
     public function auditionedit($id)
     {
         $auditionEdit = User::findorfail($id);

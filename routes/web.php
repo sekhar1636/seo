@@ -192,6 +192,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::patch('product/{id}', ['as'=>'adminProductUpdate', 'uses'=>'AdminController@productUpdate']);
 			Route::get('product/{id}/deleteproduct', ['as'=>'adminProductDelete', 'uses'=>'AdminController@productDestroy']);
 
+			Route::post('/content/create',['as'=>'createStaticPage','uses'=>'AdminController@static_create']);
 			Route::get('/content/{slug}',['as'=>'getStaticPage','uses'=>'StaticPageController@index']);
             Route::get('/content/{slug}/edit',['as'=>'staticPageEdit', 'uses'=>'StaticPageController@edit']);
             Route::post('/content/{slug}',['as'=>'updateStaticPage','uses'=>'StaticPageController@update']);
