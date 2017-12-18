@@ -491,6 +491,9 @@ class TheaterController extends Controller
             'theateractive' => 'active'
         ]);
             }
+            else{
+                return redirect()->route('getStaticPage',['slug' => 'theater'])->with('error_message','Sorry');
+            }
         }
         else{
             return redirect()->route('getIndex')->with('error_message','Not Authorised!!!');

@@ -583,7 +583,7 @@
                             </div>
                         </div>
                         <div class="row">
-                        <label class="col-md-12">Representatives who will attend StrawHat: (List more on reverse side if necessary)</label>
+                        <label class="col-md-12">Representatives who will attend StrawHat:</label>
                         <div class="col-md-12">
                             <table class="col-md-12">
                             <th>

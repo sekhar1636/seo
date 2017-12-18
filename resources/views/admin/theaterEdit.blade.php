@@ -487,7 +487,7 @@
 
                                                     <div class="col-md-9">
 
-                                                        {!! Form::text('email',isset($theater->email) ? $theater->email : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'65']) !!}
+                                                        {!! Form::text('email',isset($theater->email) ? $theater->email : null, ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'150']) !!}
 
                                                         <span class="help-block"> {{ $errors->first("email") }} </span>
 
@@ -694,7 +694,7 @@
             <div class="form-group" {{ $errors->has("dancers") ? "has-error":"" }}'>
             <label class="control-label col-md-6"><strong>Email to send the videos</strong></label>
             <div class="col-md-6">
-                {!! Form::text('email_videos',isset($theater->email_videos) ? $theater->email_videos : null , ['class' => 'form-control', 'placeholder' => 'Email to send Videos', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
+                {!! Form::text('email_videos',isset($theater->email_videos) ? $theater->email_videos : null , ['class' => 'form-control', 'placeholder' => 'Email to send Videos', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'250']) !!}
             </div>
             </div>
     </div>

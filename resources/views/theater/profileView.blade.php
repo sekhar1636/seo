@@ -42,7 +42,8 @@
                                         </p>
                                         <a href="mailto:{{$theater->email}}">{{$theater->email}} </a>
                                         </p>
-
+                                        <p>
+                                            <a href="mailto:{{$theater->email_videos}}">{{$theater->email_videos}}</a>
                                         </p>
 
                                         <p>
