@@ -631,7 +631,7 @@
 
                                                                     <div class="col-md-9">
 
-                                                                        {!! Form::select('ethnicity[]',App\Misc::$ethnicity, isset($actor[0]['ethnicity']) ? $actor[0]['ethnicity'] : null, ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+                                                                        {!! Form::select('ethnicity[]',App\Misc::$ethnicity, isset($actor[0]['ethnicity']) ? explode(',',$actor[0]['ethnicity']) : null, ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
 
                                                                         <span class="help-block"> {{ $errors->first("ethnicity") }} </span>
 
