@@ -175,10 +175,10 @@
                                             </div>
                                             <div class="tile-title">
                                                 <h3>
-                                                    <a href="javascript:;">{{ count($theater->company_name)>20 ? substr($theater->company_name,0,20)."..." : $theater->company_name }}</a>
+                                                    <a href="javascript:;">{{ strlen($theater->company_name)>20 ? substr($theater->company_name,0,20)."..." : $theater->company_name }}</a>
                                                 </h3>
 
-                                                <a href="{{route('getTheaterView', $theater->user_id) }}" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> {{ substr($theater->company_name,0,20)."..." }} </a>
+                                                <a href="{{route('getTheaterView', $theater->user_id) }}" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> {{ strlen($theater->company_name)>20 ? substr($theater->company_name,0,20)."..." : $theater->company_name }} </a>
                                             </div>
                                         </div>
                                     </div>
