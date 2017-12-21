@@ -10,6 +10,8 @@ use Input;
 use Session;
 use Socialite;
 use Validator;
+use Carbon\Carbon;
+use App\User;
 
 class PasswordController extends Controller
 {
@@ -37,15 +39,24 @@ class PasswordController extends Controller
             \Mail::send('email.forgot', ['id'=>$user->id,'token'=> $user->remember_token,'name'=>$user->username ], function ($m) use ($user) {
                 $m->to($user->email)->subject('Reset Password');
             });
+            $expiretime = Carbon::now()->addHours(4);
+            $starttime = Carbon::now();
+            $inj_user = User::findorfail($user->id);
+            $inj_user->forgot_start = $starttime;
+            $inj_user->forgot_end = $expiretime;
+            $inj_user->update();
+            //dd($starttime->toDateTimeString(). $expiretime->toDateTimeString());
             return redirect()->back()->with('success_message', 'Please check email to reset password');
         } catch (Exception $e) {
             return redirect()->back()->with('error_message', 'Unable to send forgot email please wait.');
         }
     }
 
-    public function getReset($id, $token){
-        $expire = \App\User::where('id', $id)->where('remember_token', $token)->count();
-        if($expire == 0 || $expire == ''){
+    public function getReset($id){
+        $expire = \App\User::where('id', $id)->first();
+        $exptime = $expire->forgot_end;
+        $currenttime = Carbon::now();
+        if($currenttime > $exptime){
             return redirect()->route('getLogin')->with('error_message', 'Reset password link expired.');
         }
         return view('common.reset');
