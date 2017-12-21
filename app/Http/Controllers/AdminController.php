@@ -345,7 +345,7 @@ class AdminController extends Controller
 		return Datatables::of($users)
             ->addColumn('action', function ($user) {
                 $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-				$action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+				$action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')" ><i class="glyphicon glyphicon-trash"></i> Delete</a>';
 				return $action;
             })
 			->editColumn('status', function ($user) {
@@ -370,7 +370,7 @@ class AdminController extends Controller
         return Datatables::of($users)
             ->addColumn('action', function ($user) {
                 $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-                $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger del" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')" ><i class="glyphicon glyphicon-trash del"></i> Delete</a>';
                 return $action;
             })
             ->editColumn('status', function ($user) {
@@ -412,7 +412,7 @@ class AdminController extends Controller
 
         return Datatables::of($users)->addColumn('action', function($user){
             $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-            $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"  onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
             return $action;
         })->editColumn('status', function ($user) {
             return ($user->status)? "Active" : "De-Activated";
@@ -433,7 +433,7 @@ class AdminController extends Controller
 
         return Datatables::of($users)->addColumn('action', function($user){
             $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-            $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
             return $action;
         })->editColumn('status', function ($user) {
             return ($user->status)? "Active" : "De-Activated";
