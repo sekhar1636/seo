@@ -45,7 +45,7 @@ class PasswordController extends Controller
 
     public function getReset($id, $token){
         $expire = \App\User::where('id', $id)->where('remember_token', $token)->count();
-        if($expire == 0){
+        if($expire == 0 || $expire == ''){
             return redirect()->route('getLogin')->with('error_message', 'Reset password link expired.');
         }
         return view('common.reset');
