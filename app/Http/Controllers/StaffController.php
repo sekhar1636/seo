@@ -497,10 +497,21 @@ class StaffController extends Controller
             "receipt_email" => \Auth::user()->email,
             "source" => $request->token,
             "description" => $description
-        ));*/$membership = new Membership;
-            $membership->membership_period_id = $membershipPeriod->id;
-            $membership->user_id = \Auth::user()->id;
-            $membership->save();
+        ));*/
+
+            $memb = Membership::where('user_id',\Auth::user()->id)->first();
+            if(count($memb))
+            {
+                $memb->membership_period_id = $membershipPeriod->id;
+                $memb->update();
+            }
+            else
+                {
+                    $membership = new Membership;
+                    $membership->membership_period_id = $membershipPeriod->id;
+                    $membership->user_id = \Auth::user()->id;
+                    $membership->save();
+                }
 
             //save the payment details for subscription
            /* $payment = new Payment;
