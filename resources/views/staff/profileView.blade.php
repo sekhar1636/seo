@@ -30,7 +30,7 @@
                             <div class="col-md-3">
                                 <ul class="list-unstyled profile-nav">
                                     <li>
-                                        <img src="{{isset($staff->staff->photo_url) ? ($staff->staff->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
+                                        <img src="{{isset($staff->staff->photo_url) ? asset($staff->staff->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
 
                                     </li>
                                 </ul>

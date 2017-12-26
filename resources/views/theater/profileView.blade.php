@@ -30,7 +30,7 @@
                             <div class="col-md-3">
                                 <ul class="list-unstyled profile-nav">
                                     <li>
-                                        <img src="{{isset($theater->theater->photo_url) ? ($theater->theater->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
+                                        <img src="{{isset($theater->theater->photo_url) ? asset($theater->theater->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
 
                                     </li>
                                 </ul>
