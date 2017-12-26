@@ -163,7 +163,7 @@
 
                                                     <div class="timeline-body-head">
                                                         <div class="timeline-body-head-caption">
-                                                            <span class="timeline-body-alerttitle font-green">Payment</span>
+                                                            <span class="timeline-body-alerttitle font-green">Subscription</span>
 
                                                         </div>
                                                         <div class="timeline-body-head-actions">
@@ -171,7 +171,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="timeline-body-content">
-                                            <span class="font-grey-cascade"> Payment Completed
+                                            <span class="font-grey-cascade"> Subscription Completed
 
                                             </span>
                                                     </div>
@@ -190,15 +190,15 @@
 
                                             <div class="timeline-body-head">
                                                 <div class="timeline-body-head-caption">
-                                                    <span class="timeline-body-alerttitle font-red-intense">Payment</span>
+                                                    <span class="timeline-body-alerttitle font-red-intense">Subscription</span>
 
                                                 </div>
                                                 <div class="timeline-body-head-actions">
-                                                    <a href="{{route('staff::getStaffPayment')}}" class="btn btn-danger">Pay Now</a>
+                                                    <a href="{{route('staff::getStaffPayment')}}" class="btn btn-danger">Subscribe Now</a>
                                                 </div>
                                             </div>
                                             <div class="timeline-body-content">
-                                            <span class="font-grey-cascade"> Payment Pending
+                                            <span class="font-grey-cascade"> Subscription Pending
 
                                             </span>
                                             </div>
