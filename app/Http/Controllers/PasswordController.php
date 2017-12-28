@@ -61,7 +61,7 @@ class PasswordController extends Controller
         }
         return view('common.reset');
     }
-    public function postReset(Request $request,$id, $token){
+    public function postReset(Request $request,$id){
         $validator = Validator::make($request->all(),
             [
                 'password' => "required|min:6|max:15",
@@ -75,7 +75,7 @@ class PasswordController extends Controller
                 ->with('error_message', 'Invalid data please provide complete data.')
                 ->withInput(\Input::except('password'));
         }
-        $user = \App\User::where('id', $id)->where('remember_token', $token)->first();
+        $user = \App\User::where('id', $id)->first();
         if($user){
             $user->password = bcrypt($request->get('password'));
             $user->remember_token = str_random(60);

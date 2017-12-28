@@ -28,8 +28,8 @@ Route::get('/content/{slug}', ['as'=>'getStaticPage', 'uses'=>'StaticPageControl
 
 Route::get('/forgot', ['as' => 'getForgot', 'uses' =>  "PasswordController@getForgot"]);
 Route::post('/forgot', ['uses' =>  "PasswordController@postForgot"]);
-Route::get('reset/{id}/{token}', ['as'=>'getReset', 'uses'=>'PasswordController@getReset']);
-Route::post('reset/{id}/{token}', ['as'=>'postReset','uses'=>'PasswordController@postReset']);
+Route::get('reset/{id}', ['as'=>'getReset', 'uses'=>'PasswordController@getReset']);
+Route::post('reset/{id}', ['as'=>'postReset','uses'=>'PasswordController@postReset']);
 
 Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
 Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@view']);
