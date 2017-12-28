@@ -164,7 +164,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('staff/{id}/photo', ['as'=>'staffPhotoUpdate', 'uses'=>'AdminController@staffPhotoUpdate']);
             Route::post('theater/{id}/cropPhoto', ['as'=>'staffCropPhoto', 'uses'=>'AdminController@poststaffCropPhotoUpdate']);
             Route::get('staff/{id}/deletePhoto', ['as'=>'staffPhotoDelete', 'uses'=>'AdminController@staffPhotoDelete']);
-            Route::post('staff/portfolio/{id}',['as'=>'adminStaffUpdate','uses'=>'AdminController@portfolioupdate']);
+            Route::post('staff/portfolio/{id}',['as'=>'adminStaffportfolioUpdate','uses'=>'AdminController@portfolioupdate']);
 
 
             Route::get('usersDataTable/', ['as'=>'adminUsersDataTable', 'uses'=>'AdminController@UsersDataTable']);

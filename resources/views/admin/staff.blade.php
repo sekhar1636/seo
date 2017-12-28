@@ -417,12 +417,7 @@
                                                         <h3 class="form-section">Personal Information</h3>
 
                                                         <div class="row">
-
-
-
-
-
-                                                        </div>
+               </div>
 
                                                         @if(isset($staff))
 
@@ -436,13 +431,10 @@
 
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <div class="form-group {{ $errors->has("display_name") ? "has-error":"" }}">
+                                                                <div class="form-group">
                                                                     <label class="control-label col-md-3">Display Name</label>
                                                                     <div class="col-md-9">
-                                                                        {!! Form::text('display_name',$user->name ? $user->name : null, ['class' => 'form-control', 'placeholder' => 'Display Name']) !!}
-
-                                                                        <span class="help-block"> {{ $errors->first("display_name") }} </span>
-
+                                                                        {!! Form::text('display_name',@$user->name ? $user->name : null, ['class' => 'form-control', 'placeholder' => 'Display Name']) !!}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -451,15 +443,13 @@
                                                         <div class="row">
 
                                                             <div class="col-md-6">
-                                                                <div class="form-group" {{ $errors->has("email") ? "has-error":"" }}'>
+                                                                <div class="form-group">
 
                                                                 <label class="control-label col-md-3">Email</label>
 
                                                                 <div class="col-md-9">
 
-                                                                    {!! Form::text('email',isset($staff->email) ? $staff->email : null , ['class' => 'form-control', 'placeholder' => 'E-Mail', 'required'=>'required', 'minlength'=>'3', 'maxlength'=>'20']) !!}
-
-                                                                    <span class="help-block"> {{ $errors->first("email") }} </span>
+                                                                    {!! Form::text('email',isset($staff->email) ? $staff->email : null , ['class' => 'form-control', 'placeholder' => 'E-Mail', 'minlength'=>'3']) !!}
 
                                                                 </div>
 
@@ -478,13 +468,13 @@
 
                                                                     <div class="input-group input-large date-picker input-daterange" data-date="2012/11/10" data-date-format="yyyy/mm/dd">
 
-                                                                        {!! Form::text('from', \Carbon\Carbon::parse(@$staff->from)->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required','readonly']) !!}
+                                                                        {!! Form::text('from', \Carbon\Carbon::parse(@$staff->from)->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From','readonly']) !!}
 
 
 
                                                                         <span class="input-group-addon"> to </span>
 
-                                                                        {!! Form::text('to', \Carbon\Carbon::parse(@$staff->to)->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'required'=>'required','readonly']) !!} </div>
+                                                                        {!! Form::text('to', \Carbon\Carbon::parse(@$staff->to)->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'readonly']) !!} </div>
 
                                                                     <!-- /input-group -->
 
@@ -833,7 +823,7 @@
     <!-- END CHANGE AVATAR TAB -->
 
                             <div class="tab-pane" id="tab_1_4">
-                                <form action="{{route('admin::adminStaffUpdate',$id)}}" class="form" method="POST">
+                                <form action="{{route('admin::adminStaffportfolioUpdate',$id)}}" class="form" method="POST">
                                     {{ Form::token() }}
 
                                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
