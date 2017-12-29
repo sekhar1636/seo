@@ -1,7 +1,5 @@
 @extends('common.layout')
-
 @section('title', 'Theater Profile')
-
 @section('style')
     <link href="{{asset('assets/pages/css/profile-2.min.css')}}" rel="stylesheet" type="text/css" />
     <style type="text/css">
@@ -10,9 +8,7 @@
         }
     </style>
 @endsection
-
 @section('js')
-
 @endsection
 @section('content')
     <!-- BEGIN PAGE CONTENT INNER -->
@@ -31,7 +27,6 @@
                                 <ul class="list-unstyled profile-nav">
                                     <li>
                                         <img src="{{isset($theater->theater->photo_url) ? asset($theater->theater->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
-
                                     </li>
                                 </ul>
                             </div>
@@ -45,7 +40,6 @@
                                         <p>
                                             <a href="mailto:{{$theater->email_videos}}">{{$theater->email_videos}}</a>
                                         </p>
-
                                         <p>
                                             <b>Non Musical Performer? </b>
                                             {{ \App\Misc::$view_musical_performers[$theater->theater->non_musical_yes] }}
@@ -53,14 +47,9 @@
                                         <p>
                                             <b>Casting Dancer? </b>
                                             {{\App\Misc::$view_casting_dancers[$theater->theater->dancer_yes]}}
-
                                         </p>
-
-
-
                                     </div>
                                     <!--end col-md-8-->
-
                                     <!--end col-md-4-->
                                 </div>
                                 <!--end row-->
@@ -69,7 +58,6 @@
                                         <li class="active">
                                             <a href="#tab_1_11" data-toggle="tab"> Job Listings</a>
                                         </li>
-
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab_1_11">
@@ -107,7 +95,6 @@
                                            </div>
                                        </div>
                                        <!--tab-pane-->
-
                                    </div>
                                </div>
                            </div>
@@ -115,11 +102,7 @@
                            <div class="portlet sale-summary">
                            <div class="portlet-title">
                                <div class="caption font-red sbold"> Personal Info </div>
-
-
-
                            </div>
-
                            <div class="portlet-body">
                                <ul class="list-unstyled">
                                    <li>
@@ -139,7 +122,6 @@
                                 <div class="portlet-title">
                                     <div class="caption font-red sbold"> Contact Info </div>
                                 </div>
-
                                 <div class="portlet-body">
                                     <ul class="list-unstyled">
                                         <li>
@@ -161,8 +143,6 @@
                         </div>
                     </div>
                     <!--tab_1_2-->
-
-
                 </div>
             </div>
         </div>

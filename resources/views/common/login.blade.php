@@ -1,12 +1,8 @@
-
 @extends('common.layout')
-
 @section('title', 'Login')
-
 @section('style')
 <link href="{{asset('assets/pages/css/login-3.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
-
 @section('js')
 <script type="text/javascript" src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/additional-methods.min.js')}}"></script>
@@ -43,7 +39,6 @@ $(document).keypress(function (e) {
                             <i class="fa fa-envelope"></i>
                         </span>
                         {!! Form::text('username', '', ['class' => 'form-control', 'placeholder' => ' Email', 'required'=>'required', 'email'=>'true']) !!}
-                        
                     </div>
                     <span class="help-block"> {{ $errors->first("username") }} </span>
                 </div>
@@ -58,7 +53,6 @@ $(document).keypress(function (e) {
                      <span class="help-block"> {{ $errors->first("password") }} </span>
                 </div>
                 <div class="form-actions">
-                    
                     <button type="submit" class="btn btn-primary pull-right"> Login </button>
                 </div>
               	<div class="clearfix"></div>

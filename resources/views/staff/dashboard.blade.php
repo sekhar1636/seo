@@ -1,8 +1,5 @@
-
 @extends('common.layout')
-
 @section('title', 'Staff Dashboard')
-
 @section('style')
     <style type="text/css">
         .activeBox{
@@ -13,10 +10,8 @@
         }
     </style>
 @endsection
-
 @section('js')
     <script src="{{asset('assets/apps/scripts/timeline.min.js')}}" type="text/javascript"></script>
-
 @endsection
 @section('content')
     <div class="page-content-inner">
@@ -39,13 +34,10 @@
                         <div class="caption">
                             <i class="icon-doc font-green"></i>
                             <span class="caption-subject bold font-green uppercase">Pending Tasks</span>
-
                         </div>
-
                     </div>
                     <div class="portlet-body">
                         <div class="col-md-7">
-
                             <div class="timeline">
                                 <!-- TIMELINE ITEM -->
                                 @if(@$verify == 0)
@@ -91,7 +83,6 @@
                                                     </div>
                                                     <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Profile Information Updated
-
                                             </span>
                                                     </div>
                                                 </div>
@@ -108,7 +99,6 @@
                                                     <div class="timeline-body-head">
                                                         <div class="timeline-body-head-caption">
                                                             <span class="timeline-body-alerttitle font-red-intense">Update Roles</span>
-
                                                         </div>
                                                         <div class="timeline-body-head-actions">
                                                             <a href="{{route('staff::getEditProfile',['#tab_1_5'])}}" class="btn btn-danger">Update</a>
@@ -116,7 +106,6 @@
                                                     </div>
                                                     <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Update profile information
-
                                             </span>
                                                     </div>
                                                 </div>
@@ -129,11 +118,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="timeline-body inactiveBox">
-
                                                     <div class="timeline-body-head">
                                                         <div class="timeline-body-head-caption">
                                                             <span class="timeline-body-alerttitle font-red-intense">Profile Information</span>
-
                                                         </div>
                                                         <div class="timeline-body-head-actions">
                                                             <a href="{{route('staff::getEditProfile')}}" class="btn btn-danger">Update</a>
@@ -141,7 +128,6 @@
                                                     </div>
                                                     <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Update profile information
-
                                             </span>
                                                     </div>
                                                 </div>
@@ -149,7 +135,6 @@
                                         @endif
                                     <!-- END TIMELINE ITEM -->
                                         <!-- TIMELINE ITEM -->
-
                                         <!-- END TIMELINE ITEM -->
                                         <!-- TIMELINE ITEM -->
                                         @if(\Auth::user()->payment_status == 1)
@@ -160,11 +145,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="timeline-body activeBox">
-
                                                     <div class="timeline-body-head">
                                                         <div class="timeline-body-head-caption">
                                                             <span class="timeline-body-alerttitle font-green">Subscription</span>
-
                                                         </div>
                                                         <div class="timeline-body-head-actions">
                                                             <a href="javascript:;" class="btn btn-success">Done</a>
@@ -172,7 +155,6 @@
                                                     </div>
                                                     <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Subscription Completed
-
                                             </span>
                                                     </div>
                                                 </div>
@@ -187,11 +169,9 @@
                                             </div>
                                         </div>
                                         <div class="timeline-body inactiveBox">
-
                                             <div class="timeline-body-head">
                                                 <div class="timeline-body-head-caption">
                                                     <span class="timeline-body-alerttitle font-red-intense">Subscription</span>
-
                                                 </div>
                                                 <div class="timeline-body-head-actions">
                                                     <a href="{{route('staff::getStaffPayment')}}" class="btn btn-danger">Subscribe Now</a>
@@ -199,19 +179,14 @@
                                             </div>
                                             <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Subscription Pending
-
                                             </span>
                                             </div>
                                         </div>
                                     </div>
-
-
                             </div>
                             <!-- END TIMELINE ITEM -->
                             @endif
-
                         </div>
-
                     </div>
                     <div class="clearfix"></div>
                 </div>

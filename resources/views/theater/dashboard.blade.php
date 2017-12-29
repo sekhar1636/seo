@@ -1,8 +1,5 @@
-
 @extends('common.layout')
-
 @section('title', 'Theater Dashboard')
-
 @section('style')
     <style type="text/css">
         .activeBox{
@@ -13,10 +10,8 @@
         }
     </style>
 @endsection
-
 @section('js')
     <!--<script src="//asset('assets/apps/scripts/timeline.min.js')}}" type="text/javascript"></script>-->
-
 @endsection
 @section('content')
     <div class="page-content-inner">
@@ -39,13 +34,10 @@
                         <div class="caption">
                             <i class="icon-doc font-green"></i>
                             <span class="caption-subject bold font-green uppercase">Pending Tasks</span>
-
                         </div>
-
                     </div>
                     <div class="portlet-body">
                         <div class="col-md-7">
-
                             <div class="timeline">
                                 <!-- TIMELINE ITEM -->
                                 @if(@$verify == 0)
@@ -91,7 +83,6 @@
                                                     </div>
                                                     <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Profile Information Updated
-
                                             </span>
                                                     </div>
                                                 </div>
@@ -108,7 +99,6 @@
                                                     <div class="timeline-body-head">
                                                         <div class="timeline-body-head-caption">
                                                             <span class="timeline-body-alerttitle font-red-intense">Profile Information</span>
-
                                                         </div>
                                                         <div class="timeline-body-head-actions">
                                                             <a href="{{route('theater::getEditProfile')}}" class="btn btn-danger">Update</a>
@@ -135,11 +125,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="timeline-body activeBox">
-
                                                     <div class="timeline-body-head">
                                                         <div class="timeline-body-head-caption">
                                                             <span class="timeline-body-alerttitle font-green">Payment</span>
-
                                                         </div>
                                                         <div class="timeline-body-head-actions">
                                                             <a href="javascript:;" class="btn btn-success">Done</a>
@@ -147,7 +135,6 @@
                                                     </div>
                                                     <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Payment Completed
-
                                             </span>
                                                     </div>
                                                 </div>
@@ -162,11 +149,9 @@
                                             </div>
                                         </div>
                                         <div class="timeline-body inactiveBox">
-
                                             <div class="timeline-body-head">
                                                 <div class="timeline-body-head-caption">
                                                     <span class="timeline-body-alerttitle font-red-intense">Payment</span>
-
                                                 </div>
                                                 <div class="timeline-body-head-actions">
                                                     <a href="{{route('theater::getTheaterPayment')}}" class="btn btn-danger">Pay Now</a>
@@ -174,19 +159,14 @@
                                             </div>
                                             <div class="timeline-body-content">
                                             <span class="font-grey-cascade"> Payment Pending
-
                                             </span>
                                             </div>
                                         </div>
                                     </div>
-
-
                             </div>
                             <!-- END TIMELINE ITEM -->
                             @endif
-
                         </div>
-
                     </div>
                     <div class="clearfix"></div>
                 </div>

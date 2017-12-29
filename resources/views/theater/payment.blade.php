@@ -1,19 +1,9 @@
 @extends('common.layout')
-
 @section('title', 'Theater Subscription')
-
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/css/formValidation.min.css')}}">
-    <style type="text/css">
-        .activeBox{
-            border:1px solid rgba(68,182,174,1);
-        }
-        .inactiveBox{
-            border:1px solid rgb(234, 190, 189);
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('assets/css/active.css')}}">
 @endsection
-
 @section('js')
     <script src="{{asset('assets/js/formValidation.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
@@ -22,10 +12,7 @@
         $(document).ready(function() {
             // Change the key to your one
             Stripe.setPublishableKey("<?php echo $_ENV['STRIPE_KEY']; ?>");
-
-
             $('.button-checkbox').each(function () {
-
                 // Settings
                 var $widget = $(this),
                     $button = $widget.find('button'),
@@ -39,7 +26,6 @@
                             icon: 'glyphicon glyphicon-unchecked'
                         }
                     };
-
                 // Event Handlers
                 $button.on('click', function () {
                     $checkbox.prop('checked', !$checkbox.is(':checked'));
@@ -49,19 +35,15 @@
                 $checkbox.on('change', function () {
                     updateDisplay();
                 });
-
                 // Actions
                 function updateDisplay() {
                     var isChecked = $checkbox.is(':checked');
-
                     // Set the button's state
                     $button.data('state', (isChecked) ? "on" : "off");
-
                     // Set the button's icon
                     $button.find('.state-icon')
                         .removeClass()
                         .addClass('state-icon ' + settings[$button.data('state')].icon);
-
                     // Update the button's color
                     if (isChecked) {
                         $button
@@ -74,12 +56,9 @@
                             .addClass('btn-default');
                     }
                 }
-
                 // Initialization
                 function init() {
-
                     updateDisplay();
-
                     // Inject the icon if applicable
                     if ($button.find('.state-icon').length == 0) {
                         $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
@@ -87,9 +66,6 @@
                 }
                 init();
             });
-
-
-
             $('#paymentForm')
                 .formValidation({
                     framework: 'bootstrap',
@@ -258,7 +234,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 @foreach($products as $product)
                                     <div class="form-group">
                                         <label class="col-xs-3 control-label">{{$product->name}}</label>
@@ -274,8 +249,6 @@
                                 <input type="checkbox" class="hidden" name="products[{{$product->id}}][proid]" value="{{$product->id}}" />
                             </span>
                                         </div>
-
-
                                     </div>
                                 @endforeach
                                 <div class="form-group">
@@ -307,7 +280,6 @@
                       <option value="10">October</option>
                       <option value="11">November</option>
                       <option value="12">December</option>
-                      
                       </select>
                                     </div>
                                     <?php
@@ -329,7 +301,6 @@
                                         <input type="text" class="form-control" data-stripe="cvc" name="cvv" />
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">Address</label>
                                     <div class="col-xs-5">
@@ -345,7 +316,6 @@
                                     <div class="col-xs-2">
                                         <input type="text" class="form-control" placeholder="Enter Zip Code" data-stripe="address_zip" />
                                     </div>
-
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">State</label>
@@ -362,8 +332,6 @@
                                         <input type="text" class="form-control" placeholder="Enter Country" data-stripe="address_country" />
                                     </div>
                                 </div>
-
-
                                 <div class="form-group">
                                     <div class="col-xs-9 col-xs-offset-3">
                                         <button type="submit" class="btn btn-primary">Subscribe</button>

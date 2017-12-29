@@ -5,14 +5,7 @@
 
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/css/formValidation.min.css')}}">
-<style type="text/css">
-    .activeBox{
-        border:1px solid rgba(68,182,174,1);
-    }
-    .inactiveBox{
-        border:1px solid rgb(234, 190, 189);
-    }
-</style>
+<link rel="stylesheet" href="{{asset('assets/css/active.css')}}">
 @endsection
 
 @section('js') 

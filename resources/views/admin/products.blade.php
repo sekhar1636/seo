@@ -1,23 +1,13 @@
- @extends('admin.layout')
-
-
-
+@extends('admin.layout')
 @section('title', 'Products')
-
-
-
 @section('style')
     <link href="{{asset('assets/css/datatables.bootstrap.css')}}" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
 @endsection
-
-
-
 @section('js')
     <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/js/datatables.bootstrap.js')}}"></script>
     <script src="{{asset('assets/js/handlebars.js')}}"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
 <script type="text/javascript">
 $('#products-table').DataTable({
@@ -33,7 +23,6 @@ $('#products-table').DataTable({
 			{data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
-
 $(document).ready(function() {
 	$('#editor').summernote({
 	  code : "{{ $errors->first('answer', ':message') }}",
@@ -44,24 +33,15 @@ $(document).ready(function() {
         var id = count;
         $('#varianttable').append('<tr><td>'+ '<input type="text" value="" name="varient['+id+'][name]">' +'</td><td>'+ '<input type="text" value="" name="varient['+id+'][price]">' +'</td><td><input type="button" id="rem['+id+']" value="remove" class="btn btn-xs btn-primary remove"/></td></tr>');
         count++;
-
     });
-
 	$('#varianttable').on('click','.remove',function(){
 	    $(this).parents('tr').remove();
     });
-
-
-
 });
 </script>
-
 @endsection
-
-@section('content') 
-
+@section('content')
 <!-- BEGIN PAGE CONTENT INNER -->
-
 <div class="page-content-inner">
   <div class="row">
     <div class="col-md-12"> 
@@ -71,9 +51,7 @@ $(document).ready(function() {
       <div class="alert alert-success {{{ Session::has('success_message') ? '' : 'display-hide' }}}">
         <button class="close" data-close="alert"></button>
         <span> {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!} </span> </div>
-      
       <!-- BEGIN CONTENT -->
-      
       <div class="profile-content">
         <div class="row">
           <div class="col-md-12">
@@ -101,13 +79,10 @@ $(document).ready(function() {
                   </thead>
                   </table>
                    </div>
-                  
-                  <!-- END TAB --> 
-                  
+                  <!-- END TAB -->
                   <!--TAB -->
                   <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2"> 
                   	{{ Form::open(['route' => 'admin::adminProductStore', 'class' => 'form-horizontal']) }}
-                    
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
                         {{ Form::label('name', 'Name', ['class' => 'col-lg-2 control-label']) }}
@@ -116,7 +91,6 @@ $(document).ready(function() {
                         <p class="help-block">{{ $errors->first('name', ':message') }}</p>
                         </div>
                     </div>
-                    
                     <!-- Text Area -->
                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                         {{ Form::label('description', 'Description', ['class' => 'col-lg-2 control-label']) }}
@@ -125,8 +99,6 @@ $(document).ready(function() {
                             <p class="help-block">{{ $errors->first('description', ':message') }}</p>
                         </div>
                     </div>
-
-                    
                     <!-- Select With One Default -->
                     <div class="form-group{{ $errors->has('_type') ? ' has-error' : '' }}">
                         {{ Form::label('status', 'Status', ['class' => 'col-lg-2 control-label'] )  }}
@@ -135,7 +107,6 @@ $(document).ready(function() {
                             <p class="help-block">{{ $errors->first('status', ':message') }}</p>
                         </div>
                     </div>
-
                         <div class="form-group{{ $errors->has('_type') ? ' has-error' : '' }}">
                         {{ Form::label('prvarent', 'Product Varient', ['class' => 'col-lg-2 control-label'] )  }}
                         <div class="col-lg-7">
@@ -158,11 +129,7 @@ $(document).ready(function() {
                             </table>
                         </div>
                     </div>
-
-
-
-                    
-                    <!-- Submit Button -->
+     <!-- Submit Button -->
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             {{ Form::submit('Add Product', ['class' => 'btn btn-lg btn-info pull-right'] ) }}
@@ -170,21 +137,16 @@ $(document).ready(function() {
                     </div>
                     {{ Form::close() }}
                   </div>
-                  <!-- END TAB --> 
-                  
+                  <!-- END TAB -->
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <!-- END CONTENT --> 
-      
+      <!-- END CONTENT -->
     </div>
   </div>
 </div>
-
-<!-- END PAGE CONTENT INNER --> 
-
+<!-- END PAGE CONTENT INNER -->
 @endsection

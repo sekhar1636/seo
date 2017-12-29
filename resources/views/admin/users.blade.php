@@ -1,18 +1,9 @@
- @extends('admin.layout')
-
-
-
+@extends('admin.layout')
 @section('title', 'Users')
-
-
-
 @section('style')
     <link href="{{asset('assets/css/datatables.bootstrap.css')}}" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
 @endsection
-
-
-
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
 <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
@@ -32,7 +23,6 @@ $('#faq-table').DataTable({
 			{data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
-
 $('#actor-table').DataTable({
     processing: true,
     serverSide: true,
@@ -60,7 +50,6 @@ $('#theater-table').DataTable({
         {data: 'action', name: 'action', orderable: false, searchable: false}
     ]
 });
-
 $('#staff-table').DataTable({
     processing: true,
     serverSide: true,
@@ -74,26 +63,16 @@ $('#staff-table').DataTable({
         {data: 'action', name: 'action', orderable: false, searchable: false}
     ]
 });
-
 $(document).ready(function() {
 	$('#editor').summernote({
 	  code : "{{ $errors->first('answer', ':message') }}",
 	  height:200,
 	});
-
-
-
-
-
 });
 </script>
-
 @endsection
-
-@section('content') 
-
+@section('content')
 <!-- BEGIN PAGE CONTENT INNER -->
-
 <div class="page-content-inner">
   <div class="row">
     <div class="col-md-12"> 
@@ -103,9 +82,7 @@ $(document).ready(function() {
       <div class="alert alert-success {{{ Session::has('success_message') ? '' : 'display-hide' }}}">
         <button class="close" data-close="alert"></button>
         <span> {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!} </span> </div>
-      
       <!-- BEGIN CONTENT -->
-      
       <div class="profile-content">
         <div class="row">
           <div class="col-md-12">
@@ -137,13 +114,10 @@ $(document).ready(function() {
                   </thead>
                   </table>
                    </div>
-                  
-                  <!-- END TAB --> 
-                  
+                  <!-- END TAB -->
                   <!--TAB -->
                   <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2"> 
                   	{{ Form::open(['route' => 'admin::adminUserStore', 'class' => 'form-horizontal']) }}
-                    
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         {{ Form::label('name', 'Name', ['class' => 'col-lg-2 control-label']) }}
@@ -152,7 +126,6 @@ $(document).ready(function() {
                         <p class="help-block">{{ $errors->first('name', ':message') }}</p>
                         </div>
                     </div>
-                    
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('Email') ? ' has-error' : '' }}">
                         {{ Form::label('email', 'Email', ['class' => 'col-lg-2 control-label']) }}
@@ -161,8 +134,7 @@ $(document).ready(function() {
                         <p class="help-block">{{ $errors->first('email', ':message') }}</p>
                         </div>
                     </div>
-                    
-                    <!-- input Area -->
+                        <!-- input Area -->
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         {{ Form::label('password', 'Password', ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
@@ -170,8 +142,7 @@ $(document).ready(function() {
                         <p class="help-block">{{ $errors->first('password', ':message') }}</p>
                         </div>
                     </div>
-                    
-                    <!-- Select With One Default -->
+                        <!-- Select With One Default -->
                     <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
                         {{ Form::label('role', 'Select Role', ['class' => 'col-lg-2 control-label'] )  }}
                         <div class="col-lg-10">
@@ -179,7 +150,6 @@ $(document).ready(function() {
                             <p class="help-block">{{ $errors->first('role', ':message') }}</p>
                         </div>
                     </div>
-                    
                     <!-- Submit Button -->
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
@@ -238,13 +208,9 @@ $(document).ready(function() {
           </div>
         </div>
       </div>
-      
-      <!-- END CONTENT --> 
-      
+      <!-- END CONTENT -->
     </div>
   </div>
 </div>
-
-<!-- END PAGE CONTENT INNER --> 
-
+<!-- END PAGE CONTENT INNER -->
 @endsection

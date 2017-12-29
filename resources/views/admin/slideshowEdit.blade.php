@@ -1,32 +1,18 @@
- @extends('admin.layout')
-
-
-
+@extends('admin.layout')
 @section('title', 'Edit Slideshow')
-
-
-
 @section('style')
 @endsection
-
-
-
 @section('js')
 @endsection
-
-@section('content') 
-
+@section('content')
 <!-- BEGIN PAGE CONTENT INNER -->
-
 <div class="page-content-inner">
   <div class="row">
     <div class="col-md-12"> 
       <div class="alert alert-danger {{{ Session::has('error_message')? '' : 'display-hide' }}}">
         <button class="close" data-close="alert"></button>
         <span> {!! Session::has('error_message') ? Session::pull('error_message') : 'Please correct your fields.' !!} </span> </div>
-      
       <!-- BEGIN CONTENT -->
-      
       <div class="profile-content">
         <div class="row">
           <div class="col-md-12">
@@ -41,7 +27,6 @@
               <!--TAB -->
                   <div class="tab-pane active" id="tab_1_2"> 
                     {{ Form::model($slideshow, ['method' => 'PATCH','route' => ['admin::adminSlideshowUpdate',$slideshow->id], 'class' => 'form-horizontal']) }}
-                    
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         {{ Form::label('name', 'name', ['class' => 'col-lg-2 control-label']) }}
@@ -50,9 +35,6 @@
                         <p class="help-block">{{ $errors->first('name', ':message') }}</p>
                         </div>
                     </div>
-                    
-                     
-                    
                      <!-- Select With One Default -->
                     <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                         {{ Form::label('status', 'status', ['class' => 'col-lg-2 control-label'] )  }}
@@ -61,8 +43,6 @@
                             <p class="help-block">{{ $errors->first('status', ':message') }}</p>
                         </div>
                     </div>
-                    
-                    
                     <!-- Submit Button -->
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
@@ -78,13 +58,9 @@
           </div>
         </div>
       </div>
-      
-      <!-- END CONTENT --> 
-      
+      <!-- END CONTENT -->
     </div>
   </div>
 </div>
-
-<!-- END PAGE CONTENT INNER --> 
-
+<!-- END PAGE CONTENT INNER -->
 @endsection

@@ -1,18 +1,9 @@
- @extends('admin.layout')
-
-
-
+@extends('admin.layout')
 @section('title', 'Slideshow')
-
-
-
 @section('style')
     <link href="{{asset('assets/css/datatables.bootstrap.css')}}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/datatable-custom.css')}}">
 @endsection
-
-
-
 @section('js')
     <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/js/datatables.bootstrap.js')}}"></script>
@@ -44,7 +35,6 @@ $('#slideshow-table tbody').on('click', 'td.details-control', function () {
 	var tr = $(this).closest('tr');
 	var row = table.row(tr);
 	var tableId = 'posts-' + row.data().id;
-
 	if (row.child.isShown()) {
 		// This row is already open - close it
 		$(this).html('<button class="btn btn-primary">View Slides</button>');
@@ -59,7 +49,6 @@ $('#slideshow-table tbody').on('click', 'td.details-control', function () {
 		tr.next().find('td').addClass('no-padding bg-gray');
 	}
 });
-
 function initTable(tableId, data) {
 	$('#' + tableId).DataTable({
 		processing: true,
@@ -79,14 +68,9 @@ function initTable(tableId, data) {
 	})
 }
 </script>
-
-
 @endsection
-
-@section('content') 
-
+@section('content')
 <!-- BEGIN PAGE CONTENT INNER -->
-
 <div class="page-content-inner">
   <div class="row">
     <div class="col-md-12"> 
@@ -96,9 +80,7 @@ function initTable(tableId, data) {
       <div class="alert alert-success {{{ Session::has('success_message') ? '' : 'display-hide' }}}">
         <button class="close" data-close="alert"></button>
         <span> {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!} </span> </div>
-      
       <!-- BEGIN CONTENT -->
-      
       <div class="profile-content">
         <div class="row">
           <div class="col-md-12">
@@ -139,13 +121,10 @@ function initTable(tableId, data) {
 						</table>
 					</script>
                    </div>
-                  
-                  <!-- END TAB --> 
-                  
+                  <!-- END TAB -->
                   <!--TAB -->
                   <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2"> 
                   	{{ Form::open(['route' => 'admin::adminSlideshowStore', 'class' => 'form-horizontal']) }}
-                    
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         {{ Form::label('name', 'Name', ['class' => 'col-lg-2 control-label']) }}
@@ -154,7 +133,6 @@ function initTable(tableId, data) {
                         <p class="help-block">{{ $errors->first('name', ':message') }}</p>
                         </div>
                     </div>
-                    
                     <!-- Select With One Default -->
                     <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                         {{ Form::label('status', 'status', ['class' => 'col-lg-2 control-label'] )  }}
@@ -163,9 +141,7 @@ function initTable(tableId, data) {
                             <p class="help-block">{{ $errors->first('status', ':message') }}</p>
                         </div>
                     </div>
-                    
-                    
-                    <!-- Submit Button -->
+                                        <!-- Submit Button -->
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             {{ Form::submit('Add Slideshow', ['class' => 'btn btn-lg btn-info pull-right'] ) }}
@@ -173,21 +149,16 @@ function initTable(tableId, data) {
                     </div>
                     {{ Form::close() }}
                   </div>
-                  <!-- END TAB --> 
-                  
+                  <!-- END TAB -->
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <!-- END CONTENT --> 
-      
+      <!-- END CONTENT -->
     </div>
   </div>
 </div>
-
-<!-- END PAGE CONTENT INNER --> 
-
+<!-- END PAGE CONTENT INNER -->
 @endsection

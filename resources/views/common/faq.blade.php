@@ -1,7 +1,5 @@
 @extends('common.layout')
-
 @section('title', 'FAQ')
-
 @section('style')
 <link href="{{asset('assets/pages/css/faq.min.css')}}" rel="stylesheet" type="text/css" />
 <style type="text/css">
@@ -16,27 +14,22 @@ $(function(){
     //var monkeyList = new List('test-list', { 
 //	  valueNames: ['name']
 //	});
-
 var args = {
   valueNames: [ 'name' ]
 };
-
 var list1 = new List("accordion1", args);
 var list2 = new List("accordion2", args);
 var list3 = new List("accordion3", args);
 var list4 = new List("accordion4", args);
-
 $(".fuzzy-search").keyup(function(){
     list1.search($(this).val());
     list2.search($(this).val());
 	list3.search($(this).val());
 	list4.search($(this).val());
 });
-
 });
 </script> 
 @endsection
-
 @section('content') 
 <!-- BEGIN PAGE CONTENT INNER -->
 <div class="page-content-inner">
@@ -87,12 +80,6 @@ $(".fuzzy-search").keyup(function(){
                 </li>
                 @endforeach
             </ul>
-              
-              
-              
-              
-              
-              
             </div>
           </div>
           <div class="faq-section ">
@@ -112,9 +99,6 @@ $(".fuzzy-search").keyup(function(){
                 </li>
                 @endforeach
                 </ul>
-              
-              
-              
             </div>
           </div>
           <div class="faq-section ">
@@ -141,6 +125,5 @@ $(".fuzzy-search").keyup(function(){
     </div>
   </div>
 </div>
-<!-- END PAGE CONTENT INNER --> 
-
+<!-- END PAGE CONTENT INNER -->
 @endsection

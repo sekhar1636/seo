@@ -7,7 +7,5 @@
 <p>Username : {{$name}}</p>
 <p>Email : {{$email}}</p>
 <p>Description : {{$description}}</p>
-
-
 </body>
 </html>

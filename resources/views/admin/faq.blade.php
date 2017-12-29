@@ -1,22 +1,12 @@
- @extends('admin.layout')
-
-
-
+@extends('admin.layout')
 @section('title', 'FAQ')
-
-
-
 @section('style')
     <link href="{{asset('assets/css/datatables.bootstrap.css')}}" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
 @endsection
-
-
-
 @section('js')
     <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/js/datatables.bootstrap.js')}}"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
 <script type="text/javascript">
 $('#faq-table').DataTable({
@@ -31,7 +21,6 @@ $('#faq-table').DataTable({
 			{data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
-
 $(document).ready(function() {
 	$('#editor').summernote({
 	  code : "{{ $errors->first('answer', ':message') }}",
@@ -39,13 +28,9 @@ $(document).ready(function() {
 	});
 });
 </script>
-
 @endsection
-
-@section('content') 
-
+@section('content')
 <!-- BEGIN PAGE CONTENT INNER -->
-
 <div class="page-content-inner">
   <div class="row">
     <div class="col-md-12"> 
@@ -55,9 +40,7 @@ $(document).ready(function() {
       <div class="alert alert-success {{{ Session::has('success_message') ? '' : 'display-hide' }}}">
         <button class="close" data-close="alert"></button>
         <span> {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!} </span> </div>
-      
       <!-- BEGIN CONTENT -->
-      
       <div class="profile-content">
         <div class="row">
           <div class="col-md-12">
@@ -84,13 +67,10 @@ $(document).ready(function() {
                   </thead>
                   </table>
                    </div>
-                  
-                  <!-- END TAB --> 
-                  
+                  <!-- END TAB -->
                   <!--TAB -->
                   <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2"> 
                   	{{ Form::open(['route' => 'admin::adminFaqStore', 'class' => 'form-horizontal']) }}
-                    
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
                         {{ Form::label('question', 'Question', ['class' => 'col-lg-2 control-label']) }}
@@ -99,7 +79,6 @@ $(document).ready(function() {
                         <p class="help-block">{{ $errors->first('question', ':message') }}</p>
                         </div>
                     </div>
-                    
                      <!-- Text Area -->
                     <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }}">
                         {{ Form::label('answer', 'Answer', ['class' => 'col-lg-2 control-label']) }}
@@ -108,7 +87,6 @@ $(document).ready(function() {
                             <p class="help-block">{{ $errors->first('answer', ':message') }}</p>
                         </div>
                     </div>
-                    
                     <!-- Select With One Default -->
                     <div class="form-group{{ $errors->has('_type') ? ' has-error' : '' }}">
                         {{ Form::label('_type', 'Select Type', ['class' => 'col-lg-2 control-label'] )  }}
@@ -117,9 +95,7 @@ $(document).ready(function() {
                             <p class="help-block">{{ $errors->first('_type', ':message') }}</p>
                         </div>
                     </div>
-                    
-                    
-                    <!-- Submit Button -->
+                                        <!-- Submit Button -->
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             {{ Form::submit('Add FAQ', ['class' => 'btn btn-lg btn-info pull-right'] ) }}
@@ -128,20 +104,15 @@ $(document).ready(function() {
                     {{ Form::close() }}
                   </div>
                   <!-- END TAB --> 
-                  
-                </div>
+                                  </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <!-- END CONTENT --> 
-      
+      <!-- END CONTENT -->
     </div>
   </div>
 </div>
-
-<!-- END PAGE CONTENT INNER --> 
-
+<!-- END PAGE CONTENT INNER -->
 @endsection

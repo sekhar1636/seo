@@ -1,15 +1,8 @@
 @extends('admin.layout')
-
 @section('title', 'Edit Home Page')
-
-
-
 @section('style')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
 @endsection
-
-
-
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
     <script type="text/javascript">
@@ -20,22 +13,16 @@
             });
         });
     </script>
-
 @endsection
-
 @section('content')
-
     <!-- BEGIN PAGE CONTENT INNER -->
-
     <div class="page-content-inner">
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-danger {{{ Session::has('error_message')? '' : 'display-hide' }}}">
                     <button class="close" data-close="alert"></button>
                     <span> {!! Session::has('error_message') ? Session::pull('error_message') : 'Please correct your fields.' !!} </span> </div>
-
                 <!-- BEGIN CONTENT -->
-
                 <div class="profile-content">
                     <div class="row">
                         <div class="col-md-12">
@@ -69,7 +56,7 @@
         </select>
     </div>
 </div>
-                                            <!-- Submit Button -->
+    <!-- Submit Button -->
                                             <div class="form-group">
                                                 <div class="col-lg-10 col-lg-offset-2">
                                                     {{ Form::submit('Save Page', ['class' => 'btn btn-lg btn-info pull-right'] ) }}
@@ -77,20 +64,15 @@
                                             </div>
                                         </form>
                                         </div>
-
                                         <!-- END TAB -->
-
                                 </div>
                             </div>
                         </div>
                     </div>
                     </div>
                 <!-- END CONTENT -->
-
             </div>
         </div>
     </div>
-
     <!-- END PAGE CONTENT INNER -->
-
 @endsection

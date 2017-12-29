@@ -1,19 +1,9 @@
 @extends('common.layout')
-
 @section('title', 'Staff Subscription')
-
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/css/formValidation.min.css')}}">
-    <style type="text/css">
-        .activeBox{
-            border:1px solid rgba(68,182,174,1);
-        }
-        .inactiveBox{
-            border:1px solid rgb(234, 190, 189);
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('assets/css/active.css')}}">
 @endsection
-
 @section('js')
     <script src="{{asset('assets/js/formValidation.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
@@ -52,7 +42,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                <!-- //foreach($products as $product)
                                     <div class="form-group">
                                         <label class="col-xs-3 control-label">//$product->name}}</label>
@@ -68,8 +57,6 @@
                                 <input type="checkbox" class="hidden" name="products[//$product->id}}][proid]" value="//$product->id" />
                             </span>
                                         </div>
-
-
                                     </div>
                                 //endforeach --> <div class="form-group">
                                     <div class="col-xs-9 col-xs-offset-3">

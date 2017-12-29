@@ -1,17 +1,12 @@
-
 @extends('common.layout')
-
 @section('title', 'User Type')
-
 @section('style')
 <link href="{{asset('assets/pages/css/login-3.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
-
 @section('js')
 <script type="text/javascript" src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/additional-methods.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}" type="text/javascript"></script>
-
 @endsection
 @section('content')
 <div class="content col-md-4 col-md-offset-4 box-setting">
@@ -40,8 +35,6 @@
                     </div>
                     <span class="help-block"> {{ $errors->first("role") }} </span>
                 </div>
-               
-
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary pull-right"> Submit </button>
                 </div>

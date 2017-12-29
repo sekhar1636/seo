@@ -1,8 +1,5 @@
-
 @extends('common.layout')
-
 @section('title', 'Buy Products')
-
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/css/formValidation.min.css')}}">
 <style type="text/css">
@@ -14,7 +11,6 @@
     }
 </style>
 @endsection
-
 @section('js')
 {{--<script src="{{asset('assets/apps/scripts/timeline.min.js')}}" type="text/javascript"></script>--}}
 <script src="https://js.stripe.com/v2/"></script>
@@ -22,10 +18,7 @@
 $(document).ready(function() {
     // Change the key to your one
     Stripe.setPublishableKey("<?php echo $_ENV['STRIPE_KEY']; ?>");
-	
-	
 	$('.button-checkbox').each(function () {
-
         // Settings
         var $widget = $(this),
             $button = $widget.find('button'),
@@ -39,7 +32,6 @@ $(document).ready(function() {
                     icon: 'glyphicon glyphicon-unchecked'
                 }
             };
-
         // Event Handlers
         $button.on('click', function () {
             $checkbox.prop('checked', !$checkbox.is(':checked'));
@@ -49,7 +41,6 @@ $(document).ready(function() {
         $checkbox.on('change', function () {
             updateDisplay();
         });
-
         // Actions
         function updateDisplay() {
             var isChecked = $checkbox.is(':checked');
@@ -74,12 +65,9 @@ $(document).ready(function() {
                     .addClass('btn-default');
             }
         }
-
         // Initialization
         function init() {
-
             updateDisplay();
-
             // Inject the icon if applicable
             if ($button.find('.state-icon').length == 0) {
                 $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
@@ -87,10 +75,7 @@ $(document).ready(function() {
         }
         init();
     });
-	
-	
-
-    $('#paymentForm')
+	    $('#paymentForm')
         .formValidation({
             framework: 'bootstrap',
             icon: {
@@ -210,8 +195,7 @@ $(document).ready(function() {
             });
         });
 });
-</script> 
-
+</script>
 @endsection
 @section('content')
 <div class="page-content-inner">
@@ -234,9 +218,7 @@ $(document).ready(function() {
                     <div class="caption">
                         <i class="icon-doc font-green"></i>
                         <span class="caption-subject bold font-green uppercase">Products</span>
-                        
                     </div>
-                   
                 </div>
                 <div class="portlet-body">
                     <form id="paymentForm" class="form-horizontal" method="post" action="{{route('actor::buyProduct')}}" >
@@ -256,18 +238,9 @@ $(document).ready(function() {
                                 <input type="checkbox" class="hidden" name="products[{{$product->id}}][proid]" value="{{$product->id}}" />
                             </span>
                             </div>
-        
-                            
-                          </div>
+               </div>
                 @endforeach
-                    
-                    
-              
-              
-              
-              
-              
-              <div class="form-group">
+   <div class="form-group">
                 <label class="col-xs-3 control-label">Credit card number</label>
                 <div class="col-xs-5">
                   <input type="text" class="form-control" data-stripe="number" />
@@ -288,9 +261,6 @@ $(document).ready(function() {
                   <input type="text" class="form-control" data-stripe="cvc" />
                 </div>
               </div>
-              
-              
-              
               <div class="form-group">
                 <label class="col-xs-3 control-label">Address</label>
                 <div class="col-xs-5">
@@ -306,7 +276,6 @@ $(document).ready(function() {
                 <div class="col-xs-2">
                   <input type="text" class="form-control" placeholder="Enter Zip Code" data-stripe="address_zip" />
                 </div>
-                
               </div>
               <div class="form-group">
                 <label class="col-xs-3 control-label">State</label>
@@ -318,13 +287,6 @@ $(document).ready(function() {
                   <input type="text" class="form-control" placeholder="Enter Country" data-stripe="address_country" />
                 </div>
               </div>
-              
-              
-              
-              
-              
-              
-              
               <div class="form-group">
                 <div class="col-xs-9 col-xs-offset-3">
                   <button type="submit" class="btn btn-primary">Make Payment</button>

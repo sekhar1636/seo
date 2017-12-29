@@ -5,7 +5,6 @@
 <html lang="en">
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
-
     <head>
         <meta charset="utf-8" />
         <title>StrawHat | @yield('title')</title>
@@ -18,7 +17,6 @@
         <link href="{{asset('assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-       
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="{{asset('assets/global/css/components-md.min.css')}}" rel="stylesheet" id="style_components" type="text/css" />
@@ -28,21 +26,16 @@
         <link href="{{asset('assets/layouts/layout3/css/layout.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/layouts/layout3/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" id="style_color" />
         <link href="{{asset('assets/layouts/layout3/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
-
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">
-
         @yield('style')
-
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" /> </head>
     <!-- END HEAD -->
-
     <style type="text/css">
         .page-header .page-header-top .top-menu {
             margin: 21px 0 0;
         }
     </style>
-
     <body class="page-container-bg-solid page-md">
         <div class="page-wrapper">
             <div class="page-wrapper-row">
@@ -65,7 +58,6 @@
                                 <!-- END RESPONSIVE MENU TOGGLER -->
                                 <!-- BEGIN TOP NAVIGATION MENU -->
                                 @if(Auth::check())
-                                  
                                     <!-- END TOP NAVIGATION MENU -->
                                 <div class="top-menu  pull-right">
                                     <div class="btn-group">
@@ -83,7 +75,6 @@
                                                     <a href="{{route('admin::adminDashboard')}}"> DashBoard </a>
                                                 </li>
                                             @endif
-                                           
                                             <li>
                                                 <a href="{{route('logout')}}"> Logout </a>
                                             </li>
@@ -91,8 +82,6 @@
                                     </div>
                                     </div>
                                 @endif
-                                
-                                
                             </div>
                         </div>
                         <!-- END HEADER TOP -->
@@ -188,7 +177,6 @@
                         <!-- BEGIN CONTENT -->
                         <div class="page-content-wrapper">
                             <!-- BEGIN CONTENT BODY -->
-
                             @if(\Route::getCurrentRoute()->uri != '/')
                             <!-- BEGIN PAGE HEAD-->
                             <div class="page-head">
@@ -205,9 +193,7 @@
                             <!-- BEGIN PAGE CONTENT BODY -->
                              <div class="page-content">
                                 <div class="container-fluid">
-
                                     <!-- BEGIN PAGE BREADCRUMBS -->
-
                                  <ul class="page-breadcrumb breadcrumb">
                                         <li>
                                             <a href="{{route('getIndex')}}">StrawHat</a>
@@ -217,16 +203,13 @@
                                             <span>@yield('title')</span>
                                         </li>
                                     </ul>
-                                
                                 @yield('content')
-                               
                                 </div>
                             </div>
                             <!-- END PAGE CONTENT BODY -->
                             <!-- END CONTENT BODY -->
                         </div>
                         <!-- END CONTENT -->
-                    
                     </div>
                     <!-- END CONTAINER -->
                 </div>
@@ -255,11 +238,9 @@
                                         </form>
                                     </div>
                                 </div>
-                               
                                 <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
                                     <h2>Follow Us On</h2>
                                     <ul class="social-icons">
-                                        
                                         <li>
                                             <a href="javascript:;" data-original-title="facebook" class="facebook"></a>
                                         </li>
@@ -269,7 +250,6 @@
                                         <li>
                                             <a href="javascript:;" data-original-title="youtube" class="youtube"></a>
                                         </li>
-                                       
                                     </ul>
                                 </div>
                                <!-- <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
@@ -297,7 +277,6 @@
                 </div>
             </div>
         </div>
-   
         <!--[if lt IE 9]>
         <script src="{{ asset('assets/global/plugins/respond.min.js') }}"></script>
         <script src="{{ asset('assets/global/plugins/excanvas.min.js') }}"></script>
@@ -318,9 +297,6 @@
         <script type="text/javascript">
              Metronic.init(); // init metronic core componets
         </script>
-
         @yield('js')
-    
     </body>
-
 </html>

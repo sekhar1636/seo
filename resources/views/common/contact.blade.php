@@ -1,7 +1,5 @@
 @extends('common.layout')
-
 @section('title', 'Contact Us')
-
 @section('style')
 	<link href="{{asset('assets/pages/css/contact.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/pages/css/skdslider.css')}}" rel="stylesheet" type="text/css" />
@@ -11,10 +9,7 @@
         }
     </style>
 @endsection
-
 @section('js')
-   
-	
     <script type="text/javascript" src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/additional-methods.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}" type="text/javascript"></script>
@@ -23,14 +18,11 @@
     <script type="text/javascript">
 		jQuery(document).ready(function(){
 			jQuery('#skdSlIder').skdslider({delay:5000, animationSpeed: 2000,showNextPrev:true,showPlayButton:true,autoSlide:true,animationType:'fading'});
-			
 		});
 </script>
 <!--  <script src="{{asset('assets/pages/scripts/contact.js')}}" type="text/javascript"></script>
       <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPDYloTScp0aDYyniEhynWLrbDM2HDkVQ&callback=initMap"
   type="text/javascript"></script> -->
-
-       
 @endsection
 @section('content')
  <!-- BEGIN PAGE CONTENT INNER -->
@@ -104,11 +96,8 @@
                         <a style="margin-top: 10px;" href="{{route('getFaq')}}"><button class="btn grey-cararra font-dark">Visit Now</button></a>
                     </div>
                 </div>
-
                 <div class="c-content-contact-1 c-opt-1" style="margin:0;">
                     <div class="row" data-auto-height=".c-height" style="margin:0;">
-                       
-                     
                             <div class="c-body">
                                 <div class="c-section">
                                     <h3>StrawHat</h3>
@@ -124,7 +113,6 @@
                                     <p>
                                          203-254-8572
                                         <br/>
-                                        
                                 </div>
                                 <div class="c-section">
                                     <div class="c-content-label uppercase bg-blue">Email</div>
@@ -163,9 +151,7 @@
                     </div>
        <!--  <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 615px;"></div> -->
     </div>
-                
             </div>
-            
         </div>
     </div>
 </div>

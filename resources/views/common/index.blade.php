@@ -1,15 +1,10 @@
-
 @extends('common.layout')
-
 @section('title', 'Home')
-
 @section('style')
 <link href="{{asset('assets/pages/css/about.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css" />
 @endsection
-
 @section('js')
-
 @endsection
 @section('content')
  <!-- BEGIN PAGE CONTENT INNER -->
@@ -20,11 +15,9 @@
        $val = count($slideshows);
        $j = 0;
        @endphp
-
         <div id="myCarousel" class="margin-bottom-40 carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-
                 @for($i = 0; $i < $val; $i++)
                  @if($i == 0)
                      <li data-target="#myCarousel" data-slide-to="{{$i}}" class="active"></li>
@@ -33,7 +26,6 @@
                  @endif
                 @endfor
             </ol>
-
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
             @foreach($slideshows as $slides)
@@ -71,14 +63,10 @@
          </div>
      @endif
     <!-- END CONTENT HEADER -->
-    
     <!-- BEGIN TEXT & VIDEO -->
-
         {!! $homepage  !!}
-
     <!-- END TEXT & VIDEO -->
     <!-- BEGIN CARDS -->
-
     <!-- END CARDS -->
     <!-- BEGIN LINKS BLOCK -->
 </div>

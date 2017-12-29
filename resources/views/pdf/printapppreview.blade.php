@@ -1,6 +1,4 @@
 @extends('common.layout')
-
-
 @section('content')
 <div class="page-content-inner">
     <div class="row">
@@ -59,10 +57,8 @@
     <tr><td colspan="3"><p>Signed and Acknowledged by: ________________________________________________________</p></td></tr>
 </table>
                 </div>
-
             </div>
             </div>
-
         </div>
     <div class="clearfix"></div>
 </div>

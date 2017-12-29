@@ -1,14 +1,8 @@
 @extends('common.layout')
-
 @section('title', 'Email Verified')
-
 @section('style')
-
 @endsection
-
 @section('js')
-
-
 @endsection
 @section('content')
     <div class="container">

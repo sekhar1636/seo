@@ -1,7 +1,5 @@
 @extends('common.layout')
-
 @section('title', 'Actor Profile')
-
 @section('style')
 <link href="{{asset('assets/pages/css/profile-2.min.css')}}" rel="stylesheet" type="text/css" />
 <style type="text/css">
@@ -10,9 +8,7 @@
         }
 </style>
 @endsection
-
 @section('js')
-
 @endsection
 @section('content')
 <!-- BEGIN PAGE CONTENT INNER -->
@@ -31,7 +27,6 @@
                             <ul class="list-unstyled profile-nav">
                                 <li>
                                     <img src="{{@$actor->actor->photo_url ? asset($actor->actor->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
-                                   
                                 </li>
                             </ul>
                         </div>
@@ -45,23 +40,18 @@
                                     </p>
                                         <b>Age : </b>
                                         <span class="label label-success label-sm"> {{ @$actor->actor->age ? $actor->actor->age : '' }} </span>
-                                      
                                     </p>
-
                                      </p>
                                         <b>Eyes : </b>
                                         {{ @$actor->actor->eyes ? $actor->actor->eyes : '' }}
                                         <b>Hair : </b>
                                         {{ @$actor->actor->hair ? $actor->actor->hair : '' }}
-                                      
                                     </p>
-                                   
                                     </p>
                                         <b>Height : </b>
                                         {{ @$actor->actor->feet ? $actor->actor->feet : ''}}'{{ @$actor->actor->inch ? $actor->actor->inch : ''}}"
                                         <b>Weight : </b>
                                         {{ @$actor->actor->weight ? $actor->actor->weight : ''}} lbs
-                                      
                                     </p>
                                     </p>
                                         <b>Role Type : </b>
@@ -69,22 +59,18 @@
                                         <b>Vocal Range : </b>
                                         {{ @$actor->actor->vocalRange ? $actor->actor->vocalRange : '' }}
                                     </p>
-                                     
                                      </p>
                                         <b>Dance : </b>
                                         {{ @$actor->actor->dance ? $actor->actor->dance : '' }}
-
                                         <b>Instruments : </b>
                                         {{ @$actor->actor->instrument ? $actor->actor->instrument : ''}}
                                     </p>
-                                
                                      </p>
                                         <b>Technical Skills : </b>
                                         {{ @$actor->actor->technical ? $actor->actor->technical : '' }}
                                           <b>Other Skills :  </b>
                                         {{ @$actor->actor->misc ? $actor->actor->misc : '' }}
                                     </p>
-                                
                                     </p>
                                         <b>School : </b>
                                     @if(@$actor->actor->school)
@@ -93,7 +79,6 @@
                                           <span>NA</span>
                                       @endif
                                     </p>
-                                
                                 </div>
                                 <!--end col-md-8-->
                                 <div class="col-md-5">
@@ -126,10 +111,7 @@
                                         </div>
                                         <div class="portlet-title">
                                             <div class="caption font-red sbold"> Personal Info </div>
-
-
-
-                                        </div>
+</div>
                                         <div class="portlet-body">
                                             <ul class="list-unstyled">
                                                 <li>
@@ -197,15 +179,12 @@
                                         </div>
                                     </div>
                                     <!--tab-pane-->
-                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--tab_1_2-->
-               
-                
             </div>
         </div>
     </div>

@@ -1,25 +1,15 @@
 @extends('admin.layout')
-
-
-
 @section('title', 'Audition')
-
-
-
 @section('style')
     <link href="{{asset('assets/css/datatables.bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
-
-
-
 @section('js')
     <script src="{{asset('assets/global/plugins/moment.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/js/datatables.bootstrap.js')}}"></script>
-
     <script type="text/javascript">
         $('#audition-table').DataTable({
             processing: true,
@@ -32,14 +22,10 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
-
     </script>
 @endsection
-
 @section('content')
-
     <!-- BEGIN PAGE CONTENT INNER -->
-
     <div class="page-content-inner">
         <div class="row">
             <div class="col-md-12">
@@ -49,9 +35,7 @@
                 <div class="alert alert-success {{{ Session::has('success_message') ? '' : 'display-hide' }}}">
                     <button class="close" data-close="alert"></button>
                     <span> {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!} </span> </div>
-
                 <!-- BEGIN CONTENT -->
-
                 <div class="profile-content">
                     <div class="row">
                         <div class="col-md-12">
@@ -76,25 +60,18 @@
                                                 </thead>
                                             </table>
                                         </div>
-
                                         <!-- END TAB -->
-
                                         <!--TAB -->
                                         <!-- END TAB -->
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- END CONTENT -->
-
             </div>
         </div>
     </div>
-
     <!-- END PAGE CONTENT INNER -->
-
 @endsection

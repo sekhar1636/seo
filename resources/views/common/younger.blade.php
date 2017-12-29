@@ -1,32 +1,26 @@
 @extends('common.layout')
-
 @section('title', 'Younger Actors')
-
 @section('style')
 <link href="{{asset('assets/pages/css/skdslider.css')}}" rel="stylesheet" type="text/css" />
 	<style type="text/css">
 		.box-section{
 			border : 1px solid #eee;
 			text-align: center;
-
 			background-color: #fff;
 			text-align: center;
 			padding : 20px 30px;
 		}
 	</style>
 @endsection
-
 @section('js')
 	<script src="{{asset('assets/pages/scripts/skdslider.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/pages/scripts/skdslider.min.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
 		jQuery(document).ready(function(){
 			jQuery('#skdSlIder').skdslider({delay:5000, animationSpeed: 2000,showNextPrev:true,showPlayButton:true,autoSlide:true,animationType:'fading'});
-			
 		});
 </script>
 @endsection
-
 @section('content')
 @if($slides->count())
 <div class="row" style="padding:30px 15px;;">
@@ -43,9 +37,6 @@
   </ul>
 </div>
 @endif
-
-
-
 <div class="well well-lg">
     <h3 class="block" style="font-weight: 600;color:#697882;">Younger Actors</h3>
     	<strong style="color:#697882;">I WANT TO AUDITION, BUT I'M TOO YOUNG. ARE THERE ANY SUMMER THEATER PROGRAMS AVAILABLE FOR SOMEONE MY AGE?</strong>
@@ -90,9 +81,6 @@
        		<a href="http://www.bucksrockcamp.com" class="btn btn-primary btn-block"> Visit Now </a>
        </div>
     </div>
-
-
-
     <div class="col-md-4" style="padding : 5px 15px;">
        <div class="box-section">  
           <p>Brant Lake Dance Center<br>
@@ -247,9 +235,5 @@
        </div>
     </div>
 </div>
-
-
-
-   
 </div>
 @endsection

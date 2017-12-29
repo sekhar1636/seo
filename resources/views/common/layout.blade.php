@@ -5,7 +5,6 @@
 <html lang="en">
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
-
     <head>
         <meta charset="utf-8" />
         <title>StrawHat | @yield('title')</title>
@@ -18,7 +17,6 @@
         <link href="{{asset('assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-       
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="{{asset('assets/global/css/components-md.min.css')}}" rel="stylesheet" id="style_components" type="text/css" />
@@ -28,21 +26,16 @@
         <link href="{{asset('assets/layouts/layout3/css/layout.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/layouts/layout3/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" id="style_color" />
         <link href="{{asset('assets/layouts/layout3/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
-
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">
-
         @yield('style')
-
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" /> </head>
     <!-- END HEAD -->
-
     <style type="text/css">
         .page-header .page-header-top .top-menu {
             margin: 21px 0 0;
         }
     </style>
-
     <body class="page-container-bg-solid page-md">
         <div class="page-wrapper">
             <div class="page-wrapper-row">
@@ -65,12 +58,10 @@
                                 <!-- END RESPONSIVE MENU TOGGLER -->
                                 <!-- BEGIN TOP NAVIGATION MENU -->
                                 @if(Auth::check())
-                                  
                                     <!-- END TOP NAVIGATION MENU -->
                                 <div class="top-menu  pull-right">
                                     <div class="btn-group">
-                                        
-                                    @if(Auth::user()->role=="actor")
+                                        @if(Auth::user()->role=="actor")
                                     <a href="{{route('actor::actorProfile')}}" class="btn btn-default"><i class="icon-user" style="color: #D91E18;"></i>
                                         @if(Auth::user()->actor)
                                         	{{Auth::user()->actor->first_name}} {{Auth::user()->actor->last_name}}
@@ -121,7 +112,6 @@
                                                     <a href="{{route('staff::staffProfile')}}"> Dashboard </a>
                                                 </li>
                                             @endif
-                                           
                                             <li>
                                                 <a href="{{route('logout')}}"> Logout </a>
                                             </li>
@@ -134,7 +124,6 @@
                                         <a href="{{route('getSignup')}}" class="btn btn-primary"> Register </a>
                                     </div>
                                 @endif
-                                
                             </div>
                         </div>
                         <!-- END HEADER TOP -->
@@ -222,7 +211,6 @@
                                                <li>
                                                    <a href="{{route('getStaticPage',['slug'=>'auditionschedule'])}}">Audition Schedule</a>
                                                </li>
-
                                                <li>
                                                    <a href="{{route('getStaticPage',['slug'=>'theaterregistrationfees'])}}">Registration Fees</a>
                                                </li>
@@ -232,7 +220,6 @@
                                                </li>
                                            </ul>
                                        </li>
-
                                         <li class="{{ @$faqactive ? 'active' : '' }}">
                                             <a href="{{route('getFaq')}}">
                                                 <i class="icon-question"></i> FAQ
@@ -268,7 +255,6 @@
                                         @if(\Auth::check())
                                             @if(\Auth::user()->payment_status==1)
                                                 <li class="menu-dropdown {{ @$staticactive=='resactive' ? 'active' : '' }}"><a><i class="icon-envelope"></i> Premium content</a>
-
                                         <ul class="dropdown-menu pull-left">
                                             <li>
                                                 <a href="{{route('getStaticPage',['slug'=>'dreadedlist'])}}">Dreaded List</a>
@@ -290,7 +276,6 @@
                                         @else
                                             <li><a href="{{ route('getStaticPage',['slug'=>'premcont']) }}"><i class="icon-envelope"></i> Premium Content</a></li>
 @endif
-
                                     </ul>
                                 </div>
                                 <!-- END MEGA MENU -->
@@ -320,7 +305,6 @@
                         <!-- BEGIN CONTENT -->
                         <div class="page-content-wrapper">
                             <!-- BEGIN CONTENT BODY -->
-                            
                             @if(\Route::getCurrentRoute()->uri != '/')
                             <!-- BEGIN PAGE HEAD-->
                             <div class="page-head">
@@ -339,7 +323,6 @@
                                 <div class="container-fluid">
                                     <!-- BEGIN PAGE BREADCRUMBS -->
 @if ($__env->yieldContent('title') == "Home")
-
 @else
                                         <ul class="page-breadcrumb breadcrumb">
                                             <li>
@@ -351,16 +334,13 @@
                                             </li>
                                         </ul>
 @endif
-
 @yield('content')
-
 </div>
 </div>
 <!-- END PAGE CONTENT BODY -->
 <!-- END CONTENT BODY -->
 </div>
 <!-- END CONTENT -->
-
 </div>
 <!-- END CONTAINER -->
 </div>
@@ -394,7 +374,6 @@
 <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
 <h2>Follow Us On</h2>
 <ul class="social-icons">
-
     <li>
         <a href="javascript:;" data-original-title="facebook" class="facebook"></a>
     </li>
@@ -404,7 +383,6 @@
     <li>
         <a href="javascript:;" data-original-title="youtube" class="youtube"></a>
     </li>
-
 </ul>
 </div>
 <!--<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
@@ -428,7 +406,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'UA-35492583-1');
     </script>
 </div>
@@ -440,7 +417,6 @@
 </div>
 </div>
 </div>
-
 <!--[if lt IE 9]>
 <script src="{{ asset('assets/global/plugins/respond.min.js') }}"></script>
 <script src="{{ asset('assets/global/plugins/excanvas.min.js') }}"></script>
@@ -462,16 +438,13 @@
 <script src="{{asset('assets/js/formValidation.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript">
-
 Metronic.init(); // init metronic core componets
 </script>
-
 @yield('js')
 <script>
     $('[name=card_name], [name=cvv], [name=card_number], [name=expiry_month], [name=expiry_year]').on('keyup', function(){
        repositionFeedback();
     });
-
     function repositionFeedback(){
         allElements = document.querySelectorAll('.form-control-feedback');
         for(i=0; i<allElements.length; i++){
@@ -482,5 +455,4 @@ Metronic.init(); // init metronic core componets
     }
 </script>
 </body>
-
 </html>

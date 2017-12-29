@@ -1,15 +1,8 @@
-
 @extends('common.layout')
-
 @section('title', 'Premium Content')
-
 @section('style')
-
 @endsection
-
 @section('js')
-
-
 @endsection
 @section('content')
     <div class="container">

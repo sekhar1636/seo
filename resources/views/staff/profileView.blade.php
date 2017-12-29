@@ -1,7 +1,5 @@
 @extends('common.layout')
-
 @section('title', 'Staff Profile')
-
 @section('style')
     <link href="{{asset('assets/pages/css/profile-2.min.css')}}" rel="stylesheet" type="text/css" />
     <style type="text/css">
@@ -10,9 +8,7 @@
         }
     </style>
 @endsection
-
 @section('js')
-
 @endsection
 @section('content')
     <!-- BEGIN PAGE CONTENT INNER -->
@@ -31,7 +27,6 @@
                                 <ul class="list-unstyled profile-nav">
                                     <li>
                                         <img src="{{isset($staff->staff->photo_url) ? asset($staff->staff->photo_url) : asset('assets/images/photos/default-medium.jpg')}}" class="img-responsive pic-bordered" alt="" />
-
                                     </li>
                                 </ul>
                             </div>
@@ -42,9 +37,6 @@
                                         </p>
                                         <a href="mailto:{{$staff->email}}">{{$staff->email}} </a>
                                         </p>
-
-                                        </p>
-
                                         <p>
                                         <b>Primary Sought : </b>
                                         {{ \App\Misc::$primary_sought[@$staff->staff->primary_sought ? $staff->staff->primary_sought : ''] }}
@@ -52,12 +44,8 @@
                                         <p>
                                         <b>Secondary Sought : </b>
                                         {{\App\Misc::$secondary_sought[@$staff->staff->secondary_sought ? $staff->staff->secondary_sought : '']}}
-
                                         </p>
-
-
-
-                                    </div>
+ </div>
                                     <!--end col-md-8-->
                                     <div class="col-md-5">
                                         <div class="portlet sale-summary">
@@ -88,13 +76,11 @@
                                     </div>
                                 </div>
                                 <!--end row-->
-
                                 <div class="tabbable-line tabbable-custom-profile">
                                     <ul class="nav nav-tabs">
                                         <li class="active">
                                             <a href="#tab_1_11" data-toggle="tab"> Latest Experience </a>
                                         </li>
-
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab_1_11">
@@ -110,7 +96,6 @@
                                                             <i class="fa fa-home"></i> Theater </th>
                                                         <th>
                                                             <i class="fa fa-user"></i> Dir/Choreo/Other </th>
-
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -121,7 +106,6 @@
                                                             </td>
                                                             <td class="hidden-xs">  {{ $val['show'] }} </td>
                                                             <td> {{ $val['theater'] }}
-
                                                             </td>
                                                             <td>
                                                                 {{ $val['dir_chor'] }}
@@ -133,7 +117,6 @@
                                             </div>
                                         </div>
                                         <!--tab-pane-->
-
                                     </div>
                                     <div class="col-md-7">
                                         <label><h2>PORTFOLIO</h2></label>
@@ -151,14 +134,9 @@
                             </div>
                         </div>
                     </div>
-
                         <!--tab-pane-->
-
                     </div>
-
                     <!--tab_1_2-->
-
-
                 </div>
             </div>
         </div>
