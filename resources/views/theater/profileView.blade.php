@@ -41,11 +41,11 @@
                                             <a href="mailto:{{$theater->email_videos}}">{{$theater->email_videos}}</a>
                                         </p>
                                         <p>
-                                            <b>Non Musical Performer? </b>
+                                            <b>Are you casting non-musical performers? </b>
                                             {{ \App\Misc::$view_musical_performers[$theater->theater->non_musical_yes] }}
                                         </p>
                                         <p>
-                                            <b>Casting Dancer? </b>
+                                            <b>Are You Casting Dancers this Season?</b>
                                             {{\App\Misc::$view_casting_dancers[$theater->theater->dancer_yes]}}
                                         </p>
                                     </div>
