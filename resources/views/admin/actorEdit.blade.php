@@ -240,7 +240,7 @@ function initTable(tableId, data) {
 			                        	<input type="hidden" name="method" value="POST"/>
 			                        @endif
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-md-6">
 										<div class="form-group {{ $errors->has("display_name") ? "has-error":"" }}">
 											<label class="control-label col-md-3">Display Name</label>
 											<div class="col-md-9">
@@ -249,6 +249,14 @@ function initTable(tableId, data) {
 											</div>
 										</div>
 									</div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Website URL</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('website_url',@$actor->website_url ? $actor->website_url : null, ['class'=>'form-control','placeholder'=>'Personal Website or YouTube Channel']) !!}
+                                            </div>
+                                        </div>
+                                    </div>
 								</div>
 				                <div class="row">
 				                    <div class="col-md-6">

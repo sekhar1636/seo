@@ -615,7 +615,7 @@ class AdminController extends Controller
         $actor->dance = $request->get('dance') ? implode(',', $request->get('dance')) : '';
         $actor->instrument = $request->get('instrument') ? implode(',', $request->get('instrument')) : '';
         $actor->misc = $request->get('misc') ? implode(',', $request->get('misc')) : '';
-        
+        $actor->website_url = $request->website_url;
         $actor->phone_number = $request->phone_number;
         if($request->hasFile('resume')) {
            $this->uploadResume($actor,$request->file('resume'), $request->get('name'));      

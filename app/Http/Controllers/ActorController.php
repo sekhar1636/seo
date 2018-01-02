@@ -242,6 +242,7 @@ class ActorController extends Controller
         $actor->instrument = $request->get('instrument') ? implode(',', $request->get('instrument')) : '';
         $actor->misc = $request->get('misc') ? implode(',', $request->get('misc')) : '';
         $actor->phone_number = $request->phone_number;
+        $actor->website_url = $request->website_url;
         if($request->hasFile('resume')) {
             $this->uploadResume($actor,$request->file('resume'), $request->get('name'));
         }
