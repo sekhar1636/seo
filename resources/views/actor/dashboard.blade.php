@@ -384,7 +384,7 @@
                                                 </div>
                                             </div>
 
-                                        @elseif(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy==2 && $audition_status==0)
+                                        @elseif(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy!=2 && $audition_status==0)
 
                                             <div class="timeline-item">
                                                 <div class="timeline-badge">
