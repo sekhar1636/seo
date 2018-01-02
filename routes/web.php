@@ -162,7 +162,7 @@ Route::group(['middleware' => ['auth']], function () {
 
             Route::match(array('POST','PUT'),'staff/{id}',['as'=>'adminStaffUpdate','uses'=>'AdminController@staffupdate']);
             Route::post('staff/{id}/photo', ['as'=>'staffPhotoUpdate', 'uses'=>'AdminController@staffPhotoUpdate']);
-            Route::post('theater/{id}/cropPhoto', ['as'=>'staffCropPhoto', 'uses'=>'AdminController@poststaffCropPhotoUpdate']);
+            Route::post('staff/{id}/cropPhoto', ['as'=>'staffCropPhoto', 'uses'=>'AdminController@poststaffCropPhotoUpdate']);
             Route::get('staff/{id}/deletePhoto', ['as'=>'staffPhotoDelete', 'uses'=>'AdminController@staffPhotoDelete']);
             Route::post('staff/portfolio/{id}',['as'=>'adminStaffportfolioUpdate','uses'=>'AdminController@portfolioupdate']);
 

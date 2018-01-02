@@ -557,8 +557,9 @@
         @if(isset($theater->precrop_url))
             <img src="{{asset($theater->precrop_url)}}" width="500" height="500" id="cropbox" />
             <!-- This is the form that our event handler fills -->
-            <form style="margin-top: 30px;" action="{{route('admin::theaterCropPhoto',$id)}}" method="put" onsubmit="return checkCoords();">
+            <form style="margin-top: 30px;" action="{{route('admin::theaterCropPhoto',$id)}}" method="POST" onsubmit="return checkCoords();">
                 {{csrf_field()}}
+                <input type="hidden" name="_method" value="put"/>
                 <input type="hidden" id="x" name="x" />
                 <input type="hidden" id="y" name="y" />
                 <input type="hidden" id="w" name="w" />
