@@ -286,7 +286,7 @@ class StaffController extends Controller
     public function view($id)
     {
         $staff = User::findorfail($id);
-        $roles = ActorRole::where('user_id', \Auth::User()->id)->get();
+        $roles = ActorRole::where('user_id', $id)->get();
         return view('staff.profileView')->with([
             'staff'=>$staff,
             'roles'=>$roles
