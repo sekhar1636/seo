@@ -962,7 +962,8 @@ class AdminController extends Controller
         unlink(public_path().'/'.$actor->precrop_path);
         $actor->precrop_url = null;
         $actor->precrop_path = null;
-    
+        $actor->photo_path = null;
+        $actor->photo_url = null;
         if($actor->update()){
             return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
         }else{
@@ -974,7 +975,8 @@ class AdminController extends Controller
         unlink(public_path().'/'.$theater->precrop_path);
         $theater->precrop_url = null;
         $theater->precrop_path = null;
-
+        $theater->photo_url = null;
+        $theater->photo_path = null;
         if($theater->update()){
             return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
         }else{
@@ -986,7 +988,8 @@ class AdminController extends Controller
         unlink(public_path().'/'.$staff->precrop_path);
         $staff->precrop_url = null;
         $staff->precrop_path = null;
-
+        $staff->photo_url = null;
+        $staff->photo_path = null;
         if($staff->update()){
             return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
         }else{

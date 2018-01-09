@@ -195,7 +195,8 @@ class TheaterController extends Controller
         unlink(public_path().'/'.$theater->precrop_path);
         $theater->precrop_url = null;
         $theater->precrop_path = null;
-
+        $theater->photo_url = null;
+        $theater->photo_path = null;
         if($theater->update()){
             return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
         }else{

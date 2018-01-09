@@ -847,7 +847,8 @@ class ActorController extends Controller
         unlink(public_path().'/'.$actor->precrop_path);
         $actor->precrop_url = null;
         $actor->precrop_path = null;
-
+        $actor->photo_path = null;
+        $actor->photo_url = null;
         if($actor->update()){
             return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
         }else{

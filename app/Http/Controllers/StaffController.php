@@ -275,7 +275,8 @@ class StaffController extends Controller
         unlink(public_path().'/'.$staff->precrop_path);
         $staff->precrop_url = null;
         $staff->precrop_path = null;
-
+        $staff->photo_path = null;
+        $staff->photo_url = null;
         if($staff->update()){
             return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');
         }else{
