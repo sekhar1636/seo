@@ -523,9 +523,18 @@ class AdminController extends Controller
 				if($payment->product_id===NULL){
 					return "Subscription Fee";
 				}else{
-				    $pr = Product::findorfail($payment->product_id);
-				    $name = $pr->name;
-					return "$name";
+				    if($payment->varient_id != NULL){
+				        $vr = ProductVariant::findorfail($payment->varient_id);
+				        $name = $vr->product_variant;
+				        return "$name";
+                    }
+                    else
+                    {
+                        $pr = Product::findorfail($payment->product_id);
+                        $name = $pr->name;
+                        return "$name";
+                    }
+
 				}
         	})
 			->make(true);

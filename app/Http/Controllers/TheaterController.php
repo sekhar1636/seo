@@ -87,6 +87,7 @@ class TheaterController extends Controller
                     $payment->user_id = \Auth::user()->id;
                     $payment->transaction_id = $result->id;
                     $payment->product_id = $product->id;
+                    $payment->varient_id = $varient->id;
                     $payment->price = $prod['price'] * $varient['price'];
                     $payment->save();
                 }
