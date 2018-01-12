@@ -309,11 +309,10 @@
                                                                     </div>
                                                                     <div class="timeline-body activeBox">
 
-                                                                        <div class="timeline-body-head">
-                                                                            <div class="timeline-body-head-caption">
-                                                                                <span class="timeline-body-alerttitle font-green">Selected</span>
-
-                                                                            </div>
+                                                                        <div class="timeline-body-head-actions">
+                                                                            @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
+                                                                                <a href="{{ route('actor::actorPreview') }}" class="btn btn-danger">Print Application</a>
+                                                                            @endif
                                                                         </div>
                                                                         <div class="timeline-body-content">
                                             <span class="font-grey-cascade">Congratulations, You're Selected for Audition.
