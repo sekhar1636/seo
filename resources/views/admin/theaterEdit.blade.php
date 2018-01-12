@@ -106,8 +106,8 @@
                     ajax: data.details_url,
                     columns: [
                         {data: 'id'},
-                        {data: 'item'},
                         {data: 'price'},
+                        {data: 'item'},
                         {data: 'created_at'}
                     ]
                 })

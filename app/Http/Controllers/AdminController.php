@@ -517,12 +517,15 @@ class AdminController extends Controller
 	
 	public function userTransactionDetails($id){
 		$payments = Payment::where("transaction_id","=",$id);
+
 		return Datatables::of($payments)
 			->addColumn('item', function($payment) {
 				if($payment->product_id===NULL){
 					return "Subscription Fee";
 				}else{
-					return "Product Charges";
+				    $pr = Product::findorfail($payment->product_id);
+				    $name = $pr->name;
+					return "$name";
 				}
         	})
 			->make(true);
