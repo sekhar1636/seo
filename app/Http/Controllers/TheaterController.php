@@ -392,7 +392,7 @@ class TheaterController extends Controller
                 {
                     $product = Product::findOrFail($proid);
                     $varient = ProductVariant::findorFail($varid);
-                    $totalPrice = $totalPrice + $varient['price'];
+                    $totalPrice = $totalPrice + $prod['price'] * $varient['price'];
                     $description.= "\nProduct: ".$product->name." ".$varient['product_variant']." Price: ".$varient['price'];
                 }
             }
