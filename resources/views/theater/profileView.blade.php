@@ -46,7 +46,32 @@
                                         </p>
                                         <p>
                                             <b>Are You Casting Dancers this Season?</b>
-                                            {{\App\Misc::$view_casting_dancers[$theater->theater->dancer_yes]}}
+                                            {{\App\Misc::$view_casting_dancers[$theater->theater->dancers_yes]}}
+                                        </p>
+                                        <p>
+                                            <b>Days Plan to attend:</b>
+                                            {{ $theater->theater->friday == 1 ? 'Friday ' : ''}}
+                                            {{ $theater->theater->saturday == 1 ? 'Saturday ' : ''}}
+                                            {{ $theater->theater->sunday == 1 ? 'Sunday' : '' }}
+                                        </p>
+                                        <p>
+                                            <b>Accept video Auditions?</b>
+                                            {{ $theater->theater->dancers_no == 1 ? 'Yes' : ''}}
+                                            {{ $theater->theater->dancers_no==2 ? 'No' : ''  }}
+                                        </p>
+                                        <p>
+                                            <b>On AEA Contract?</b>
+                                            {{ $theater->theater->non_musical_no == 1 ? 'Yes' : ''}}
+                                            {{ $theater->theater->non_musical_no==2 ? 'No' : ''   }}
+                                        </p>
+                                        <p>
+                                            <b>Offering EMC Points?</b>
+                                            {{ $theater->theater->non_musical_not_certain == 1 ? 'Yes' : '' }}
+                                            {{ $theater->theater->non_musical_not_certain == 2 ? 'No' : '' }}
+                                        </p>
+                                        <p>
+                                            <b>AEA Contract</b>
+                                            {{ \App\Misc::$aea[$theater->theater->aea_contract] }}
                                         </p>
                                     </div>
                                     <!--end col-md-8-->
@@ -57,6 +82,9 @@
                                     <ul class="nav nav-tabs">
                                         <li class="active">
                                             <a href="#tab_1_11" data-toggle="tab"> Job Listings</a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab_1_12" data-toggle="tab">Representatives</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
@@ -95,9 +123,29 @@
                                            </div>
                                        </div>
                                        <!--tab-pane-->
+                                        <div class="tab-pane" id="tab_1_12">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <table>
+                                                        <th>
+                                                            <tr>
+                                                                <td>
+                                                                    <strong>Name</strong></td><td><strong>Title</strong></td>
+                                                            </tr>
+                                                        </th>
+                                                        <tr>
+                                                            <td>{{ @$theater->theater->name_table_1 }}</td><td>{{ $theater->theater->title_table_1 }}</td></tr><tr>
+                                                            <td>{{ @$theater->theater->name_table_2 }}</td><td>{{ $theater->theater->title_table_1 }}</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--tab pane-->
                                    </div>
                                </div>
-                           </div>
+                            </div>
+
                        <div class="col-md-3">
                            <div class="portlet sale-summary">
                            <div class="portlet-title">
@@ -135,6 +183,10 @@
                                         <li>
                                             <span class="sale-info">Telephone</span>
                                             <span class="sale-num"><a href="tel:{{ $theater->theater->telephone }}">{{ $theater->theater->telephone }}</a> </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">Mailing</span>
+                                            <span class="sale-num">{{ @$theater->theater->mailing.' - '.@$theater->theater->zipcode }}</span>
                                         </li>
                                     </ul>
                                 </div>
