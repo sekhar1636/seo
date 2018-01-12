@@ -42,7 +42,7 @@
                                         </p>
                                         <p>
                                             <b>Are you casting non-musical performers? </b>
-                                            {{ \App\Misc::$view_musical_performers[$theater->theater->non_musical_yes] }}
+                                            {{\App\Misc::$view_musical_performers[$theater->theater->non_musical_yes] }}
                                         </p>
                                         <p>
                                             <b>Are You Casting Dancers this Season?</b>
@@ -63,34 +63,34 @@
                                         <div class="tab-pane active" id="tab_1_11">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                   {{ @$theater->theater->accompanist == 1 ? 'Accompanist' : '' }}<br>
-                                                   {{ @$theater->theater->administration == 2 ? 'Administration' : '' }}<br>
-                                                   {{ @$theater->theater->box_office == 3 ? 'Box Office' : ''}}<br>
-                                                   {{ @$theater->theater->carpentry == 4 ? 'Carpentry' : '' }}<br>
-                                                   {{ @$theater->theater->choreographer == 5 ? 'Choreographer' : ''}}<br>
-                                                   {{ @$theater->theater->costume_design == 6 ? 'Costume Design' : ''}}<br>
-                                                   {{ @$theater->theater->director == 7 ? 'Director' : '' }}<br>
-                                                   {{ @$theater->theater->electrics == 8 ? 'Electrics' : '' }}<br>
-                                                   {{ @$theater->theater->graphics == 9 ? 'Graphics' : '' }}<br>
-                                                   {{ @$theater->theater->house == 10 ? 'House' : '' }}<br>
-                                                   {{ @$theater->theater->light_ops == 11 ? 'Light Ops' : '' }}<br>
-                                                   {{ @$theater->theater->makeup_wig_design == 12 ? 'Make UP and Wig Design' : '' }}<br>
-                                                   {{ @$theater->theater->music_director == 13 ? 'Music Director' : '' }}<br>
+                                                   <div class="row">{{ @$theater->theater->accompanist == 1 ? 'Accompanist' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->administration == 2 ? 'Administration' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->box_office == 3 ? 'Box Office' : ''}}</div>
+                                                   <div class="row">{{ @$theater->theater->carpentry == 4 ? 'Carpentry' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->choreographer == 5 ? 'Choreographer' : ''}}</div>
+                                                   <div class="row">{{ @$theater->theater->costume_design == 6 ? 'Costume Design' : ''}}</div>
+                                                   <div class="row">{{ @$theater->theater->director == 7 ? 'Director' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->electrics == 8 ? 'Electrics' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->graphics == 9 ? 'Graphics' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->house == 10 ? 'House' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->light_ops == 11 ? 'Light Ops' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->makeup_wig_design == 12 ? 'Make UP and Wig Design' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->music_director == 13 ? 'Music Director' : '' }}</div>
                                                </div>
                                                <div class="col-md-4">
-                                                   {{ @$theater->theater->paint_charge == 14 ? 'Paint Charge' : '' }}<br>
-                                                   {{ @$theater->theater->photography == 15 ? 'Photography' : '' }}<br>
-                                                   {{ @$theater->theater->pit_musician == 16 ? 'Pit Musician' : '' }}<br>
-                                                   {{ @$theater->theater->properties == 17 ? 'Properties' : '' }}<br>
-                                                   {{ @$theater->theater->publicity == 18 ? 'Publicity' : '' }}<br>
-                                                   {{ @$theater->theater->running_crew == 19 ? 'Running Crew' : '' }}<br>
-                                                   {{ @$theater->theater->scenic_artist == 20 ? 'Scenic Artist' : '' }}<br>
-                                                   {{ @$theater->theater->set_design == 21 ? 'Set Design' : '' }}<br>
-                                                   {{ @$theater->theater->sewing_wardrobe == 22 ? 'Sewing Wardrobe' : '' }}<br>
-                                                   {{ @$theater->theater->sound == 23 ? 'Sound' : '' }}<br>
-                                                   {{ @$theater->theater->state_management == 24 ? 'State Management' : '' }}<br>
-                                                   {{ @$theater->theater->technical_direction == 25 ? 'Technical Direction' : '' }}<br>
-                                                   {{ @$theater->theater->video == 26 ? 'Video' : '' }}<br>
+                                                   <div class="row">{{ @$theater->theater->paint_charge == 14 ? 'Paint Charge' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->photography == 15 ? 'Photography' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->pit_musician == 16 ? 'Pit Musician' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->properties == 17 ? 'Properties' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->publicity == 18 ? 'Publicity' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->running_crew == 19 ? 'Running Crew' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->scenic_artist == 20 ? 'Scenic Artist' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->set_design == 21 ? 'Set Design' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->sewing_wardrobe == 22 ? 'Sewing Wardrobe' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->sound == 23 ? 'Sound' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->state_management == 24 ? 'State Management' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->technical_direction == 25 ? 'Technical Direction' : '' }}</div>
+                                                   <div class="row">{{ @$theater->theater->video == 26 ? 'Video' : '' }}</div>
                                                </div>
                                            </div>
                                        </div>
@@ -101,17 +101,17 @@
                        <div class="col-md-3">
                            <div class="portlet sale-summary">
                            <div class="portlet-title">
-                               <div class="caption font-red sbold"> Personal Info </div>
+                               <div class="caption font-red sbold"> Theater Info </div>
                            </div>
                            <div class="portlet-body">
                                <ul class="list-unstyled">
                                    <li>
-                                                   <span class="sale-info">Fax
-                                                       <i class="fa fa-img-up"></i>
-                                                   </span>
+                                       <span class="sale-info">Fax
+                                           <i class="fa fa-img-up"></i>
+                                       </span>
                                        <span class="sale-num">
-                                                               <a href="#">{{ $theater->theater->fax }}</a>
-                                                            </span>
+                                           <a href="#">{{ $theater->theater->fax }}</a>
+                                       </span>
                                     </li>
                                     <li>
                                         <span class="sale-info">Website</span>
@@ -125,12 +125,12 @@
                                 <div class="portlet-body">
                                     <ul class="list-unstyled">
                                         <li>
-                                                    <span class="sale-info">Contact Number
-                                                        <i class="fa fa-img-up"></i>
-                                                    </span>
+                                            <span class="sale-info">Contact Number
+                                                <i class="fa fa-img-up"></i>
+                                            </span>
                                             <span class="sale-num">
-                                                                <a href="tel:{{ $theater->theater->contact_number }}">{{ $theater->theater->contact_number }}</a>
-                                                            </span>
+                                            	<a href="tel:{{ $theater->theater->contact_number }}">{{ $theater->theater->contact_number }}</a>
+                                            </span>
                                         </li>
                                         <li>
                                             <span class="sale-info">Telephone</span>
