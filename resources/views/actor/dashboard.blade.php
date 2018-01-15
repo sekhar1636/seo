@@ -247,7 +247,7 @@
                                                 </div>
                                             </div>
                                             <div class="timeline-body-content">
-                                            <span class="font-grey-cascade"> Payment Pending
+                                            <span class="font-grey-cascade"> Payment is pending
 
                                             </span>
                                             </div>

@@ -56,7 +56,6 @@ class ActorController extends Controller
             }
 
         }
-        //$hardcopy = (!empty($hardcop[0]['hardcopy_status'])) ? (!empty($hardcop[0]['hardcopy_status'])) : 0;
         $audition = (!empty($hardcop[0]['audition_status'])) ? (!empty($hardcop[0]['audition_status'])) : 0;
         $resume = (!empty($hardcop[0]['resume_path'])) ? (!empty($hardcop[0]['resume_path'])) : 0;
 
