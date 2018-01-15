@@ -46,7 +46,7 @@ class AdminController extends Controller
             [
                 "question"=>"required|min:3",
                 '_type' => "required",
-				'answer' => "required|min:20"
+				'answer' => "required|min:5"
             ]
         );
 		
@@ -570,8 +570,8 @@ class AdminController extends Controller
     	$validator = \Validator::make($request->all(),
             [
                 "resume"=>"mimes:pdf|max:10000",
-                'first_name' => "required|max:20|min:3",
-                'last_name' => "required|max:20|min:3",
+                'first_name' => "required|max:20|min:1",
+                'last_name' => "required|max:20|min:1",
                 'age'=>'required|max:3|min:1',
                 'gender'=>'required|max:7',
                 'feet'=>'required',
@@ -1171,7 +1171,7 @@ class AdminController extends Controller
     	$validator = \Validator::make($request->all(),
             [
                 "title"=>"required|min:5",
-				'description' => "required|min:20",
+				'description' => "required|min:5",
             ]
         );
 		

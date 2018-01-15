@@ -283,7 +283,7 @@
                                                                     <label class="control-label col-md-3">First
                                                                         Name</label>
                                                                     <div class="col-md-9">
-                                                                        {!! Form::text('first_name',@$actor[0]['first_name'], ['class' => 'form-control', 'placeholder' => ' First Name', 'required'=>'required', 'minlength'=>'2', 'maxlength'=>'20']) !!}
+                                                                        {!! Form::text('first_name',@$actor[0]['first_name'], ['class' => 'form-control', 'placeholder' => ' First Name', 'required'=>'required', 'minlength'=>'1', 'maxlength'=>'20']) !!}
                                                                         <span class="help-block"> {{ $errors->first("first_name") }} </span>
                                                                     </div>
                                                                 </div>
@@ -304,7 +304,7 @@
                                                                     <label class="control-label col-md-3">Last
                                                                         Name</label>
                                                                     <div class="col-md-9">
-                                                                        {!! Form::text('last_name',@$actor[0]['last_name'], ['class' => 'form-control', 'placeholder' => ' Last Name', 'required'=>'required', 'minlength'=>'2', 'maxlength'=>'20']) !!}
+                                                                        {!! Form::text('last_name',@$actor[0]['last_name'], ['class' => 'form-control', 'placeholder' => ' Last Name', 'required'=>'required', 'minlength'=>'1', 'maxlength'=>'20']) !!}
                                                                         <span class="help-block"> {{ $errors->first("last_name") }} </span>
                                                                     </div>
                                                                 </div>
@@ -380,7 +380,7 @@
                                                                 <div class="form-group" {{ $errors->has("school") ? "has-error":"" }}>
                                                                     <label class="control-label col-md-3">School</label>
                                                                     <div class="col-md-9">
-                                                                        {!! Form::text('school', @$actor[0]['school'], ['class' => 'form-control', 'placeholder' => 'School','maxlength'=>'150', 'minlength'=>'3']) !!}
+                                                                        {!! Form::text('school', @$actor[0]['school'], ['class' => 'form-control', 'placeholder' => 'School','maxlength'=>'150', 'minlength'=>'2']) !!}
                                                                         <span class="help-block"> {{ $errors->first("school") }} </span>
                                                                     </div>
                                                                 </div>
