@@ -227,122 +227,7 @@
                                             </div>
                                     </div>
                                     <!-- END TIMELINE ITEM -->
-                                    @if(@$hardcopy == 0 && @$hardcopy != 2)
-                                    <div class="timeline-item">
-                                        <div class="timeline-badge">
-                                            <div class="timeline-icon">
-                                                <i class="icon-picture font-red"></i>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-body inactiveBox">
 
-                                            <div class="timeline-body-head">
-                                                <div class="timeline-body-head-caption">
-                                                    <span class="timeline-body-alerttitle font-red">Photo And Resume</span>
-                                                </div>
-                                                <div class="timeline-body-head-actions">
-                                                    @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
-													   	<a href="{{ route('actor::actorPreview') }}" class="btn btn-primary">Print Application</a>
-													   @endif  
-                                                </div>
-                                            </div>
-                                            <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">Send in a check and a Hard Copy of your Resume & Photo
-                                            </span>
-
-                                            
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @elseif(@$hardcopy == 2)
-                                                                <div class="timeline-item">
-                                                                    <div class="timeline-badge">
-                                                                        <div class="timeline-icon">
-                                                                            <i class="icon-picture font-red"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="timeline-body inactiveBox">
-
-                                                                        <div class="timeline-body-head">
-                                                                            <div class="timeline-body-head-caption">
-                                                                                <span class="timeline-body-alerttitle font-red">Hardcopy Received</span>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">Hardcopy Received Waiting for Strawhat Panelist to approve.
-                                            </span>
-
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                    @endif
-                                    @if(@$hardcopy==1 && @$hardcopy != 2)
-                                        <div class="timeline-item">
-                                            <div class="timeline-badge">
-                                                <div class="timeline-icon">
-                                                    <i class="icon-picture font-red"></i>
-                                                </div>
-                                            </div>
-                                            <div class="timeline-body inactiveBox">
-
-                                                <div class="timeline-body-head">
-                                                    <div class="timeline-body-head-caption">
-                                                        <span class="timeline-body-alerttitle font-red">Incomplete</span>
-
-                                                    </div>
-                                                </div>
-                                                <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">Issue with your paperwork, a StrawHat representative will be reaching out to you shortly
-                                            </span>
-                                                </div>
-                                            </div>
-                                        </div>
-@endif
-                                                            @if(@$hardcopy == 3)
-                                                                <div class="timeline-item">
-                                                                    <div class="timeline-badge">
-                                                                        <div class="timeline-icon">
-                                                                            <i class="icon-picture font-green"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="timeline-body activeBox">
-
-                                                                        <div class="timeline-body-head-actions">
-                                                                            @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
-                                                                                <a href="{{ route('actor::actorPreview') }}" class="btn btn-danger">Print Application</a>
-                                                                            @endif
-                                                                        </div>
-                                                                        <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">Congratulations, You're Selected for Audition.
-                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @endif
-                                                            @if(@$hardcopy == 4)
-                                                                <div class="timeline-item">
-                                                                    <div class="timeline-badge">
-                                                                        <div class="timeline-icon">
-                                                                            <i class="icon-picture font-red"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="timeline-body inactiveBox">
-
-                                                                        <div class="timeline-body-head">
-                                                                            <div class="timeline-body-head-caption">
-                                                                                <span class="timeline-body-alerttitle font-green">Not Selected</span>
-
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">Sorry! You're Not Selected for Audition.
-                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @endif
                                 @else
                                     <div class="timeline-item">
                                         <div class="timeline-badge">
@@ -374,80 +259,119 @@
                             <!-- END TIMELINE ITEM -->
 
                             @endif
-                                        @if(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy==2 && $audition_status==1 && @$roles != '')
-                                            <div class="timeline-item">
-                                                <div class="timeline-badge">
-                                                    <div class="timeline-icon">
-                                                        <i class="icon-credit-card font-green"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="timeline-body activeBox">
+                                                            @if(@$hardcopy == 0)
+                                                                <div class="timeline-item">
+                                                                    <div class="timeline-badge">
+                                                                        <div class="timeline-icon">
+                                                                            <i class="icon-picture font-red"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="timeline-body inactiveBox">
 
-                                                    <div class="timeline-body-head">
-                                                        <div class="timeline-body-head-caption">
-                                                            <span class="timeline-body-alerttitle font-green">Audition</span>
-
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="timeline-body-content">
-                                            <span class="font-grey-cascade"> Selected For Audition
-
+                                                                        <div class="timeline-body-head">
+                                                                            <div class="timeline-body-head-caption">
+                                                                                <span class="timeline-body-alerttitle font-red">Photo And Resume</span>
+                                                                            </div>
+                                                                            <div class="timeline-body-head-actions">
+                                                                                @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
+                                                                                    <a href="{{ route('actor::actorPreview') }}" class="btn btn-primary">Print Application</a>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Send in a check and a Hard Copy of your Resume & Photo
                                             </span>
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                        @elseif(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy==2 && $audition_status==2)
 
-                                            <div class="timeline-item">
-                                                <div class="timeline-badge">
-                                                    <div class="timeline-icon">
-                                                        <i class="icon-credit-card font-red"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="timeline-body inactiveBox">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @elseif(@$hardcopy == 2)
+                                                                <div class="timeline-item">
+                                                                    <div class="timeline-badge">
+                                                                        <div class="timeline-icon">
+                                                                            <i class="icon-picture font-red"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="timeline-body inactiveBox">
 
-                                                    <div class="timeline-body-head">
-                                                        <div class="timeline-body-head-caption">
-                                                            <span class="timeline-body-alerttitle font-red-intense">Audition</span>
+                                                                        <div class="timeline-body-head">
+                                                                            <div class="timeline-body-head-caption">
+                                                                                <span class="timeline-body-alerttitle font-red">Hardcopy Received</span>
+                                                                            </div>
 
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="timeline-body-content">
-                                            <span class="font-grey-cascade"> Come for next year audition
-
+                                                                        </div>
+                                                                        <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Hardcopy Received Waiting for Strawhat Panelist to approve.
                                             </span>
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                        @elseif(\Auth::user()->payment_status == 1 && $verify==1 && $hardcopy!=2 && $audition_status==0)
 
-                                            <div class="timeline-item">
-                                                <div class="timeline-badge">
-                                                    <div class="timeline-icon">
-                                                        <i class="icon-credit-card font-red"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="timeline-body inactiveBox">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @elseif(@$hardcopy == 1)
+                                                                <div class="timeline-item">
+                                                                    <div class="timeline-badge">
+                                                                        <div class="timeline-icon">
+                                                                            <i class="icon-picture font-red"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="timeline-body inactiveBox">
 
-                                                    <div class="timeline-body-head">
-                                                        <div class="timeline-body-head-caption">
-                                                            <span class="timeline-body-alerttitle font-red-intense">Audition</span>
+                                                                        <div class="timeline-body-head">
+                                                                            <div class="timeline-body-head-caption">
+                                                                                <span class="timeline-body-alerttitle font-red">Incomplete</span>
 
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="timeline-body-content">
-                                            <span class="font-grey-cascade"> Your Audition Status is Pending Now. Once Confirmed you will get this information shortly.
-
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Issue with your paperwork, a StrawHat representative will be reaching out to you shortly
                                             </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @elseif(@$hardcopy == 3)
+                                                                <div class="timeline-item">
+                                                                    <div class="timeline-badge">
+                                                                        <div class="timeline-icon">
+                                                                            <i class="icon-picture font-green"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="timeline-body activeBox">
+                                                                        <span class="timeline-body-alerttitle font-green">Selected</span>
+                                                                        <div class="timeline-body-head-actions">
+                                                                            @if(\Auth::user()->payment_status == 1 && @$act->first_name != '' && @$act->last_name != '' && @$act->ethnicity != '' && @$verify == 1 && \Auth::user()->email != '' && @$act->gender != '' && @$act->age != '' && @$act->vocalRange != '' && @$act->feet != '' && @$act->inch != '' && @$act->weight != '' && @$act->hair != '' && @$act->eyes != '' && @$act->from != '' && @$act->to != '' && @$act->auditionType != '')
+                                                                                <a href="{{ route('actor::actorPreview') }}" class="btn btn-success">Print Application</a>
+                                                                            @endif
+                                                                        </div>
+                                                                        <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Congratulations, You're Selected for Audition.
+                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @elseif(@$hardcopy == 4)
+                                                                <div class="timeline-item">
+                                                                    <div class="timeline-badge">
+                                                                        <div class="timeline-icon">
+                                                                            <i class="icon-picture font-red"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="timeline-body inactiveBox">
+
+                                                                        <div class="timeline-body-head">
+                                                                            <div class="timeline-body-head-caption">
+                                                                                <span class="timeline-body-alerttitle font-red">Not Selected</span>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="timeline-body-content">
+                                            <span class="font-grey-cascade">Sorry! You're Not Selected for Audition.
+                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
 
                         </div>
 
