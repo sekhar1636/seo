@@ -485,7 +485,7 @@ class TheaterController extends Controller
         if(\Auth::check()){
 	        if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
 		        $theaters = \App\User::join('theaters','theaters.user_id', '=', 'users.id')
-		            ->where('users.payment_status',1)->orderBy('theaters.name', 'asc')
+		            ->where('users.payment_status',1)->orderBy('theaters.company_name', 'asc')
 		            ->get();
 		
 		        return view('theater.theaterSearch')->with([

@@ -253,10 +253,10 @@ class StaffController extends Controller
         if(\Auth::check()){
 	        if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
 		        $staffs = \App\User::join('staff','staff.user_id', '=', 'users.id')
-		            ->where('users.payment_status',1)->orderBy('staff.name', 'asc')
+		            ->where('users.payment_status',1)->orderBy('users.name', 'asc')
 		            ->get();
-		        return view('staff.staffsearch')->with([
-		            'staffs'=>$staffs,
+		        return view('staff.staffSearch')->with([
+		            'staffs'	  => $staffs,
 		            'staffactive' => 'active'
 		        ]);
             }
