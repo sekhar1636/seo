@@ -600,71 +600,17 @@ class ActorController extends Controller
     /*getting actors in actor view*/
     public function getActors(){
         if(\Auth::check()){
-            if(\Auth::user()->payment_status==1) {
-
+            if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
                 $actors = \App\User::join('actors', 'actors.user_id', '=', 'users.id')
-                    ->where('payment_status', 1)->whereNotNull('photo_path')->orderBy('first_name', 'asc')
+                    ->where('users.payment_status', 1)->whereNotNull('actors.photo_path')->orderBy('actors.first_name', 'asc')
                     ->get();
 
-                $actorList = "";
-                /*Loop through the Actors*/
-
-                /*foreach($actors as $actor){
-
-                    $mixClass = $actor->gender . ' ';
-                    $mixClass .= $this->prepareData($actor->ethnicity) . ' ';
-                    $mixClass .= $this->prepareData($actor->misc) . ' ';
-                    $mixClass .= $this->prepareData($actor->technical) . ' ';
-                    $mixClass .= $this->prepareData($actor->dance) . ' ';
-                    $mixClass .= $this->prepareData($actor->jobType) . ' ';
-                    $mixClass .= $this->prepareData($actor->instrument). ' ';
-
-                    //contion for employment availability
-                    //imediate
-                    $imediate = $this->check_in_range($actor->from, $actor->to, date('Y-m-d'), date('Y-m-d'));
-                    if($imediate) $mixClass .= $this->prepareData("Immediate") . ' ';
-
-                    //for getting summer
-                    $sd = date("Y-m-d", strtotime("third monday".date("Y-05")));
-                    $ed = date("Y-m-d", strtotime("first monday ".date("Y-09")));
-                    $summer = $this->check_in_range($actor->from, $actor->to, $sd, $ed);
-                    if($summer) $mixClass .= $this->prepareData("Summer") . ' ';
-
-                    //for getting fall
-                    $fd = date("Y-m-d", strtotime("first monday ".date("Y-09")));
-                    $fed = date("Y-12-25");
-                    $fall = $this->check_in_range($actor->from, $actor->to, $fd, $fed);
-                    if($fall) $mixClass .= $this->prepareData("Fall") . ' ';
-
-                    //for getting next year
-                    $ny = date("Y-m-d", strtotime("+1 year".date("Y-01-01")));
-                    $eny = date("Y-m-d", strtotime("+1 year".date("Y-12-31")));
-                    $next_year = $this->check_in_range($actor->from, $actor->to, $ny, $eny);
-                    if($next_year) $mixClass .= $this->prepareData("Next Year") . ' ';
-
-                    $first_name = $actor->first_name;
-                    $last_name = $actor->last_name;
-                    $auditionType = preg_replace('/\s+/', '', $actor->auditionType);
-                    $skill_vocal = preg_replace('/\s+/', '', $actor->vocalRange);
-                    $from = $actor->from;
-                    $to = $actor->to;
-                    $user_id = $actor->user_id;
-                    if($actor->photo_url){
-                        $photo_url = $actor->photo_url ;
-                    }else{
-                        $photo_url = asset('assets/images/photos/default-medium.jpg');
-                    }
-                    $height = (int) $actor['physical']['ht'];
-
-
-                    $actorList = array( "first_name"=>$first_name, "last_name"=>$last_name, "auditionType"=>$auditionType, "from"=>$from, "to"=>$to, "photo_url"=>$photo_url, "user_id"=>$user_id, "skill_vocal"=>$skill_vocal, "mix_class"=>$mixClass );
-
-
-                }*/
-                return view('actor.actorSearch1')->with([
-                    'actorList' => $actors,
-                    'actoractive' => 'active'
+                return view('actor.actorSearch')->with([
+                    'actorList' 	=> $actors,
+                    'actoractive' 	=> 'active'
                 ]);
+            }else{
+            	return redirect()->route('getIndex')->with('error_message', 'You must have a paid subscription');
             }
         }
         else{

@@ -17,8 +17,6 @@ use Validator;
 use Carbon\Carbon;
 use App\ActorRole;
 
-
-
 class StaffController extends Controller
 {
     public function getProfile(){
@@ -253,16 +251,14 @@ class StaffController extends Controller
 
     public function getStaff(){
         if(\Auth::check()){
-
-        if(\Auth::user()->payment_status==1)
-        {
-        $staffs = \App\User::join('staff','staff.user_id', '=', 'users.id')
-            ->where('payment_status',1)->orderBy('name', 'asc')
-            ->get();
-        return view('staff.staffsearch')->with([
-            'staffs'=>$staffs,
-            'staffactive' => 'active'
-        ]);
+	        if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
+		        $staffs = \App\User::join('staff','staff.user_id', '=', 'users.id')
+		            ->where('users.payment_status',1)->orderBy('staff.name', 'asc')
+		            ->get();
+		        return view('staff.staffsearch')->with([
+		            'staffs'=>$staffs,
+		            'staffactive' => 'active'
+		        ]);
             }
         }
         else{
@@ -293,7 +289,6 @@ class StaffController extends Controller
             'roles'=>$roles
         ]);
     }
-
 
     public function postPhotoUpdate(Request $request)
     {
@@ -393,7 +388,6 @@ class StaffController extends Controller
         }else{
             return redirect()->back()->with('error_message', 'Picture not uploaded. Try again!');
         }
-
     }
 
     public function postEditPassword(Request $request)
@@ -416,14 +410,12 @@ class StaffController extends Controller
             \Auth::user()->password = bcrypt($request->get('new_password'));
             \Auth::user()->update();
             return redirect()->back()->with('success_message', 'Password successfully updated.');
-        }
-        else
-        {
+        }else{
             return redirect()->back()->with('error_message', 'Incorrect password! Please enter correct password.');
         }
     }
     
-       /**for state list**/
+   /**for state list**/
     public function getStateWithSelected(){
         $states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado ","Connecticut ","Delaware ","District of Columbia ","Florida ",
             "Georgia ","Hawaii ","Idaho ","Illinois ","Indiana ","Iowa ","Kansas ","Kentucky ","Louisiana ","Maine ","Maryland ","Massachusetts ",
