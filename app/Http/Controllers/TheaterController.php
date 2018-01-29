@@ -19,12 +19,9 @@ class TheaterController extends Controller
 {
     public function getProfile(){
         $verify = '';
-        if(\Auth::user()->verified == 1)
-        {
+        if(\Auth::user()->verified == 1){
             $verify = 1;
-        }
-        else
-        {
+        }else{
             $verify = 0;
         }
         return view('theater.dashboard')->with([
@@ -485,18 +482,16 @@ class TheaterController extends Controller
     }
 
     public function getTheater(){
-        if(\Auth::check())
-        {
-            if(\Auth::user()->payment_status==1)
-            {
-        $theaters = \App\User::join('theaters','theaters.user_id', '=', 'users.id')
-            ->where('payment_status',1)->orderBy('name', 'asc')
-            ->get();
-
-        return view('theater.theaterSearch')->with([
-            'theaters'=>$theaters,
-            'theateractive' => 'active'
-        ]);
+        if(\Auth::check()){
+	        if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
+		        $theaters = \App\User::join('theaters','theaters.user_id', '=', 'users.id')
+		            ->where('users.payment_status',1)->orderBy('theaters.company_name', 'asc')
+		            ->get();
+		
+		        return view('theater.theaterSearch')->with([
+		            'theaters'		=> $theaters,
+		            'theateractive' => 'active'
+		        ]);
             }
             else{
                 return redirect()->route('getStaticPage',['slug' => 'theater'])->with('error_message','Sorry');
@@ -525,5 +520,4 @@ class TheaterController extends Controller
             'theater'=>$theater,
         ]);
     }
-
 }

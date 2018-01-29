@@ -31,3 +31,7 @@
 	color: #fff;
 	font-weight: 300;
 }
+
+.search-content-3 .tile-container {
+    min-height: 440px;
+}
