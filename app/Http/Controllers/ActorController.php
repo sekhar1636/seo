@@ -735,33 +735,37 @@ class ActorController extends Controller
         $destinationPath = 'assets/photos/actor'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
-        $fileName = trim(\Auth::user()->name).rand(11111,99999).'.'.$extension; // renameing image
-        $file->move(public_path($destinationPath), $fileName);
+        if($extension == "jpg" || $extension == "jpeg" || $extension == "png" || $extension == "bmp") {
+            $fileName = trim(\Auth::user()->name) . rand(11111, 99999) . '.' . $extension; // renameing image
+            $file->move(public_path($destinationPath), $fileName);
 
 
-        $actor->precrop_path = $destinationPath.'/'.$fileName;
-        $actor->precrop_url = $destinationPath.'/'.$fileName;
+            $actor->precrop_path = $destinationPath . '/' . $fileName;
+            $actor->precrop_url = $destinationPath . '/' . $fileName;
 
-        if(\Auth::user()->Actor){
+            if (\Auth::user()->Actor) {
 
-            if($actor->update()){
-                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-            }else{
-                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+                if ($actor->update()) {
+                    return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive', 'active');
+                } else {
+                    return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+                }
+
+            } else {
+                $actor->user_id = \Auth::user()->id;
+                if ($actor->save()) {
+                    return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive', 'active');
+                } else {
+                    return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+                }
+
             }
 
-        }else{
-            $actor->user_id = \Auth::user()->id;
-            if($actor->save()){
-                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-            }else{
-                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
-            }
 
         }
-
-
-
+        else{
+            return redirect()->back()->with('error_message', 'Supported File types .jpg, .png, .bmp only!');
+        }
     }
 
     public function actoraudifields(Request $request)
