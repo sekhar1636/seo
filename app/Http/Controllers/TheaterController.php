@@ -38,7 +38,7 @@ class TheaterController extends Controller
 
     protected function products()
     {
-        $products = Product::latest()->orderBy('id', 'desc')->get();
+        $products = Product::latest()->where('status',1)->orderBy('id', 'desc')->get();
         $states = $this->getStateWithSelected();
         return view("theater.products",compact('products'))->with(['states' => $states]);
     }
