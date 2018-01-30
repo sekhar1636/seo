@@ -350,7 +350,7 @@ class TheaterController extends Controller
         else
         {
             $membershipPeriods = MembershipPeriod::latest()->where('type','Theater')->where('status',1)->orderBy('id', 'desc')->get();
-            $products = Product::orderBy('id', 'desc')->get();
+            $products = Product::where('status',1)->orderBy('id', 'desc')->get();
             //$products = Product::findorfail(2);
             //$n = $products->product_variant;
             //dd($n);
