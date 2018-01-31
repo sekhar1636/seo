@@ -319,29 +319,34 @@ class StaffController extends Controller
         $destinationPath = 'files/profiles/staff'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
-        $fileName = \Auth::user()->name.rand(11111,99999).'.'.$extension; // renameing image
-        $file->move(public_path($destinationPath), $fileName);
+        if($extension == "jpg" || $extension == "jpeg" || $extension == "png" || $extension == "bmp") {
+            $fileName = \Auth::user()->name . rand(11111, 99999) . '.' . $extension; // renameing image
+            $file->move(public_path($destinationPath), $fileName);
 
 
-        $staff->precrop_path = $destinationPath.'/'.$fileName;
-        $staff->precrop_url = $destinationPath.'/'.$fileName;
+            $staff->precrop_path = $destinationPath . '/' . $fileName;
+            $staff->precrop_url = $destinationPath . '/' . $fileName;
 
-        if(!empty($staff_info)){
+            if (!empty($staff_info)) {
 
-            if($staff->update()){
-                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-            }else{
-                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+                if ($staff->update()) {
+                    return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive', 'active');
+                } else {
+                    return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+                }
+
+            } else {
+                $staff->user_id = \Auth::user()->id;
+                if ($staff->save()) {
+                    return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive', 'active');
+                } else {
+                    return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+                }
+
             }
-
-        }else{
-            $staff->user_id = \Auth::user()->id;
-            if($staff->save()){
-                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-            }else{
-                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
-            }
-
+        }
+        else{
+            return redirect()->back()->with('error_message', 'Supported File types .jpg, .png, .bmp only!');
         }
     }
 

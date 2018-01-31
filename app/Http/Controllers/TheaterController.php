@@ -231,29 +231,34 @@ class TheaterController extends Controller
         $destinationPath = 'files/profiles/theater'; // upload path
         $file = $request->file('photo');
         $extension = $file->getClientOriginalExtension();
-        $fileName = \Auth::user()->name.rand(11111,99999).'.'.$extension; // renameing image
-        $file->move(public_path($destinationPath), $fileName);
+        if($extension == "jpg" || $extension == "jpeg" || $extension == "png" || $extension == "bmp") {
+            $fileName = \Auth::user()->name . rand(11111, 99999) . '.' . $extension; // renameing image
+            $file->move(public_path($destinationPath), $fileName);
 
 
-        $theater->precrop_path = $destinationPath.'/'.$fileName;
-        $theater->precrop_url = $destinationPath.'/'.$fileName;
+            $theater->precrop_path = $destinationPath . '/' . $fileName;
+            $theater->precrop_url = $destinationPath . '/' . $fileName;
 
-        if(!empty($theater_info)){
+            if (!empty($theater_info)) {
 
-            if($theater->update()){
-                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-            }else{
-                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+                if ($theater->update()) {
+                    return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive', 'active');
+                } else {
+                    return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+                }
+
+            } else {
+                $theater->user_id = \Auth::user()->id;
+                if ($theater->save()) {
+                    return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive', 'active');
+                } else {
+                    return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+                }
+
             }
-
-        }else{
-            $theater->user_id = \Auth::user()->id;
-            if($theater->save()){
-                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-            }else{
-                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
-            }
-
+        }
+        else{
+            return redirect()->back()->with('error_message', 'Supported File types .jpg, .png, .bmp only!');
         }
     }
 
