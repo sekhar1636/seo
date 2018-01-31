@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterTablePaymentForVariantId extends Migration
+class AlterTableTheaterDetails extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AlterTablePaymentForVariantId extends Migration
      */
     public function up()
     {
-        Schema::table('payments', function(Blueprint $table){
-           $table->integer('varient_id')->after('price')->nullable();
+        Schema::table('theaters', function(Blueprint $table)
+        {
+           $table->string('company_description')->after('website')->nullable();
         });
     }
 

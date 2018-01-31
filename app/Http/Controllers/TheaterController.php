@@ -43,7 +43,8 @@ class TheaterController extends Controller
         return view("theater.products",compact('products'))->with(['states' => $states]);
     }
 
-    public function productBuy(Request $request){
+    public function productBuy(Request $request)
+    {
         $description = "Products Invoice: ";
         $totalPrice = 0;
         $size = sizeof($request->products);
@@ -94,30 +95,27 @@ class TheaterController extends Controller
 
     }
 
-    public function edit(){
-
+    public function edit()
+    {
         $theaterid = \Auth::user()->id;
         $theater = Theater::where('user_id',$theaterid)->get();
         return view('theater.editprofile')->with(['theater'=>$theater]);
-
     }
 
     public function update(Request $request)
     {
-        $validator = \Validator::make($request->all(),
-            [
-                ]);
+        $validator = \Validator::make($request->all(),[]);
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
         }
+        
         if($request->tes == "PUT"){
             $theater = Theater::where('user_id',\Auth::user()->id)->first();
-        }
-        else
-        {
+        }else{
             $theater = new Theater;
         }
 
@@ -131,6 +129,7 @@ class TheaterController extends Controller
         $theater->email = $request->email;
         $theater->contact_number = $request->contact_number;
         $theater->website = $request->website;
+        $theater->company_description = $request->company_description;
         $theater->mailing = $request->mailing;
         $theater->telephone = $request->telephone;
         $theater->fax = $request->fax;
@@ -188,7 +187,8 @@ class TheaterController extends Controller
         }
     }
 
-    public function theaterPhotoDelete(){
+    public function theaterPhotoDelete()
+    {
         $theater = Theater::where('user_id', \Auth::User()->id)->first();
         unlink(public_path().'/'.$theater->precrop_path);
         $theater->precrop_url = null;
@@ -257,7 +257,8 @@ class TheaterController extends Controller
         }
     }
 
-    public function postCropPhotoUpdate(Request $request){
+    public function postCropPhotoUpdate(Request $request)
+    {
         $targ_w = $targ_h = 230;
         $jpeg_quality = 90;
         $theater_info = Theater::where('user_id',\Auth::user()->id)->get();
@@ -359,7 +360,8 @@ class TheaterController extends Controller
         }
     }
 
-    public function paymentStore(Request $request){
+    public function paymentStore(Request $request)
+    {
         $request->all();
         $validator = \Validator::make($request->all(),
             [
@@ -437,9 +439,7 @@ class TheaterController extends Controller
                     $sub->save();
 
                 }
-            }
-            else
-            {
+            }else{
 
                 $stripe_sub = new SubscriptionPackage;
                 $stripe_sub->user_id = \Auth::user()->id;
@@ -450,7 +450,6 @@ class TheaterController extends Controller
                 $stripe_sub->trial_ends_at = $membershipPeriod->start_date;
                 $stripe_sub->ends_at = $membershipPeriod->end_date;
                 $stripe_sub->save();
-
             }
 
             //user table
@@ -461,27 +460,28 @@ class TheaterController extends Controller
             if($request->products)
             {
                 foreach($request->products AS $prod){
-                $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
-                $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
-
-                if(!empty($varid && $proid)) {
-                    $product = Product::findOrFail($proid);
-                    $varient = ProductVariant::findOrFail($varid);
-
-                    $payment = new Payment;
-                    $payment->user_id = \Auth::user()->id;
-                    $payment->transaction_id = $request->token;
-                    $payment->product_id = (!empty($product['id'])) ? $product['id'] : '0';
-                    $payment->price = (!empty($varient['price'])) ? $varient['price'] : '0';
-                    $payment->save();
-                }
-			}
+	                $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
+	                $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
+	
+	                if(!empty($varid && $proid)) {
+	                    $product = Product::findOrFail($proid);
+	                    $varient = ProductVariant::findOrFail($varid);
+	
+	                    $payment = new Payment;
+	                    $payment->user_id = \Auth::user()->id;
+	                    $payment->transaction_id = $request->token;
+	                    $payment->product_id = (!empty($product['id'])) ? $product['id'] : '0';
+	                    $payment->price = (!empty($varient['price'])) ? $varient['price'] : '0';
+	                    $payment->save();
+	                }
+				}
             }
             return redirect()->route('theater::theaterProfile')->with('success_message', 'Successfully subscribed.');
         }
     }
 
-    public function getTheater(){
+    public function getTheater()
+    {
         if(\Auth::check()){
 	        if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
 		        $theaters = \App\User::join('theaters','theaters.user_id', '=', 'users.id')
@@ -502,8 +502,8 @@ class TheaterController extends Controller
         }
     }
     /**for preparing data**/
-    public static function prepareData($data){
-
+    public static function prepareData($data)
+    {
         if($data){
             $removeWhitespace = preg_replace('/\s+/', '', $data);
             $removeComma = str_replace(',', ' ', $removeWhitespace);
@@ -513,6 +513,7 @@ class TheaterController extends Controller
         }
 
     }
+    
     public function view($id)
     {
         $theater = User::findorfail($id);
