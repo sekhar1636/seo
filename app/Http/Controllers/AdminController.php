@@ -669,6 +669,7 @@ class AdminController extends Controller
         $theater->email = $request->email;
         $theater->contact_number = $request->contact_number;
         $theater->website = $request->website;
+        $theater->company_description = $request->company_description;
         $theater->mailing = $request->mailing;
         $theater->telephone = $request->telephone;
         $theater->fax = $request->fax;

@@ -254,6 +254,19 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+													    <div class="row">
+													        <div class="col-md-12">
+													            <div class="form-group">
+														            <div class="col-md-8 col-md-offset-2">
+													                <label class="control-label"><strong>Company Description</strong></label>
+													                    {!! Form::textarea('company_description',isset($theater['company_description']) ? $theater['company_description'] : null, ['class' => 'form-control', 'placeholder' => 'company_description']) !!}
+														            </div>
+													        	</div>
+													    	</div>
+													    </div>
+
+
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group" {{ $errors->has("company_name") ? "has-error":"" }}'>
