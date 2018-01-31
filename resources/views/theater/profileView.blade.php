@@ -32,11 +32,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-md-7 profile-info">
+                                    <div class="col-md-12 profile-info">
                                         <h1 class="font-green sbold uppercase">{{$theater->name}}</h1>
-                                        </p>
-                                        <a href="mailto:{{$theater->email}}">{{$theater->email}} </a>
-                                        </p>
+                                        <p>{{ $theater->theater->company_description }}</p>
                                         <p>
                                             <a href="mailto:{{$theater->email_videos}}">{{$theater->email_videos}}</a>
                                         </p>
@@ -146,54 +144,54 @@
                                </div>
                             </div>
 
-                       <div class="col-md-3">
-                           <div class="portlet sale-summary">
-                           <div class="portlet-title">
-                               <div class="caption font-red sbold"> Theater Info </div>
-                           </div>
-                           <div class="portlet-body">
-                               <ul class="list-unstyled">
-                                   <li>
-                                       <span class="sale-info">Fax
-                                           <i class="fa fa-img-up"></i>
-                                       </span>
-                                       <span class="sale-num">
-                                           <a href="#">{{ $theater->theater->fax }}</a>
-                                       </span>
-                                    </li>
-                                    <li>
-                                        <span class="sale-info">Website</span>
-                                        <span class="sale-num"><a href="https://{{ $theater->theater->website }}" target="_blank">{{ $theater->name }}'s Website</a> </span>
-                                    </li>
-                                </ul>
-                            </div>
-                                <div class="portlet-title">
-                                    <div class="caption font-red sbold"> Contact Info </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <span class="sale-info">Contact Number
-                                                <i class="fa fa-img-up"></i>
-                                            </span>
-                                            <span class="sale-num">
-                                            	<a href="tel:{{ $theater->theater->contact_number }}">{{ $theater->theater->contact_number }}</a>
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span class="sale-info">Telephone</span>
-                                            <span class="sale-num"><a href="tel:{{ $theater->theater->telephone }}">{{ $theater->theater->telephone }}</a> </span>
-                                        </li>
-                                        <li>
-                                            <span class="sale-info">Mailing</span>
-                                            <span class="sale-num">{{ @$theater->theater->mailing.' - '.@$theater->theater->zipcode }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+	                       <div class="col-md-3">
+	                           <div class="portlet sale-summary">
+		                            <div class="portlet-title">
+		                                <div class="caption font-red sbold"> Contact Info </div>
+		                            </div>
+		                            <div class="portlet-body">
+		                                <ul class="list-unstyled">
+		                                    <li>
+		                                        <span class="sale-info">Website</span>
+		                                        <span class="sale-num"><a href="https://{{ $theater->theater->website }}" target="_blank">{{ $theater->theater->website }}</a> </span>
+		                                    </li>
+			                                <li>
+		                                        <span class="sale-info">Contact Email<i class="fa fa-envelope-o"></i></span>
+		                                        <span class="sale-num" style="font-size:15px;">
+		                                        	 <a href="mailto:{{$theater->email}}">{{$theater->email}} </a>
+		                                        </span>
+		                                    </li>
+		                                    <li>
+		                                        <span class="sale-info">Contact Number<i class="fa fa-phone"></i></span>
+		                                        <span class="sale-num">
+		                                        	<a href="tel:{{ $theater->theater->contact_number }}">{{ $theater->theater->contact_number }}</a>
+		                                        </span>
+		                                    </li>
+		                                    <li>
+		                                        <span class="sale-info">Telephone<i class="fa fa-phone"></i></span>
+		                                        <span class="sale-num"><a href="tel:{{ $theater->theater->telephone }}">{{ $theater->theater->telephone }}</a> </span>
+		                                    </li>
+		                                   <li>
+		                                       <span class="sale-info">Fax<i class="fa fa-img-up"></i></span>
+		                                       <span class="sale-num">
+		                                           <a href="#">{{ $theater->theater->fax }}</a>
+		                                       </span>
+		                                    </li>
+		                                    <li>
+		                                        <span class="sale-info">Mailing<i class="fa fa-map-marker"></i></span>
+		                                        <span class="sale-num" style="font-size:15px;">
+		                                        	{{ @$theater->theater->mailing.' - '.@$theater->theater->zipcode }}
+		                                        </span>
+		                                    </li>
+		                                </ul>
+		                            </div>
+		                        </div>
+	                        </div>
+                        
+                        
+                        </div><!--END .row-->
+                    </div><!--END .tab-pane active" id="tab_1_1"-->
+                    
                     <!--tab_1_2-->
                 </div>
             </div>
