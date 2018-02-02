@@ -971,8 +971,9 @@ class AdminController extends Controller
     }
 	
 	public function actorPhotoDelete($id){
-        $actor = \App\Actor::where('user_id', $id)->first(); 
+        $actor = \App\Actor::where('user_id', $id)->first();
         unlink(public_path().'/'.$actor->precrop_path);
+        unlink(public_path().'/'.$actor->photo_path);
         $actor->precrop_url = null;
         $actor->precrop_path = null;
         $actor->photo_path = null;
@@ -986,6 +987,7 @@ class AdminController extends Controller
     public function theaterPhotoDelete($id){
         $theater = Theater::where('user_id', $id)->first();
         unlink(public_path().'/'.$theater->precrop_path);
+        unlink(public_path().'/'.$theater->photo_path);
         $theater->precrop_url = null;
         $theater->precrop_path = null;
         $theater->photo_url = null;
@@ -999,6 +1001,7 @@ class AdminController extends Controller
     public function staffPhotoDelete($id){
         $staff = Staff::where('user_id', $id)->first();
         unlink(public_path().'/'.$staff->precrop_path);
+        unlink(public_path().'/'.$staff->photo_path);
         $staff->precrop_url = null;
         $staff->precrop_path = null;
         $staff->photo_url = null;

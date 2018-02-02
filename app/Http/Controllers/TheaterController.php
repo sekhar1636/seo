@@ -198,6 +198,7 @@ class TheaterController extends Controller
     {
         $theater = Theater::where('user_id', \Auth::User()->id)->first();
         unlink(public_path().'/'.$theater->precrop_path);
+        unlink(public_path().'/'.$theater->photo_path);
         $theater->precrop_url = null;
         $theater->precrop_path = null;
         $theater->photo_url = null;

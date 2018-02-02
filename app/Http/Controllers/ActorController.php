@@ -621,9 +621,11 @@ class ActorController extends Controller
     public function actorPhotoDelete(){
         $actor = Actor::where('user_id', \Auth::User()->id)->first();
         unlink(public_path().'/'.$actor->precrop_path);
-        //dd(public_path().'before   /     after'.$actor->precrop_path);
+        unlink(public_path().'/'.$actor->photo_path);
         $actor->precrop_url = null;
         $actor->precrop_path = null;
+        $actor->photo_path = null;
+        $actor->photo_url = null;
 
         if($actor->update()){
             return redirect()->back()->with('success_message', 'Picture successfully deleted.')->with('tabactive','active');

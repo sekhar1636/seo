@@ -269,6 +269,7 @@ class StaffController extends Controller
     public function staffPhotoDelete(){
         $staff = Staff::where('user_id', \Auth::User()->id)->first();
         unlink(public_path().'/'.$staff->precrop_path);
+        unlink(public_path().'/'.$staff->photo_path);
         $staff->precrop_url = null;
         $staff->precrop_path = null;
         $staff->photo_path = null;
