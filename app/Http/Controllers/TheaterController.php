@@ -50,19 +50,25 @@ class TheaterController extends Controller
         $size = sizeof($request->products);
         if($size)
         {
+            $totalPric = [];
             foreach($request->products as $prod){
                 $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
                 $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
                 if($proid && $varid) {
                     $product = Product::findOrFail($proid);
                     $varient = ProductVariant::findorFail($varid);
-                    $totalPrice = $totalPrice + $prod['price'] * $varient['price'];
+                    $productPrice = $prod['price'] * $varient['price'];
+                    $totalPric[] = $prod['price'] * $varient['price'];
+                    //$totalPrice = $totalPrice + $productPrice;
+                    //dd($totalPrice.' '.$prod['price'].' '.$varient['price']);
+                    // $tp[] = $totalPrice;
                     $description .= "\nProduct: " . $product->name . " Price: " . $prod['price'] * $varient['price'];
                 }
             }
 
         }
-        $totalPrice = $totalPrice*100;
+        $tp = array_sum($totalPric);
+        $totalPrice = ($totalPrice + $tp)*100;
         \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $result = \Stripe\Charge::create(array(
             "amount" => $totalPrice,
@@ -81,12 +87,13 @@ class TheaterController extends Controller
                 if($proid && $varid){
                     $product = Product::findOrFail($proid);
                     $varient = ProductVariant::findorFail($varid);
+                    $varientcountprice = (!empty($varient['price'])) ? $prod['price'] * $varient['price'] : '0';
                     $payment = new Payment;
                     $payment->user_id = \Auth::user()->id;
                     $payment->transaction_id = $result->id;
                     $payment->product_id = $product->id;
                     $payment->varient_id = $varient->id;
-                    $payment->price = $prod['price'] * $varient['price'];
+                    $payment->price = $varientcountprice; //$prod['price'] * $varient['price'];
                     $payment->save();
                 }
             }
@@ -388,6 +395,7 @@ class TheaterController extends Controller
 
         if($request->products)
         {
+            $totalPric = [];
             foreach($request->products AS $prod)
             {
                 $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
@@ -396,13 +404,19 @@ class TheaterController extends Controller
                 {
                     $product = Product::findOrFail($proid);
                     $varient = ProductVariant::findorFail($varid);
-                    $totalPrice = $totalPrice + $prod['price'] * $varient['price'];
-                    $description.= "\nProduct: ".$product->name." ".$varient['product_variant']." Price: ".$varient['price'];
+                    $productPrice = $prod['price'] * $varient['price'];
+                    $totalPric[] = $prod['price'] * $varient['price'];
+                    //$totalPrice = $totalPrice + $productPrice;
+                    //dd($totalPrice.' '.$prod['price'].' '.$varient['price']);
+                   // $tp[] = $totalPrice;
+                    $description.= "\nProduct: ".$product->name." ".$varient['product_variant']." Price: ".$productPrice['price'];
                 }
-            }
-        }
 
-        $totalPrice = $totalPrice*100;
+            }
+
+        }
+        $tp = array_sum($totalPric);
+        $totalPrice = ($totalPrice + $tp)*100;
         \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $result = \Stripe\Charge::create(array(
             "amount" => $totalPrice,
@@ -425,7 +439,7 @@ class TheaterController extends Controller
             $payment->user_id = \Auth::user()->id;
             $payment->transaction_id = $result->id;
             $payment->membership_period_id = $membershipPeriod->id;
-            $payment->price = $membershipPeriod->price;
+            $payment->price = $totalPrice/100;
             $payment->save();
 
             //subscription table
@@ -471,12 +485,12 @@ class TheaterController extends Controller
 	                if(!empty($varid && $proid)) {
 	                    $product = Product::findOrFail($proid);
 	                    $varient = ProductVariant::findOrFail($varid);
-	
+                        $varientcountprice = (!empty($varient['price'])) ? $prod['price'] * $varient['price'] : '0';
 	                    $payment = new Payment;
 	                    $payment->user_id = \Auth::user()->id;
 	                    $payment->transaction_id = $request->token;
 	                    $payment->product_id = (!empty($product['id'])) ? $product['id'] : '0';
-	                    $payment->price = (!empty($varient['price'])) ? $varient['price'] : '0';
+	                    $payment->price = $varientcountprice;
 	                    $payment->save();
 	                }
 				}
