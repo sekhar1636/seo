@@ -1276,7 +1276,7 @@ class AdminController extends Controller
 			$membershipPeriod = MembershipPeriod::findOrFail($id);
 			$membershipPeriod->name = $request->get('name');
 			$membershipPeriod->price = $request->get('price');
-			$membershipPeriod->type = $request->get('type');
+			$membershipPeriod->type = $request->get('type')!=Null ? $request->get('type') : $membershipPeriod->type;
 			$membershipPeriod->start_date = date("Y-m-d",strtotime($request->get('start_date')));
 			$membershipPeriod->end_date = date("Y-m-d",strtotime($request->get('end_date')));
 			$membershipPeriod->status = $request->get('status');
