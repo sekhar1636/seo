@@ -31,7 +31,6 @@ Route::post('/forgot', ['uses' =>  "PasswordController@postForgot"]);
 Route::get('reset/{id}', ['as'=>'getReset', 'uses'=>'PasswordController@getReset']);
 Route::post('reset/{id}', ['as'=>'postReset','uses'=>'PasswordController@postReset']);
 
-Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
 Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@view']);
 Route::get('/staffs/{id}/view',['as'=>'getStaffView', 'uses'=>'StaffController@view']);
 Route::get('/theaters/{id}/view',['as'=>'getTheaterView','uses'=>'TheaterController@view']);
@@ -44,12 +43,13 @@ Route::get('/secret-cookie', function() {
 
 
 Route::group(['middleware' => ['auth']], function () {
+	
+	/* SEARCH */
+	Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
     Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'TheaterController@getTheater']);
 	Route::get('/staffs', ['as'=>'getStaffs', 'uses'=>'StaffController@getStaff']);
 
-	// Route::get('/role', ['as'=>'getRole', 'uses'=>'CommonController@getRole']);
-	// Route::post('/role', ['as'=>'postRole', 'uses'=>'CommonController@postRole']);
-
+	/* LOGOUT*/
 	Route::get('/logout', ['as' => 'logout', 'uses' =>  "LoginController@logout"]);
 
 	Route::group(['prefix'=>'actor'], function (){
