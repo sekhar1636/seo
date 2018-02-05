@@ -78,7 +78,10 @@ class CronForStraw extends Command
 		$users = $valid_IDs = $valid_user_IDs = $valid_users = [];
 		
 		/*Get Valid Membership Periods*/
-		$valid_periods = MembershipPeriod::where('end_date', '>=', $date_now)->get();
+		$valid_periods = MembershipPeriod::
+			where('end_date', '>=', $date_now)
+			->where('start_date', '<=', $date_now)
+			->get();
 		
 		if($valid_periods){
 			foreach($valid_periods as $valid_period){
