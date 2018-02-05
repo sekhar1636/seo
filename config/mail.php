@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'host' => 'smtp.sendgrid.net',
+	'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'port' => 587,
+	'port' => env('MAIL_PORT', '587'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => array('address' => 'mail@algoflux.com', 'name' => 'StrawHat'),
+    'from' => array('address' => 'noreply@strawhat-auditions.com', 'name' => 'StrawHat'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'encryption' => 'tls',
+	'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
     /*
     |--------------------------------------------------------------------------
@@ -79,8 +79,8 @@ return [
     | connection. You may also set the "password" value below this one.
     |
     */
-
-    'username' => 'azure_9ad48071c423ed6d788ad3d4bc86febe@azure.com',
+    
+	'username' => env('MAIL_USERNAME', 'test'),
 
     /*
     |--------------------------------------------------------------------------
@@ -92,8 +92,8 @@ return [
     | connection so that the application will be able to send messages.
     |
     */
-
-    'password' => 'xjlJLj8T2cZZ1RF',
+    
+	'password' => env('MAIL_PASSWORD', ''),
 
     /*
     |--------------------------------------------------------------------------

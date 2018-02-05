@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App;
 use Auth;
 
-class Misc
-{
+class Misc{
+	
 	public static $accountTypes = [
-		'actor' => 'Actor',
-		'staff' => 'Staff/Technician',		
-		'theater'=>'Theater'
+		'actor'   => 'Actor',
+		'staff'   => 'Staff/Technician',		
+		'theater' => 'Theater'
 	];
 
 	public static $primary_sought = [
@@ -40,19 +40,19 @@ class Misc
         '22' => 'Sound',
         '23' => 'State Management',
         '24' => 'Company Management',
-        '' => ''
+        ''   => ''
     ];
 
     public static $secondary_sought = [
-        '1' => 'Accompanist',
-        '2' => 'Administration',
-        '3' => 'Box Office',
-        '4' => 'Carpentry',
-        '5' => 'Choreography',
-        '6' => 'Costume Design',
-        '7' => 'Sewing',
-        '8' => 'Technical Director',
-        '9' => 'Graphics',
+        '1'  => 'Accompanist',
+        '2'  => 'Administration',
+        '3'  => 'Box Office',
+        '4'  => 'Carpentry',
+        '5'  => 'Choreography',
+        '6'  => 'Costume Design',
+        '7'  => 'Sewing',
+        '8'  => 'Technical Director',
+        '9'  => 'Graphics',
         '10' => 'House Management',
         '11' => 'Lighting Design',
         '12' => 'Electrics',
@@ -68,14 +68,14 @@ class Misc
         '22' => 'Sound',
         '23' => 'State Management',
         '24' => 'Company Management',
-        '' => ''
+        ''   => ''
     ];
 
     public static $musical_performers = [
-      '1' => 'Non Musical Performers',
-      '2' => 'Musical Performers',
-      '3' => 'Not Certain',
-      ''  => 'Not selected Musical Performers'
+		'1' => 'Non Musical Performers',
+		'2' => 'Musical Performers',
+		'3' => 'Not Certain',
+		''  => 'Not selected Musical Performers'
     ];
 
     public static $view_musical_performers = [
@@ -274,50 +274,50 @@ class Misc
 
 
     public static $aea = [
-        'None' => 'None',
-        'ANTC' => 'ANTC',
-'Bay Area Theatre' => 'Bay Area Theatre',
-'Business Theatre & Events' => 'Business Theatre & Events',
-'Cabaret' => 'Cabaret',
-'Casino' => 'Casino',
-'CAT' => 'CAT',
-'CORST' => 'CORST',
-'COST' => 'COST',
-'Dinner Theatre' => 'Dinner Theatre',
-'Dinner Theatre Artist' => 'Dinner Theatre Artist',
-'Disney World' => 'Disney World',
-'Guest Artist' => 'Guest Artist',
-'HAT' => 'HAT',
-'LOA' => 'LOA',
-'LOA-NYC' => 'LOA-NYC',
-'LORT Non-Rep' => 'LORT Non-Rep',
-'LORT Rep' => 'LORT Rep',
-'LA 99-Seat Theatre Code' => 'LA 99-Seat Theatre Code',
-'Midsize Theatres' => 'Midsize Theatres',
-'Mini' => 'Mini',
-'Modified BAT' => 'Modified BAT',
-'MSUA' => 'MSUA',
-'NEAT' => 'NEAT',
-'NOLA' => 'NOLA',
-'OAT' => 'OAT',
-'Off-Broadway' => 'Off-Broadway',
-'Outdoor Drama' => 'Outdoor Drama',
-'Production (Disney)' => 'Production (Disney)',
-'Production (League)' => 'Production (League)',
-'RMTA' => 'RMTA',
-'Short Engagement Touring Agreement' => 'Short Engagement Touring Agreement',
-'Showcase-NY' => 'Showcase-NY',
-'Special Agreement' => 'Special Agreement',
-'Special Appearance' => 'Special Appearance',
-'Special Production-Central' => 'Special Production-Central',
-'Special Production-Eastern' => 'Special Production-Eastern',
-'Special Production-Western' => 'Special Production-Western',
-'SPT' => 'SPT',
-'Transition' => 'Transition',
-'TYA' => 'TYA',
-'URTA' => 'URTA',
-'WCLO' => 'WCLO',
-'Workshop' => 'Workshop'
+		'None' => 'None',
+		'ANTC' => 'ANTC',
+		'Bay Area Theatre' => 'Bay Area Theatre',
+		'Business Theatre & Events' => 'Business Theatre & Events',
+		'Cabaret' => 'Cabaret',
+		'Casino' => 'Casino',
+		'CAT' => 'CAT',
+		'CORST' => 'CORST',
+		'COST' => 'COST',
+		'Dinner Theatre' => 'Dinner Theatre',
+		'Dinner Theatre Artist' => 'Dinner Theatre Artist',
+		'Disney World' => 'Disney World',
+		'Guest Artist' => 'Guest Artist',
+		'HAT' => 'HAT',
+		'LOA' => 'LOA',
+		'LOA-NYC' => 'LOA-NYC',
+		'LORT Non-Rep' => 'LORT Non-Rep',
+		'LORT Rep' => 'LORT Rep',
+		'LA 99-Seat Theatre Code' => 'LA 99-Seat Theatre Code',
+		'Midsize Theatres' => 'Midsize Theatres',
+		'Mini' => 'Mini',
+		'Modified BAT' => 'Modified BAT',
+		'MSUA' => 'MSUA',
+		'NEAT' => 'NEAT',
+		'NOLA' => 'NOLA',
+		'OAT' => 'OAT',
+		'Off-Broadway' => 'Off-Broadway',
+		'Outdoor Drama' => 'Outdoor Drama',
+		'Production (Disney)' => 'Production (Disney)',
+		'Production (League)' => 'Production (League)',
+		'RMTA' => 'RMTA',
+		'Short Engagement Touring Agreement' => 'Short Engagement Touring Agreement',
+		'Showcase-NY' => 'Showcase-NY',
+		'Special Agreement' => 'Special Agreement',
+		'Special Appearance' => 'Special Appearance',
+		'Special Production-Central' => 'Special Production-Central',
+		'Special Production-Eastern' => 'Special Production-Eastern',
+		'Special Production-Western' => 'Special Production-Western',
+		'SPT' => 'SPT',
+		'Transition' => 'Transition',
+		'TYA' => 'TYA',
+		'URTA' => 'URTA',
+		'WCLO' => 'WCLO',
+		'Workshop' => 'Workshop'
     ];
 
 	public static function arrayInsertBefore($key, array &$array, $new_key, $new_value) {
@@ -348,13 +348,7 @@ class Misc
 		return FALSE;
 	}
 
-	/* Copyright (C) Ali Ashraf - All Rights Reserved
-	 * Unauthorized copying of this file, via any medium is strictly prohibited
-	 * Proprietary and confidential
-	 * Written by Ali Ashraf <aliashraf@outlook.com>, June 2016
-	 */
-	public static function handleDatatable($options)
-	{
+	public static function handleDatatable($options){
 		// initializing the response
 		$responseData = [];
 
@@ -626,12 +620,6 @@ class Misc
 		return $responseData;
 	}
 
-
-	/* Copyright (C) Ali Ashraf - All Rights Reserved
-	 * Unauthorized copying of this file, via any medium is strictly prohibited
-	 * Proprietary and confidential
-	 * Written by Ali Ashraf <aliashraf@outlook.com>, June 2016
-	 */
 	private static function filterRecordValue($key, $value, $type, $records) {
 
 		if(is_array($value)) {
@@ -659,12 +647,6 @@ class Misc
 
 	}
 
-
-	/* Copyright (C) Ali Ashraf - All Rights Reserved
-	 * Unauthorized copying of this file, via any medium is strictly prohibited
-	 * Proprietary and confidential
-	 * Written by Ali Ashraf <aliashraf@outlook.com>, June 2016
-	 */
 	public static function filterRecords($records, $request, $exempt)
 	{
 		$filters = $request->get("filter");
@@ -722,12 +704,6 @@ class Misc
 
 	}
 
-
-	/* Copyright (C) Ali Ashraf - All Rights Reserved
-	 * Unauthorized copying of this file, via any medium is strictly prohibited
-	 * Proprietary and confidential
-	 * Written by Ali Ashraf <aliashraf@outlook.com>, June 2016
-	 */
 	public static function orderFilteredRecords($records, $request, $exempt)
 	{
 		// sorting stuff
@@ -747,12 +723,6 @@ class Misc
 		return $records;
 	}
 
-
-	/* Copyright (C) Ali Ashraf - All Rights Reserved
-	 * Unauthorized copying of this file, via any medium is strictly prohibited
-	 * Proprietary and confidential
-	 * Written by Ali Ashraf <aliashraf@outlook.com>, June 2016
-	 */
 	public static function sortResponseColumns($request, $columns)
 	{
 		$orderedRecord = [];

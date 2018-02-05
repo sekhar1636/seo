@@ -65,6 +65,6 @@ return [
 
     ],
 
-    'url'=>'http://localhost/strawhat/app/public/',
+    'url'=>'https://strawhat-auditions.com',
 
 ];
