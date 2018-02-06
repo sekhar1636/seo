@@ -57,8 +57,8 @@ class TheaterController extends Controller
                 if($proid && $varid) {
                     $product = Product::findOrFail($proid);
                     $varient = ProductVariant::findorFail($varid);
-                    $productPrice = $prod['price'] * $varient['price'];
-                    $totalPric[] = $prod['price'] * $varient['price'];
+                    $productPrice = (!empty($prod['price'])) ? $prod['price'] : 1 * $varient['price'];
+                    $totalPric[] = (!empty($prod['price'])) ? $prod['price'] : 1 * $varient['price'];
                     //$totalPrice = $totalPrice + $productPrice;
                     //dd($totalPrice.' '.$prod['price'].' '.$varient['price']);
                     // $tp[] = $totalPrice;
@@ -87,7 +87,8 @@ class TheaterController extends Controller
                 if($proid && $varid){
                     $product = Product::findOrFail($proid);
                     $varient = ProductVariant::findorFail($varid);
-                    $varientcountprice = (!empty($varient['price'])) ? $prod['price'] * $varient['price'] : '0';
+                    $prodpricecount = (!empty($prod['price'])) ? $prod['price'] : 1;
+                    $varientcountprice = (!empty($varient['price'])) ? $prodpricecount * $varient['price'] : '0';
                     $payment = new Payment;
                     $payment->user_id = \Auth::user()->id;
                     $payment->transaction_id = $result->id;
@@ -112,14 +113,14 @@ class TheaterController extends Controller
     public function update(Request $request)
     {
         $validator = \Validator::make($request->all(),[]);
-        
+
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
         }
-        
+
         if($request->tes == "PUT"){
             $theater = Theater::where('user_id',\Auth::user()->id)->first();
         }else{
@@ -405,8 +406,8 @@ class TheaterController extends Controller
                 {
                     $product = Product::findOrFail($proid);
                     $varient = ProductVariant::findorFail($varid);
-                    $productPrice = $prod['price'] * $varient['price'];
-                    $totalPric[] = $prod['price'] * $varient['price'];
+                    $productPrice = (!empty($prod['price'])) ? $prod['price'] : 1 * $varient['price'];
+                    $totalPric[] = (!empty($prod['price'])) ? $prod['price'] : 1 * $varient['price'];
                     //$totalPrice = $totalPrice + $productPrice;
                     //dd($totalPrice.' '.$prod['price'].' '.$varient['price']);
                    // $tp[] = $totalPrice;
@@ -482,15 +483,17 @@ class TheaterController extends Controller
                 foreach($request->products AS $prod){
 	                $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
 	                $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
-	
+
 	                if(!empty($varid && $proid)) {
 	                    $product = Product::findOrFail($proid);
 	                    $varient = ProductVariant::findOrFail($varid);
-                        $varientcountprice = (!empty($varient['price'])) ? $prod['price'] * $varient['price'] : '0';
+                        $prodpricecount = (!empty($prod['price'])) ? $prod['price'] : 1;
+                        $varientcountprice = (!empty($varient['price'])) ? $prodpricecount * $varient['price'] : '0';
 	                    $payment = new Payment;
 	                    $payment->user_id = \Auth::user()->id;
 	                    $payment->transaction_id = $request->token;
 	                    $payment->product_id = (!empty($product['id'])) ? $product['id'] : '0';
+                        $payment->varient_id = $varient->id;
 	                    $payment->price = $varientcountprice;
 	                    $payment->save();
 	                }
@@ -507,7 +510,7 @@ class TheaterController extends Controller
 		        $theaters = \App\User::join('theaters','theaters.user_id', '=', 'users.id')
 		            ->where('users.payment_status',1)->orderBy('theaters.company_name', 'asc')
 		            ->get();
-		
+
 		        return view('theater.theaterSearch')->with([
 		            'theaters'		=> $theaters,
 		            'theateractive' => 'active'
@@ -533,7 +536,7 @@ class TheaterController extends Controller
         }
 
     }
-    
+
     public function view($id)
     {
         $theater = User::findorfail($id);
