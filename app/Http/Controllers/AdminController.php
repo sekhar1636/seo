@@ -36,7 +36,6 @@ class AdminController extends Controller
 	//======================================================================
 	// FAQ Functions
 	//======================================================================
-	
 	public function faq(){
     	return view("admin.faq")->with('faqactive','active');
     }
@@ -72,8 +71,7 @@ class AdminController extends Controller
                 $action = '<a href="'.route('admin::adminFaqEdit', $faq->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
 				$action.= '<a href="'.route('admin::adminFaqDelete', $faq->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
 				return $action;
-            })->make(true);
-    	
+        })->make(true);
     }
 	
 	public function faqDestroy($id){
@@ -1012,6 +1010,49 @@ class AdminController extends Controller
             return redirect()->back()->with('error_message', 'Picture not deleted. Try again!');
         }
     }
+    
+    public function actorAuditionList(){
+	    
+	    /*Get All Actors with Auditions*/
+	    $actors = Actor::where('adminAudition_time')->get();
+
+		foreach($actors as $actor){
+			
+			$actor_roles = ActorRole::where('user_id', $actor->id)->orderBy('id', 'asc')->get();
+			
+			$actorList = [
+				'actor' 	  => $actor,
+				'actor_roles' => $actor_roles,
+			];
+		}
+
+        return view('admin.actorAuditionList')->with($actorList);
+    }
+        
+	public function adminAuditions(Request $request, $id){
+
+    	$validator = \Validator::make($request->all(),
+            [
+                'adminAudition_time'  => 'required',
+                'adminAudition_day'   => 'required',
+            ]
+        );
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors())
+                ->withInput();
+        }
+
+        $user = User::findorfail($id);
+        $actor = $user->actor; 
+        $actor->adminAudition_time = $request->adminAudition_time;
+        $actor->adminAudition_day = $request->adminAudition_day;
+		$actor->save();
+
+        return redirect()->back()->with('success_message', 'Actor ADMIN AUDITIONS Successfully Updated');
+    }
+
 	public function postCropPhotoUpdate(Request $request, $id){
         $targ_w = $targ_h = 230;
         $jpeg_quality = 90;

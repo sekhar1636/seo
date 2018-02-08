@@ -35,7 +35,7 @@
 <script src="{{asset('assets/js/datatables.bootstrap.js')}}"></script>
 <script src="{{asset('assets/js/handlebars.js')}}"></script>
 <script type="text/javascript">
-$(function(){
+  $(function(){
 	$('#cropbox').Jcrop({
         onSelect: updateCoords,
         setSelect: [0, 160, 160, 0],// you have set proper proper x and y coordinates here
@@ -59,54 +59,56 @@ $(function(){
             }
         ]
     });
-	// Add event listener for opening and closing details
-	$('#payments-table tbody').on('click', 'td.details-control', function () {
-		var tr = $(this).closest('tr');
-		var row = table.row(tr);
-		var tableId = 'posts-' + row.data().id;
-		if (row.child.isShown()) {
-			// This row is already open - close it
-			$(this).html('<button class="btn btn-primary">View Details</button>');
-			row.child.hide();
-			tr.removeClass('shown');
-		} else {
-			// Open this row
-			$(this).html('<button class="btn btn-danger">Hide Details</button>');
-			row.child(template(row.data())).show();
-			initTable(tableId, row.data());
-			tr.addClass('shown');
-			tr.next().find('td').addClass('no-padding bg-gray');
-		}
-	});
-	function initTable(tableId, data) {
-		$('#' + tableId).DataTable({
-				processing: true,
-				serverSide: true,
-				searching: false,
-				paging: false,
-				bInfo: false,
-				ajax: data.details_url,
-				columns: [
-					{data: 'id'},
-		            {data: 'item'},
-					{data: 'price'},
-					{data: 'created_at'}
-				]
-			})
-		};
-	});
-	function updateCoords(c){
-		$('#x').val(c.x);
-		$('#y').val(c.y);
-		$('#w').val(c.w);
-		$('#h').val(c.h);
-	};
-	function checkCoords(){
-		if (parseInt($('#w').val())) return true;
-			alert('Please select a crop region then press submit.');
-		return false;
-	};
-</script>
+// Add event listener for opening and closing details
+$('#payments-table tbody').on('click', 'td.details-control', function () {
+	var tr = $(this).closest('tr');
+	var row = table.row(tr);
+	var tableId = 'posts-' + row.data().id;
+	if (row.child.isShown()) {
+		// This row is already open - close it
+		$(this).html('<button class="btn btn-primary">View Details</button>');
+		row.child.hide();
+		tr.removeClass('shown');
+	} else {
+		// Open this row
+		$(this).html('<button class="btn btn-danger">Hide Details</button>');
+		row.child(template(row.data())).show();
+		initTable(tableId, row.data());
+		tr.addClass('shown');
+		tr.next().find('td').addClass('no-padding bg-gray');
+	}
+});
+function initTable(tableId, data) {
+	$('#' + tableId).DataTable({
+		processing: true,
+		serverSide: true,
+		searching: false,
+		paging: false,
+		bInfo: false,
+		ajax: data.details_url,
+		columns: [
+			{data: 'id'},
+            {data: 'item'},
+			{data: 'price'},
+			{data: 'created_at'}
+		]
+	})
+}
+  });
+  function updateCoords(c)
+  {
+    $('#x').val(c.x);
+    $('#y').val(c.y);
+    $('#w').val(c.w);
+    $('#h').val(c.h);
+  };
+  function checkCoords()
+  {
+    if (parseInt($('#w').val())) return true;
+    alert('Please select a crop region then press submit.');
+    return false;
+  };
+ </script>
 <style type="text/css">
   #target {
     background-color: #ccc;
@@ -178,10 +180,6 @@ $(function(){
 									<i class="icon-key"></i> Audition </a>
 							</li>
 							<li>
-								<a href="#tab_actor_audition" data-toggle="tab">
-									<i class="icon-key"></i> ADMIN Audition </a>
-							</li>
-							<li>
 								<a href="#tab_1_6" data-toggle="tab">
 									<i class="icon-key"></i> Change Password
 								</a>
@@ -218,9 +216,6 @@ $(function(){
 									</li>
 									<li {{  (Session::has('tabactive') ? 'class=active' : '') }}>
 										<a href="#tab_1_5" data-toggle="tab">Audition</a>
-									</li>
-									<li {{  (Session::has('tabactive') ? 'class=active' : '') }}>
-										<a href="#tab_actor_audition" data-toggle="tab">ADMIN Audition</a>
 									</li>
                                  	<li {{ (Session::has('tabactive') ? 'class=active' : '') }}>
 										<a href="#tab_1_6" data-toggle="tab">Change Password</a>
@@ -450,7 +445,7 @@ $(function(){
 				                    <!--/span-->
 				                    <div class="col-md-6">
 				                	<div class="form-group">
-	                                    <label class="control-label col-md-3">Employment Availability</label>
+	                                    <label class="control-label col-md-3">Employement Availbility</label>
 	                                    <div class="col-md-9">
 	                                        <div class="input-group input-large date-picker input-daterange" data-date="2012/11/10" data-date-format="yyyy/mm/dd">
 	                                        	{!! Form::text('from', @$actor->from, ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required']) !!}
@@ -487,29 +482,29 @@ $(function(){
                                     </div>
 				                 	</div>
 				                 </div>
-							 @if(isset($actor->resume_path))
-							 <div class="row">
-								 <div class="col-md-9">
-									 <div class="form-group">
-										 <label class="control-label col-md-3">Actor Resume</label>
-										 <div class="col-md-6">
-												 <a href="{{ asset($actor->resume_path) }}" target="_blank" class="btn btn-xs btn-primary"><i class="fa fa-download"></i>Download</a>
-										 </div>
-									 </div>
-								 </div>
-							 </div>
-							@endif
-							 <div class="row">
-								 <div class="col-md-9">
-									 <div class="form-group">
-										 <label class="control-label col-md-3">Phone Number</label>
-										 <div class="col-md-6">
-											 {{ Form::text('phone_number',@$actor->phone_number ? $actor->phone_number : '',['class'=>'form-control','placeholder'=>'Enter Your Phone Number Here']) }}
-										 </div>
-									 </div>
-								 </div>
-							 </div>
-						</div>
+ @if(isset($actor->resume_path))
+ <div class="row">
+	 <div class="col-md-9">
+		 <div class="form-group">
+			 <label class="control-label col-md-3">Actor Resume</label>
+			 <div class="col-md-6">
+					 <a href="{{ asset($actor->resume_path) }}" target="_blank" class="btn btn-xs btn-primary"><i class="fa fa-download"></i>Download</a>
+			 </div>
+		 </div>
+	 </div>
+ </div>
+@endif
+ <div class="row">
+	 <div class="col-md-9">
+		 <div class="form-group">
+			 <label class="control-label col-md-3">Phone Number</label>
+			 <div class="col-md-6">
+				 {{ Form::text('phone_number',@$actor->phone_number ? $actor->phone_number : '',['class'=>'form-control','placeholder'=>'Enter Your Phone Number Here']) }}
+			 </div>
+		 </div>
+	 </div>
+ </div>
+ </div>
 				            <div class="form-actions">
 				                <div class="row">
 				                    <div class="col-md-6">
@@ -762,34 +757,6 @@ $(function(){
 		 </div>
 	 </form>
  </div>
- 
- <div class="tab-pane" id="tab_actor_audition">
- 	<form action="{{route('admin::adminAuditions',$id)}}" enctype="multipart/form-data" role="form" method="POST">
-		{{csrf_field()}}
-        <div class="row">
-        	<div class="col-md-4">
-                <div class="form-group" {{ $errors->has("adminAudition_time`") ? "has-error":"" }}'>
-                        <label class="control-label col-md-3">Audition Time</label>
-                        <div class="col-md-9">
-                        {!! Form::select('adminAudition_time',\App\Misc::$auditionTime, @$actor->adminAudition_time, ['required' => 'required',  'class' => 'form-control']) !!}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group" {{ $errors->has("adminAudition_day") ? "has-error":"" }}'>
-                        <label class="control-label col-md-3">Audition Day</label>
-                        <div class="col-md-9">
-                        {!! Form::select('adminAudition_day',\App\Misc::$auditionDay, @$actor->adminAudition_day, [  'required' => 'required',  'class' => 'form-control']) !!}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-            	<button type="submit" class="btn green"> Submit </button>
-			</div>
-        </div>
-	 </form>
- </div>
-
  <div class="tab-pane" id="tab_1_6">
 	 <form action="{{route('admin::postEditPassword',$id)}}"
 		   class="form-validate-auto" method="POST">

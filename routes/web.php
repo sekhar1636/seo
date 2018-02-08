@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Route::get('/verifyemail/{token}',['as'=>'getEmail', 'uses'=>'CommonController@verify']);
 //Static pages common for all users
 Route::get('/', ['as'=>'getIndex', 'uses'=>'CommonController@getIndex']);
@@ -150,7 +140,10 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('user/{id}/edit', ['as'=>'adminUserEdit', 'uses'=>'AdminController@userEdit']);
 			Route::patch('user/{id}', ['as'=>'adminUserUpdate', 'uses'=>'AdminController@userUpdate']);
 			
+
+			Route::get('actorAuditionList/', ['as'=>'actorAuditionList', 'uses'=>'AdminController@actorAuditionList']);			
 			Route::match(array('POST', 'PUT'),'actor/{id}', ['as'=>'adminActorUpdate', 'uses'=>'AdminController@actorUpdate']);
+			Route::post('actor/{id}/adminAuditions', ['as'=>'adminAuditions', 'uses'=>'AdminController@adminAuditions']);			
 			Route::post('actor/{id}/photo', ['as'=>'actorPhotoUpdate', 'uses'=>'AdminController@actorPhotoUpdate']);
 			Route::post('actor/{id}/cropPhoto', ['as'=>'actorCropPhoto', 'uses'=>'AdminController@postCropPhotoUpdate']);
 			Route::get('actor/{id}/deletePhoto', ['as'=>'actorPhotoDelete', 'uses'=>'AdminController@actorPhotoDelete']);
@@ -165,7 +158,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('staff/{id}/cropPhoto', ['as'=>'staffCropPhoto', 'uses'=>'AdminController@poststaffCropPhotoUpdate']);
             Route::get('staff/{id}/deletePhoto', ['as'=>'staffPhotoDelete', 'uses'=>'AdminController@staffPhotoDelete']);
             Route::post('staff/portfolio/{id}',['as'=>'adminStaffportfolioUpdate','uses'=>'AdminController@portfolioupdate']);
-
 
             Route::get('usersDataTable/', ['as'=>'adminUsersDataTable', 'uses'=>'AdminController@UsersDataTable']);
             Route::get('actorsDataTable/', ['as'=>'adminActorDataTable', 'uses'=>'AdminController@actorsDataTable']);

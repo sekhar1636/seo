@@ -233,6 +233,19 @@ class Misc{
 		'Blue'=>'Blue',
 	];
 
+	public static $auditionDay = [
+		'Thursday' 	=> 'Thursday',
+		'Friday' 	=> 'Friday',
+		'Saturday' 	=> 'Saturday',
+		'Sunday' 	=> 'Sunday',
+		'Monday' 	=> 'Monday',
+	];
+
+	public static $auditionTime = [
+		'10:00:00' 	=> '10:00:00',
+		'10:02:00' 	=> '10:02:00',
+	];
+
     public static $employee_availability = [
         1 => 'Immediate',
         2 => 'Summer',
