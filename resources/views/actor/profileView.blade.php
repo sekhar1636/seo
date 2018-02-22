@@ -89,7 +89,7 @@
                                         <div class="portlet-body">
                                             <ul class="list-unstyled">
                                                 <li>
-                                                    <span class="sale-info"> Audition Date/Time/Standby
+                                                    <span class="sale-info"> Audition On
                                                         <i class="fa fa-img-up"></i>
                                                     </span>
                                                     <span class="sale-num">{{ @$actor->actor->adminAudition_standby!=NULL ? $actor->actor->adminAudition_standby : ($actor->actor->adminAudition_time != NULL ? ($actor->actor->adminAudition_day.' '.$actor->actor->adminAudition_time) : 'Coming Soon') }}</span>
