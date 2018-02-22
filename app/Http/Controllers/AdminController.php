@@ -471,9 +471,23 @@ class AdminController extends Controller
         } else {
             $ax = '';
         }
+        $time= [];
+        $minutes = [];
+        for($i=1;$i<=24;$i++){
+            $time[strlen($i)==1 ? '0'.$i : $i] = strlen($i)==1 ? '0'.$i : $i;
+        }
+        for($i=0;$i<60;$i++)
+        $minutes[strlen($i)==1 ? '0'.$i : $i] = strlen($i)==1 ? '0'.$i : $i;
 
+        for($j=1;$j<=24;$j++)
+        $standBy['sat-'.$j] = 'Saturday Stand By - '.$j;
 		if($user->role == 'actor'){
-			//\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
+		    $ht = '';
+		    if($user->actor['adminAudition_time'] != NULL)
+		    {
+		        $ht=explode(':',$user->actor['adminAudition_time']);
+		    }
+				//\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
 //			return \Stripe\Charge::all(array("customer"=>"cus_BATTZrHSA1uhHo"));
 			return view('admin.actorEdit')->with([
 			    'actor' => $user->actor,
@@ -482,6 +496,11 @@ class AdminController extends Controller
                 'id' => $id,
                 'user' => $user,
                 'ax' => $ax,
+                'hours' => $time,
+                'minutes' => $minutes,
+                'standby' => $standBy,
+                'audhour' => $ht[0]!=null ? $ht[0] : '00',
+                'audmin' => $ht[1]!=null ? $ht[1] : '00',
             ]);
 		}
         if($user->role=='theater')
@@ -1015,11 +1034,9 @@ class AdminController extends Controller
 	    
 	    /*Get All Actors with Auditions*/
 	    $actors = Actor::where('adminAudition_time')->get();
-
 		foreach($actors as $actor){
-			
+
 			$actor_roles = ActorRole::where('user_id', $actor->id)->orderBy('id', 'asc')->get();
-			
 			$actorList = [
 				'actor' 	  => $actor,
 				'actor_roles' => $actor_roles,
@@ -1033,8 +1050,9 @@ class AdminController extends Controller
 
     	$validator = \Validator::make($request->all(),
             [
-                'adminAudition_time'  => 'required',
+                'adminAudition_hours'  => 'required',
                 'adminAudition_day'   => 'required',
+                'adminAudition_minutes'   => 'required',
             ]
         );
         if ($validator->fails()) {
@@ -1046,8 +1064,9 @@ class AdminController extends Controller
 
         $user = User::findorfail($id);
         $actor = $user->actor; 
-        $actor->adminAudition_time = $request->adminAudition_time;
+        $actor->adminAudition_time = $request->adminAudition_hours > 0 ? $request->adminAudition_hours .':'.($request->adminAudition_minutes ? $request->adminAudition_minutes : '00') : null;
         $actor->adminAudition_day = $request->adminAudition_day;
+        $actor->adminAudition_standby = $request->adminAudition_standBy;
 		$actor->save();
 
         return redirect()->back()->with('success_message', 'Actor ADMIN AUDITIONS Successfully Updated');

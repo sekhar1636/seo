@@ -325,6 +325,21 @@
                                 </div>
                             </div>
                         @endif
+                                @if(@$act->adminAudition_standby != NULL || @$act->adminAudition_time != NULL)
+                                  <div class="timeline-item">
+                                          <div class="timeline-badge">
+                                                    <div class="timeline-icon">
+                                                        <i class="icon-note font-green"></i>
+                                                    </div>
+                                          </div>
+                                          <div class="timeline-body activeBox">
+                                                    <span class="timeline-body-alerttitle font-green">Got An Audition</span>
+                                                    <div class="timeline-body-content">
+                                                        <span class="font-grey-cascade">Congratulations, You've Got An Audition {{@$act->adminAudition_standby!=NULL ? $act->adminAudition_standby : $act->adminAudition_day.' '.$act->adminAudition_time }}.</span>
+                                                    </div>
+                                          </div>
+                                  </div>
+                                @endif
 
                         </div><!--END .timeline-->
 

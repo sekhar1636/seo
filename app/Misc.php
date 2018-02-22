@@ -241,11 +241,6 @@ class Misc{
 		'Monday' 	=> 'Monday',
 	];
 
-	public static $auditionTime = [
-		'10:00:00' 	=> '10:00:00',
-		'10:02:00' 	=> '10:02:00',
-	];
-
     public static $employee_availability = [
         1 => 'Immediate',
         2 => 'Summer',

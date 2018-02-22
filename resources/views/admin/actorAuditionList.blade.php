@@ -84,21 +84,6 @@
                                 <div class="col-md-5">
                                     <div class="portlet sale-summary">
                                         <div class="portlet-title">
-                                            <div class="caption font-red sbold">Audition Info</div>
-                                        </div>
-                                        <div class="portlet-body">
-                                            <ul class="list-unstyled">
-                                                <li>
-                                                    <span class="sale-info">
-                                                        <i class="fa fa-img-up"></i>
-                                                    </span>
-                                                    <span class="sale-num">{{ @$actor->actor->adminAudition_standby!=NULL ? $actor->actor->adminAudition_standby : ($actor->actor->adminAudition_time != NULL ? $actor->actor->adminAudition_time : 'Coming Soon') }}</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="portlet sale-summary">
-                                        <div class="portlet-title">
                                             <div class="caption font-red sbold"> Job Info </div>
                                             <!--<div class="tools">
                                                 <a class="reload" href="javascript:;"> </a>

@@ -767,26 +767,46 @@ $(function(){
  	<form action="{{route('admin::adminAuditions',$id)}}" enctype="multipart/form-data" role="form" method="POST">
 		{{csrf_field()}}
         <div class="row">
-        	<div class="col-md-4">
-                <div class="form-group" {{ $errors->has("adminAudition_time`") ? "has-error":"" }}'>
-                        <label class="control-label col-md-3">Audition Time</label>
-                        <div class="col-md-9">
-                        {!! Form::select('adminAudition_time',\App\Misc::$auditionTime, @$actor->adminAudition_time, ['required' => 'required',  'class' => 'form-control']) !!}
+        	<div class="col-md-6">
+                <div class="form-group" {{ $errors->has("adminAudition_hours`") ? "has-error":"" }}'>
+                        <label class="control-label col-md-6">Audition Hours</label>
+                        <div class="col-md-6">
+                        {!! Form::select('adminAudition_hours',@$hours, $audhour ? $audhour : '00', ['required' => 'required',  'class' => 'form-control']) !!}
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group" {{ $errors->has("adminAudition_day") ? "has-error":"" }}'>
-                        <label class="control-label col-md-3">Audition Day</label>
-                        <div class="col-md-9">
-                        {!! Form::select('adminAudition_day',\App\Misc::$auditionDay, @$actor->adminAudition_day, [  'required' => 'required',  'class' => 'form-control']) !!}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-            	<button type="submit" class="btn green"> Submit </button>
+			<div class="col-md-6">
+				<div class="form-group" {{ $errors->has("adminAudition_time`") ? "has-error":"" }}'>
+				<label class="control-label col-md-6">Audition Minutes</label>
+					<div class="col-md-6">
+						{!! Form::select('adminAudition_minutes',@$minutes, $audmin ? $audmin : '00', ['required' => 'required',  'class' => 'form-control']) !!}
+					</div>
+				</div>
 			</div>
-        </div>
+ 		</div>
+ 		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group" {{ $errors->has("adminAudition_day") ? "has-error":"" }}'>
+				<label class="control-label col-md-3">Audition Day</label>
+				<div class="col-md-9">
+					{!! Form::select('adminAudition_day',\App\Misc::$auditionDay, @$actor->adminAudition_day, [  'required' => 'required',  'class' => 'form-control']) !!}
+				</div>
+			</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group" {{ $errors->has("adminAudition_day") ? "has-error":"" }}'>
+				<label class="control-label col-md-3">Audition StandBy</label>
+				<div class="col-md-9">
+					{!! Form::select('adminAudition_standBy', $standby, @$actor->adminAudition_standby ? $actor->adminAudition_standby : 'sat-1', [  'required' => 'required',  'class' => 'form-control']) !!}
+				</div>
+			</div>
+			</div>
+		</div>
+ 		<div class="row">
+			<div class="col-md-offset-5">
+				<button type="submit" class="btn green"> Submit </button>
+			</div>
+ 		</div>
 	 </form>
  </div>
 
