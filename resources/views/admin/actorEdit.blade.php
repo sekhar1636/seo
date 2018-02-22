@@ -797,7 +797,7 @@ $(function(){
 				<div class="form-group" {{ $errors->has("adminAudition_day") ? "has-error":"" }}'>
 				<label class="control-label col-md-3">Audition StandBy</label>
 				<div class="col-md-9">
-					{!! Form::select('adminAudition_standBy', $standby, @$actor->adminAudition_standby ? $actor->adminAudition_standby : 'sat-1', [  'required' => 'required',  'class' => 'form-control']) !!}
+					{!! Form::select('adminAudition_standBy', ['' => '-Select standby-']+$standby, @$actor->adminAudition_standby ? $actor->adminAudition_standby : '-Select a Standby-', [  'required' => 'required',  'class' => 'form-control']) !!}
 				</div>
 			</div>
 			</div>
