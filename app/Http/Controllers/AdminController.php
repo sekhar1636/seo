@@ -482,7 +482,7 @@ class AdminController extends Controller
         for($j=1;$j<=24;$j++)
         $standBy['sat-'.$j] = 'Saturday Stand By - '.$j;
 		if($user->role == 'actor'){
-		    $ht = '';
+		    $ht = null;
 		    if($user->actor['adminAudition_time'] != NULL)
 		    {
 		        $ht=explode(':',$user->actor['adminAudition_time']);
