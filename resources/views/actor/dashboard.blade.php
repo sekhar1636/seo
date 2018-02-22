@@ -329,7 +329,7 @@
                                   <div class="timeline-item">
                                           <div class="timeline-badge">
                                                     <div class="timeline-icon">
-                                                        <i class="icon-note font-green"></i>
+                                                        <i class="icon-star font-green"></i>
                                                     </div>
                                           </div>
                                           <div class="timeline-body activeBox">
