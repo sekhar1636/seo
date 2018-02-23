@@ -479,8 +479,16 @@ class AdminController extends Controller
         for($i=0;$i<60;$i++)
         $minutes[strlen($i)==1 ? '0'.$i : $i] = strlen($i)==1 ? '0'.$i : $i;
 
-        for($j=1;$j<=24;$j++)
-        $standBy['sat-'.$j] = 'Saturday Stand By - '.$j;
+        for($k=1;$k<=24;$k++){
+            $standBy['fri-'.$k] = 'Friday Stand By - '.$k;
+            if($k==24){
+                for($j=1;$j<=24;$j++)
+                    $standBy['sat-'.$j] = 'Saturday Stand By - '.$j;
+                for($l=1;$l<=24;$l++)
+                    $standBy['sun-' . $l] = 'Sunday Stand By - ' . $l;
+            }
+
+        }
 		if($user->role == 'actor'){
 		    $ht = null;
 		    if($user->actor['adminAudition_time'] != NULL)
