@@ -25,6 +25,7 @@ use App\ContentPage;
 use App\Product;
 use App\MembershipPeriod;
 use App\Payment;
+use App\ActorRole;
 
 
 class AdminController extends Controller
@@ -484,7 +485,7 @@ class AdminController extends Controller
             if($k==24){
                 for($j=1;$j<=24;$j++)
                     $standBy['sat-'.$j] = 'Saturday Stand By - '.$j;
-                for($l=1;$l<=24;$l++)
+                for($l=1;$l<=20;$l++)
                     $standBy['sun-' . $l] = 'Sunday Stand By - ' . $l;
             }
 
@@ -1058,9 +1059,7 @@ class AdminController extends Controller
 
     	$validator = \Validator::make($request->all(),
             [
-                'adminAudition_hours'  => 'required',
                 'adminAudition_day'   => 'required',
-                'adminAudition_minutes'   => 'required',
             ]
         );
         if ($validator->fails()) {
