@@ -771,7 +771,7 @@ $(function(){
                 <div class="form-group" {{ $errors->has("adminAudition_hours`") ? "has-error":"" }}'>
                         <label class="control-label col-md-6">Audition Hours</label>
                         <div class="col-md-6">
-                        {!! Form::select('adminAudition_hours',@$hours, $audhour ? $audhour : '00', ['required' => 'required',  'class' => 'form-control']) !!}
+                        {!! Form::select('adminAudition_hours',@['' => '-Select Hours-']+$hours, $audhour ? $audhour : '00', ['class' => 'form-control']) !!}
                     </div>
                 </div>
             </div>
@@ -779,7 +779,7 @@ $(function(){
 				<div class="form-group" {{ $errors->has("adminAudition_time`") ? "has-error":"" }}'>
 				<label class="control-label col-md-6">Audition Minutes</label>
 					<div class="col-md-6">
-						{!! Form::select('adminAudition_minutes',@$minutes, $audmin ? $audmin : '00', ['required' => 'required',  'class' => 'form-control']) !!}
+						{!! Form::select('adminAudition_minutes',@['' => '-Select Minutes-']+$minutes, $audmin ? $audmin : '00', ['class' => 'form-control']) !!}
 					</div>
 				</div>
 			</div>
@@ -797,7 +797,7 @@ $(function(){
 				<div class="form-group" {{ $errors->has("adminAudition_day") ? "has-error":"" }}'>
 				<label class="control-label col-md-3">Audition StandBy</label>
 				<div class="col-md-9">
-					{!! Form::select('adminAudition_standBy', ['' => '-Select standby-']+$standby, @$actor->adminAudition_standby ? $actor->adminAudition_standby : '-Select a Standby-', [  'required' => 'required',  'class' => 'form-control']) !!}
+					{!! Form::select('adminAudition_standBy', ['' => '-Select standby-']+$standby, @$actor->adminAudition_standby ? $actor->adminAudition_standby : '-Select a Standby-', ['class' => 'form-control']) !!}
 				</div>
 			</div>
 			</div>
