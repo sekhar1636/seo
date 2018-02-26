@@ -767,22 +767,30 @@ $(function(){
  	<form action="{{route('admin::adminAuditions',$id)}}" enctype="multipart/form-data" role="form" method="POST">
 		{{csrf_field()}}
         <div class="row">
-        	<div class="col-md-6">
+        	<div class="col-md-4">
                 <div class="form-group" {{ $errors->has("adminAudition_hours`") ? "has-error":"" }}'>
                         <label class="control-label col-md-6">Audition Hours</label>
                         <div class="col-md-6">
-                        {!! Form::select('adminAudition_hours',@['' => '-Select Hours-']+$hours, $audhour ? $audhour : '00', ['class' => 'form-control']) !!}
+                        {!! Form::select('adminAudition_hours',@['' => '-Select Hours-']+$hours, $audhour ? $audhour : '', ['class' => 'form-control']) !!}
                     </div>
                 </div>
             </div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="form-group" {{ $errors->has("adminAudition_time`") ? "has-error":"" }}'>
 				<label class="control-label col-md-6">Audition Minutes</label>
 					<div class="col-md-6">
-						{!! Form::select('adminAudition_minutes',@['' => '-Select Minutes-']+$minutes, $audmin ? $audmin : '00', ['class' => 'form-control']) !!}
+						{!! Form::select('adminAudition_minutes',@['' => '-Select Minutes-']+$minutes, $audmin ? $audmin : '', ['class' => 'form-control']) !!}
 					</div>
 				</div>
 			</div>
+            <div class="col-md-4">
+                <div class="form-group" {{ $errors->has("adminAudition_am`") ? "has-error" : "" }}'>
+                    <label class="control-label col-md-6">AM/PM</label>
+                <div class="col-md-6">
+                    {!! Form::select('adminAudition_am',[''=>'-AM/PM-','AM'=>'AM','PM'=>'PM'],$ampm ? $ampm : '',['class'=>'form-control']) !!}
+                </div>
+                </div>
+            </div>
  		</div>
  		<div class="row">
 			<div class="col-md-6">

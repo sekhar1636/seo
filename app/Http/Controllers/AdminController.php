@@ -474,7 +474,7 @@ class AdminController extends Controller
         }
         $time= [];
         $minutes = [];
-        for($i=1;$i<=24;$i++){
+        for($i=1;$i<=12;$i++){
             $time[strlen($i)==1 ? '0'.$i : $i] = strlen($i)==1 ? '0'.$i : $i;
         }
         for($i=0;$i<60;$i++)
@@ -491,10 +491,17 @@ class AdminController extends Controller
 
         }
 		if($user->role == 'actor'){
-		    $ht = null;
-		    if($user->actor['adminAudition_time'] != NULL)
+		    $ht = "";
+		    if($user->actor['adminAudition_time'] != "")
 		    {
 		        $ht=explode(':',$user->actor['adminAudition_time']);
+		        if($ht[0] > 12){
+		            $hours = $ht[0]-12;
+		            $ampm = "PM";
+                }else{
+		            $hours = $ht[0];
+		            $ampm = "AM";
+                }
 		    }
 				//\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
 //			return \Stripe\Charge::all(array("customer"=>"cus_BATTZrHSA1uhHo"));
@@ -508,8 +515,9 @@ class AdminController extends Controller
                 'hours' => $time,
                 'minutes' => $minutes,
                 'standby' => $standBy,
-                'audhour' => $ht[0]!=null ? $ht[0] : '00',
-                'audmin' => $ht[1]!=null ? $ht[1] : '00',
+                'audhour' => $hours!="" ? $hours : '00',
+                'audmin' => $ht[1]!="" ? $ht[1] : '00',
+                'ampm' => $ampm
             ]);
 		}
         if($user->role=='theater')
@@ -1070,8 +1078,20 @@ class AdminController extends Controller
         }
 
         $user = User::findorfail($id);
+        $hours = '';
+        if($request->adminAudition_am == "AM") {
+            $hours = $request->adminAudition_hours;
+            $time = $hours.':'.$request->adminAudition_minutes.':00';
+        }
+        if($request->adminAudition_am == "PM"){
+            $hours = '12'+$request->adminAudition_hours;
+            $time = $hours.':'.$request->adminAudition_minutes.':00';
+        }
+        if($request->adminAudition_am == ""){
+            $time="";
+        }
         $actor = $user->actor; 
-        $actor->adminAudition_time = $request->adminAudition_hours > 0 ? $request->adminAudition_hours .':'.($request->adminAudition_minutes ? $request->adminAudition_minutes : '00') : null;
+        $actor->adminAudition_time = $time;
         $actor->adminAudition_day = $request->adminAudition_day;
         $actor->adminAudition_standby = $request->adminAudition_standBy;
 		$actor->save();
@@ -1620,5 +1640,37 @@ class AdminController extends Controller
                 $user->password = bcrypt($request->get('new_password'));
                 $user->update();
         return redirect()->back()->with('success_message', 'Password successfully updated.');
+        }
+
+        /*function for audition pdf*/
+        protected function auditionPdf($day){
+            $actorDay = Actor::where('adminAudition_day',$day)
+                ->where('adminAudition_standby',null)
+                ->get();
+            $roles = [];
+            $email = [];
+            foreach($actorDay as $role){
+                $roles[$role['id']] = ActorRole::where('user_id',$role['user_id'])->get();
+                $email[$role['id']] = User::select('email')->where('id',$role['user_id'])->get();
+            }
+            if($day=="Friday"){
+                $standby_filter = 'fri-';
+            }
+            if($day=='Saturday'){
+               $standby_filter = 'sat-';
+            }
+            if($day=='Sunday'){
+                $standby_filter = 'sun-';
+            }
+            $standBy = Actor::where('adminAudition_standby','like','%'.$standby_filter.'%')
+                ->where('adminAudition_time',Null)
+                ->get();
+            $stRoles = [];
+            foreach($standBy as $stand){
+                $stRoles[$stand['id']] = ActorRole::where('user_id',$stand['user_id'])->get();
+            }
+            //Generating pdf using dom pdf
+            $pdf = PDF::loadView('pdf.actorslist',['dayactor' => $actorDay,'actorroles'=>$roles,'standbyactor'=>$standBy,'standbyroles'=>$stRoles]);
+            return $pdf->download('ActorList_'.$day.'.pdf');
         }
 }
