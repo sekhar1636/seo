@@ -158,7 +158,7 @@
 			                                <li>
 		                                        <span class="sale-info">Contact Email<i class="fa fa-envelope-o"></i></span>
 		                                        <span class="sale-num" style="font-size:15px;">
-		                                        	 <a href="mailto:{{$theater->email}}">{{$theater->email}} </a>
+		                                        	 <a href="mailto:{{$theater->theater->email}}">{{$theater->theater->email}} </a>
 		                                        </span>
 		                                    </li>
 		                                    <li>
