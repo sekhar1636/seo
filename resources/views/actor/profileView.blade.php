@@ -79,6 +79,14 @@
                                           <span>NA</span>
                                       @endif
                                     </p>
+                                        <p>
+                                            <b>Website Url/Youtube Channel: </b>
+                                            @if(@$actor->actor->website_url)
+                                                <span class="label label-success label-sm"> {{$actor->actor->website_url}} </span>
+                                            @else
+                                                <span>NA</span>
+                                            @endif
+                                        </p>
                                 </div>
                                 <!--end col-md-8-->
                                 <div class="col-md-5">
