@@ -456,7 +456,6 @@ class AdminController extends Controller
 		
 		$user = User::findOrFail($id);
 
-
 		$subsciption_expiry = Membership::where('user_id',$id)->get();
 		if(count($subsciption_expiry)){
             $subsciption_expiry = MembershipPeriod::where('id',$subsciption_expiry[0]['membership_period_id'])->get();
@@ -503,20 +502,17 @@ class AdminController extends Controller
 		            $hours = $ht[0];
 		            $ampm = "AM";
                 }
-                if(isset($ht[1])){
+                if(!empty($ht[1])){
 	                $ht_1 = $ht[1];
                 }else{
 	                $ht_1 = '00';
                 }
 		    }else{
-	            $hours = '00';
+	            $hours = "";
 	            $ampm = ""; 
-	            $ht_1 = '00';  
+	            $ht_1 = "";  
 		    }
 		    
-		    
-				//\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
-//			return \Stripe\Charge::all(array("customer"=>"cus_BATTZrHSA1uhHo"));
 			return view('admin.actorEdit')->with([
 			    'actor' => $user->actor,
                 'weight' => $weight,
@@ -1082,7 +1078,17 @@ class AdminController extends Controller
                 'adminAudition_day'   => 'required',
             ]
         );
-        if ($validator->fails()) {
+
+		$subRequirementFAIL = FALSE;
+
+        if(
+        	(isset($request->adminAudition_hours)) &&
+        	(!isset($request->adminAudition_minutes))||(!isset($request->adminAudition_am))
+		){
+			$subRequirementFAIL = TRUE;
+        }
+        
+        if (($validator->fails())||($subRequirementFAIL == TRUE)) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
