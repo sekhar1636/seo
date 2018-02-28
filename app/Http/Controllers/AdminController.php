@@ -510,7 +510,7 @@ class AdminController extends Controller
                 }
 		    }else{
 	            $hours = '00';
-	            $ampm = "AM"; 
+	            $ampm = ""; 
 	            $ht_1 = '00';  
 		    }
 		    
