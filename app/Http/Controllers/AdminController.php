@@ -491,10 +491,11 @@ class AdminController extends Controller
 
         }
 		if($user->role == 'actor'){
-		    $ht = "";
-		    if($user->actor['adminAudition_time'] != "")
+		    $ht = [];
+		    $ampm = "";
+		    if(!is_null($user->actor['adminAudition_time']))
 		    {
-		        $ht=explode(':',$user->actor['adminAudition_time']);
+		        $ht = explode(':',$user->actor['adminAudition_time']);
 		        if($ht[0] > 12){
 		            $hours = $ht[0]-12;
 		            $ampm = "PM";
@@ -502,7 +503,18 @@ class AdminController extends Controller
 		            $hours = $ht[0];
 		            $ampm = "AM";
                 }
+                if(isset($ht[1])){
+	                $ht_1 = $ht[1];
+                }else{
+	                $ht_1 = '00';
+                }
+		    }else{
+	            $hours = '00';
+	            $ampm = "AM"; 
+	            $ht_1 = '00';  
 		    }
+		    
+		    
 				//\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
 //			return \Stripe\Charge::all(array("customer"=>"cus_BATTZrHSA1uhHo"));
 			return view('admin.actorEdit')->with([
@@ -515,8 +527,8 @@ class AdminController extends Controller
                 'hours' => $time,
                 'minutes' => $minutes,
                 'standby' => $standBy,
-                'audhour' => $hours!="" ? $hours : '00',
-                'audmin' => $ht[1]!="" ? $ht[1] : '00',
+                'audhour' => $hours,
+                'audmin' => $ht_1,
                 'ampm' => $ampm
             ]);
 		}
