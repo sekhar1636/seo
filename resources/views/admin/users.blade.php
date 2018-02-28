@@ -160,6 +160,18 @@ $(document).ready(function() {
                   </div>
                   <!-- END TAB -->
                     <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_3">
+                        <div class="row">
+                            <label class="col-md-6">Audition List</label>
+                        <div class="col-md-2">
+                            <a class="btn-lg btn-info" href="{{route('admin::auditionpdf','Friday')}}">Friday</a>
+                        </div>
+                            <div class="col-md-2">
+                        <a class="btn-lg btn-info" href="{{route('admin::auditionpdf','Saturday')}}">Saturday</a>
+                            </div>
+                            <div class="col-md-2">
+                        <a class="btn-lg btn-info" href="{{route('admin::auditionpdf','Sunday')}}">Sunday</a>
+                            </div>
+                        </div>
                         <table id="actor-table" class="table">
                             <thead>
                             <tr>

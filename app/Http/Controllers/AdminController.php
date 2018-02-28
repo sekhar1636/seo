@@ -26,7 +26,7 @@ use App\Product;
 use App\MembershipPeriod;
 use App\Payment;
 use App\ActorRole;
-
+use PDF;
 
 class AdminController extends Controller
 {
@@ -1294,6 +1294,16 @@ class AdminController extends Controller
 	public function subscriptionsDataTable(){
 		$membershipPeriods = MembershipPeriod::latest()->orderBy('id', 'desc');
 		return Datatables::of($membershipPeriods)
+            ->editColumn('start_date',function($membershipPeriod){
+                $start = Carbon::parse($membershipPeriod->start_date);
+                $start_date = $start->format('m/d/Y');
+                return $start_date;
+            })
+            ->editColumn('end_date',function($membershipPeriod){
+                $end = Carbon::parse($membershipPeriod->end_date);
+                $end_date = $end->format('m/d/Y');
+                return $end_date;
+            })
             ->addColumn('status', function ($membershipPeriod) {
                 $status = ($membershipPeriod->status)?"Active":"De-Activated";
 				return $status;
@@ -1649,9 +1659,9 @@ class AdminController extends Controller
                 ->get();
             $roles = [];
             $email = [];
+
             foreach($actorDay as $role){
                 $roles[$role['id']] = ActorRole::where('user_id',$role['user_id'])->get();
-                $email[$role['id']] = User::select('email')->where('id',$role['user_id'])->get();
             }
             if($day=="Friday"){
                 $standby_filter = 'fri-';
@@ -1670,7 +1680,7 @@ class AdminController extends Controller
                 $stRoles[$stand['id']] = ActorRole::where('user_id',$stand['user_id'])->get();
             }
             //Generating pdf using dom pdf
-            $pdf = PDF::loadView('pdf.actorslist',['dayactor' => $actorDay,'actorroles'=>$roles,'standbyactor'=>$standBy,'standbyroles'=>$stRoles]);
+            $pdf = PDF::loadView('pdf.actorslist',['actorDay' => $actorDay,'actorroles'=>$roles,'standbyactor'=>$standBy,'standbyroles'=>$stRoles]);
             return $pdf->download('ActorList_'.$day.'.pdf');
         }
 }
