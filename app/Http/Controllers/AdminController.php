@@ -1080,12 +1080,11 @@ class AdminController extends Controller
         );
 
 		$subRequirementFAIL = FALSE;
-
-        if(
-        	(isset($request->adminAudition_hours)) &&
-        	(!isset($request->adminAudition_minutes))||(!isset($request->adminAudition_am))
-		){
+		
+        if( (!is_null($request->adminAudition_hours)) && ((!is_null($request->adminAudition_minutes))||(!is_null($request->adminAudition_am)))){
 			$subRequirementFAIL = TRUE;
+        }else{
+	        $time = NULL;
         }
         
         if (($validator->fails())||($subRequirementFAIL == TRUE)) {
@@ -1104,9 +1103,6 @@ class AdminController extends Controller
         if($request->adminAudition_am == "PM"){
             $hours = '12'+$request->adminAudition_hours;
             $time = $hours.':'.$request->adminAudition_minutes.':00';
-        }
-        if($request->adminAudition_am == ""){
-            $time="";
         }
         $actor = $user->actor; 
         $actor->adminAudition_time = $time;
