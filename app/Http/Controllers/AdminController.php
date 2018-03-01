@@ -1073,37 +1073,48 @@ class AdminController extends Controller
         
 	public function adminAuditions(Request $request, $id){
 
+		/*Initialize*/
+		$subRequirementFAIL = FALSE;
+		$hours = '';
+
+		/*Core Validator*/
     	$validator = \Validator::make($request->all(),
             [
                 'adminAudition_day'   => 'required',
             ]
         );
-
-		$subRequirementFAIL = FALSE;
 		
-        if( (!is_null($request->adminAudition_hours)) && ((!is_null($request->adminAudition_minutes))||(!is_null($request->adminAudition_am)))){
-			$subRequirementFAIL = TRUE;
+		/*Logic Check*/
+        if(!is_null($request->adminAudition_hours)){
+	    	if((!is_numeric($request->adminAudition_minutes))||(empty($request->adminAudition_am))){
+				$subRequirementFAIL = TRUE;
+	    	}
         }else{
 	        $time = NULL;
         }
         
+        /*Validator Check - With Error Handling*/
         if (($validator->fails())||($subRequirementFAIL == TRUE)) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
-                ->withInput();
+                ->withInput()
+                ->with('error_message', 'Admin Audition Information Not Stored. Try again!');
         }
 
+		/*Query User*/
         $user = User::findorfail($id);
-        $hours = '';
+
+		/*AM/PM processing*/
         if($request->adminAudition_am == "AM") {
             $hours = $request->adminAudition_hours;
             $time = $hours.':'.$request->adminAudition_minutes.':00';
-        }
-        if($request->adminAudition_am == "PM"){
+        }elseif($request->adminAudition_am == "PM"){
             $hours = '12'+$request->adminAudition_hours;
             $time = $hours.':'.$request->adminAudition_minutes.':00';
         }
+        
+        /*Define Save Class*/
         $actor = $user->actor; 
         $actor->adminAudition_time = $time;
         $actor->adminAudition_day = $request->adminAudition_day;
@@ -1669,8 +1680,14 @@ class AdminController extends Controller
         /*function for audition pdf*/
         protected function auditionPdf($day){
             $actorDay = Actor::where('adminAudition_day',$day)
-                ->whereNull('adminAudition_standby')
+                ->where('adminAudition_standby',null)
                 ->get();
+            $roles = [];
+            $email = [];
+
+            foreach($actorDay as $role){
+                $roles[$role['id']] = ActorRole::where('user_id',$role['user_id'])->get();
+            }
             if($day=="Friday"){
                 $standby_filter = 'fri-';
             }
@@ -1681,10 +1698,14 @@ class AdminController extends Controller
                 $standby_filter = 'sun-';
             }
             $standBy = Actor::where('adminAudition_standby','like','%'.$standby_filter.'%')
-                ->whereNull('adminAudition_time')
+                ->where('adminAudition_time',Null)
                 ->get();
+            $stRoles = [];
+            foreach($standBy as $stand){
+                $stRoles[$stand['id']] = ActorRole::where('user_id',$stand['user_id'])->get();
+            }
             //Generating pdf using dom pdf
-            $pdf = PDF::loadView('pdf.actorslist',['actorDay' => $actorDay,'standbyactor'=>$standBy]);
+            $pdf = PDF::loadView('pdf.actorslist',['actorDay' => $actorDay,'actorroles'=>$roles,'standbyactor'=>$standBy,'standbyroles'=>$stRoles]);
             return $pdf->download('ActorList_'.$day.'.pdf');
         }
 }

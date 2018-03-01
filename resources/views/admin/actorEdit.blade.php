@@ -766,53 +766,56 @@ $(function(){
  <div class="tab-pane" id="tab_actor_audition">
  	<form action="{{route('admin::adminAuditions',$id)}}" enctype="multipart/form-data" role="form" method="POST">
 		{{csrf_field()}}
-        <div class="row">
-        	<div class="col-md-4">
+        <div class="row" style="background-color:#EEE; padding:25px;">
+        	<div class="col-md-3">
+				<div class="form-group" {{ $errors->has("adminAudition_day") ? "has-error":"" }}'>
+					<label class="control-label">Audition Day</label>
+					<div class="">
+					{!! Form::select('adminAudition_day',\App\Misc::$auditionDay, @$actor->adminAudition_day, [  'required' => 'required',  'class' => 'form-control']) !!}
+					</div>
+				</div>
+	        </div>
+        	<div class="col-md-3">
                 <div class="form-group" {{ $errors->has("adminAudition_hours`") ? "has-error":"" }}'>
-                        <label class="control-label col-md-6">Audition Hours</label>
-                        <div class="col-md-6">
-                        {!! Form::select('adminAudition_hours',@['' => '-Select Hours-']+$hours, $audhour ? $audhour : '', ['class' => 'form-control']) !!}
-                    </div>
+                    <label class="control-label">Audition Hours</label>
+                    <div class="">
+                    {!! Form::select('adminAudition_hours',@['' => '-Select Hours-']+$hours, $audhour ? $audhour : '', ['class' => 'form-control']) !!}
+					</div>
                 </div>
             </div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group" {{ $errors->has("adminAudition_time`") ? "has-error":"" }}'>
-				<label class="control-label col-md-6">Audition Minutes</label>
-					<div class="col-md-6">
+					<label class="control-label">Audition Minutes</label>
+					<div class="">
 						{!! Form::select('adminAudition_minutes',@['' => '-Select Minutes-']+$minutes, $audmin ? $audmin : '', ['class' => 'form-control']) !!}
 					</div>
 				</div>
 			</div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group" {{ $errors->has("adminAudition_am`") ? "has-error" : "" }}'>
-                    <label class="control-label col-md-6">AM/PM</label>
-                <div class="col-md-6">
-                    {!! Form::select('adminAudition_am',[''=>'-AM/PM-','AM'=>'AM','PM'=>'PM'],$ampm ? $ampm : '',['class'=>'form-control']) !!}
-                </div>
+                    <label class="control-label">AM/PM</label>
+	                <div class="">
+	                    {!! Form::select('adminAudition_am',[''=>'-AM/PM-','AM'=>'AM','PM'=>'PM'],$ampm ? $ampm : '',['class'=>'form-control']) !!}
+	                </div>
                 </div>
             </div>
- 		</div>
- 		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group" {{ $errors->has("adminAudition_day") ? "has-error":"" }}'>
-				<label class="control-label col-md-3">Audition Day</label>
-				<div class="col-md-9">
-					{!! Form::select('adminAudition_day',\App\Misc::$auditionDay, @$actor->adminAudition_day, [  'required' => 'required',  'class' => 'form-control']) !!}
+        </div><div class="clearfix"></div>
+        <div class="row">
+	        <h3 class="text-center">or</h3>
+        </div><div class="clearfix"></div>
+ 		<div class="row" style="background-color:#EEE; padding:25px;">
+			<div class="col-md-12">
+				<div class="form-group" {{ $errors->has("adminAudition_standby") ? "has-error":"" }}'>
+					<label class="control-label col-md-3">Audition StandBy</label>
+					<div class="col-md-9">
+						{!! Form::select('adminAudition_standBy', ['' => '-Select standby-']+$standby, @$actor->adminAudition_standby ? $actor->adminAudition_standby : '-Select a Standby-', ['class' => 'form-control']) !!}
+					</div>
 				</div>
 			</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group" {{ $errors->has("adminAudition_day") ? "has-error":"" }}'>
-				<label class="control-label col-md-3">Audition StandBy</label>
-				<div class="col-md-9">
-					{!! Form::select('adminAudition_standBy', ['' => '-Select standby-']+$standby, @$actor->adminAudition_standby ? $actor->adminAudition_standby : '-Select a Standby-', ['class' => 'form-control']) !!}
-				</div>
-			</div>
-			</div>
-		</div>
- 		<div class="row">
-			<div class="col-md-offset-5">
-				<button type="submit" class="btn green"> Submit </button>
+        </div><div class="clearfix"></div>
+        <div class="row" style="background-color:#EEE; padding:25px; margin-top:15px;">
+			<div class="col-md-12">
+				<button type="submit" class="btn btn-block green"> Update ADMIN AUDITION </button>
 			</div>
  		</div>
 	 </form>
