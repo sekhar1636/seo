@@ -259,7 +259,7 @@
                                 </div>
                                 <?php $i=1; $j=1; ?>
                                 @foreach($products as $product)
-                                    <div class="form-group">
+                                    <div class="form-group" style="align-content: center; background-color:#EEE; padding:25px;">
                                         <label class="col-xs-3 control-label">{{$product->name}}</label>
                                         <div class="col-xs-5">
                                             <?php $r=$i++; $s=$j++; ?>
