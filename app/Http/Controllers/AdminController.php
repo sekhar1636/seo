@@ -1655,14 +1655,8 @@ class AdminController extends Controller
         /*function for audition pdf*/
         protected function auditionPdf($day){
             $actorDay = Actor::where('adminAudition_day',$day)
-                ->where('adminAudition_standby',null)
+                ->whereNull('adminAudition_standby')
                 ->get();
-            $roles = [];
-            $email = [];
-
-            foreach($actorDay as $role){
-                $roles[$role['id']] = ActorRole::where('user_id',$role['user_id'])->get();
-            }
             if($day=="Friday"){
                 $standby_filter = 'fri-';
             }
@@ -1673,14 +1667,10 @@ class AdminController extends Controller
                 $standby_filter = 'sun-';
             }
             $standBy = Actor::where('adminAudition_standby','like','%'.$standby_filter.'%')
-                ->where('adminAudition_time',Null)
+                ->whereNull('adminAudition_time')
                 ->get();
-            $stRoles = [];
-            foreach($standBy as $stand){
-                $stRoles[$stand['id']] = ActorRole::where('user_id',$stand['user_id'])->get();
-            }
             //Generating pdf using dom pdf
-            $pdf = PDF::loadView('pdf.actorslist',['actorDay' => $actorDay,'actorroles'=>$roles,'standbyactor'=>$standBy,'standbyroles'=>$stRoles]);
+            $pdf = PDF::loadView('pdf.actorslist',['actorDay' => $actorDay,'standbyactor'=>$standBy]);
             return $pdf->download('ActorList_'.$day.'.pdf');
         }
 }
