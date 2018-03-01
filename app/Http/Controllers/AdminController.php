@@ -456,7 +456,6 @@ class AdminController extends Controller
 		
 		$user = User::findOrFail($id);
 
-
 		$subsciption_expiry = Membership::where('user_id',$id)->get();
 		if(count($subsciption_expiry)){
             $subsciption_expiry = MembershipPeriod::where('id',$subsciption_expiry[0]['membership_period_id'])->get();
@@ -491,10 +490,11 @@ class AdminController extends Controller
 
         }
 		if($user->role == 'actor'){
-		    $ht = "";
-		    if($user->actor['adminAudition_time'] != "")
+		    $ht = [];
+		    $ampm = "";
+		    if(!is_null($user->actor['adminAudition_time']))
 		    {
-		        $ht=explode(':',$user->actor['adminAudition_time']);
+		        $ht = explode(':',$user->actor['adminAudition_time']);
 		        if($ht[0] > 12){
 		            $hours = $ht[0]-12;
 		            $ampm = "PM";
@@ -502,9 +502,17 @@ class AdminController extends Controller
 		            $hours = $ht[0];
 		            $ampm = "AM";
                 }
+                if(!empty($ht[1])){
+	                $ht_1 = $ht[1];
+                }else{
+	                $ht_1 = '00';
+                }
+		    }else{
+	            $hours = "";
+	            $ampm = ""; 
+	            $ht_1 = "";  
 		    }
-				//\Stripe\Stripe::setApiKey("sk_test_qAom6u4p21fG4a6GMn0JrRd3");
-//			return \Stripe\Charge::all(array("customer"=>"cus_BATTZrHSA1uhHo"));
+		    
 			return view('admin.actorEdit')->with([
 			    'actor' => $user->actor,
                 'weight' => $weight,
@@ -515,8 +523,8 @@ class AdminController extends Controller
                 'hours' => $time,
                 'minutes' => $minutes,
                 'standby' => $standBy,
-                'audhour' => $hours!="" ? $hours : '00',
-                'audmin' => $ht[1]!="" ? $ht[1] : '00',
+                'audhour' => $hours,
+                'audmin' => $ht_1,
                 'ampm' => $ampm
             ]);
 		}
@@ -1070,7 +1078,16 @@ class AdminController extends Controller
                 'adminAudition_day'   => 'required',
             ]
         );
-        if ($validator->fails()) {
+
+		$subRequirementFAIL = FALSE;
+		
+        if( (!is_null($request->adminAudition_hours)) && ((!is_null($request->adminAudition_minutes))||(!is_null($request->adminAudition_am)))){
+			$subRequirementFAIL = TRUE;
+        }else{
+	        $time = NULL;
+        }
+        
+        if (($validator->fails())||($subRequirementFAIL == TRUE)) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
@@ -1086,9 +1103,6 @@ class AdminController extends Controller
         if($request->adminAudition_am == "PM"){
             $hours = '12'+$request->adminAudition_hours;
             $time = $hours.':'.$request->adminAudition_minutes.':00';
-        }
-        if($request->adminAudition_am == ""){
-            $time="";
         }
         $actor = $user->actor; 
         $actor->adminAudition_time = $time;
