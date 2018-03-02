@@ -70,7 +70,7 @@
         <td><strong>Theatre</strong></td>
         <td><strong>Dir/Choreo/Other</strong></td>
     </tr>
-    @foreach(@$actorroles[$actor['id']] as $role)
+    @foreach(@$actor->user->actors_role as $role)
         <tr>
         <td>{{$role['roles_chosen']}}</td><td>{{$role['show']}}</td><td>{{$role['theater']}}</td><td>{{$role['dir_chor']}}</td>
         </tr>
@@ -153,7 +153,7 @@
                 <td><strong>Theatre</strong></td>
                 <td><strong>Dir/Choreo/Other</strong></td>
             </tr>
-            @foreach(@$standbyroles[$actor['id']] as $role)
+            @foreach(@$actor->user->actors_role as $role)
                 <tr>
                     <td>{{$role['roles_chosen']}}</td><td>{{$role['show']}}</td><td>{{$role['theater']}}</td><td>{{$role['dir_chor']}}</td>
                 </tr>
