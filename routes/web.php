@@ -201,6 +201,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('homepage/edit',['as'=>'adminHomepageupdate','uses'=>'AdminController@homepageupdate']);
 
             Route::get('auditionpdf/{slug}',['as'=>'auditionpdf','uses'=>'AdminController@auditionPdf']);
+            Route::post('dompdf/{day}',['as'=>'dompdf','uses'=>'AdminController@dompdf']);
+            Route::post('domstandbypdf/{day}',['as'=>'dompdf','uses'=>'AdminController@domstandbypdf']);
 
             //Admin Password edit
             Route::post('password/use/{id}', ['as'=>'postEditPassword', 'uses'=>'AdminController@postEditPassword']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actor;
 use App\AuditionExtra;
 use App\Homepage;
+use App\Jobs\GenerateDompdf;
 use App\Membership;
 use App\ProductVariant;
 use App\Theater;
@@ -27,7 +28,6 @@ use App\MembershipPeriod;
 use App\Payment;
 use App\ActorRole;
 use PDF;
-
 class AdminController extends Controller
 {
     public function index(){
@@ -1682,6 +1682,12 @@ class AdminController extends Controller
             $actorDay = Actor::where('adminAudition_day',$day)
                 ->whereNull('adminAudition_standby')
                 ->get();
+            $roles = [];
+            $email = [];
+            foreach($actorDay as $role){
+                $roles[$role['user_id']] = ActorRole::where('user_id',$role['user_id'])->get();
+                $email[$role['user_id']] = User::select('email')->where('id',$role['user_id'])->get();
+            }
             if($day=="Friday"){
                 $standby_filter = 'fri-';
             }
@@ -1691,11 +1697,53 @@ class AdminController extends Controller
             if($day=='Sunday'){
                 $standby_filter = 'sun-';
             }
-            $standBy = Actor::where('adminAudition_standby','like','%'.$standby_filter.'%')
-                ->whereNull('adminAudition_time')
+            $standby = Actor::where('adminAudition_standby','LIKE', '%' . $standby_filter . '%')
                 ->get();
-            //Generating pdf using dom pdf
-            $pdf = PDF::loadView('pdf.actorslist',['actorDay' => $actorDay,'standbyactor'=>$standBy]);
-            return $pdf->download('ActorList_'.$day.'.pdf');
+            if(count($actorDay)>50 || count($standby)>50){
+                $half = ceil($actorDay->count() / 4);
+                $chunks = $actorDay->chunk($half);
+                $standbys = "";
+                if(count($standby)>50){
+                $standbyhalf = ceil($standby->count()/4);
+                $standbys = $standby->chunk($standbyhalf);
+                }
+                return view('admin.admidoc')->with([
+                    'b' => $chunks,
+                    'day' => $day,
+                    'standbys' => $standbys != "" ? $standbys : $standby
+                ]);
+            }
+            else{
+                $pdf = PDF::loadview('pdf.actorandstandbylist',['actorday'=>$actorDay,'roles'=>$roles,'email' => $email,'standbys'=>$standby]);
+                return $pdf->download('ActorList_'.$day.'.pdf');
+            }
+            //,'standbyactor'=>$standBy
+            /**/
+
+        }
+        protected function dompdf($day,Request $request){
+            $actor = $request->actor;
+            $id = $request->id;
+            $actorDay = json_decode($actor, true);
+            $roles = [];
+            $email = [];
+            foreach($actorDay as $role){
+                $roles[$role['user_id']] = ActorRole::where('user_id',$role['user_id'])->get();
+                $email[$role['user_id']] = User::select('email')->where('id',$role['user_id'])->get();
+            }
+            $pdf = PDF::loadView('pdf.actorslist',['actorDay' => $actorDay,'roles'=>$roles,'email' => $email]);
+            return $pdf->download('ActorList_'.$day.'_'.$id.'.pdf');
+        }
+        protected function domstandbypdf($day,Request $request){
+            $actor = $request->actor;
+            $id = $request->id;
+            $actorDay = json_decode($actor, true);
+            $roles = [];
+            foreach($actorDay as $role){
+                $roles[$role['user_id']] = ActorRole::where('user_id',$role['user_id'])->get();
+                $email[$role['user_id']] = User::select('email')->where('id',$role['user_id'])->get();
+            }
+            $pdf = PDF::loadView('pdf.actorstandbylist',['standbyactor' => $actorDay,'roles'=>$roles,'email'=>$email]);
+            return $pdf->download('Standby_Actor_'.$day.'_'.$id.' .pdf');
         }
 }
