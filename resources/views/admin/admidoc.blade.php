@@ -1,5 +1,5 @@
 @extends('common.layout')
-@section('title', 'Actor Audition Pdfs')
+@section('title', 'Actor Audition PDF\'s')
 @section('style')
     <link href="{{asset('assets/pages/css/profile-2.min.css')}}" rel="stylesheet" type="text/css" />
     <style type="text/css">
@@ -19,13 +19,13 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>Friday Pdf Status</div>
+                        <i class="fa fa-gift"></i>Friday PDF's</div>
                 </div>
                 <div class="portlet-body">
-                    <div class="scroller" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                    <div class="scroller" style="height:400px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
                         <br/>
 
-                                <label>Pdf's to download:</label>
+                                <label>Friday Main PDF(s):</label>
                                 <!--<select name="pdfselect">-->
                                     <?php $i = 1; ?>
                                     @foreach(@$b as $actor)
@@ -43,7 +43,7 @@
                                         </div>
                                         <br/>
                                 @endforeach
-                            <label>Friday Standby Pdf's to download:</label>
+                            <label>Friday Standby PDF(s):</label>
                             <!--<select name="pdfselect">-->
                             <?php $i = 1; ?>
                             @foreach(@$standbys as $actor)
@@ -69,13 +69,13 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>Saturday Pdf Status</div>
+                        <i class="fa fa-gift"></i>Saturday PDF's</div>
                 </div>
                 <div class="portlet-body">
-                    <div class="scroller" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                    <div class="scroller" style="height:400px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
                         <br/>
 
-                                <label>Pdf's to download:</label>
+                                <label>Saturday Main PDF(s):</label>
                                 <!--<select name="pdfselect">-->
                                     <?php $i = 1; ?>
                                     @foreach(@$c as $actor)
@@ -94,7 +94,7 @@
                                         <br/>
                                 @endforeach
                         <!--if(count($standbysat)>50)-->
-                            <label>Saturday Standby Pdf's to download:</label>
+                                <label>Saturday Standby PDF(s):</label>
                             <!--<select name="pdfselect">-->
                             <?php $i = 1; ?>
                             @foreach(@$standbysat as $actor)
@@ -131,13 +131,13 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>Sunday Pdf Status</div>
+                        <i class="fa fa-gift"></i>Sunday PDF's</div>
                 </div>
                 <div class="portlet-body">
-                    <div class="scroller" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                    <div class="scroller" style="height:400px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
                         <br/>
 
-                                <label>Pdf's to download:</label>
+                                <label>Sunday Main PDF(s):</label>
                                 <!--<select name="pdfselect">-->
                                     <?php $i = 1; ?>
                                     @foreach(@$d as $actor)
@@ -155,7 +155,7 @@
                                         </div>
                                         <br/>
                                 @endforeach
-                            <label>Sunday Standby Pdf's to download:</label>
+                                <label>Sunday Standby PDF(s):</label>
                             <!--<select name="pdfselect">-->
                             <?php $i = 1; ?>
                             @foreach(@$standbysun as $actor)
