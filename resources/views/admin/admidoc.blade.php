@@ -14,7 +14,7 @@
     <!-- BEGIN PAGE CONTENT INNER -->
     <div class="row">
         @if(count($b)!=0)
-        <div class="col-md-4 ">
+        <div class="col-md-4">
             <!-- BEGIN Portlet PORTLET-->
             <div class="portlet box blue">
                 <div class="portlet-title">
@@ -186,6 +186,16 @@
                 </div>
             </div>
         @endif
+        <div class="col-md-12">
+        <strong>How to combine and merge files into one PDF:</strong>
+			<ol>
+			<li>Within Acrobat, click on the Tools menu and select Combine Files.</li>
+			<li>Click Combine Files, and then click Add Files to select the files you want to include in your PDF.</li>
+			<li>Click, drag, and drop to reorder the files and pages. Double-click on a file to expand and rearrange individual pages. Press the Delete key to remove unwanted content.</li>
+			<li>When finished arranging files, click Combine Files.</li>
+			<li>Click the Save button.</li>
+			</ol>
+        </div>
             <!-- END Portlet PORTLET-->
         </div>
     </div>
