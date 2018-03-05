@@ -17,7 +17,7 @@
 </style>
 @if(count($actorDay))
 @foreach($actorDay as $actor)
-    <div class="bvody">
+    <div class="bvody page-break">
         <table class="table-all" border="0">
             <tr>
                 <td colspan="4" class="border-bottom">
@@ -142,6 +142,5 @@
             </tr>
         </table>
     </div>
-    <div class="page-break"></div>
 @endforeach
 @endif
