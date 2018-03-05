@@ -1,170 +1,267 @@
-<style>
-    hr{
-        border-top: 1px solid black;
-        background-color: black;
-    }
-    .page-break{
-        page-break-after: always;
-    }
-    td.bor-bottom{
-        border-bottom: 1px solid dimgrey;
-    }
+<style type="text/css">
+    .bvody{width: 750px;margin: 0 auto;text-align : center;}
+    .table-all{width: 100%;}
+    .table-all td{text-align: left;vertical-align:top;}
+    td.pad2{padding: 0 4px; 0 0;}
+    td.border-bottom{border-bottom: 2px solid black;}
+    td.border-top{border-top: 2px solid black;}
+    .page-break{page-break-after: always;}
 </style>
 @if(count($actorDay))
     @foreach($actorDay as $actor)
-        <table>
-            <tr>
-                <td><img src="{{ asset('assets/images/listlogo.jpg') }}"/></td><td colspan="2"><h2 style="text-align: center;">{{$actor['first_name'].' '.$actor['last_name']}}</h2></td>
-                <?php $time = \Carbon\Carbon::parse($actor['adminAudition_time']);
-                $now = $time->format('g:i A');
-                ?>
-                <td><p style="text-align:right;">{{$actor['adminAudition_day'].' '.$now}}</p></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <table>
-                        <tr>
-                            <td><span><strong>Hair:</strong> {{$actor['hair']}}</span></td>
-                            <td><span><strong>Eyes:</strong>{{ $actor['eyes'] }}</span></td>
-                            <td><span><strong>Ht:</strong> {{$actor['feet']."'".$actor['inch']}}</span></td>
-                            <td><span><strong>Wt:</strong> {{$actor['weight'].' lbs'}}</span></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 100px;" colspan="4"><span><strong>Ethnicity:</strong> {{$actor['ethnicity']}}</span></td>
-                        </tr>
-                        <tr><td class="bor-bottom" colspan="4"></td></tr>
-                        <tr>
-                            <td style="width:50px;"><strong>Phone:</strong></td>
-                            <td style="width:100px;" colspan="2"><strong>E-mail:</strong></td><td style="width:100px;"><strong>Available:</strong></td></tr><tr><td style="width:50px;">{{$actor['phone_number']}}</td>
-                            <td style="width:100px;" colspan="2"><a href="mailTo:{{ $email[$actor['user_id']][0]['email'] }}">{{ $email[$actor['user_id']][0]['email'] }}</a></td>
-                            <td style="width:50px;">{{$actor['from'].' to'.$actor['to']}}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Instrument:</strong></td>
-                            <td colspan="2"><strong>Will Consider:</strong></td>
-                            <td><strong>Gender</strong></td>
-                        </tr>
-                        <tr>
-                            <td>{{$actor['instrument']}}</td>
-                            <td colspan="2">{{$actor['jobType']}}</td>
-                            <td>{{$actor['gender']}}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Range:</strong></td>
-                            <td colspan="2"><strong>Websites:</strong></td>
-                            <td><strong>Misc</strong></td>
-                        </tr>
-                        <tr>
-                            <td><p>{{$actor['vocalRange']}}</p></td>
-                            <td colspan="2"><p>{{$actor['website_url']}}</p></td>
-                            <td><p>{{$actor['misc']}}</p></td>
-                        </tr>
-                    </table>
-                </td>
-                <td><img src="{{asset($actor['photo_path'])}}" height="277px" width="185px"/></td>
-            </tr>
-            <tr><td class="bor-bottom" colspan="4"></td></tr>
-            <tr>
-                <td style="width: 50px;"><strong>Role</strong></td>
-                <td style="width: 50px;"><strong>Show</strong></td>
-                <td style="width: 50px;"><strong>Theatre</strong></td>
-                <td style="width: 50px;"><strong>Dir/Choreo/Other</strong></td>
-            </tr>
-            @foreach(@$roles[$actor['user_id']] as $role)
-                <tr>
-                    <td style="width: 50px;">{{$role['roles_chosen']}}</td><td style="width: 50px;">{{$role['show']}}</td><td style="width: 50px;">{{$role['theater']}}</td><td style="width: 50px;">{{$role['dir_chor']}}</td>
-                </tr>
-            @endforeach
-            <tr><td class="bor-bottom" colspan="4"></td></tr>
-            <tr><td><strong>Dance:</strong></td><td colspan="3">{{$actor['dance']}}</td></tr>
-            <tr><td><strong>Technical skills:</strong></td><td colspan="3">{{$actor['technical']}}</td></tr>
-            <tr><td><strong>Schools:</strong></td><td colspan="3">{{$actor['school']}}</td></tr>
-            <tr><td><strong>Audition Type:</strong></td><td colspan="3">{{$actor['auditionType']}}</td></tr>
-        </table>
-        </hr>
-        <div class="page-break"></div>
+<div class="bvody">
+    <table class="table-all" border="0">
+        <tr>
+            <td colspan="4" class="border-bottom">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 25%"><img width="122px" height="93x" src="{{ asset('assets/images/listlogo.jpg') }}"/></td>
+                        <td style="text-align: center; text-transform: uppercase; font-weight: bold; width: 40%">{{$actor['first_name'].' '.$actor['last_name']}}</td>
+                        <?php $time = \Carbon\Carbon::parse($actor['adminAudition_time']);
+                        $now = $time->format('g:i A');
+                        ?>
+                        <td style="text-align: center; width: 35%">{{$actor['adminAudition_day'].' '.$now}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <table style="width: 100%">
+                    <tr>
+                        <td class="border-bottom">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="width: 25%" class="pad2"><strong>Hair:</strong> {{$actor['hair']}}</td>
+                                    <td style="width: 25%" class="pad2"><strong>Eyes:</strong>{{ $actor['eyes'] }}</td>
+                                    <td style="width: 25%" class="pad2"><strong>Ht:</strong> {{$actor['feet']."'".$actor['inch']}}</td>
+                                    <td style="width: 25%" class="pad2"><strong>Wt:</strong> {{$actor['weight'].' lbs'}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><strong>Ethnicity:</strong> {{$actor['ethnicity']}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="width: 33%"><strong>Phone:</strong></td>
+                                    <td style="width: 33%"><strong>E-mail:</strong></td>
+                                    <td style="width: 33%"><strong>Available:</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33%">{{$actor['phone_number']}}</td>
+                                    <td style="width: 33%"><a href="mailTo:{{ $email[$actor['user_id']][0]['email'] }}">{{ $email[$actor['user_id']][0]['email'] }}</a></td>
+                                    <td style="width: 33%">{{$actor['from'].' to'.$actor['to']}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33%"><strong>Instrument:</strong></td>
+                                    <td style="width: 33%"><strong>Will Consider:</strong></td>
+                                    <td style="width: 33%"><strong>Gender</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33%">{{preg_replace("(,)",", ",$actor['instrument'])}}</td>
+                                    <td style="width: 33%">{{preg_replace("(,)",", ",$actor['jobType'])}}</td>
+                                    <td style="width: 33%">{{$actor['gender']}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33%"><strong>Range:</strong></td>
+                                    <td style="width: 33%"><strong>Websites:</strong></td>
+                                    <td style="width: 33%"><strong>Misc</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 33%">{{$actor['vocalRange']}}</td>
+                                    <td style="width: 33%"><a href="http://{{$actor['website_url']}}">{{strlen($actor['website_url']) > 21 ? substr($actor['website_url'], 0, 15) . '...' : $actor['website_url']}}</a></td>
+                                    <td style="width: 33%">{{preg_replace("(,)",", ",$actor['misc'])}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <img width="80%" height="200px" src="{{asset($actor['photo_path'])}}"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"  class="border-top border-bottom">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 25%"><strong>Role</strong></td>
+                        <td style="width: 25%"><strong>Show</strong></td>
+                        <td style="width: 25%"><strong>Theatre</strong></td>
+                        <td style="width: 25%"><strong>Dir/Choreo/Other</strong></td>
+                    </tr>
+                    @foreach(@$roles[$actor['user_id']] as $role)
+                    <tr>
+                        <td style="width: 25%">{{strlen($role['roles_chosen']) > 31 ? substr($role['roles_chosen'], 0, 25) . '...' : $role['roles_chosen']}}</td>
+                        <td style="width: 25%">{{strlen($role['show']) > 31 ? substr($role['show'], 0, 25) . '...' :$role['show']}}</td>
+                        <td style="width: 25%">{{strlen($role['theater']) > 31 ? substr($role['theater'], 0, 25) . '...' : $role['theater']}}</td>
+                        <td style="width: 25%">{{strlen($role['dir_chor']) > 31 ? substr($role['dir_chor'], 0, 25) . '...' : $role['dir_chor']}}</td>
+                    </tr>
+                    @endforeach
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 25%"><strong>Dance:</strong></td>
+                        <td style="width: 75%">{{preg_replace("(,)",", ",$actor['dance'])}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%"><strong>Technical skills:</strong></td>
+                        <td style="width: 75%">{{preg_replace("(,)",", ",$actor['technical'])}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%"><strong>Schools:</strong></td>
+                        <td style="width: 75%">{{$actor['school']}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%"><strong>Audition Type:</strong></td>
+                        <td style="width: 75%">{{$actor['auditionType']}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="page-break"></div>
     @endforeach
 @endif
 @if(count($standbyactor))
     @foreach($standbyactor as $actor)
-        <table>
-            <tr>
-                <td><img src="{{ asset('assets/images/listlogo.jpg') }}"/></td><td colspan="2"><h2 style="text-align: center;">{{$actor['first_name'].' '.$actor['last_name']}}</h2></td>
-                <?php $standby = substr($actor['adminAudition_standby'],0,3);
-                if($standby=="fri"){
-                    $stand = str_replace("fri","Friday",$actor['adminAudition_standby']);
-                }
-                if($standby=="sat"){
-                    $stand = str_replace("sat","Saturday",$actor['adminAudition_standby']);
-                }
-                if($standby=="sun"){
-                    $stand = str_replace("sun","Sunday",$actor['adminAudition_standby']);
-                }
-                ?>
-                <td><p style="text-align: center;">{{$actor['adminAudition_day'].' '.$stand!="" ? $stand.' StandBy' : "" }}</p></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <table>
-                        <tr>
-                            <td><span><strong>Hair:</strong> {{$actor['hair']}}</span></td>
-                            <td><span><strong>Eyes:</strong>{{ $actor['eyes'] }}</span></td>
-                            <td><span><strong>Ht:</strong> {{$actor['feet']."'".$actor['inch']}}</span></td>
-                            <td><span><strong>Wt:</strong> {{$actor['weight'].' lbs'}}</span></td>
-                        </tr>
-                        <tr>
-                            <td style="width:100px;" colspan="4"><span><strong>Ethnicity:</strong> {{$actor['ethnicity']}}</span></td>
-                        </tr>
-                        <tr><td class="bor-bottom" colspan="4"></td></tr>
-                        <tr>
-                            <td style=""><strong>Phone:</strong></td>
-                            <td colspan="2"><strong>E-mail:</strong></td><td><strong>Available:</strong></td></tr><tr><td>{{$actor['phone_number']}}</td>
-                            <td colspan="2"><a href="mailTo:{{$email[$actor['user_id']][0]['email']}}">{{$email[$actor['user_id']][0]['email']}}</a></td>
-                            <td>{{$actor['from'].' to'.$actor['to']}}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Instrument:</strong></td>
-                            <td colspan="2"><strong>Will Consider:</strong></td>
-                            <td><strong>Gender</strong></td>
-                        </tr>
-                        <tr>
-                            <td>{{$actor['instrument']}}</td>
-                            <td colspan="2">{{$actor['jobType']}}</td>
-                            <td>{{$actor['gender']}}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Range:</strong></td>
-                            <td colspan="2"><strong>Websites:</strong></td>
-                            <td><strong>Misc</strong></td>
-                        </tr>
-                        <tr>
-                            <td><p>{{$actor['vocalRange']}}</p></td>
-                            <td colspan="2"><p>{{$actor['website_url']}}</p></td>
-                            <td><p>{{$actor['misc']}}</p></td>
-                        </tr>
-                    </table>
-                </td>
-                <td><img src="{{asset($actor['photo_path'])}}" height="277px" width="185px"/></td>
-            </tr>
-            <tr><td class="bor-bottom" colspan="4"></td></tr>
-            <tr>
-                <td style="width: 50px;"><strong>Role</strong></td>
-                <td style="width: 50px;"><strong>Show</strong></td>
-                <td style="width: 50px;"><strong>Theatre</strong></td>
-                <td style="width: 50px;"><strong>Dir/Choreo/Other</strong></td>
-            </tr>
-            @foreach(@$roles[$actor['user_id']] as $role)
+        <div class="bvody">
+            <table class="table-all" border="0">
                 <tr>
-                    <td style="width: 50px;">{{$role['roles_chosen']}}</td><td style="width: 50px;">{{$role['show']}}</td><td style="width: 50px;">{{$role['theater']}}</td><td style="width: 50px;">{{$role['dir_chor']}}</td>
+                    <td colspan="4" class="border-bottom">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 25%"><img width="122px" height="93x" src="{{ asset('assets/images/listlogo.jpg') }}"/></td>
+                                <td style="font-weight: bold; text-transform: uppercase; width: 40%">{{$actor['first_name'].' '.$actor['last_name']}}</td>
+                                <?php $standby = substr($actor['adminAudition_standby'],0,3);
+                                if($standby=="fri"){
+                                    $stand = str_replace("fri","Friday",$actor['adminAudition_standby']);
+                                }
+                                if($standby=="sat"){
+                                    $stand = str_replace("sat","Saturday",$actor['adminAudition_standby']);
+                                }
+                                if($standby=="sun"){
+                                    $stand = str_replace("sun","Sunday",$actor['adminAudition_standby']);
+                                }
+                                ?>
+                                <td style="width: 35%">{{$actor['adminAudition_day'].' '.$stand!="" ? $stand.' StandBy' : "" }}</td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
-            @endforeach
-            <tr><td class="bor-bottom" colspan="4"></td></tr>
-            <tr><td><strong>Dance:</strong></td><td colspan="3">{{$actor['dance']}}</td></tr>
-            <tr><td><strong>Technical skills:</strong></td><td colspan="3">{{$actor['technical']}}</td></tr>
-            <tr><td><strong>Schools:</strong></td><td colspan="3">{{$actor['school']}}</td></tr>
-            <tr><td><strong>Audition Type:</strong></td><td colspan="3">{{$actor['auditionType']}}</td></tr>
-        </table>
-        </hr>
+                <tr>
+                    <td colspan="3">
+                        <table style="width: 100%">
+                            <tr>
+                                <td class="border-bottom">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 25%" class="pad2"><strong>Hair:</strong> {{$actor['hair']}}</td>
+                                            <td style="width: 25%" class="pad2"><strong>Eyes:</strong>{{ $actor['eyes'] }}</td>
+                                            <td style="width: 25%" class="pad2"><strong>Ht:</strong> {{$actor['feet']."'".$actor['inch']}}</td>
+                                            <td style="width: 25%" class="pad2"><strong>Wt:</strong> {{$actor['weight'].' lbs'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><strong>Ethnicity:</strong> {{$actor['ethnicity']}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 33%"><strong>Phone:</strong></td>
+                                            <td style="width: 33%"><strong>E-mail:</strong></td>
+                                            <td style="width: 33%"><strong>Available:</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33%">{{$actor['phone_number']}}</td>
+                                            <td style="width: 33%"><a href="mailTo:{{ $email[$actor['user_id']][0]['email'] }}">{{ $email[$actor['user_id']][0]['email'] }}</a></td>
+                                            <td style="width: 33%">{{$actor['from'].' to'.$actor['to']}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33%"><strong>Instrument:</strong></td>
+                                            <td style="width: 33%"><strong>Will Consider:</strong></td>
+                                            <td style="width: 33%"><strong>Gender</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33%">{{preg_replace("(,)",", ",$actor['instrument'])}}</td>
+                                            <td style="width: 33%">{{preg_replace("(,)",", ",$actor['jobType'])}}</td>
+                                            <td style="width: 33%">{{$actor['gender']}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33%"><strong>Range:</strong></td>
+                                            <td style="width: 33%"><strong>Websites:</strong></td>
+                                            <td style="width: 33%"><strong>Misc</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 33%">{{$actor['vocalRange']}}</td>
+                                            <td style="width: 33%"><a href="http://{{$actor['website_url']}}">{{strlen($actor['website_url']) > 21 ? substr($actor['website_url'], 0, 15) . '...' : $actor['website_url']}}</a></td>
+                                            <td style="width: 33%">{{preg_replace("(,)",", ",$actor['misc'])}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <img width="80%" height="200px" src="{{asset($actor['photo_path'])}}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"  class="border-top border-bottom">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 25%"><strong>Role</strong></td>
+                                <td style="width: 25%"><strong>Show</strong></td>
+                                <td style="width: 25%"><strong>Theatre</strong></td>
+                                <td style="width: 25%"><strong>Dir/Choreo/Other</strong></td>
+                            </tr>
+                            @foreach(@$roles[$actor['user_id']] as $role)
+                                <tr>
+                                    <td style="width: 25%">{{strlen($role['roles_chosen']) > 31 ? substr($role['roles_chosen'], 0, 25) . '...' : $role['roles_chosen']}}</td>
+                                    <td style="width: 25%">{{strlen($role['show']) > 31 ? substr($role['show'], 0, 25) . '...' :$role['show']}}</td>
+                                    <td style="width: 25%">{{strlen($role['theater']) > 31 ? substr($role['theater'], 0, 25) . '...' : $role['theater']}}</td>
+                                    <td style="width: 25%">{{strlen($role['dir_chor']) > 31 ? substr($role['dir_chor'], 0, 25) . '...' : $role['dir_chor']}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 25%"><strong>Dance:</strong></td>
+                                <td style="width: 75%">{{preg_replace("(,)",", ",$actor['dance'])}}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%"><strong>Technical skills:</strong></td>
+                                <td style="width: 75%">{{preg_replace("(,)",", ",$actor['technical'])}}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%"><strong>Schools:</strong></td>
+                                <td style="width: 75%">{{$actor['school']}}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%"><strong>Audition Type:</strong></td>
+                                <td style="width: 75%">{{$actor['auditionType']}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <div class="page-break"></div>
     @endforeach
 @endif

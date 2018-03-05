@@ -147,7 +147,7 @@
                                         {{ csrf_field() }}
                                         <input type="hidden" name="id" value="{{$i}}">
                                         <input type="hidden" name="actor" value="{{$actor->toJson()}}">
-                                        <button class="btn btn-sm btn-primary" type="submit">Sunday {{$i>1 ? "Part $i" : " " }}</button>
+                                        <button class="btn btn-sm btn-primary" type="submit">{{"Sunday Part $i"}}</button>
                                     </form>
                                             <?php $i++; ?>
 
