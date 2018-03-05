@@ -70,7 +70,13 @@
                                         <tr>
                                             <td style="width: 33%">{{$actor['phone_number']}}</td>
                                             <td style="width: 33%"><a href="mailTo:{{ $email[$actor['user_id']][0]['email'] }}">{{ $email[$actor['user_id']][0]['email'] }}</a></td>
-                                            <td style="width: 33%">{{$actor['from'].' to'.$actor['to']}}</td>
+                                            <?php
+                                            $start_date = \Carbon\Carbon::parse($actor['from']);
+                                            $from = $start_date->format('m/d/Y');
+                                            $end_date = \Carbon\Carbon::parse($actor['to']);
+                                            $to = $end_date->format('m/d/Y');
+                                            ?>
+                                            <td style="width: 33%">{{$from.' to'.$to}}</td>
                                         </tr>
                                         <tr>
                                             <td style="width: 33%"><strong>Instrument:</strong></td>
