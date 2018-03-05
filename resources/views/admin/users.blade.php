@@ -165,13 +165,7 @@ $(document).ready(function() {
                             <div class="col-md-6">
                                 <label class="col-md-3 control-label">Audition List:</label>
                                 <div class="col-md-3">
-                                    <a class="btn btn-xs btn-primary" href="{{route('admin::auditionpdf','Friday')}}">Friday</a>
-                                </div>
-                                <div class="col-md-3">
-                                    <a class="btn btn-xs btn-primary" href="{{route('admin::auditionpdf','Saturday')}}">Saturday</a>
-                                </div>
-                                <div class="col-md-3">
-                                    <a class="btn btn-xs btn-primary" href="{{route('admin::auditionpdf','Sunday')}}">Sunday</a>
+                                    <a class="btn btn-md btn-primary" href="{{route('admin::auditionpdf')}}">Actor Audition List</a>
                                 </div>
                             </div>
                             <div class="col-md-3"></div>

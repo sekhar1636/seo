@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Actor;
 use App\AuditionExtra;
 use App\Homepage;
-use App\Jobs\GenerateDompdf;
 use App\Membership;
 use App\ProductVariant;
 use App\Theater;
@@ -1676,50 +1675,93 @@ class AdminController extends Controller
                 $user->update();
         return redirect()->back()->with('success_message', 'Password successfully updated.');
         }
-
+        protected function getCount($total){
+            if($total>450){
+                return 10;
+            }
+            if($total>400 && $total<450){
+                return 9;
+            }
+            if($total>350 && $total<400){
+                return 8;
+            }
+            if($total>300 && $total<350){
+                return 7;
+            }
+            if($total>250 && $total<300){
+                return 6;
+            }
+            if($total>200 && $total<250){
+                return 4;
+            }
+            if($total>150 && $total<200){
+                return 4;
+            }
+            if($total>100 && $total<150){
+                return 3;
+            }
+            if($total>50 && $total<100){
+                return 2;
+            }
+            if($total>0 && $total<50){
+                return 1;
+            }
+        }
         /*function for audition pdf*/
-        protected function auditionPdf($day){
-            $actorDay = Actor::where('adminAudition_day',$day)
+        protected function auditionPdf(){
+            $actorDay = Actor::where('adminAudition_day','Friday')
                 ->whereNull('adminAudition_standby')
                 ->get();
-            $roles = [];
-            $email = [];
-            foreach($actorDay as $role){
-                $roles[$role['user_id']] = ActorRole::where('user_id',$role['user_id'])->get();
-                $email[$role['user_id']] = User::select('email')->where('id',$role['user_id'])->get();
-            }
-            if($day=="Friday"){
-                $standby_filter = 'fri-';
-            }
-            if($day=='Saturday'){
-               $standby_filter = 'sat-';
-            }
-            if($day=='Sunday'){
-                $standby_filter = 'sun-';
-            }
-            $standby = Actor::where('adminAudition_standby','LIKE', '%' . $standby_filter . '%')
+            $standby = Actor::where('adminAudition_standby','LIKE', '%fri-%')
                 ->get();
-            if(count($actorDay)>50 || count($standby)>50){
-                $half = ceil($actorDay->count() / 4);
+            $actorSaturday = Actor::where('adminAudition_day','Saturday')
+                ->whereNull('adminAudition_standby')
+                ->get();
+            $standbySaturday = Actor::where('adminAudition_standby','LIKE', '%sat-%')
+                ->get();
+            $actorSunday = Actor::where('adminAudition_day','Sunday')
+                ->whereNull('adminAudition_standby')
+                ->get();
+            $standbySunday = Actor::where('adminAudition_standby','LIKE', '%sun-%')
+                ->get();
+                $total = count($actorDay);
+                $count = AdminController::getCount($total);
+                $half = ceil($actorDay->count() / $count);
                 $chunks = $actorDay->chunk($half);
                 $standbys = "";
-                if(count($standby)>50){
-                $standbyhalf = ceil($standby->count()/4);
+                    $totalStandy = count($standby);
+                    $countStandby = AdminController::getCount($totalStandy);
+                $standbyhalf = ceil($standby->count()/$countStandby);
                 $standbys = $standby->chunk($standbyhalf);
-                }
+                /**for saturday**/
+            $totalSaturday = count($actorSaturday);
+            $countSaturday = AdminController::getCount($totalSaturday);
+            $halfSaturday = ceil($actorSaturday->count() / $countSaturday);
+            $chunksSaturday = $actorSaturday->chunk($halfSaturday);
+            $standbysaturday = "";
+            $totalStandySat = count($standbySaturday);
+            $countStandbySat = AdminController::getCount($totalStandySat);
+            $standbyhalfsat = ceil($standbySaturday->count()/$countStandbySat);
+            $standbysat = $standbySaturday->chunk($standbyhalfsat);
+
+                /**for sunday**/
+            $totalSunday = count($actorSunday);
+            $countSunday = AdminController::getCount($totalSunday);
+            $halfSunday = ceil($actorDay->count() / $countSunday);
+            $chunkSunday = $actorSunday->chunk($halfSunday);
+            $standby_sunday = "";
+            $totalStandSunday = count($standbySunday);
+            $countStandSunday = AdminController::getCount($totalStandSunday);
+            $standbyhalfSunday = ceil($standbySunday->count()/$countStandSunday);
+            $standbysunday = $standbySunday->chunk($standbyhalfSunday);
                 return view('admin.admidoc')->with([
                     'b' => $chunks,
-                    'day' => $day,
-                    'standbys' => $standbys != "" ? $standbys : $standby
+                    'c' => $chunksSaturday,
+                    'd' => $chunkSunday,
+                    'standbys' => $standbys != "" ? $standbys : $standby,
+                    'standbysat' => $standbysat != "" ? $standbysat : $standbySaturday,
+                    'standbysun' => $standbysunday != "" ? $standbysunday : $standbySunday
                 ]);
-            }
-            else{
-                $pdf = PDF::loadview('pdf.actorandstandbylist',['actorday'=>$actorDay,'roles'=>$roles,'email' => $email,'standbys'=>$standby]);
-                return $pdf->download('ActorList_'.$day.'.pdf');
-            }
-            //,'standbyactor'=>$standBy
-            /**/
-
         }
         protected function dompdf($day,Request $request){
             $actor = $request->actor;
