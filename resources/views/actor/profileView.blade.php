@@ -82,7 +82,7 @@
                                         <p>
                                             <b>Website Url/Youtube Channel: </b>
                                             @if(@$actor->actor->website_url)
-                                                <span><a style="text-decoration: none;" href="http://{{$actor->actor->website_url}}" target="_blank">{{$actor->actor->website_url}}</a> </span>
+                                                <span><a style="text-decoration: none;" href="{{strpos($actor->actor->website_url,"https://") ? $actor->actor->website_url : (strpos($actor->actor->website_url, "http://") ? $actor->actor->website_url : "http://".$actor->actor->website_url)}}" target="_blank">{{$actor->actor->website_url}}</a> </span>
                                             @else
                                                 <span>NA</span>
                                             @endif
