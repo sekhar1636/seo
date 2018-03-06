@@ -82,7 +82,7 @@
                                         <p>
                                             <b>Website Url/Youtube Channel: </b>
                                             @if(@$actor->actor->website_url)
-                                                <span class="label label-success label-sm"> {{$actor->actor->website_url}} </span>
+                                                <span class="label label-success label-sm"> <a href="http://{{$actor->actor->website_url}}">{{$actor->actor->website_url}}</a> </span>
                                             @else
                                                 <span>NA</span>
                                             @endif
