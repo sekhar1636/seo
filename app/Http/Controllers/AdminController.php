@@ -1714,6 +1714,7 @@ class AdminController extends Controller
                 ->orderBy('adminAudition_time','asc')
                 ->get();
             $standby = Actor::where('adminAudition_standby','LIKE', '%fri-%')
+                ->orderByRaw('CHAR_LENGTH(adminAudition_standby)','asc')
                 ->orderBy('adminAudition_standby','asc')
                 ->get();
             $actorSaturday = Actor::where('adminAudition_day','Saturday')
@@ -1721,6 +1722,7 @@ class AdminController extends Controller
                 ->orderBy('adminAudition_time','asc')
                 ->get();
             $standbySaturday = Actor::where('adminAudition_standby','LIKE', '%sat-%')
+                ->orderByRaw('CHAR_LENGTH(adminAudition_standby)','asc')
                 ->orderBy('adminAudition_standby','asc')
                 ->get();
             $actorSunday = Actor::where('adminAudition_day','Sunday')
@@ -1728,6 +1730,7 @@ class AdminController extends Controller
                 ->orderBy('adminAudition_time','asc')
                 ->get();
             $standbySunday = Actor::where('adminAudition_standby','LIKE', '%sun-%')
+                ->orderByRaw('CHAR_LENGTH(adminAudition_standby)','asc')
                 ->orderBy('adminAudition_standby','asc')
                 ->get();
                 $total = count($actorDay);
