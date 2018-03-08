@@ -637,17 +637,11 @@ class ActorController extends Controller
     /** View user */
     public function view($id){
         $actor = User::findOrFail($id);
-        $hours = substr($actor->actor->adminAudition_time,0,2);
-        $minutes = substr($actor->actor->adminAudition_time,3,2);
-        $time = "";
-        if($hours != ""){
-        if($hours > 12){
-            $hours = $hours-12;
-            $ampm = "PM";
-        }else{
-            $ampm = "AM";
-        }
-        $time = $hours.':'.$minutes.':00';
+        $time = $actor->actor->adminAudition_time;
+        $actualTime = "";
+        if($time != ""){
+            $ampmTime = Carbon::parse($time);
+            $actualTime = $ampmTime->format('g:i A');
         }
         $actor_inside = Actor::where('user_id',$id)->get();
         if($actor->payment_status == 1 && $actor_inside[0]['first_name'] != NULL && $actor_inside[0]['last_name']!= NULL && $actor_inside[0]['photo_path']!= NULL)
@@ -657,7 +651,7 @@ class ActorController extends Controller
             return view('actor.profileView')->with([
                 'actor'=> $actor,
                 'actor_role' => $actor_role,
-                'time' => $time!="" ? $time : ""
+                'time' => $actualTime!="" ? $actualTime : ""
             ]);
         }
         else

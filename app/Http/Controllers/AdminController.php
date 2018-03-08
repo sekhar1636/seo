@@ -1107,9 +1107,17 @@ class AdminController extends Controller
 		/*AM/PM processing*/
         if($request->adminAudition_am == "AM") {
             $hours = $request->adminAudition_hours;
+            if($hours == 12){
+                $hours = '00';
+            }
             $time = $hours.':'.$request->adminAudition_minutes.':00';
         }elseif($request->adminAudition_am == "PM"){
-            $hours = '12'+$request->adminAudition_hours;
+            $hours = $request->adminAudition_hours;
+            if($hours == 12){
+                $hours = $request->adminAudition_hours;
+            }else{
+                $hours = 12+$request->adminAudition_hours;
+             }
             $time = $hours.':'.$request->adminAudition_minutes.':00';
         }
         

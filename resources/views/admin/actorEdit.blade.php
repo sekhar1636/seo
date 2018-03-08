@@ -779,7 +779,7 @@ $(function(){
                 <div class="form-group" {{ $errors->has("adminAudition_hours`") ? "has-error":"" }}'>
                     <label class="control-label">Audition Hours</label>
                     <div class="">
-                    {!! Form::select('adminAudition_hours',@['' => '-Select Hours-']+$hours, $audhour ? $audhour : '', ['class' => 'form-control']) !!}
+                    {!! Form::select('adminAudition_hours',@['' => '-Select Hours-']+$hours, $audhour ? ($audhour == 00 ? '12' : $audhour): '', ['class' => 'form-control']) !!}
 					</div>
                 </div>
             </div>
