@@ -160,6 +160,9 @@
                                                 <span class="arrow"></span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('admin::staticPageEdit','tandc') }}"><i class="icon-flag"></i> Terms and Conditions</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <!-- END MEGA MENU -->

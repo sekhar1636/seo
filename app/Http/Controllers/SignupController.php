@@ -8,12 +8,15 @@ use Validator;
 use App\Jobs\SendVerificationMail;
 use Carbon\Carbon;
 use Auth;
+use App\StaticPage;
 
 class SignupController extends Controller
 {
     //Get function for signup
     public function getSignup(){
-        return view('common.register');
+        $cP = StaticPage::where('slug','tandc')->get();
+
+        return view('common.register',['cp' => $cP[0]->page_description]);
     }
     public function postSignup(Request $request){
 
