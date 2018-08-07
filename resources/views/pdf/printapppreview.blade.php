@@ -25,7 +25,7 @@
                 <div class="portlet-body">
 <h2 style="text-align: center;"><img src="{{ asset('assets/images/straw99.gif') }}" style="width:8%; height: 8%;"/> STRAWHAT AUDITIONS APPLICATION PRINT-OUT</h2>
 <p style="font-weight: bold;">Mail To: StrawHat Auditions, 1771 Post Road East #315, Westport, CT 06880</p>
-<p style="font-weight: bold;">Application Deadline: February 1st All Materials Must Be Received by Our Office as of Noon on This Date !</p>
+<p style="font-weight: bold;">Application Deadline: January 15th All Materials Must Be Received by Our Office as of Noon on This Date !</p>
 
     <hr/>
 <table>
