@@ -177,20 +177,25 @@
                                                     <a href="{{route('getStaticPage',['slug'=>'resumeadvice'])}}">Resume Advice</a>
                                                 </li>
                                             </ul>
-                                        <li class="{{ @$staffactive ? 'active' : @$staticactive=='staffactive' ? 'active' : '' }}">
+                                                    </a>
+                                            </a>
+                                        </li>
+                                        <li class="{{ @$staffactive ? 'active' : @$staticactive=='staffactive' ? 'active' : '' }} menu-dropdown">
+                                            <a href="{{ route('getStaticPage',['slug'=>'staff']) }}"><i class="icon-fire"></i> Staff/Tech</a>
+                                            <ul class="dropdown-menu pull-left">
+                                                <li>
                                             @if(Auth::check())
                                                 @if(\Auth::user()->payment_status==1)
-                                                    <a href="{{ route('getStaffs') }}">
-                                                        @else
-                                                            <a href="{{route('staff::staffProfile')}}">
-                                                                @endif
-                                                                @else
-                                                                    <a href="{{route('getStaticPage',['slug'=>'staff'])}}">
-                                                                        @endif
-                                                                        <i class="icon-note"></i> Staff/Tech
-                                                                        <span class="arrow"></span>
-                                                                    </a>
 
+                                                            <a href="{{ route('getStaffs') }}"><i class="icon-fire"></i> Staffs </a>
+                                                        @else
+                                                            <a href="{{route('staff::staffProfile')}}"><i class="icon-fire"></i> Staffs </a>
+                                                                <span class="arrow"></span>
+                                                        @endif
+                                            @endif
+                                                </li>
+                                            </ul>
+                                        </li>
                                        <li class="menu-dropdown {{ @$theateractive ? 'active' : @$staticactive=='theateractive' ? 'active' : '' }}">
                                            @if(Auth::check())
                                                @if(\Auth::user()->payment_status==1)
