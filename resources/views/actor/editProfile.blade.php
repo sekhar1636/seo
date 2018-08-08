@@ -509,6 +509,17 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <h3 class="form-section">Geo Info</h3>
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Please Select Your State</label>
+                                                                    <div class="col-md-6">
+                                                                    {{ Form::select('state[]',App\Misc::$states,$actor[0]['state'] ? $actor[0]['state'] : '',['class'=>"form-control col-md-6",'placeholder'=>"Please Select Your States"]) }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <!--/row-->
                                                         <h3 class="form-section">Resume</h3>
                                                         <div class="row">

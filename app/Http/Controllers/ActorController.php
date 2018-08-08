@@ -213,7 +213,6 @@ class ActorController extends Controller
 
         $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
         $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
-
         $id = \Auth::user()->id;
         $user = User::findorfail($id);
         $user->name = $request->get('display_name');
@@ -243,6 +242,7 @@ class ActorController extends Controller
         $actor->website_url = $request->website_url;
         $actor->pro_name = $request->pro_name;
         $actor->pro_mail = $request->pro_mail;
+        $actor->state = $request->state[0];
         if($request->hasFile('resume')) {
             $this->uploadResume($actor,$request->file('resume'), $request->get('name'));
         }

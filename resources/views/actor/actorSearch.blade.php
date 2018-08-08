@@ -122,6 +122,14 @@
                             @endforeach
                         </select>
                     </fieldset>
+                    <div class="search-label uppercase">States</div>
+                    <fieldset data-filter-group="states" class="control-group">
+                        <select class="form-control">
+                            @foreach(\App\Misc::$states as $key=>$vc)
+                                <option value="[data-state={{$key}}]">{{$vc}}</option>
+                            @endforeach
+                        </select>
+                    </fieldset>
                     <div class="search-label uppercase">First Name</div>
                     <fieldset data-filter-group="first-name" class="text-input-wrapper">
                     <div class="input-icon right">
@@ -206,7 +214,7 @@
                     <div class="actorContainer">
 					@foreach($actorList as $actor)
                         @if(($actor->email)&&($actor->first_name)&&($actor->last_name)&&($actor->auditionType)&&($actor->from)&&($actor->to)&&($actor->ethnicity)&&($actor->gender)&&($actor->vocalRange)&&($actor->feet)&&($actor->hair)&&($actor->eyes)&&($actor->photo_path)&&($actor->photo_url)&&($actor->weight)&&($actor->school) != NULL && $actor->payment_status == 1 && $actor->verified == 1)
-						<div data-first-name="{{ strtolower($actor->first_name) }}" data-last-name="{{ strtolower($actor->last_name) }}" data-audition-type="{{ preg_replace('/\s+/', '', $actor->auditionType=="Song & Monologue" ? "Song-n-Monologue" : $actor->auditionType) }}" data-skill-vocal="{{ preg_replace('/\s+/', '', $actor->vocalRange) }}" class="mix {{
+						<div data-first-name="{{ strtolower($actor->first_name) }}" data-last-name="{{ strtolower($actor->last_name) }}" data-audition-type="{{ preg_replace('/\s+/', '', $actor->auditionType=="Song & Monologue" ? "Song-n-Monologue" : $actor->auditionType) }}" data-skill-vocal="{{ preg_replace('/\s+/', '', $actor->vocalRange) }}" data-state="{{$actor->state}}" class="mix {{
 
 							$mixClass = $actor->gender . ' '. \App\Http\Controllers\ActorController::prepareData($actor->ethnicity). ' '. \App\Http\Controllers\ActorController::prepareData($actor->misc). ' '. \App\Http\Controllers\ActorController::prepareData($actor->technical). ' '. \App\Http\Controllers\ActorController::prepareData($actor->dance). ' '. \App\Http\Controllers\ActorController::prepareData($actor->jobType). ' '. \App\Http\Controllers\ActorController::prepareData($actor->instrument) .' '. \App\Http\Controllers\ActorController::getAvailability($actor->from, $actor->to)
 						}}">

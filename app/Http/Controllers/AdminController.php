@@ -671,6 +671,7 @@ class AdminController extends Controller
         $actor->website_url = $request->website_url;
         $actor->pro_name = $request->pro_name;
         $actor->pro_mail = $request->pro_mail;
+        $actor->state = $request->state[0];
         $actor->phone_number = $request->phone_number;
         if($request->hasFile('resume')) {
            $this->uploadResume($actor,$request->file('resume'), $request->get('name'));      
