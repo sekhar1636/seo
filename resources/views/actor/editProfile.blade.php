@@ -490,6 +490,25 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <h3 class="form-section">Professor Information</h3>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Professor Name</label>
+                                                                    <div class="col-md-9">
+                                                                        {!! Form::text('pro_name',@$actor[0]['pro_name'] ? $actor[0]['pro_name'] : null,['class'=>'form-control','placeholder'=>'Professor Name']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Professor Email</label>
+                                                                    <div class="col-md-9">
+                                                                        {!! Form::text('pro_mail',@$actor[0]['pro_mail'] ? $actor[0]['pro_mail'] : null,['class'=>'form-control','placeholder'=>'Professor Email']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <!--/row-->
                                                         <h3 class="form-section">Resume</h3>
                                                         <div class="row">

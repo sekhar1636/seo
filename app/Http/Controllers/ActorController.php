@@ -241,6 +241,8 @@ class ActorController extends Controller
         $actor->misc = $request->get('misc') ? implode(',', $request->get('misc')) : '';
         $actor->phone_number = $request->phone_number;
         $actor->website_url = $request->website_url;
+        $actor->pro_name = $request->pro_name;
+        $actor->pro_mail = $request->pro_mail;
         if($request->hasFile('resume')) {
             $this->uploadResume($actor,$request->file('resume'), $request->get('name'));
         }
