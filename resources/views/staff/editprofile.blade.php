@@ -218,9 +218,10 @@
                                                                 <label class="control-label col-md-3">Availability</label>
                                                                 <div class="col-md-9">
                                                                     <div class="input-group input-large date-picker input-daterange"  data-date-format="dd/mm/yyyy">
-                                                                        {!! Form::text('from', \Carbon\Carbon::parse(@$staff[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From','readonly']) !!}
+                                                                        {!! Form::text('from', \Carbon\Carbon::parse(@$staff[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From','readonly', "required" => "required"]) !!}
+
                                                                         <span class="input-group-addon"> to </span>
-                                                                        {!! Form::text('to', \Carbon\Carbon::parse(@$staff[0]['to'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'readonly']) !!}
+                                                                        {!! Form::text('to', \Carbon\Carbon::parse(@$staff[0]['to'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'readonly', "required" => "required"]) !!}
                                                                     </div>
                                                                     <!-- /input-group -->
                                                                     <span class="help-block"> {{ $errors->first("from") }} {{ $errors->first("to") }} </span>
@@ -231,10 +232,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <label for="Roles" class="control-label col-md-3">Primary
-                                                                Sought</label>
+                                                                Sought <span class="required" aria-required="true">*</span></label>
+
                                                             <div class="col-md-9">
-                                                                {!! Form::select('primary_sought',['' => 'Select', 1 => 'Accompanist', 2 => 'Administration',3 => 'Box Office', 4 => 'Carpentry', 5 => 'Choreography', 6 => 'Costume Design', 7 => 'Sewing', 8 => 'Technical Director', 9 => 'Graphics', 10 => 'House Management', 11 => 'Lighting Design', 12 => 'Electrics', 13 => 'Director', 14 => 'Musical Director', 15 => 'Photography', 16 => 'Video', 17 => 'Props',18=>'Publicity',19=>'Running Crew',20=>'Scenic Artist',21=>'Set Design',22=>'Sound',23=>'State Management',24=>'Company Management'], @$staff[0]['primary_sought'] ? $staff[0]['primary_sought'] : '', ['class' => 'form-control', 'id' => "primary_sought"]) !!}
-                                                                <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+                                                                {!! Form::select('primary_sought',['' => 'Select', 1 => 'Accompanist', 2 => 'Administration',3 => 'Box Office', 4 => 'Carpentry', 5 => 'Choreography', 6 => 'Costume Design', 7 => 'Sewing', 8 => 'Technical Director', 9 => 'Graphics', 10 => 'House Management', 11 => 'Lighting Design', 12 => 'Electrics', 13 => 'Director', 14 => 'Musical Director', 15 => 'Photography', 16 => 'Video', 17 => 'Props',18=>'Publicity',19=>'Running Crew',20=>'Scenic Artist',21=>'Set Design',22=>'Sound',23=>'State Management',24=>'Company Management'], @$staff[0]['primary_sought'] ? $staff[0]['primary_sought'] : '', ['class' => 'form-control', 'id' => "primary_sought", "required"=>"required"]) !!}
+                                                                <span class="help-block"> {{ $errors->first("primary_sought") }} </span>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -242,7 +244,7 @@
                                                                 Sought</label>
                                                             <div class="col-md-9">
                                                                 {!! Form::select('secondary_sought',['' => 'Select', 1 => 'Accompanist', 2 => 'Administration',3 => 'Box Office', 4 => 'Carpentry', 5 => 'Choreography', 6 => 'Costume Design', 7 => 'Sewing', 8 => 'Technical Director', 9 => 'Graphics', 10 => 'House Management', 11 => 'Lighting Design', 12 => 'Electrics', 13 => 'Director', 14 => 'Musical Director', 15 => 'Photography', 16 => 'Video', 17 => 'Props',18=>'Publicity',19=>'Running Crew',20=>'Scenic Artist',21=>'Set Design',22=>'Sound',23=>'State Management',24=>'Company Management'], @$staff[0]['secondary_sought'] ? $staff[0]['secondary_sought'] : '', ['class' => 'form-control', 'id' => "secondary_sought"]) !!}
-                                                                <span class="help-block"> {{ $errors->first("roles_chosen") }} </span>
+                                                                <span class="help-block"> {{ $errors->first("secondary_sought") }} </span>
                                                             </div>
                                                         </div>
                                                     </div>

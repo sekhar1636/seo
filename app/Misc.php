@@ -38,7 +38,7 @@ class Misc{
         '20' => 'Scenic Artist',
         '21' => 'Scenic Artist',
         '22' => 'Sound',
-        '23' => 'State Management',
+        '23' => 'Stage Management',
         '24' => 'Company Management',
         ''   => ''
     ];
@@ -66,7 +66,7 @@ class Misc{
         '20' => 'Scenic Artist',
         '21' => 'Scenic Artist',
         '22' => 'Sound',
-        '23' => 'State Management',
+        '23' => 'Stage Management',
         '24' => 'Company Management',
         ''   => ''
     ];
