@@ -38,4 +38,21 @@
 </div>
 @endif
 {!! $sP !!}
+
+<div class="row" style="padding: 30px 0px;">
+	<?php $i = 0; ?>
+	@foreach($young as $y)
+		<?php if($i % 3 == 0) {
+		    echo "</div><div class='row'  style='padding: 30px 0px;'>";
+			} ?>
+	<div class="col-md-4" style="padding: 5px 15px;">
+		<div class="box-section">
+			{!! $y->business !!}
+			<a href="{{ $y->link }}" class="btn btn-primary btn-block"> {{ $y->button_text }} </a>
+		</div>
+	</div>
+		<?php $i++; ?>
+	@endforeach
+</div>
+
 @endsection

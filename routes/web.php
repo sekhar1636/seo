@@ -206,6 +206,13 @@ Route::group(['middleware' => ['auth']], function () {
 
             //Admin Password edit
             Route::post('password/use/{id}', ['as'=>'postEditPassword', 'uses'=>'AdminController@postEditPassword']);
+            //Younger List
+            Route::get('younger/list',['as' => 'youngList','uses'=>'YoungerController@yList']);
+            Route::get('younger/data',['as'=>'youngData','uses'=>'YoungerController@yData']);
+            Route::post('younger/create',['as' => 'youngAdd','uses'=>'YoungerController@yCreate']);
+            Route::get('younger/edit/{young}',['as' => 'youngEdit','uses'=>'YoungerController@yEdit']);
+            Route::get('younger/delete/{id}',['as' => 'youngDelete','uses'=>'YoungerController@yDelete']);
+            Route::patch('younger/update/{id}',['as' => 'youngUpdate','uses'=>'YoungerController@yUpdate']);
         });
 	});
 	

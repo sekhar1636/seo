@@ -163,6 +163,13 @@
                                         <li>
                                             <a href="{{ route('admin::staticPageEdit','tandc') }}"><i class="icon-flag"></i> Terms and Conditions</a>
                                         </li>
+                                        <li class="menu-dropdown ">
+                                            <a href="#"><i class="icon-book"></i> Younger</a>
+                                            <ul class="dropdown-menu pull-left">
+                                                <li><a href="{{ route('admin::youngList') }}"><i class="icon-file"></i> Younger Sections</a></li>
+                                                <li><a href="{{ route('admin::staticPageEdit','younger') }}"><i class="icon-file"></i> Younger Edit</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </div>
                                 <!-- END MEGA MENU -->
