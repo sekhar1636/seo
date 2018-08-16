@@ -12,6 +12,6 @@ class AuditionExtra extends Model
 
     public function audition()
     {
-        return $this->belongsTo('App\Actor','user_id');
+        return $this->belongsTo('App\User','user_id');
     }
 }
