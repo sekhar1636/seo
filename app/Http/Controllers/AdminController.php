@@ -438,10 +438,76 @@ class AdminController extends Controller
         })->make(true);
     }
 
+    public function delete($file1,$file2,$file3,$file4,$file5){
+        if(file_exists(public_path().'/'.$file1)){
+            unlink(public_path().'/'.$file1);
+        }
+        if(file_exists(public_path(public_path().'/'.$file2))){
+            unlink(public_path().'/'.$file2);
+        }
+        if(file_exists(public_path().'/'.$file3)){
+            unlink(public_path().'/'.$file3);
+        }
+        if(file_exists(public_path().'/'.$file4)){
+            unlink(public_path().'/'.$file4);
+        }
+        if(file_exists(public_path().'/'.$file5)){
+            unlink(public_path().'/'.$file5);
+        }
+    }
 	public function userDestroy($id){
-    	$user = User::find($id);
-		$user->delete();
+        $user = User::findorfail($id);
+        // delete related actor
+        if(count($user) > 0){
+        if(count($user->actor) > 0){
+            $actor = $user->actor;
+            if($actor->photo_path != "" || $actor->precrop_path != "" || $actor->photo_url != "" || $actor->precrop_url != "" || $actor->resume_path != ""){
+                $this->delete($actor->photo_path,$actor->precrop_path,$actor->photo_url,$actor->precrop_url,$actor->resume_path);
+            }
+            if(count($user->audition_extra) > 0){
+                //$user->audition_extra->delete();
+                $aE = AuditionExtra::where('user_id',$user->id)->delete();
+            }
+            if(count($user->actors_role) > 0){
+                $aR = ActorRole::where('user_id',$user->id)->delete();
+            }
+            $aD = Actor::where('user_id',$user->id)->delete();
+
+        }
+        /*theater related files and theater profile deletion**/
+        if(count($user->theater) > 0){
+            $theater = $user->theater;
+            if($theater->photo_path != "" || $theater->precrop_path != "" || $theater->photo_url != "" || $theater->precrop_url != "" || $theater->resume_path != ""){
+                $this->delete($theater->photo_path,$theater->precrop_path,$theater->photo_url,$theater->precrop_url,$theater->resume_path);
+            }
+           $tD = Theater::where('user_id',$user->id)->delete();
+
+        }
+        /*staff related files and staff profile deletion**/
+        if(count($user->staff) > 0){
+            $staff = $user->staff;
+            if($staff->photo_path != "" || $staff->precrop_path != "" || $staff->photo_url != "" || $staff->precrop_url != "" || $staff->resume_path != ""){
+                $this->delete($staff->photo_path,$staff->precrop_path,$staff->photo_url,$staff->precrop_url,$staff->resume_path);
+            }
+            $sD = Staff::where('user_id',$user->id)->delete();
+           }
+           /**payment and memberships delete**/
+        if(count($user->payments) > 0){
+            //$user->payments->delete();
+            Payment::where('user_id',$user->id)->delete();
+        }
+        if(count($user->memberships) > 0){
+            //$user->memberships->delete();
+            Membership::where('user_id',$user->id)->delete();
+        }
+
+		$u = User::where('id',$user->id)->delete();
 		return redirect()->back()->with('success_message', 'User deleted successfully.');
+
+
+        }else{
+            return redirect()->back()->with('error_message', 'User Dosnt exist');
+        }
 	}
 	
 	public function userEdit($id){
