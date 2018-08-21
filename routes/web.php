@@ -25,12 +25,13 @@ Route::get('/actors/{id}/view',['as'=>'getActorView', 'uses'=>'ActorController@v
 Route::get('/staffs/{id}/view',['as'=>'getStaffView', 'uses'=>'StaffController@view']);
 Route::get('/theaters/{id}/view',['as'=>'getTheaterView','uses'=>'TheaterController@view']);
 
+Route::get('/special-payment', ['as'=>'adminUserPayment', 'uses'=>'AdminController@specialPayment']);
+
 Route::get('/secret-cookie', function() {
 	$response = new Illuminate\Http\Response('Cookie installed');
 	$response->withCookie(cookie()->forever('secret-cookie', 'WebTestMDT'));
 	return $response;
 });
-
 
 Route::group(['middleware' => ['auth']], function () {
 	
@@ -38,6 +39,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/actors', ['as'=>'getActors', 'uses'=>'ActorController@getActors']);
     Route::get('/theaters', ['as'=>'getTheaters', 'uses'=>'TheaterController@getTheater']);
 	Route::get('/staffs', ['as'=>'getStaffs', 'uses'=>'StaffController@getStaff']);
+
+
 
 	/* LOGOUT*/
 	Route::get('/logout', ['as' => 'logout', 'uses' =>  "LoginController@logout"]);
@@ -139,7 +142,7 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::get('user/{id}/delete', ['as'=>'adminUserDelete', 'uses'=>'AdminController@userDestroy']);
 			Route::get('user/{id}/edit', ['as'=>'adminUserEdit', 'uses'=>'AdminController@userEdit']);
 			Route::patch('user/{id}', ['as'=>'adminUserUpdate', 'uses'=>'AdminController@userUpdate']);
-			
+			Route::get('/sendPaymentEmail', ['as'=>'adminUserEmail', 'uses'=>'AdminController@sendPaymentEmail']);
 
 			Route::get('actorAuditionList/', ['as'=>'actorAuditionList', 'uses'=>'AdminController@actorAuditionList']);			
 			Route::match(array('POST', 'PUT'),'actor/{id}', ['as'=>'adminActorUpdate', 'uses'=>'AdminController@actorUpdate']);

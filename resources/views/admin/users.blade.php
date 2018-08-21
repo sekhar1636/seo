@@ -70,6 +70,19 @@ $(document).ready(function() {
 	});
 });
 </script>
+<script type="text/javascript">
+    $(document).on('click','.special_payment', function(){
+        var user_id = $(this).attr('ref');
+        $.ajax({
+            type:"GET",
+            url:"./sendPaymentEmail",
+            data:{user_id:user_id},
+            success:function(output){
+
+            },
+        });
+    });
+</script>
 @endsection
 @section('content')
 <!-- BEGIN PAGE CONTENT INNER -->
@@ -81,7 +94,7 @@ $(document).ready(function() {
         <span> {!! Session::has('error_message') ? Session::pull('error_message') : 'Please correct your fields.' !!} </span> </div>
       <div class="alert alert-success {{{ Session::has('success_message') ? '' : 'display-hide' }}}">
         <button class="close" data-close="alert"></button>
-        <span> {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!} </span> </div>
+        <span> {!! Session::has('success_message') ? Session::pull('success_message') : 'Success' !!} </span> </div>
       <!-- BEGIN CONTENT -->
       <div class="profile-content">
         <div class="row">

@@ -27,6 +27,10 @@ use App\MembershipPeriod;
 use App\Payment;
 use App\ActorRole;
 use PDF;
+use Mail;
+use App\SpecialPayment;
+use Auth;
+
 class AdminController extends Controller
 {
     public function index(){
@@ -344,6 +348,7 @@ class AdminController extends Controller
             ->addColumn('action', function ($user) {
                 $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
 				$action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')" ><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                $action.= '<a ref="'.$user->id.'" class="btn btn-xs btn-success special_payment"><i class="fa fa-money" aria-hidden="true"></i> Special Payment</a>';
 				return $action;
             })
 			->editColumn('status', function ($user) {
@@ -353,6 +358,65 @@ class AdminController extends Controller
                 return ($user->payment_status)? "Yes" : "No";
             })
 			->make(true);
+    }
+
+    public function sendPaymentEmail(Request $request)
+    {
+        if(isset($request['user_id']) && $request['user_id'] != "") {
+            $user          = User::where('id',$request['user_id'])->first();
+            $payment_token = 'SP'.$request['user_id'].date('Ymds');
+            $paymentUrl = env('APP_URL').'special-payment?d='.base64_encode($user->id.'|'.$payment_token);
+            try {
+                Mail::send('email.payment', ['paymentUrl'=> $paymentUrl,'name'=>$user->username ], function ($m) use ($user) {
+                    $m->to($user->email)->subject('Payment');
+                });
+
+                $special_payment                 = new SpecialPayment;
+                $special_payment->user_id        = $request->user_id;
+                $special_payment->transaction_id = '';
+                $special_payment->price          = '0.00';
+                $special_payment->varient_id     = '0';
+                $special_payment->status         = '1';
+                $special_payment->payment_token  = $payment_token;
+                $special_payment->save();
+
+                return redirect()->back()->with('success_message', 'Please check email for payment link');
+            } catch (Exception $e) {
+                return redirect()->back()->with('error_message', 'Unable to send forgot email please wait.');
+            }
+        }
+    }
+
+    public function specialPayment(Request $request)
+    {
+        if(isset(Auth::user()->role) && Auth::user()->role != "") {
+            if(isset($request['d']) && $request['d'] != "") {
+                $userInfo = explode('|',base64_decode($request['d']));
+                
+                if(isset($userInfo[0]) && Auth::user()->id == $userInfo[0]) {
+                    $paymentinfo = base64_encode("s|".$userInfo[0].'|'.$userInfo[1]);
+                    if(Auth::user()->role == "actor") {
+                        return redirect('/actor/payment?t='.$paymentinfo);
+                    } else if(Auth::user()->role == 'theater') {
+                        return redirect('/theater/payment?t='.$paymentinfo);
+                    } else if(Auth::user()->role == 'staff') {
+                        return redirect('/staff/payment?t='.$paymentinfo);
+                    }
+                } else {
+                    if(Auth::user()->role == "actor") {
+                        return redirect()->route('actor::actorProfile');
+                    } else if(Auth::user()->role == 'theater'){
+                        return redirect()->route('theater::theaterProfile');
+                    } else if(Auth::user()->role == 'staff'){
+                        return redirect()->route('staff::staffProfile');
+                    } else {
+                        return redirect()->route('admin::adminDashboard');
+                    }
+                }
+            }
+        } else {
+            return redirect('/login?d='.$request['d']);
+        }
     }
 
     public function actorsDataTable(){
@@ -369,6 +433,7 @@ class AdminController extends Controller
             ->addColumn('action', function ($user) {
                 $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                 $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger del" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')" ><i class="glyphicon glyphicon-trash del"></i> Delete</a>';
+                $action.= '<a ref="'.$user->id.'" class="btn btn-xs btn-success special_payment"><i class="fa fa-money" aria-hidden="true"></i> Special Payment</a>';
                 return $action;
             })
             ->editColumn('status', function ($user) {
@@ -411,6 +476,7 @@ class AdminController extends Controller
         return Datatables::of($users)->addColumn('action', function($user){
             $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"  onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            $action.= '<a ref="'.$user->id.'" class="btn btn-xs btn-success special_payment"><i class="fa fa-money" aria-hidden="true"></i> Special Payment</a>';
             return $action;
         })->editColumn('status', function ($user) {
             return ($user->status)? "Active" : "De-Activated";
@@ -432,6 +498,7 @@ class AdminController extends Controller
         return Datatables::of($users)->addColumn('action', function($user){
             $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            $action.= '<a ref="'.$user->id.'" class="btn btn-xs btn-success special_payment"><i class="fa fa-money" aria-hidden="true"></i> Special Payment</a>';
             return $action;
         })->editColumn('status', function ($user) {
             return ($user->status)? "Active" : "De-Activated";
@@ -1420,10 +1487,11 @@ class AdminController extends Controller
 		//return $request->all();
 		$validator = \Validator::make($request->all(),
             [
-				'start_date' => "required",
-				'end_date' => "required",
-                'type' => "required",
-				'name' => "required",
+				'start_date'        => "required",
+				'end_date'          => "required",
+                'type'              => "required",
+				'name'              => "required",
+                'subscription_type' => 'required',
             ]
         );
 		
@@ -1434,12 +1502,13 @@ class AdminController extends Controller
                 ->withInput();
         }else{
 			
-			$membershipPeriod = new MembershipPeriod;
-			$membershipPeriod->name = $request->get('name');
-			$membershipPeriod->price = $request->get('price');
-            $membershipPeriod->type = $request->get('type');
-			$membershipPeriod->start_date = date("Y-m-d",strtotime($request->get('start_date')));
-			$membershipPeriod->end_date = date("Y-m-d",strtotime($request->get('end_date')));
+			$membershipPeriod                    = new MembershipPeriod;
+			$membershipPeriod->name              = $request->get('name');
+			$membershipPeriod->price             = $request->get('price');
+            $membershipPeriod->type              = $request->get('type');
+            $membershipPeriod->subscription_type = $request->get('subscription_type');
+			$membershipPeriod->start_date        = date("Y-m-d",strtotime($request->get('start_date')));
+			$membershipPeriod->end_date          = date("Y-m-d",strtotime($request->get('end_date')));
 			$membershipPeriod->save();
 			return redirect()->back()->with('success_message', 'Product added successfully.');
 			
@@ -1459,9 +1528,10 @@ class AdminController extends Controller
 	public function subscriptionUpdate(Request $request, $id){
 	    $validator = \Validator::make($request->all(),
             [
-				'start_date' => "required",
-				'end_date' => "required",
-				'name' => "required",
+				'start_date'        => "required",
+				'end_date'          => "required",
+				'name'              => "required",
+                'subscription_type' => "required",
             ]
         );
 		
@@ -1471,13 +1541,14 @@ class AdminController extends Controller
                 ->withErrors($validator->errors())
                 ->withInput();
         }else{
-			$membershipPeriod = MembershipPeriod::findOrFail($id);
-			$membershipPeriod->name = $request->get('name');
-			$membershipPeriod->price = $request->get('price');
-			$membershipPeriod->type = $request->get('type')!=Null ? $request->get('type') : $membershipPeriod->type;
-			$membershipPeriod->start_date = date("Y-m-d",strtotime($request->get('start_date')));
-			$membershipPeriod->end_date = date("Y-m-d",strtotime($request->get('end_date')));
-			$membershipPeriod->status = $request->get('status');
+			$membershipPeriod                    = MembershipPeriod::findOrFail($id);
+			$membershipPeriod->name              = $request->get('name');
+			$membershipPeriod->price             = $request->get('price');
+			$membershipPeriod->type              = $request->get('type')!=Null ? $request->get('type') : $membershipPeriod->type;
+			$membershipPeriod->start_date        = date("Y-m-d",strtotime($request->get('start_date')));
+			$membershipPeriod->end_date          = date("Y-m-d",strtotime($request->get('end_date')));
+            $membershipPeriod->subscription_type = $request->get('subscription_type')!=Null ? $request->get('subscription_type') : $membershipPeriod->subscription_type;
+			$membershipPeriod->status            = $request->get('status');
 			$membershipPeriod->save();
 			return redirect()->route('admin::adminSubscriptions')->with('success_message', 'Plan edited successfully.');
 		}
@@ -1506,7 +1577,8 @@ class AdminController extends Controller
 	public function productStore(Request $request){
 		$validator = \Validator::make($request->all(),
             [
-                "name"=>"required|min:5",
+                "name"         => "required|min:5",
+                "product_type" => "required",
             ]
         );
 		
@@ -1517,10 +1589,11 @@ class AdminController extends Controller
 				->with('tabactive', 'active')
                 ->withInput();
         }else{
-            $prod = new Product;
-            $prod->name = $request->name;
-            $prod->price = "0";
-            $prod->description = $request->description;
+            $prod               = new Product;
+            $prod->name         = $request->name;
+            $prod->price        = "0";
+            $prod->description  = $request->description;
+            $prod->product_type = $request->product_type;
             $prod->save();
 
             foreach($request->varient as $val)
@@ -1551,8 +1624,8 @@ class AdminController extends Controller
 
     	$validator = \Validator::make($request->all(),
             [
-                "name"=>"required|min:5",
-				//'price' => "required",
+                "name"         => "required|min:5",
+				'product_type' => "required",
             ]
         );
 		
@@ -1562,11 +1635,12 @@ class AdminController extends Controller
                 ->withErrors($validator->errors())
                 ->withInput();
         }else{
-			$product = Product::findOrFail($id);
-			$product->name = $request['name'];
-			$product->price = "0";
-			$product->description = $request['description'];
-			$product->status = $request['status'];
+			$product               = Product::findOrFail($id);
+			$product->name         = $request['name'];
+			$product->price        = "0";
+			$product->description  = $request['description'];
+			$product->status       = $request['status'];
+            $product->product_type = $request['product_type'];
 			$product->save();
 
 			$iddetect = [];

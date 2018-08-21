@@ -242,6 +242,7 @@ $(document).ready(function() {
           <div class="row" style="margin-top: 10px;">
             <form id="paymentForm" class="form-horizontal" method="post" action="{{route('actor::storeActorPayment')}}" >
               <input type="hidden" name="_token" value="{{csrf_token()}}">
+              <input type="hidden" name="payment_type" @if(isset($_REQUEST['t'])) value="{{ $_REQUEST['t'] }}" @else value="" @endif>
               <div class="form-group">
                 <label class="col-xs-3 control-label">Subscription Plan</label>
                 <div class="col-xs-5">

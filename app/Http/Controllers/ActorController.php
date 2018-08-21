@@ -20,6 +20,7 @@ use App\AuditionExtra;
 use Yajra\Datatables\Facades\Datatables;
 use DB;
 use PDF;
+use App\SpecialPayment;
 
 class ActorController extends Controller
 {
@@ -382,7 +383,7 @@ class ActorController extends Controller
      * TODO : Dummy payment just chaning payment status for now
      * Will update with proper payment system in future
      */
-    public function payment()
+    public function payment(Request $request)
     {
         $user = User::find(\Auth::user()->id);
         if($user->subscribed('main'))
@@ -391,11 +392,31 @@ class ActorController extends Controller
         }
         else
         {
-            $membershipPeriods = MembershipPeriod::latest()->where('type','Actor')->where('status',1)->orderBy('id', 'desc')->get();
-            $products = Product::orderBy('id', 'desc')->get();
-            //$products = Product::findorfail(2);
-            //$n = $products->product_variant;
-            //dd($n);
+            $payment_type = "";
+            if(isset($request['t']) && $request['t'] != '') {
+                $paymentInfo  = explode("|",base64_decode($request['t']));
+                
+                if(isset($paymentInfo[0]) && $paymentInfo[0] != "") {
+                    $payment_type = $paymentInfo[0];
+                }
+            }
+
+            $membershipPeriods = MembershipPeriod::latest()->where('type','Actor')->where('status',1);
+            if(isset($payment_type) && $payment_type == 's') {
+                $membershipPeriods = $membershipPeriods->where("subscription_type","special");
+            } else {
+                $membershipPeriods = $membershipPeriods->where("subscription_type","default")->orWhere("subscription_type","");
+            }
+            $membershipPeriods = $membershipPeriods->orderBy('id', 'desc')->get();
+
+            $products = Product::where('status',1);
+            if(isset($payment_type) && $payment_type == 's') {
+                $products = $products->where("product_type","special");
+            } else {
+                $products = $products->where("product_type","default")->orWhere("product_type","");
+            }
+            $products = $products->orderBy('id', 'desc')->get();
+
             $states = $this->getStateWithSelected();
             return view('actor.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods, 'states' => $states]);
         }
@@ -412,7 +433,6 @@ class ActorController extends Controller
     }
 
     public function paymentStore(Request $request){
-        $request->all();
         $description = "";
         $totalPrice = 0;
         $membershipPeriod = MembershipPeriod::findOrFail($request->subscription);
@@ -466,13 +486,37 @@ class ActorController extends Controller
             $membership->save();
 
             //save the payment details for subscription
-            $payment = new Payment;
-            $payment->user_id = \Auth::user()->id;
-            $payment->transaction_id = $result->id;
-            //$request->token;
-            $payment->membership_period_id = $membershipPeriod->id;
-            $payment->price = $membershipPeriod->price;
-            $payment->save();
+            $paymentType    = "";
+            $$paymentUserId = "";
+            $paymentToken   = "";
+            if(isset($request->payment_type) && $request->payment_type != '') {
+                $paymentInfo  = explode("|",base64_decode($request->payment_type));
+                $payment_type = "";
+                if(isset($paymentInfo[0]) && $paymentInfo[0] != "") {
+                    $paymentType = $paymentInfo[0];
+                }
+                if(isset($paymentInfo[1]) && $paymentInfo[1] != "") {
+                    $paymentUserId = $paymentInfo[1];
+                }
+                if(isset($paymentInfo[2]) && $paymentInfo[2] != "") {
+                    $paymentToken = $paymentInfo[2];
+                }
+            }
+            if(isset($paymentType) && $paymentType == 's') {
+                $payment = SpecialPayment::where('user_id',$paymentUserId)->where('payment_token',$paymentToken)->first();
+                $payment->transaction_id       = $result->id;
+                $payment->membership_period_id = $membershipPeriod->id;
+                $payment->price                = $membershipPeriod->price;
+                $payment->save();
+            } else {
+               $payment = new Payment;
+                $payment->user_id              = \Auth::user()->id;
+                $payment->transaction_id       = $result->id;
+                $payment->membership_period_id = $membershipPeriod->id;
+                $payment->price                = $membershipPeriod->price;
+                $payment->save(); 
+            }
+            
 
             //subscription table
             $subes = SubscriptionPackage::where('user_id',\Auth::user()->id)->get();
@@ -546,6 +590,17 @@ class ActorController extends Controller
 
     }
 
+    /**for preparing audition data
+    public static function actorRoleShow($data){
+        if($data->count() > 0){
+            $prep = $data->implode('roles_chosen');
+            $prep .= $data->implode('show');
+        }else{
+            $prep = "";
+        }
+        return $prep;
+    }**/
+
     /**for checking date comparision and return**/
     public static function check_in_range($start_date, $end_date, $start_lookup, $end_lookup)
     {
@@ -603,7 +658,8 @@ class ActorController extends Controller
     public function getActors(){
         if(\Auth::check()){
             if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
-                $actors = \App\User::join('actors', 'actors.user_id', '=', 'users.id')
+                $actors = \App\User::select('users.email','users.payment_status','users.verified','actors.first_name','actors.last_name','actors.auditionType','actors.from','actors.to','actors.ethnicity','actors.gender','actors.vocalRange','actors.feet','actors.hair','actors.eyes','actors.photo_path','actors.photo_url','actors.weight','actors.school','actors.misc','actors.technical','actors.dance','actors.jobType','actors.instrument')
+                    ->join('actors', 'actors.user_id', '=', 'users.id')
                     ->where('users.payment_status', 1)->whereNotNull('actors.photo_path')->orderBy('actors.first_name', 'asc')
                     ->get();
 
@@ -619,6 +675,7 @@ class ActorController extends Controller
             return redirect()->route('getIndex')->with('error_message', 'Not Authorised!!!!!');
         }
     }
+
 
     public function actorPhotoDelete(){
         $actor = Actor::where('user_id', \Auth::User()->id)->first();

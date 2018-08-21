@@ -97,6 +97,15 @@ $(document).ready(function() {
                             </table>
                         </div>
                         </div>
+                        <!-- NEW PRODUCT TYPE -->
+                    <div class="form-group{{ ($errors->has('product_type')) ? ' has-error' : '' }}" >
+                        {{ Form::label('product_type', 'Product Type', ['class' => 'col-lg-2 control-label'] )  }}
+                        <div class="col-lg-10" style="top: 8px;">
+                            <input type="radio" name="product_type" id="product_default" value="default" @if($product->product_type == 'default') checked="checked" @else checked="checked" @endif style="vertical-align: text-top;"> Default
+                            <input type="radio" name="product_type" id="product_Special" value="special" @if($product->product_type == 'special') checked="checked" @endif style="vertical-align: text-top; margin-left: 15px;"> Special
+                            <p class="help-block">{{ $errors->first('product_type', ':message') }}</p>
+                        </div>
+                    </div>
                     <!-- Submit Button -->
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">

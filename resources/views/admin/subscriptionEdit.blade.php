@@ -99,6 +99,15 @@ $(document).ready(function() {
                             <p class="help-block">{{ $errors->first('status', ':message') }}</p>
                         </div>
                     </div>
+                    <!-- NEW SUBSCRIPTION -->
+                    <div class="form-group{{ ($errors->has('subscription_type')) ? ' has-error' : '' }}" >
+                        {{ Form::label('subscription_type', 'Subscription Type', ['class' => 'col-lg-2 control-label'] )  }}
+                        <div class="col-lg-10" style="top: 8px;">
+                            <input type="radio" name="subscription_type" id="subscription_default" value="default" @if($membershipPeriod->subscription_type == 'default') checked="checked" @else checked="checked" @endif style="vertical-align: text-top;"> Default
+                            <input type="radio" name="subscription_type" id="subscription_Special" value="special" @if($membershipPeriod->subscription_type == 'special') checked="checked" @endif style="vertical-align: text-top; margin-left: 15px;"> Special
+                            <p class="help-block">{{ $errors->first('subscription_type', ':message') }}</p>
+                        </div>
+                    </div>
                     <!-- Submit Button -->
                     <div class="form-group">
                       <div class="col-lg-10 col-lg-offset-2"> {{ Form::submit('Update Plan', ['class' => 'btn btn-lg btn-info pull-right', 'id' => 'but'] ) }} </div>
