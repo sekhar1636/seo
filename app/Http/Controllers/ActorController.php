@@ -212,6 +212,17 @@ class ActorController extends Controller
             $actor = new Actor;
         }
 
+        $actor_dance_experince = "";
+        if($request->get('dance_exp') != "") {
+            $danceExperince = "";
+            foreach($request->get('dance_exp') as $key => $value) {
+                if($value != "") {
+                    $danceExperince .= $value.',';
+                }
+            }
+            $actor_dance_experince = rtrim($danceExperince,', ');
+        }
+
         $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
         $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
         $id = \Auth::user()->id;
@@ -237,6 +248,7 @@ class ActorController extends Controller
         $actor->technical = $request->get('technical') ? implode(',', $request->get('technical')) : '';
         $actor->ethnicity = $request->get('ethnicity') ? implode(',', $request->get('ethnicity')) : '';
         $actor->dance = $request->get('dance') ? implode(',', $request->get('dance')) : '';
+        $actor->dance_experince = $actor_dance_experince ? $actor_dance_experince : '';
         $actor->instrument = $request->get('instrument') ? implode(',', $request->get('instrument')) : '';
         $actor->misc = $request->get('misc') ? implode(',', $request->get('misc')) : '';
         $actor->phone_number = $request->phone_number;

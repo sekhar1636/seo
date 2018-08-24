@@ -155,11 +155,11 @@ class Misc{
 	];
 	public static $dance = [
 		'Ballet' => 'Ballet',
-		'Ballroom' => 'Ballroom',		
-		'Tap'=>'Tap',
-		'Swing' => 'Swing',		
+		'Ballroom' => 'Ballroom',
 		'Jazz'=>'Jazz',
-        'Musical Theatre' => 'Musical Theatre'
+		'Musical Theatre' => 'Musical Theatre',
+		'Swing' => 'Swing',	
+		'Tap'=>'Tap'
 	];
 	public static $technical = [
 		'Set Design' => 'Set Design',

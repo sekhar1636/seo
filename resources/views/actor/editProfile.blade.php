@@ -24,6 +24,25 @@
             border: 1px solid #c2cad8;
             padding: 4px;
         }
+        .dancers_new {
+            border: 1px solid #c2cad8;
+            border-radius: 4px;
+            width: 100%;
+            height: 120px;
+            float: left;
+            overflow-y: auto;
+            padding: 5px 10px;
+        }
+        .dancers_new .dances {
+            float: left;
+            vertical-align: text-top;
+
+        }
+        .dancers_new .dance_name{
+            float: left;
+            width: 120px;
+            margin-left: 3px;
+        }
     </style>
 @endsection
 @section('js')
@@ -424,20 +443,6 @@
                                                             </div>
                                                             <!--/span-->
                                                             <div class="col-md-6">
-                                                                <div class="form-group" {{ $errors->has("dance") ? "has-error":"" }}>
-                                                                    <label for="multiple"
-                                                                           class="control-label col-md-3">Dance</label>
-                                                                    <div class="col-md-9">
-                                                                        {!! Form::select('dance[]',App\Misc::$dance, isset($actor[0]['dance']) ? explode(',', $actor[0]['dance']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
-                                                                        <span class="help-block"> {{ $errors->first("dance") }} </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                        </div>
-                                                        <!--/row-->
-                                                        <div class="row">
-                                                            <div class="col-md-6">
                                                                 <div class="form-group" {{ $errors->has("technical") ? "has-error":"" }}>
                                                                     <label for="multiple"
                                                                            class="control-label col-md-3">Technicals</label>
@@ -446,7 +451,11 @@
                                                                         <span class="help-block"> {{ $errors->first("technical") }} </span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div>                                                           
+                                                            <!--/span-->
+                                                        </div>
+                                                        <!--/row-->
+                                                        <div class="row">                                                            
                                                             <!--/span-->
                                                             <div class="col-md-6">
                                                                 <div class="form-group" {{ $errors->has("instrument") ? "has-error":"" }}>
@@ -459,9 +468,6 @@
                                                                 </div>
                                                             </div>
                                                             <!--/span-->
-                                                        </div>
-                                                        <!--/row-->
-                                                        <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group" {{ $errors->has("misc") ? "has-error":"" }}>
                                                                     <label for="multiple"
@@ -472,6 +478,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <!--/row-->
+                                                        <div class="row">                                                            
                                                             <!--/span-->
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
@@ -486,6 +495,33 @@
                                                                         </div>
                                                                         <!-- /input-group -->
                                                                         <span class="help-block"> {{ $errors->first("from") }} {{ $errors->first("to") }} </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                             <div class="col-md-6">
+                                                                <div class="form-group" {{ $errors->has("dance") ? "has-error":"" }}>
+                                                                    <label for="multiple"
+                                                                           class="control-label col-md-3">Dance</label>
+                                                                    <div class="col-md-9">
+                                                                        <span class="dancers_new">
+                                                                            @foreach(App\Misc::$dance as $dances)
+                                                                                <div style="padding-bottom: 6px;">
+                                                                                    <input type="checkbox" name="dance[]" class="dances" value="{{ $dances }}" @if(in_array($dances, explode(',', $actor[0]['dance']))) checked="checked" @endif>
+                                                                                    <span class="dance_name">{{ $dances }}</span>
+                                                                                    <select name="dance_exp[]" class="dance_exp">
+                                                                                        <option value="">Select Experience</option>
+                                                                                        @for($i=1;$i<=20;$i++)
+                                                                                        <?php $danceExp = $dances.'_'.$i; 
+                                                                                              if($i == 20) { $danceExp = $danceExp.'+'; }
+                                                                                        ?>
+                                                                                            <option value="{{ $danceExp }}" @if(in_array($danceExp,explode(',',$actor[0]['dance_experince']))) selected="selected" @endif>{{ $i }}@if($i == 20)+@endif</option>
+                                                                                        @endfor
+                                                                                    </select>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </span>
+                                                                        <!-- {!! Form::select('dance[]',App\Misc::$dance, isset($actor[0]['dance']) ? explode(',', $actor[0]['dance']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!} -->
+                                                                        <span class="help-block"> {{ $errors->first("dance") }} </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
