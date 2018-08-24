@@ -223,6 +223,17 @@ class ActorController extends Controller
             $actor_dance_experince = rtrim($danceExperince,', ');
         }
 
+        $actor_instrument_experince = "";
+        if($request->get('instrument_exp') != "") {
+            $instrumentExperince = "";
+            foreach($request->get('instrument_exp') as $key => $value) {
+                if($value != "") {
+                    $instrumentExperince .= $value.',';
+                }
+            }
+            $actor_instrument_experince = rtrim($instrumentExperince,', ');
+        }
+
         $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
         $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
         $id = \Auth::user()->id;
@@ -250,6 +261,7 @@ class ActorController extends Controller
         $actor->dance = $request->get('dance') ? implode(',', $request->get('dance')) : '';
         $actor->dance_experince = $actor_dance_experince ? $actor_dance_experince : '';
         $actor->instrument = $request->get('instrument') ? implode(',', $request->get('instrument')) : '';
+        $actor->instrument_experince = $actor_instrument_experince ? $actor_instrument_experince : '';
         $actor->misc = $request->get('misc') ? implode(',', $request->get('misc')) : '';
         $actor->phone_number = $request->phone_number;
         $actor->website_url = $request->website_url;

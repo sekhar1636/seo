@@ -24,7 +24,8 @@
             border: 1px solid #c2cad8;
             padding: 4px;
         }
-        .dancers_new {
+        .dancers_new,
+        .instruments_new {
             border: 1px solid #c2cad8;
             border-radius: 4px;
             width: 100%;
@@ -33,12 +34,14 @@
             overflow-y: auto;
             padding: 5px 10px;
         }
-        .dancers_new .dances {
+        .dancers_new .dances,
+        .instruments_new .instruments {
             float: left;
             vertical-align: text-top;
 
         }
-        .dancers_new .dance_name{
+        .dancers_new .dance_name, 
+        .instruments_new .instrument_name {
             float: left;
             width: 120px;
             margin-left: 3px;
@@ -458,47 +461,6 @@
                                                         <div class="row">                                                            
                                                             <!--/span-->
                                                             <div class="col-md-6">
-                                                                <div class="form-group" {{ $errors->has("instrument") ? "has-error":"" }}>
-                                                                    <label for="multiple"
-                                                                           class="control-label col-md-3">Instruments</label>
-                                                                    <div class="col-md-9">
-                                                                        {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor[0]['instrument']) ? explode(',', $actor[0]['instrument']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
-                                                                        <span class="help-block"> {{ $errors->first("instrument") }} </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                            <div class="col-md-6">
-                                                                <div class="form-group" {{ $errors->has("misc") ? "has-error":"" }}>
-                                                                    <label for="multiple"
-                                                                           class="control-label col-md-3">Misc</label>
-                                                                    <div class="col-md-9">
-                                                                        {!! Form::select('misc[]',App\Misc::$misc, isset($actor[0]['misc']) ? explode(',', $actor[0]['misc']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
-                                                                        <span class="help-block"> {{ $errors->first("misc") }} </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--/row-->
-                                                        <div class="row">                                                            
-                                                            <!--/span-->
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="control-label col-md-3">Employement
-                                                                        Availbility</label>
-                                                                    <div class="col-md-9">
-                                                                        <div class="input-group input-large date-picker input-daterange"
-                                                                             data-date-format="dd/mm/yyyy">
-                                                                            {!! Form::text('from', \Carbon\Carbon::parse(@$actor[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required', 'readonly']) !!}
-                                                                            <span class="input-group-addon"> to </span>
-                                                                            {!! Form::text('to', \Carbon\Carbon::parse(@$actor[0]['to'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'required'=>'required','readonly']) !!}
-                                                                        </div>
-                                                                        <!-- /input-group -->
-                                                                        <span class="help-block"> {{ $errors->first("from") }} {{ $errors->first("to") }} </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                             <div class="col-md-6">
                                                                 <div class="form-group" {{ $errors->has("dance") ? "has-error":"" }}>
                                                                     <label for="multiple"
                                                                            class="control-label col-md-3">Dance</label>
@@ -524,7 +486,68 @@
                                                                         <span class="help-block"> {{ $errors->first("dance") }} </span>
                                                                     </div>
                                                                 </div>
+                                                            </div> 
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group" {{ $errors->has("instrument") ? "has-error":"" }}>
+                                                                    <label for="multiple"
+                                                                           class="control-label col-md-3">Instruments</label>
+                                                                    <div class="col-md-9">
+                                                                        <span class="instruments_new">
+                                                                            @foreach(App\Misc::$instrument as $instruments)
+                                                                                <div style="padding-bottom: 6px;">
+                                                                                    <input type="checkbox" name="instrument[]" class="instruments" value="{{ $instruments }}" @if(in_array($instruments, explode(',', $actor[0]['instrument']))) checked="checked" @endif>
+                                                                                    <span class="instrument_name">{{ $instruments }}</span>
+                                                                                    <select name="instrument_exp[]" class="dance_exp">
+                                                                                        <option value="">Select Experience</option>
+                                                                                        @for($i=1;$i<=20;$i++)
+                                                                                        <?php $instrumentExp = $instruments.'_'.$i; 
+                                                                                              if($i == 20) { $instrumentExp = $instrumentExp.'+'; }
+                                                                                        ?>
+                                                                                            <option value="{{ $instrumentExp }}" @if(in_array($instrumentExp,explode(',',$actor[0]['instrument_experince']))) selected="selected" @endif>{{ $i }}@if($i == 20)+@endif</option>
+                                                                                        @endfor
+                                                                                    </select>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </span>
+                                                                        <!-- {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor[0]['instrument']) ? explode(',', $actor[0]['instrument']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!} -->
+                                                                        <span class="help-block"> {{ $errors->first("instrument") }} </span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
+                                                            <!--/span-->
+                                                            
+                                                        </div>
+                                                        <!--/row-->
+                                                        <div class="row">                                                            
+                                                            <!--/span-->
+                                                            <div class="col-md-6">
+                                                                <div class="form-group" {{ $errors->has("misc") ? "has-error":"" }}>
+                                                                    <label for="multiple"
+                                                                           class="control-label col-md-3">Misc</label>
+                                                                    <div class="col-md-9">
+                                                                        {!! Form::select('misc[]',App\Misc::$misc, isset($actor[0]['misc']) ? explode(',', $actor[0]['misc']): '', ['required' => 'required',  'class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+                                                                        <span class="help-block"> {{ $errors->first("misc") }} </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Employement
+                                                                        Availbility</label>
+                                                                    <div class="col-md-9">
+                                                                        <div class="input-group input-large date-picker input-daterange"
+                                                                             data-date-format="dd/mm/yyyy">
+                                                                            {!! Form::text('from', \Carbon\Carbon::parse(@$actor[0]['from'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'From', 'required'=>'required', 'readonly']) !!}
+                                                                            <span class="input-group-addon"> to </span>
+                                                                            {!! Form::text('to', \Carbon\Carbon::parse(@$actor[0]['to'])->format('d/m/Y'), ['class' => 'form-control', 'placeholder' => 'To', 'required'=>'required','readonly']) !!}
+                                                                        </div>
+                                                                        <!-- /input-group -->
+                                                                        <span class="help-block"> {{ $errors->first("from") }} {{ $errors->first("to") }} </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                             
                                                         </div>
                                                         <h3 class="form-section">Professor Information</h3>
                                                         <div class="row">

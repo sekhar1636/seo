@@ -45,13 +45,22 @@
     <?php if(isset($actor[0]['dance_experince'])) {
             $danceExperince = "";
             foreach(explode(',',$actor[0]['dance_experince']) as $key => $value) {
-                $danceExperince .= str_replace("_"," ",$value).' Years Experince, ';
+                $danceExperince .= str_replace("_"," - ",$value).' Years Experince, ';
             }
         }
     ?>
     {{ rtrim($danceExperince,', ') }}
     </p></td></tr>
-    <tr><td colspan="1"><table><tr><td><p><strong>Hair:</strong>&nbsp;{{ $actor[0]['hair'] }}</p></td><td><p><strong>Eyes:</strong>&nbsp;{{ $actor[0]['eyes'] }}</p></td></tr></table><td colspan="2"><p><strong>Instruments:</strong>&nbsp;{{ $actor[0]['instrument'] }}</p></td></tr>
+    <tr><td colspan="1"><table><tr><td><p><strong>Hair:</strong>&nbsp;{{ $actor[0]['hair'] }}</p></td><td><p><strong>Eyes:</strong>&nbsp;{{ $actor[0]['eyes'] }}</p></td></tr></table><td colspan="2"><p><strong>Instruments:</strong>&nbsp;
+        <?php if(isset($actor[0]['instrument_experince'])) {
+            $instrumentExperince = "";
+            foreach(explode(',',$actor[0]['instrument_experince']) as $key => $value) {
+                $instrumentExperince .= str_replace("_"," - ",$value).' Years Experince, ';
+            }
+        }
+    ?>
+    {{ rtrim($instrumentExperince,', ') }}
+    </p></td></tr>
     <tr><td colspan="1"><p><strong>Ethnicity:</strong>&nbsp;{{ $actor[0]['ethnicity'] }}</p></td><td colspan="2"><p><strong>Technical:</strong>&nbsp;{{ $actor[0]['technical'] }}</p></td></tr>
     <tr><td colspan="1"></td><td colspan="2"><p><strong>Misc.other skills:</strong>&nbsp;{{ $actor[0]['misc'] }}</p></td></tr>
     <tr><td colspan="3"><p>MAIL THIS FORM TO THE ADDRESS ABOVE ALONG WITH THE FOLLOWING ITEMS:</p></td></tr>
