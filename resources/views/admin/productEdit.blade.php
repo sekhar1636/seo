@@ -7,11 +7,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#editor').summernote({
-	  code : "{{ $errors->first('description', ':message') }}",
-	  height:200,
-	});
-	var count  = $('.tab_hid').attr('value');
+  $('#editor').summernote({
+    code : "{{ $errors->first('description', ':message') }}",
+    height:200,
+  });
+  var count  = $('.tab_hid').attr('value');
     $('#add_variant').click(function(){
         var id = count;
         $('#varianttable').append('<tr><td>'+ '<input type="text" class="col-lg-8" value="" name="varient['+id+'][name]">' +'</td><td>'+ '<input type="text" class="col-sm-8" value="" name="varient['+id+'][price]">' +'</td><td><input type="button" id="rem['+id+']" value="remove" class="btn btn-xs btn-primary remove"/></td></tr>');
@@ -97,6 +97,15 @@ $(document).ready(function() {
                             </table>
                         </div>
                         </div>
+                        <!-- NEW PRODUCT TYPE -->
+                    <div class="form-group{{ ($errors->has('product_type')) ? ' has-error' : '' }}" >
+                        {{ Form::label('product_type', 'Product Type', ['class' => 'col-lg-2 control-label'] )  }}
+                        <div class="col-lg-10" style="top: 8px;">
+                            <input type="radio" name="product_type" id="product_default" value="default" @if($product->product_type == 'default') checked="checked" @else checked="checked" @endif style="vertical-align: text-top;"> Default
+                            <input type="radio" name="product_type" id="product_Special" value="special" @if($product->product_type == 'special') checked="checked" @endif style="vertical-align: text-top; margin-left: 15px;"> Special
+                            <p class="help-block">{{ $errors->first('product_type', ':message') }}</p>
+                        </div>
+                    </div>
                     <!-- Submit Button -->
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">

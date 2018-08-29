@@ -155,11 +155,11 @@ class Misc{
 	];
 	public static $dance = [
 		'Ballet' => 'Ballet',
-		'Ballroom' => 'Ballroom',		
-		'Tap'=>'Tap',
-		'Swing' => 'Swing',		
+		'Ballroom' => 'Ballroom',
 		'Jazz'=>'Jazz',
-        'Musical Theatre' => 'Musical Theatre'
+		'Musical Theatre' => 'Musical Theatre',
+		'Swing' => 'Swing',	
+		'Tap'=>'Tap'
 	];
 	public static $technical = [
 		'Set Design' => 'Set Design',
@@ -179,18 +179,18 @@ class Misc{
 		'Indian'=>'Indian'
 	];
 	public static $instrument = [
-		'Perc' => 'Perc',
-		'Sax' => 'Sax',		
 		'Banjo'=>'Banjo',
-		'Piano' => 'Piano',		
-		'Drums'=>'Drums',
 		'Cello' => 'Cello',
-		'Clarinet' => 'Clarinet',		
-		'Trombone'=>'Trombone',
-		'Trumpet' => 'Trumpet',		
+		'Clarinet' => 'Clarinet',
+		'Drums'=>'Drums',
 		'Flute'=>'Flute',
-		'Violin' => 'Violin',		
 		'Guitar'=>'Guitar',
+		'Perc' => 'Perc',
+		'Piano' => 'Piano',
+		'Sax' => 'Sax',
+		'Trombone'=>'Trombone',
+		'Trumpet' => 'Trumpet',	
+		'Violin' => 'Violin'
 	];
 	public static $misc = [
 		'Shakespeare' => 'Shakespeare',

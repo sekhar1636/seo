@@ -13,6 +13,7 @@ use App\Membership;
 use App\MembershipPeriod;
 use App\Payment;
 use App\SubscriptionPackage;
+use App\SpecialPayment;
 
 
 class TheaterController extends Controller
@@ -364,11 +365,31 @@ class TheaterController extends Controller
         }
         else
         {
-            $membershipPeriods = MembershipPeriod::latest()->where('type','Theater')->where('status',1)->orderBy('id', 'desc')->get();
-            $products = Product::where('status',1)->orderBy('id', 'desc')->get();
-            //$products = Product::findorfail(2);
-            //$n = $products->product_variant;
-            //dd($n);
+            $payment_type = "";
+            if(isset($request['t']) && $request['t'] != '') {
+                $paymentInfo  = explode("|",base64_decode($request['t']));
+                
+                if(isset($paymentInfo[0]) && $paymentInfo[0] != "") {
+                    $payment_type = $paymentInfo[0];
+                }
+            }
+
+            $membershipPeriods = MembershipPeriod::latest()->where('type','Theater')->where('status',1);
+            if(isset($payment_type) && $payment_type == 's') {
+                $membershipPeriods = $membershipPeriods->where("subscription_type","special");
+            } else {
+                $membershipPeriods = $membershipPeriods->where("subscription_type","default")->orWhere("subscription_type","");
+            }
+            $membershipPeriods = $membershipPeriods->orderBy('id', 'desc')->get();
+
+            $products = Product::where('status',1);
+            if(isset($payment_type) && $payment_type == 's') {
+                $products = $products->where("product_type","special");
+            } else {
+                $products = $products->where("product_type","default")->orWhere("product_type","");
+            }
+            $products = $products->orderBy('id', 'desc')->get();
+           
             $states = $this->getStateWithSelected();
             return view('theater.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods, 'states' => $states]);
         }
@@ -437,12 +458,37 @@ class TheaterController extends Controller
             $membership->save();
 
             //save the payment details for subscription
-            $payment = new Payment;
-            $payment->user_id = \Auth::user()->id;
-            $payment->transaction_id = $result->id;
-            $payment->membership_period_id = $membershipPeriod->id;
-            $payment->price = $totalPrice/100;
-            $payment->save();
+            $paymentType    = "";
+            $$paymentUserId = "";
+            $paymentToken   = "";
+            if(isset($request->payment_type) && $request->payment_type != '') {
+                $paymentInfo  = explode("|",base64_decode($request->payment_type));
+                $payment_type = "";
+                if(isset($paymentInfo[0]) && $paymentInfo[0] != "") {
+                    $paymentType = $paymentInfo[0];
+                }
+                if(isset($paymentInfo[1]) && $paymentInfo[1] != "") {
+                    $paymentUserId = $paymentInfo[1];
+                }
+                if(isset($paymentInfo[2]) && $paymentInfo[2] != "") {
+                    $paymentToken = $paymentInfo[2];
+                }
+            }
+
+            if(isset($paymentType) && $paymentType == 's') {
+                $payment = SpecialPayment::where('user_id',$paymentUserId)->where('payment_token',$paymentToken)->first();
+                $payment->transaction_id       = $result->id;
+                $payment->membership_period_id = $membershipPeriod->id;
+                $payment->price                = $totalPrice/100;
+                $payment->save();
+            } else {
+               $payment = new Payment;
+                $payment->user_id              = \Auth::user()->id;
+                $payment->transaction_id       = $result->id;
+                $payment->membership_period_id = $membershipPeriod->id;
+                $payment->price                = $totalPrice/100;
+                $payment->save(); 
+            }
 
             //subscription table
             $subes = SubscriptionPackage::where('user_id',\Auth::user()->id)->get();
@@ -481,23 +527,33 @@ class TheaterController extends Controller
             if($request->products)
             {
                 foreach($request->products AS $prod){
-	                $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
-	                $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
+                    $varid = (!empty($prod['varid'])) ? $prod['varid'] : '';
+                    $proid = (!empty($prod['proid'])) ? $prod['proid'] : '';
 
-	                if(!empty($varid && $proid)) {
-	                    $product = Product::findOrFail($proid);
-	                    $varient = ProductVariant::findOrFail($varid);
+                    if(!empty($varid && $proid)) {
+                        $product = Product::findOrFail($proid);
+                        $varient = ProductVariant::findOrFail($varid);
                         $prodpricecount = (!empty($prod['price'])) ? $prod['price'] : 1;
                         $varientcountprice = (!empty($varient['price'])) ? $prodpricecount * $varient['price'] : '0';
-	                    $payment = new Payment;
-	                    $payment->user_id = \Auth::user()->id;
-	                    $payment->transaction_id = $request->token;
-	                    $payment->product_id = (!empty($product['id'])) ? $product['id'] : '0';
-                        $payment->varient_id = $varient->id;
-	                    $payment->price = $varientcountprice;
-	                    $payment->save();
-	                }
-				}
+                        
+                        if(isset($paymentType) && $paymentType == 's') {
+                            $payment = SpecialPayment::where('user_id',$paymentUserId)->where('payment_token',$paymentToken)->first();
+                            $payment->transaction_id = $request->token;
+                            $payment->product_id     = (!empty($product['id'])) ? $product['id'] : '0';
+                            $payment->varient_id     = $varient->id;
+                            $payment->price          = $varientcountprice;
+                            $payment->save();
+                        } else {
+                            $payment = new Payment;
+                            $payment->user_id = \Auth::user()->id;
+                            $payment->transaction_id = $request->token;
+                            $payment->product_id = (!empty($product['id'])) ? $product['id'] : '0';
+                            $payment->varient_id = $varient->id;
+                            $payment->price = $varientcountprice;
+                            $payment->save();
+                        }
+                    }
+                }
             }
             return redirect()->route('theater::theaterProfile')->with('success_message', 'Successfully subscribed.');
         }
@@ -506,15 +562,15 @@ class TheaterController extends Controller
     public function getTheater()
     {
         if(\Auth::check()){
-	        if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
-		        $theaters = \App\User::join('theaters','theaters.user_id', '=', 'users.id')
-		            ->where('users.payment_status',1)->orderBy('theaters.company_name', 'asc')
-		            ->get();
+            if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
+                $theaters = \App\User::join('theaters','theaters.user_id', '=', 'users.id')
+                    ->where('users.payment_status',1)->orderBy('theaters.company_name', 'asc')
+                    ->get();
 
-		        return view('theater.theaterSearch')->with([
-		            'theaters'		=> $theaters,
-		            'theateractive' => 'active'
-		        ]);
+                return view('theater.theaterSearch')->with([
+                    'theaters'      => $theaters,
+                    'theateractive' => 'active'
+                ]);
             }
             else{
                 return redirect()->route('getStaticPage',['slug' => 'theater'])->with('error_message','Sorry');

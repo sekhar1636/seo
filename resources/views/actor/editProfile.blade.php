@@ -24,6 +24,28 @@
             border: 1px solid #c2cad8;
             padding: 4px;
         }
+        .dancers_new,
+        .instruments_new {
+            border: 1px solid #c2cad8;
+            border-radius: 4px;
+            width: 100%;
+            height: 120px;
+            float: left;
+            overflow-y: auto;
+            padding: 5px 10px;
+        }
+        .dancers_new .dances,
+        .instruments_new .instruments {
+            float: left;
+            vertical-align: text-top;
+
+        }
+        .dancers_new .dance_name, 
+        .instruments_new .instrument_name {
+            float: left;
+            width: 120px;
+            margin-left: 3px;
+        }
     </style>
 @endsection
 @section('js')
@@ -143,14 +165,14 @@
                 <div class="alert alert-danger {{ Session::has('error_message')? '' : 'display-hide' }}">
                     <button class="close" data-close="alert"></button>
                     <span>
-	                    {!! Session::has('error_message') ? Session::pull('error_message') : 'Please correct your fields.' !!}
-	                </span>
+                        {!! Session::has('error_message') ? Session::pull('error_message') : 'Please correct your fields.' !!}
+                    </span>
                 </div>
                 <div class="alert alert-success {{ Session::has('success_message') ? '' : 'display-hide' }}">
                     <button class="close" data-close="alert"></button>
                     <span>
-	                    {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!}
-	                </span>
+                        {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!}
+                    </span>
                 </div>
                 <div class="profile-sidebar">
                     <!-- PORTLET MAIN -->
@@ -424,20 +446,6 @@
                                                             </div>
                                                             <!--/span-->
                                                             <div class="col-md-6">
-                                                                <div class="form-group" {{ $errors->has("dance") ? "has-error":"" }}>
-                                                                    <label for="multiple"
-                                                                           class="control-label col-md-3">Dance</label>
-                                                                    <div class="col-md-9">
-                                                                        {!! Form::select('dance[]',App\Misc::$dance, isset($actor[0]['dance']) ? explode(',', $actor[0]['dance']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
-                                                                        <span class="help-block"> {{ $errors->first("dance") }} </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--/span-->
-                                                        </div>
-                                                        <!--/row-->
-                                                        <div class="row">
-                                                            <div class="col-md-6">
                                                                 <div class="form-group" {{ $errors->has("technical") ? "has-error":"" }}>
                                                                     <label for="multiple"
                                                                            class="control-label col-md-3">Technicals</label>
@@ -446,22 +454,73 @@
                                                                         <span class="help-block"> {{ $errors->first("technical") }} </span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div>                                                           
                                                             <!--/span-->
+                                                        </div>
+                                                        <!--/row-->
+                                                        <div class="row">                                                            
+                                                            <!--/span-->
+                                                            <div class="col-md-6">
+                                                                <div class="form-group" {{ $errors->has("dance") ? "has-error":"" }}>
+                                                                    <label for="multiple"
+                                                                           class="control-label col-md-3">Dance</label>
+                                                                    <div class="col-md-9">
+                                                                        <span class="dancers_new">
+                                                                            @foreach(App\Misc::$dance as $dances)
+                                                                                <div style="padding-bottom: 6px;">
+                                                                                    <input type="checkbox" name="dance[]" class="dances" value="{{ $dances }}" @if(in_array($dances, explode(',', $actor[0]['dance']))) checked="checked" @endif>
+                                                                                    <span class="dance_name">{{ $dances }}</span>
+                                                                                    <select name="dance_exp[]" class="dance_exp">
+                                                                                        <option value="">Select Experience</option>
+                                                                                        @for($i=1;$i<=20;$i++)
+                                                                                        <?php $danceExp = $dances.'_'.$i; 
+                                                                                              if($i == 20) { $danceExp = $danceExp.'+'; }
+                                                                                        ?>
+                                                                                            <option value="{{ $danceExp }}" @if(in_array($danceExp,explode(',',$actor[0]['dance_experince']))) selected="selected" @endif>{{ $i }}@if($i == 20)+@endif</option>
+                                                                                        @endfor
+                                                                                    </select>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </span>
+                                                                        <!-- {!! Form::select('dance[]',App\Misc::$dance, isset($actor[0]['dance']) ? explode(',', $actor[0]['dance']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!} -->
+                                                                        <span class="help-block"> {{ $errors->first("dance") }} </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+
                                                             <div class="col-md-6">
                                                                 <div class="form-group" {{ $errors->has("instrument") ? "has-error":"" }}>
                                                                     <label for="multiple"
                                                                            class="control-label col-md-3">Instruments</label>
                                                                     <div class="col-md-9">
-                                                                        {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor[0]['instrument']) ? explode(',', $actor[0]['instrument']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!}
+                                                                        <span class="instruments_new">
+                                                                            @foreach(App\Misc::$instrument as $instruments)
+                                                                                <div style="padding-bottom: 6px;">
+                                                                                    <input type="checkbox" name="instrument[]" class="instruments" value="{{ $instruments }}" @if(in_array($instruments, explode(',', $actor[0]['instrument']))) checked="checked" @endif>
+                                                                                    <span class="instrument_name">{{ $instruments }}</span>
+                                                                                    <select name="instrument_exp[]" class="dance_exp">
+                                                                                        <option value="">Select Experience</option>
+                                                                                        @for($i=1;$i<=20;$i++)
+                                                                                        <?php $instrumentExp = $instruments.'_'.$i; 
+                                                                                              if($i == 20) { $instrumentExp = $instrumentExp.'+'; }
+                                                                                        ?>
+                                                                                            <option value="{{ $instrumentExp }}" @if(in_array($instrumentExp,explode(',',$actor[0]['instrument_experince']))) selected="selected" @endif>{{ $i }}@if($i == 20)+@endif</option>
+                                                                                        @endfor
+                                                                                    </select>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </span>
+                                                                        <!-- {!! Form::select('instrument[]',App\Misc::$instrument, isset($actor[0]['instrument']) ? explode(',', $actor[0]['instrument']): '', ['class' => 'form-control select2-multiple', 'multiple', 'id' => "multiple"]) !!} -->
                                                                         <span class="help-block"> {{ $errors->first("instrument") }} </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <!--/span-->
+                                                            
                                                         </div>
                                                         <!--/row-->
-                                                        <div class="row">
+                                                        <div class="row">                                                            
+                                                            <!--/span-->
                                                             <div class="col-md-6">
                                                                 <div class="form-group" {{ $errors->has("misc") ? "has-error":"" }}>
                                                                     <label for="multiple"
@@ -472,7 +531,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <!--/span-->
+
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Employement
@@ -488,7 +547,7 @@
                                                                         <span class="help-block"> {{ $errors->first("from") }} {{ $errors->first("to") }} </span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div>                                                             
                                                         </div>
                                                         <h3 class="form-section">Professor Information</h3>
                                                         <div class="row">
@@ -795,12 +854,12 @@
                                                                          alt="{{ @$slider->name }}"/>
                                                                 </div>
                                                                 <div class="fileinput-buttons">
-					                                        <span class="btn default btn-file">
-					                                        <span class="fileinput-new">Select image </span>
-					                                        <span class="fileinput-exists">Change </span>
-					                                        <input type="hidden" value="" name="...">
-					                                        <input type="file" name="photo"/>
-					                                        </span>
+                                                            <span class="btn default btn-file">
+                                                            <span class="fileinput-new">Select image </span>
+                                                            <span class="fileinput-exists">Change </span>
+                                                            <input type="hidden" value="" name="...">
+                                                            <input type="file" name="photo"/>
+                                                            </span>
                                                                     <a href="javascript:;"
                                                                        class="btn red fileinput-exists hidden"
                                                                        data-dismiss="fileinput">
@@ -825,9 +884,9 @@
                                                 <div class="form-group" {{ $errors->has("password") ? "has-error":"" }}>
                                                     <label class="control-label">Password</label>
                                                     <div class="input-group">
-						                        <span class="input-group-addon">
-						                            <i class="fa fa-key"></i>
-						                        </span>
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-key"></i>
+                                                </span>
                                                         {{csrf_field()}}
                                                         {!! Form::password('password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6']) !!}
                                                     </div>
@@ -836,9 +895,9 @@
                                                 <div class="form-group" {{ $errors->has("new_password") ? "has-error":"" }}>
                                                     <label class="control-label">New Password</label>
                                                     <div class="input-group">
-						                        <span class="input-group-addon">
-						                            <i class="fa fa-key"></i>
-						                        </span>
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-key"></i>
+                                                </span>
                                                         {!! Form::password('new_password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6', 'id'=>'PasswordField']) !!}
                                                     </div>
                                                     <span class="help-block"> {{ $errors->first("new_password") }} </span>
@@ -846,9 +905,9 @@
                                                 <div class="form-group" {{ $errors->has("re_password") ? "has-error":"" }}>
                                                     <label class="control-label">Re-type New Password</label>
                                                     <div class="input-group">
-						                        <span class="input-group-addon">
-						                            <i class="fa fa-key"></i>
-						                        </span>
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-key"></i>
+                                                </span>
                                                         {!! Form::password('re_password', ['class' => 'form-control placeholder-no-fix', 'placeholder' => 'Password', 'required'=>'required','maxlength' => '15','minlength'=>'6', 'equalTo'=>'#PasswordField']) !!}
                                                     </div>
                                                     <span class="help-block"> {{ $errors->first("re_password") }} </span>

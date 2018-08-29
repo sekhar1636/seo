@@ -18,9 +18,9 @@ $('#faq-table').DataTable({
             {data: 'name'},
             {data: 'email'},
             {data: 'role'},
-			{data: 'payment_status'},
-			{data: 'status'},
-			{data: 'action', name: 'action', orderable: false, searchable: false}
+            {data: 'payment_status'},
+            {data: 'status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 $('#actor-table').DataTable({
@@ -64,11 +64,24 @@ $('#staff-table').DataTable({
     ]
 });
 $(document).ready(function() {
-	$('#editor').summernote({
-	  code : "{{ $errors->first('answer', ':message') }}",
-	  height:200,
-	});
+    $('#editor').summernote({
+      code : "{{ $errors->first('answer', ':message') }}",
+      height:200,
+    });
 });
+</script>
+<script type="text/javascript">
+    $(document).on('click','.special_payment', function(){
+        var user_id = $(this).attr('ref');
+        $.ajax({
+            type:"GET",
+            url:"./sendPaymentEmail",
+            data:{user_id:user_id},
+            success:function(output){
+
+            },
+        });
+    });
 </script>
 @endsection
 @section('content')
@@ -81,7 +94,7 @@ $(document).ready(function() {
         <span> {!! Session::has('error_message') ? Session::pull('error_message') : 'Please correct your fields.' !!} </span> </div>
       <div class="alert alert-success {{{ Session::has('success_message') ? '' : 'display-hide' }}}">
         <button class="close" data-close="alert"></button>
-        <span> {!! Session::has('success_message') ? Session::pull('success_message') : 'Please correct your fields.' !!} </span> </div>
+        <span> {!! Session::has('success_message') ? Session::pull('success_message') : 'Success' !!} </span> </div>
       <!-- BEGIN CONTENT -->
       <div class="profile-content">
         <div class="row">
@@ -117,7 +130,7 @@ $(document).ready(function() {
                   <!-- END TAB -->
                   <!--TAB -->
                   <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2"> 
-                  	{{ Form::open(['route' => 'admin::adminUserStore', 'class' => 'form-horizontal']) }}
+                    {{ Form::open(['route' => 'admin::adminUserStore', 'class' => 'form-horizontal']) }}
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         {{ Form::label('name', 'Name', ['class' => 'col-lg-2 control-label']) }}

@@ -41,8 +41,26 @@
     <tr><td colspan="1"><p><strong>Do Summer Stock Last Year?</strong>&nbsp;{{ $ae[0]['summer_stock_last_year']==1 ? 'Yes' : 'No' }}</p></td></tr>
     <tr><td><p style="text-decoration: underline; font-weight: bold;">PERSONAL DETAILS</p></td><td colspan="3"><p style="font-weight: bold; text-decoration: underline;">SKILLS</p></td></tr>
     <tr><td colspan="1"><table><tr><td><p><strong>Gender:</strong>&nbsp;{{$actor[0]['gender'] }}</p></td><td><p><strong>Age:</strong>&nbsp;{{ $actor[0]['age'] }}</p></td></tr></table></td><td colspan="2"><p><strong>Voice Range:</strong>&nbsp;{{ $actor[0]['vocalRange'] }}</p></td></tr>
-    <tr><td colspan="1"><table><tr><td><p><strong>Height:</strong>&nbsp;{{ $actor[0]['feet']  }}'ft {{ $actor[0]['inch'] }}'inches</p></td><td><p><strong>Weight:</strong>&nbsp;{{ $actor[0]['weight']  }}</p></td></tr></table></td><td colspan="2"><p><strong>Dance:</strong>&nbsp;{{ $actor[0]['dance'] }}</p></td></tr>
-    <tr><td colspan="1"><table><tr><td><p><strong>Hair:</strong>&nbsp;{{ $actor[0]['hair'] }}</p></td><td><p><strong>Eyes:</strong>&nbsp;{{ $actor[0]['eyes'] }}</p></td></tr></table><td colspan="2"><p><strong>Instruments:</strong>&nbsp;{{ $actor[0]['instrument'] }}</p></td></tr>
+    <tr><td colspan="1"><table><tr><td><p><strong>Height:</strong>&nbsp;{{ $actor[0]['feet']  }}'ft {{ $actor[0]['inch'] }}'inches</p></td><td><p><strong>Weight:</strong>&nbsp;{{ $actor[0]['weight']  }}</p></td></tr></table></td><td colspan="2"><p><strong>Dance:</strong>&nbsp;
+    <?php if(isset($actor[0]['dance_experince'])) {
+            $danceExperince = "";
+            foreach(explode(',',$actor[0]['dance_experince']) as $key => $value) {
+                $danceExperince .= str_replace("_"," - ",$value).' Years Experince, ';
+            }
+        }
+    ?>
+    {{ rtrim($danceExperince,', ') }}
+    </p></td></tr>
+    <tr><td colspan="1"><table><tr><td><p><strong>Hair:</strong>&nbsp;{{ $actor[0]['hair'] }}</p></td><td><p><strong>Eyes:</strong>&nbsp;{{ $actor[0]['eyes'] }}</p></td></tr></table><td colspan="2"><p><strong>Instruments:</strong>&nbsp;
+        <?php if(isset($actor[0]['instrument_experince'])) {
+            $instrumentExperince = "";
+            foreach(explode(',',$actor[0]['instrument_experince']) as $key => $value) {
+                $instrumentExperince .= str_replace("_"," - ",$value).' Years Experince, ';
+            }
+        }
+    ?>
+    {{ rtrim($instrumentExperince,', ') }}
+    </p></td></tr>
     <tr><td colspan="1"><p><strong>Ethnicity:</strong>&nbsp;{{ $actor[0]['ethnicity'] }}</p></td><td colspan="2"><p><strong>Technical:</strong>&nbsp;{{ $actor[0]['technical'] }}</p></td></tr>
     <tr><td colspan="1"></td><td colspan="2"><p><strong>Misc.other skills:</strong>&nbsp;{{ $actor[0]['misc'] }}</p></td></tr>
     <tr><td colspan="3"><p>MAIL THIS FORM TO THE ADDRESS ABOVE ALONG WITH THE FOLLOWING ITEMS:</p></td></tr>

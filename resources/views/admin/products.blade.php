@@ -19,23 +19,23 @@ $('#products-table').DataTable({
             {data: 'name'},
             //{data: 'description'},
             //{data: 'price'},
-			{data: 'status'},
-			{data: 'action', name: 'action', orderable: false, searchable: false}
+      {data: 'status'},
+      {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 $(document).ready(function() {
-	$('#editor').summernote({
-	  code : "{{ $errors->first('answer', ':message') }}",
-	  height:200,
-	});
+  $('#editor').summernote({
+    code : "{{ $errors->first('answer', ':message') }}",
+    height:200,
+  });
     var count  = $('.tab_hid').attr('value');
-	$('#add_variant').click(function(){
+  $('#add_variant').click(function(){
         var id = count;
         $('#varianttable').append('<tr><td>'+ '<input type="text" value="" name="varient['+id+'][name]">' +'</td><td>'+ '<input type="text" value="" name="varient['+id+'][price]">' +'</td><td><input type="button" id="rem['+id+']" value="remove" class="btn btn-xs btn-primary remove"/></td></tr>');
         count++;
     });
-	$('#varianttable').on('click','.remove',function(){
-	    $(this).parents('tr').remove();
+  $('#varianttable').on('click','.remove',function(){
+      $(this).parents('tr').remove();
     });
 });
 </script>
@@ -82,7 +82,7 @@ $(document).ready(function() {
                   <!-- END TAB -->
                   <!--TAB -->
                   <div class="tab-pane {{{  (Session::has('tabactive') ? 'active' : '') }}}" id="tab_1_2"> 
-                  	{{ Form::open(['route' => 'admin::adminProductStore', 'class' => 'form-horizontal']) }}
+                    {{ Form::open(['route' => 'admin::adminProductStore', 'class' => 'form-horizontal']) }}
                     <!-- input Area -->
                     <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
                         {{ Form::label('name', 'Name', ['class' => 'col-lg-2 control-label']) }}
@@ -127,6 +127,15 @@ $(document).ready(function() {
                                 </tbody>
                                 <input type="hidden" value="1" name="data" class="tab_hid">
                             </table>
+                        </div>
+                    </div>
+                    <!-- NEW PRODUCT TYPE -->
+                    <div class="form-group{{ ($errors->has('product_type')) ? ' has-error' : '' }}" >
+                        {{ Form::label('product_type', 'Product Type', ['class' => 'col-lg-2 control-label'] )  }}
+                        <div class="col-lg-10" style="top: 8px;">
+                            <input type="radio" name="product_type" id="product_default" value="default" checked="checked" style="vertical-align: text-top;"> Default
+                            <input type="radio" name="product_type" id="product_Special" value="special" style="vertical-align: text-top; margin-left: 15px;"> Special
+                            <p class="help-block">{{ $errors->first('product_type', ':message') }}</p>
                         </div>
                     </div>
      <!-- Submit Button -->

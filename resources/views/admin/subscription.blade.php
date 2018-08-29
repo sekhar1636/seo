@@ -22,15 +22,15 @@ $('#subscription-table').DataTable({
             {data: 'price'},
             {data: 'type'},
             {data: 'start_date'},
-			{data: 'end_date'},
-			{data: 'status'},
-			{data: 'action', name: 'action', orderable: false, searchable: false}
+      {data: 'end_date'},
+      {data: 'status'},
+      {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 $(document).ready(function() {
-	$('.input-daterange input').each(function() {
+  $('.input-daterange input').each(function() {
     $(this).datepicker({
-	});
+  });
 });
     $('#staff_price').hide();
     $('#staff_select').on('change', function(){
@@ -125,6 +125,15 @@ $(document).ready(function() {
                     </div>
                     <p class="help-block">{{ $errors->first('start_date', ':message') }}</p>
                       </div>
+                    </div>
+                    <!-- NEW SUBSCRIPTION -->
+                    <div class="form-group{{ ($errors->has('subscription_type')) ? ' has-error' : '' }}" >
+                        {{ Form::label('subscription_type', 'Subscription Type', ['class' => 'col-lg-2 control-label'] )  }}
+                        <div class="col-lg-10" style="top: 8px;">
+                            <input type="radio" name="subscription_type" id="subscription_default" value="default" checked="checked" style="vertical-align: text-top;"> Default
+                            <input type="radio" name="subscription_type" id="subscription_Special" value="special" style="vertical-align: text-top; margin-left: 15px;"> Special
+                            <p class="help-block">{{ $errors->first('subscription_type', ':message') }}</p>
+                        </div>
                     </div>
                     <!-- Submit Button -->
                     <div class="form-group">

@@ -10,11 +10,11 @@
 <script src="{{asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$('.input-daterange input').each(function() {
+  $('.input-daterange input').each(function() {
     $(this).datepicker({
-	});
+  });
 });
-	$('#staff_price').hide();
+  $('#staff_price').hide();
     $('#staff_select').on('change', function(){
         var find = $('#staff_select').val();
         if(find == 'Staff'){
@@ -97,6 +97,15 @@ $(document).ready(function() {
                         <div class="col-lg-10">
                             {{  Form::select('status', ['De-Activate','Activate'], null, array('class' => 'form-control', 'required'=>'required')) }}
                             <p class="help-block">{{ $errors->first('status', ':message') }}</p>
+                        </div>
+                    </div>
+                    <!-- NEW SUBSCRIPTION -->
+                    <div class="form-group{{ ($errors->has('subscription_type')) ? ' has-error' : '' }}" >
+                        {{ Form::label('subscription_type', 'Subscription Type', ['class' => 'col-lg-2 control-label'] )  }}
+                        <div class="col-lg-10" style="top: 8px;">
+                            <input type="radio" name="subscription_type" id="subscription_default" value="default" @if($membershipPeriod->subscription_type == 'default') checked="checked" @else checked="checked" @endif style="vertical-align: text-top;"> Default
+                            <input type="radio" name="subscription_type" id="subscription_Special" value="special" @if($membershipPeriod->subscription_type == 'special') checked="checked" @endif style="vertical-align: text-top; margin-left: 15px;"> Special
+                            <p class="help-block">{{ $errors->first('subscription_type', ':message') }}</p>
                         </div>
                     </div>
                     <!-- Submit Button -->

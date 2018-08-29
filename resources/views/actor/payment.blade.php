@@ -16,9 +16,9 @@
 $(document).ready(function() {
     // Change the key to your one
     Stripe.setPublishableKey("<?php echo $_ENV['STRIPE_KEY']; ?>");
-	
-	
-	$('.button-checkbox').each(function () {
+    
+    
+    $('.button-checkbox').each(function () {
 
         // Settings
         var $widget = $(this),
@@ -76,13 +76,13 @@ $(document).ready(function() {
 
             // Inject the icon if applicable
             if ($button.find('.state-icon').length == 0) {
-                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
             }
         }
         init();
     });
-	
-	
+    
+    
 
     $('#paymentForm')
         .formValidation({
@@ -209,9 +209,9 @@ $(document).ready(function() {
                 } else {                  
                     // Set the token value
                     $form.find('[name="token"]').val(response.id);
-					 fv    = $(e.target).data('formValidation'); 
-					fv.defaultSubmit();
-					//return true;
+                     fv    = $(e.target).data('formValidation'); 
+                    fv.defaultSubmit();
+                    //return true;
                 }
             });
         });
@@ -242,6 +242,7 @@ $(document).ready(function() {
           <div class="row" style="margin-top: 10px;">
             <form id="paymentForm" class="form-horizontal" method="post" action="{{route('actor::storeActorPayment')}}" >
               <input type="hidden" name="_token" value="{{csrf_token()}}">
+              <input type="hidden" name="payment_type" @if(isset($_REQUEST['t'])) value="{{ $_REQUEST['t'] }}" @else value="" @endif>
               <div class="form-group">
                 <label class="col-xs-3 control-label">Subscription Plan</label>
                 <div class="col-xs-5">

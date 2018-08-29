@@ -251,14 +251,14 @@ class StaffController extends Controller
 
     public function getStaff(){
         if(\Auth::check()){
-	        if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
-		        $staffs = \App\User::join('staff','staff.user_id', '=', 'users.id')
-		            ->where('users.payment_status',1)->orderBy('users.name', 'asc')
-		            ->get();
-		        return view('staff.staffSearch')->with([
-		            'staffs'	  => $staffs,
-		            'staffactive' => 'active'
-		        ]);
+            if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
+                $staffs = \App\User::join('staff','staff.user_id', '=', 'users.id')
+                    ->where('users.payment_status',1)->orderBy('users.name', 'asc')
+                    ->get();
+                return view('staff.staffSearch')->with([
+                    'staffs'      => $staffs,
+                    'staffactive' => 'active'
+                ]);
             }
         }
         else{
@@ -441,11 +441,31 @@ class StaffController extends Controller
         }
         else
         {
-            $membershipPeriods = MembershipPeriod::latest()->where('type','Staff')->where('status',1)->orderBy('id', 'desc')->get();
-            $products = Product::orderBy('id', 'desc')->get();
-            //$products = Product::findorfail(2);
-            //$n = $products->product_variant;
-            //dd($n);
+            $payment_type = "";
+            if(isset($request['t']) && $request['t'] != '') {
+                $paymentInfo  = explode("|",base64_decode($request['t']));
+                
+                if(isset($paymentInfo[0]) && $paymentInfo[0] != "") {
+                    $payment_type = $paymentInfo[0];
+                }
+            }
+
+            $membershipPeriods = MembershipPeriod::latest()->where('type','Staff')->where('status',1);
+            if(isset($payment_type) && $payment_type == 's') {
+                $membershipPeriods = $membershipPeriods->where("subscription_type","special");
+            } else {
+                $membershipPeriods = $membershipPeriods->where("subscription_type","default")->orWhere("subscription_type","");
+            }
+            $membershipPeriods = $membershipPeriods->orderBy('id', 'desc')->get();
+
+            $products = Product::where('status',1);
+            if(isset($payment_type) && $payment_type == 's') {
+                $products = $products->where("product_type","special");
+            } else {
+                $products = $products->where("product_type","default")->orWhere("product_type","");
+            }
+            $products = $products->orderBy('id', 'desc')->get();
+
             $states = $this->getStateWithSelected();
             return view('staff.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods, 'states' => $states]);
         }

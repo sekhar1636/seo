@@ -27,112 +27,116 @@ use App\MembershipPeriod;
 use App\Payment;
 use App\ActorRole;
 use PDF;
+use Mail;
+use App\SpecialPayment;
+use Auth;
+
 class AdminController extends Controller
 {
     public function index(){
-    	return view("admin.index")->with('homeactive','active');
+        return view("admin.index")->with('homeactive','active');
     }//end function
-	
-	//======================================================================
-	// FAQ Functions
-	//======================================================================
-	public function faq(){
-    	return view("admin.faq")->with('faqactive','active');
+    
+    //======================================================================
+    // FAQ Functions
+    //======================================================================
+    public function faq(){
+        return view("admin.faq")->with('faqactive','active');
     }
-	
-	public function faqStore(Request $request){
-    	$validator = \Validator::make($request->all(),
+    
+    public function faqStore(Request $request){
+        $validator = \Validator::make($request->all(),
             [
                 "question"=>"required|min:3",
                 '_type' => "required",
-				'answer' => "required|min:5"
+                'answer' => "required|min:5"
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
-				->with('tabactive', 'active')
+                ->with('tabactive', 'active')
                 ->withInput();
         }else{
-			//save faq
-			Faq::create(request(['question','answer','_type']));
-			return redirect()->back()->with('success_message', 'FAQ added successfully.');
-		}
+            //save faq
+            Faq::create(request(['question','answer','_type']));
+            return redirect()->back()->with('success_message', 'FAQ added successfully.');
+        }
     }
-	
-	public function faqDataTable(){
-		// Using Eloquent
-		//return Datatables::eloquent(Faq::query())->make(true);
-		$faqs = Faq::latest()->orderBy('id', 'desc');
-		return Datatables::of($faqs)
+    
+    public function faqDataTable(){
+        // Using Eloquent
+        //return Datatables::eloquent(Faq::query())->make(true);
+        $faqs = Faq::latest()->orderBy('id', 'desc');
+        return Datatables::of($faqs)
             ->addColumn('action', function ($faq) {
                 $action = '<a href="'.route('admin::adminFaqEdit', $faq->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-				$action.= '<a href="'.route('admin::adminFaqDelete', $faq->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-				return $action;
+                $action.= '<a href="'.route('admin::adminFaqDelete', $faq->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                return $action;
         })->make(true);
     }
-	
-	public function faqDestroy($id){
-    	Faq::where('id',$id)->delete();
-		return redirect()->back()->with('success_message', 'FAQ deleted successfully.');
-	}
-	
-	public function faqEdit($id){
-		
-		$faq = Faq::findOrFail($id);
-		return view('admin.faqEdit',compact('faq'));
+    
+    public function faqDestroy($id){
+        Faq::where('id',$id)->delete();
+        return redirect()->back()->with('success_message', 'FAQ deleted successfully.');
     }
-	
-	public function faqUpdate(Request $request, $id){
-		$validator = \Validator::make($request->all(),
+    
+    public function faqEdit($id){
+        
+        $faq = Faq::findOrFail($id);
+        return view('admin.faqEdit',compact('faq'));
+    }
+    
+    public function faqUpdate(Request $request, $id){
+        $validator = \Validator::make($request->all(),
             [
                 "question"=>"required|min:3",
                 '_type' => "required",
-				'answer' => "required|min:20"
+                'answer' => "required|min:20"
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
         }else{
-			$faq = Faq::findOrFail($id);
-			$faq->question = $request['question'];
-			$faq->answer = $request['answer'];
-			$faq->_type = $request['_type'];
-			$faq->save();
-			return redirect()->route('admin::adminFaq')->with('success_message', 'FAQ edited successfully.');
-		}
+            $faq = Faq::findOrFail($id);
+            $faq->question = $request['question'];
+            $faq->answer = $request['answer'];
+            $faq->_type = $request['_type'];
+            $faq->save();
+            return redirect()->route('admin::adminFaq')->with('success_message', 'FAQ edited successfully.');
+        }
     }
-	
-	//======================================================================
-	// Slideshow Functions
-	//======================================================================
-	
-	public function slideshows(){
-    	return view("admin.slideshows")->with('slideshowactive','active');
+    
+    //======================================================================
+    // Slideshow Functions
+    //======================================================================
+    
+    public function slideshows(){
+        return view("admin.slideshows")->with('slideshowactive','active');
     }
-	
-	public function slideshowStore(Request $request){
-    	$validator = \Validator::make($request->all(),
+    
+    public function slideshowStore(Request $request){
+        $validator = \Validator::make($request->all(),
             [
                 "name"=>"required|min:5",
                 'status' => "required",
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
-				->with('tabactive', 'active')
+                ->with('tabactive', 'active')
                 ->withInput();
         }else{
-			//save Slideshow
+            //save Slideshow
             $tes = Slideshow::orderBy('id')->get();
             foreach($tes as $item)
             {
@@ -145,59 +149,59 @@ class AdminController extends Controller
                     $item->save();
                 }
             }
-			Slideshow::create(request(['name','status']));
-			return redirect()->back()->with('success_message', 'Slideshow added successfully.');
-		}
+            Slideshow::create(request(['name','status']));
+            return redirect()->back()->with('success_message', 'Slideshow added successfully.');
+        }
     }
-	
-	public function slideshowDataTable(){
-		$slideshows = Slideshow::latest()->orderBy('id', 'desc');
-		return Datatables::of($slideshows)
+    
+    public function slideshowDataTable(){
+        $slideshows = Slideshow::latest()->orderBy('id', 'desc');
+        return Datatables::of($slideshows)
             ->addColumn('action', function ($slideshow) {
-				$action = "";
-				if($slideshow->status<2){
-				$action.= '<a href="'.route('admin::adminSlideshowEdit', $slideshow->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-				$action.= '<a href="'.route('admin::adminSlideshowDelete', $slideshow->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-				}
-				$action.= '<a href="'.route('admin::adminSlideshowAddSlide', $slideshow->id).'" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-plus"></i> Add Slide</a>';
-				return $action;
+                $action = "";
+                if($slideshow->status<2){
+                $action.= '<a href="'.route('admin::adminSlideshowEdit', $slideshow->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                $action.= '<a href="'.route('admin::adminSlideshowDelete', $slideshow->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                }
+                $action.= '<a href="'.route('admin::adminSlideshowAddSlide', $slideshow->id).'" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-plus"></i> Add Slide</a>';
+                return $action;
             })
-			->addColumn('details_url', function($slideshow) {
-            	return route('admin::adminSlideshowSlidesDataTable',$slideshow->id);
-        	})
-			->editColumn('status', function ($slideshow) {
+            ->addColumn('details_url', function($slideshow) {
+                return route('admin::adminSlideshowSlidesDataTable',$slideshow->id);
+            })
+            ->editColumn('status', function ($slideshow) {
                 return ($slideshow->status)? "Active" : "De-Activated";
             })
-			->make(true);
-    	
+            ->make(true);
+        
     }
-	
-	public function slideshowDestroy($id){
-    	Slideshow::where('id',$id)->delete();
-		return redirect()->back()->with('success_message', 'Slideshow deleted successfully.');
-	}
-	
-	public function slideshowEdit($id){
-		
-		$slideshow = Slideshow::findOrFail($id);
-		return view('admin.slideshowEdit',compact('slideshow'));
+    
+    public function slideshowDestroy($id){
+        Slideshow::where('id',$id)->delete();
+        return redirect()->back()->with('success_message', 'Slideshow deleted successfully.');
     }
-	
-	public function slideshowUpdate(Request $request, $id){
-		$validator = \Validator::make($request->all(),
-			[
-				 "name"=>"required|min:5",
-				 'status' => "required",
-			]
-		);
-		
+    
+    public function slideshowEdit($id){
+        
+        $slideshow = Slideshow::findOrFail($id);
+        return view('admin.slideshowEdit',compact('slideshow'));
+    }
+    
+    public function slideshowUpdate(Request $request, $id){
+        $validator = \Validator::make($request->all(),
+            [
+                 "name"=>"required|min:5",
+                 'status' => "required",
+            ]
+        );
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
         }else{
-			if($request->status == 1)
+            if($request->status == 1)
             {
                 $not_in_id = Slideshow::OrderBy('id')->get();
                 foreach($not_in_id as $item)
@@ -214,22 +218,22 @@ class AdminController extends Controller
                 }
             }
         }
-			$slideshow = Slideshow::findOrFail($id);
-			$slideshow->name = $request['name'];
-			$slideshow->status = $request['status'];
-			$slideshow->save();
+            $slideshow = Slideshow::findOrFail($id);
+            $slideshow->name = $request['name'];
+            $slideshow->status = $request['status'];
+            $slideshow->save();
 
-			return redirect()->route('admin::adminSlideshows')->with('success_message', 'Slideshow edited successfully.');
+            return redirect()->route('admin::adminSlideshows')->with('success_message', 'Slideshow edited successfully.');
 
     }
-	
-	public function slideshowAddSlide($id){
-		$id = $id;
-    	return view("admin.slideAdd",compact('id'));
+    
+    public function slideshowAddSlide($id){
+        $id = $id;
+        return view("admin.slideAdd",compact('id'));
     }
-	
-	public function slideshowStoreSlide(Request $request, $id){
-		$validator = \Validator::make($request->all(),
+    
+    public function slideshowStoreSlide(Request $request, $id){
+        $validator = \Validator::make($request->all(),
             [
                 "slide"=>"required|image"
             ]
@@ -241,123 +245,183 @@ class AdminController extends Controller
                 ->withInput()
                 ->with('tabactive', 'active');
         }else{
-			$destinationPath = 'assets/slides'; // upload path
-			$file = $request->file('slide');
-			$extension = $file->getClientOriginalExtension();
-			$fileName = "slideshow_".$id."_".time().'.'.$extension; // renameing image
-			$file->move(public_path($destinationPath), $fileName);
-		
-			$slide = new Slide;
-			$slide->slideshow_id = $id;
-			$slide->title = $request['title'];
-			$slide->description = $request['description'];
-			$slide->path = $destinationPath.'/'.$fileName;
-			$slide->save();
-			return redirect()->route('admin::adminSlideshows')->with('success_message', 'Slide added successfully.');
-		}
-    	
-    }
-	
-	public function slideshowSlidesDataTable($id){
-		$slides = Slide::latest()->where("slideshow_id","=",$id)->orderBy('id', 'desc');
-		return Datatables::of($slides)
-            ->addColumn('action', function ($slide) {  
-				$action= '<a href="'.route('admin::adminSlideshowEditSlide', $slide->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-				$action.= '<a href="'.route('admin::adminSlideshowDeleteSlide', $slide->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-				
-				return $action;
-            })
-			->addColumn('slide', function ($slide) {  
-				return url('/').'/'.$slide->path;
-            })
-			->make(true);
-    }
-	
-	public function slideshowEditSlide($id){
-		$slide = Slide::findOrFail($id);
-    	return view("admin.slideEdit",compact('slide'));
-    }
-	
-	public function slideshowUpdateSlide(Request $request, $id){
-		$slide = Slide::findOrFail($id);
-		if($request->hasFile('slide')) {
-           	$destinationPath = 'assets/slides'; // upload path
-			$file = $request->file('slide');
-			$extension = $file->getClientOriginalExtension();
-			$fileName = "slideshow_".$id."_".time().'.'.$extension; // renameing image
-			$file->move(public_path($destinationPath), $fileName);
-			$slide->path = $destinationPath.'/'.$fileName;
+            $destinationPath = 'assets/slides'; // upload path
+            $file = $request->file('slide');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = "slideshow_".$id."_".time().'.'.$extension; // renameing image
+            $file->move(public_path($destinationPath), $fileName);
+        
+            $slide = new Slide;
+            $slide->slideshow_id = $id;
+            $slide->title = $request['title'];
+            $slide->description = $request['description'];
+            $slide->path = $destinationPath.'/'.$fileName;
+            $slide->save();
+            return redirect()->route('admin::adminSlideshows')->with('success_message', 'Slide added successfully.');
         }
-		$slide->title = $request['title'];
-		$slide->description = $request['description'];
-		$slide->save();
-		return redirect()->route('admin::adminSlideshows')->with('success_message', 'Slide Edited successfully.');
+        
     }
-	
-	public function slideshowDestroySlide($id){
-		$slide = Slide::findOrFail($id);
-		$slide_path = public_path().'/'.$slide->path;
-		unlink($slide_path);
-		$slide->delete();
-		return redirect()->back()->with('success_message', 'Slide deleted successfully.');	
+    
+    public function slideshowSlidesDataTable($id){
+        $slides = Slide::latest()->where("slideshow_id","=",$id)->orderBy('id', 'desc');
+        return Datatables::of($slides)
+            ->addColumn('action', function ($slide) {  
+                $action= '<a href="'.route('admin::adminSlideshowEditSlide', $slide->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                $action.= '<a href="'.route('admin::adminSlideshowDeleteSlide', $slide->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                
+                return $action;
+            })
+            ->addColumn('slide', function ($slide) {  
+                return url('/').'/'.$slide->path;
+            })
+            ->make(true);
     }
-	
-	//======================================================================
-	// Users Functions
-	//======================================================================
-	public function users(){
-    	return view("admin.users")->with('useractive','active');
+    
+    public function slideshowEditSlide($id){
+        $slide = Slide::findOrFail($id);
+        return view("admin.slideEdit",compact('slide'));
     }
-	
-	public function userStore(Request $request){
-    	$validator = \Validator::make($request->all(),
+    
+    public function slideshowUpdateSlide(Request $request, $id){
+        $slide = Slide::findOrFail($id);
+        if($request->hasFile('slide')) {
+            $destinationPath = 'assets/slides'; // upload path
+            $file = $request->file('slide');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = "slideshow_".$id."_".time().'.'.$extension; // renameing image
+            $file->move(public_path($destinationPath), $fileName);
+            $slide->path = $destinationPath.'/'.$fileName;
+        }
+        $slide->title = $request['title'];
+        $slide->description = $request['description'];
+        $slide->save();
+        return redirect()->route('admin::adminSlideshows')->with('success_message', 'Slide Edited successfully.');
+    }
+    
+    public function slideshowDestroySlide($id){
+        $slide = Slide::findOrFail($id);
+        $slide_path = public_path().'/'.$slide->path;
+        unlink($slide_path);
+        $slide->delete();
+        return redirect()->back()->with('success_message', 'Slide deleted successfully.');  
+    }
+    
+    //======================================================================
+    // Users Functions
+    //======================================================================
+    public function users(){
+        return view("admin.users")->with('useractive','active');
+    }
+    
+    public function userStore(Request $request){
+        $validator = \Validator::make($request->all(),
             [
                 'name' => "required|max:60",
-				'email' => "required|unique:users,email|email|max:100",
-				'password' => "min:6|required|max:15",
-				'role' => "required|max:30",
+                'email' => "required|unique:users,email|email|max:100",
+                'password' => "min:6|required|max:15",
+                'role' => "required|max:30",
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
-				->with('tabactive', 'active')
+                ->with('tabactive', 'active')
                 ->withInput();
         }else{
-			//save faq
-			$user = new User;
-			$user->name = $request->get('name');
-			$user->email = $request->get('email');
-			$user->password = bcrypt($request->get('password'));
-			$user->role = $request->get('role');
-			$user->status = 1;
-			$user->save();
-			return redirect()->back()->with('success_message', 'User added successfully.');
-		}
+            //save faq
+            $user = new User;
+            $user->name = $request->get('name');
+            $user->email = $request->get('email');
+            $user->password = bcrypt($request->get('password'));
+            $user->role = $request->get('role');
+            $user->status = 1;
+            $user->save();
+            return redirect()->back()->with('success_message', 'User added successfully.');
+        }
     }
-	
-	public function usersDataTable(){
-		$users = User::latest()->orderBy('id', 'desc');
-		return Datatables::of($users)
+    
+    public function usersDataTable(){
+        $users = User::latest()->orderBy('id', 'desc');
+        return Datatables::of($users)
             ->addColumn('action', function ($user) {
                 $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-				$action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')" ><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-				return $action;
+                $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')" ><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                $action.= '<a ref="'.$user->id.'" class="btn btn-xs btn-success special_payment"><i class="fa fa-money" aria-hidden="true"></i> Special Payment</a>';
+                return $action;
             })
-			->editColumn('status', function ($user) {
+            ->editColumn('status', function ($user) {
                 return ($user->status==1)? "Active" : "De-Activated";
             })
-			->editColumn('payment_status', function ($user) {
+            ->editColumn('payment_status', function ($user) {
                 return ($user->payment_status)? "Yes" : "No";
             })
-			->make(true);
+            ->make(true);
+    }
+
+    public function sendPaymentEmail(Request $request)
+    {
+        if(isset($request['user_id']) && $request['user_id'] != "") {
+            $user          = User::where('id',$request['user_id'])->first();
+            $payment_token = 'SP'.$request['user_id'].date('Ymds');
+            $paymentUrl = env('APP_URL').'special-payment?d='.base64_encode($user->id.'|'.$payment_token);
+            try {
+                Mail::send('email.payment', ['paymentUrl'=> $paymentUrl,'name'=>$user->username ], function ($m) use ($user) {
+                    $m->to($user->email)->subject('Payment');
+                });
+
+                $special_payment                 = new SpecialPayment;
+                $special_payment->user_id        = $request->user_id;
+                $special_payment->transaction_id = '';
+                $special_payment->price          = '0.00';
+                $special_payment->varient_id     = '0';
+                $special_payment->status         = '1';
+                $special_payment->payment_token  = $payment_token;
+                $special_payment->save();
+
+                return redirect()->back()->with('success_message', 'Please check email for payment link');
+            } catch (Exception $e) {
+                return redirect()->back()->with('error_message', 'Unable to send forgot email please wait.');
+            }
+        }
+    }
+
+    public function specialPayment(Request $request)
+    {
+        if(isset(Auth::user()->role) && Auth::user()->role != "") {
+            if(isset($request['d']) && $request['d'] != "") {
+                $userInfo = explode('|',base64_decode($request['d']));
+                
+                if(isset($userInfo[0]) && Auth::user()->id == $userInfo[0]) {
+                    $paymentinfo = base64_encode("s|".$userInfo[0].'|'.$userInfo[1]);
+                    if(Auth::user()->role == "actor") {
+                        return redirect('/actor/payment?t='.$paymentinfo);
+                    } else if(Auth::user()->role == 'theater') {
+                        return redirect('/theater/payment?t='.$paymentinfo);
+                    } else if(Auth::user()->role == 'staff') {
+                        return redirect('/staff/payment?t='.$paymentinfo);
+                    }
+                } else {
+                    if(Auth::user()->role == "actor") {
+                        return redirect()->route('actor::actorProfile');
+                    } else if(Auth::user()->role == 'theater'){
+                        return redirect()->route('theater::theaterProfile');
+                    } else if(Auth::user()->role == 'staff'){
+                        return redirect()->route('staff::staffProfile');
+                    } else {
+                        return redirect()->route('admin::adminDashboard');
+                    }
+                }
+            }
+        } else {
+            return redirect('/login?d='.$request['d']);
+        }
     }
 
     public function actorsDataTable(){
 
-	    $users = DB::table('users')->where('role','actor')->orderBy('id', 'desc')->get();
+        $users = DB::table('users')->where('role','actor')->orderBy('id', 'desc')->get();
         $index = 0;
         foreach ($users as $user){
             $users[$index]->subscription = $this->subscriptionStatus($user->id);
@@ -369,6 +433,7 @@ class AdminController extends Controller
             ->addColumn('action', function ($user) {
                 $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                 $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger del" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')" ><i class="glyphicon glyphicon-trash del"></i> Delete</a>';
+                $action.= '<a ref="'.$user->id.'" class="btn btn-xs btn-success special_payment"><i class="fa fa-money" aria-hidden="true"></i> Special Payment</a>';
                 return $action;
             })
             ->editColumn('status', function ($user) {
@@ -411,6 +476,7 @@ class AdminController extends Controller
         return Datatables::of($users)->addColumn('action', function($user){
             $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger"  onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            $action.= '<a ref="'.$user->id.'" class="btn btn-xs btn-success special_payment"><i class="fa fa-money" aria-hidden="true"></i> Special Payment</a>';
             return $action;
         })->editColumn('status', function ($user) {
             return ($user->status)? "Active" : "De-Activated";
@@ -432,6 +498,7 @@ class AdminController extends Controller
         return Datatables::of($users)->addColumn('action', function($user){
             $action = '<a href="'.route('admin::adminUserEdit', $user->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             $action.= '<a href="'.route('admin::adminUserDelete', $user->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'You are about to delete this record -- do you want to continue?\')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            $action.= '<a ref="'.$user->id.'" class="btn btn-xs btn-success special_payment"><i class="fa fa-money" aria-hidden="true"></i> Special Payment</a>';
             return $action;
         })->editColumn('status', function ($user) {
             return ($user->status)? "Active" : "De-Activated";
@@ -455,7 +522,7 @@ class AdminController extends Controller
             unlink(public_path().'/'.$file5);
         }
     }
-	public function userDestroy($id){
+    public function userDestroy($id){
         $user = User::findorfail($id);
         // delete related actor
         if(count($user) > 0){
@@ -501,32 +568,32 @@ class AdminController extends Controller
             Membership::where('user_id',$user->id)->delete();
         }
 
-		$u = User::where('id',$user->id)->delete();
-		return redirect()->back()->with('success_message', 'User deleted successfully.');
+        $u = User::where('id',$user->id)->delete();
+        return redirect()->back()->with('success_message', 'User deleted successfully.');
 
 
         }else{
             return redirect()->back()->with('error_message', 'User Dosnt exist');
         }
-	}
-	
-	public function userEdit($id){
+    }
+    
+    public function userEdit($id){
 
-		for ($i=1; $i <= 100 ; $i++) { 
+        for ($i=1; $i <= 100 ; $i++) { 
             $age[$i] = $i;
         }
         for ($i=75; $i <= 400 ; $i++) { 
             $weight[$i] = $i .' lbs';
         }
-		
-		$user = User::findOrFail($id);
+        
+        $user = User::findOrFail($id);
 
-		$subsciption_expiry = Membership::where('user_id',$id)->get();
-		if(count($subsciption_expiry)){
+        $subsciption_expiry = Membership::where('user_id',$id)->get();
+        if(count($subsciption_expiry)){
             $subsciption_expiry = MembershipPeriod::where('id',$subsciption_expiry[0]['membership_period_id'])->get();
             $subsciption_expiry = $subsciption_expiry[0]['end_date'];
         } else {
-		    $subsciption_expiry = '';
+            $subsciption_expiry = '';
         }
 
         $ae = AuditionExtra::updateorcreate(['user_id'=>$id],['user_id',$id]);
@@ -554,32 +621,32 @@ class AdminController extends Controller
             }
 
         }
-		if($user->role == 'actor'){
-		    $ht = [];
-		    $ampm = "";
-		    if(!is_null($user->actor['adminAudition_time']))
-		    {
-		        $ht = explode(':',$user->actor['adminAudition_time']);
-		        if($ht[0] > 12){
-		            $hours = $ht[0]-12;
-		            $ampm = "PM";
+        if($user->role == 'actor'){
+            $ht = [];
+            $ampm = "";
+            if(!is_null($user->actor['adminAudition_time']))
+            {
+                $ht = explode(':',$user->actor['adminAudition_time']);
+                if($ht[0] > 12){
+                    $hours = $ht[0]-12;
+                    $ampm = "PM";
                 }else{
-		            $hours = $ht[0];
-		            $ampm = "AM";
+                    $hours = $ht[0];
+                    $ampm = "AM";
                 }
                 if(!empty($ht[1])){
-	                $ht_1 = $ht[1];
+                    $ht_1 = $ht[1];
                 }else{
-	                $ht_1 = '00';
+                    $ht_1 = '00';
                 }
-		    }else{
-	            $hours = "";
-	            $ampm = ""; 
-	            $ht_1 = "";  
-		    }
-		    
-			return view('admin.actorEdit')->with([
-			    'actor' => $user->actor,
+            }else{
+                $hours = "";
+                $ampm = ""; 
+                $ht_1 = "";  
+            }
+            
+            return view('admin.actorEdit')->with([
+                'actor' => $user->actor,
                 'weight' => $weight,
                 'age' => $age,
                 'id' => $id,
@@ -592,7 +659,7 @@ class AdminController extends Controller
                 'audmin' => $ht_1,
                 'ampm' => $ampm
             ]);
-		}
+        }
         if($user->role=='theater')
         {
             return view('admin.theaterEdit')->with([
@@ -609,31 +676,31 @@ class AdminController extends Controller
                'id' => $id
             ]);
         }
-		return view('admin.userEdit',compact('user'))->with('subsciption_expiry',$subsciption_expiry);
+        return view('admin.userEdit',compact('user'))->with('subsciption_expiry',$subsciption_expiry);
     }
-	
-	public function userPaymentDatatable($id){
-		DB::statement(DB::raw('set @rownum=0'));
-		$invoices = Payment::where("user_id","=",$id)->selectRaw("@rownum  := @rownum  + 1 AS id,sum(price) as total_price,transaction_id")->groupBy('transaction_id');
-		return Datatables::of($invoices)
-			->addColumn('details_url', function($invoice) {
-            	return route('admin::adminUserTransactionDetails',$invoice->transaction_id);
-        	})
-			->make(true);
-	}
-	
-	public function userTransactionDetails($id){
-		$payments = Payment::where("transaction_id","=",$id);
+    
+    public function userPaymentDatatable($id){
+        DB::statement(DB::raw('set @rownum=0'));
+        $invoices = Payment::where("user_id","=",$id)->selectRaw("@rownum  := @rownum  + 1 AS id,sum(price) as total_price,transaction_id")->groupBy('transaction_id');
+        return Datatables::of($invoices)
+            ->addColumn('details_url', function($invoice) {
+                return route('admin::adminUserTransactionDetails',$invoice->transaction_id);
+            })
+            ->make(true);
+    }
+    
+    public function userTransactionDetails($id){
+        $payments = Payment::where("transaction_id","=",$id);
 
-		return Datatables::of($payments)
-			->addColumn('item', function($payment) {
-				if($payment->product_id===NULL){
-					return "Subscription Fee";
-				}else{
-				    if($payment->varient_id != NULL){
-				        $vr = ProductVariant::findorfail($payment->varient_id);
-				        $name = $vr->product_variant;
-				        return "$name";
+        return Datatables::of($payments)
+            ->addColumn('item', function($payment) {
+                if($payment->product_id===NULL){
+                    return "Subscription Fee";
+                }else{
+                    if($payment->varient_id != NULL){
+                        $vr = ProductVariant::findorfail($payment->varient_id);
+                        $name = $vr->product_variant;
+                        return "$name";
                     }
                     else
                     {
@@ -642,39 +709,39 @@ class AdminController extends Controller
                         return "$name";
                     }
 
-				}
-        	})
-			->make(true);
-	}
-	
-	public function userUpdate(Request $request, $id){
-		$validator = \Validator::make($request->all(),
+                }
+            })
+            ->make(true);
+    }
+    
+    public function userUpdate(Request $request, $id){
+        $validator = \Validator::make($request->all(),
             [
                 "name"=>"required|min:5",
-				'role' => "required",
-				'payment_status' => "required",
-				'status' => "required"
+                'role' => "required",
+                'payment_status' => "required",
+                'status' => "required"
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
         }else{
-			$user = User::findOrFail($id);
-			$user->name = $request['name'];
-			$user->role = $request['role'];
-			$user->payment_status = $request['payment_status'];
-			$user->status = $request['status'];
-			$user->save();
-			return redirect()->route('admin::adminUsers')->with('success_message', 'User edited successfully.');
-		}
+            $user = User::findOrFail($id);
+            $user->name = $request['name'];
+            $user->role = $request['role'];
+            $user->payment_status = $request['payment_status'];
+            $user->status = $request['status'];
+            $user->save();
+            return redirect()->route('admin::adminUsers')->with('success_message', 'User edited successfully.');
+        }
     }
-	
-	public function actorUpdate(Request $request,$id){
-    	$validator = \Validator::make($request->all(),
+    
+    public function actorUpdate(Request $request,$id){
+        $validator = \Validator::make($request->all(),
             [
                 "resume"=>"mimes:pdf|max:10000",
                 'first_name' => "required|max:20|min:1",
@@ -713,7 +780,7 @@ class AdminController extends Controller
         $user = User::findorfail($id);
         $user->name = $request->get('display_name');
         $user->save();
-    	$actor->user_id = $id;
+        $actor->user_id = $id;
         $actor->first_name = $request->get('first_name');
         $actor->last_name = $request->get('last_name');
         $actor->age = $request->get('age');
@@ -910,8 +977,8 @@ class AdminController extends Controller
         $file->move(public_path($destinationPath), $fileName);
         $actor->resume_path = $destinationPath.'/'.$fileName; 
     }
-	
-	public function actorPhotoUpdate(Request $request,$id){
+    
+    public function actorPhotoUpdate(Request $request,$id){
        
         $validator = \Validator::make($request->all(),
             [
@@ -928,12 +995,12 @@ class AdminController extends Controller
                 ->withInput()
                 ->with('tabactive', 'active');
         }
-		
-		$user = User::findOrFail($id);
+        
+        $user = User::findOrFail($id);
         $actor = $user->actor;
-		
-		
-		if($user->actor){
+        
+        
+        if($user->actor){
             $actor = \App\Actor::where('user_id',$id)->first();
         }else{
             $actor = new \App\Actor;
@@ -948,20 +1015,20 @@ class AdminController extends Controller
 
         $actor->precrop_path = $destinationPath.'/'.$fileName; 
         $actor->precrop_url = $destinationPath.'/'.$fileName; 
-		
-		if($user->actor){
+        
+        if($user->actor){
             if($actor->update()){
-				return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-			}else{
-				return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
-			}
+                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+            }else{
+                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+            }
         }else{
-			$actor->user_id = $id;
+            $actor->user_id = $id;
             if($actor->save()){
-				return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
-			}else{
-				return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
-			}
+                return redirect()->back()->with('success_message', 'Image Uploaded! Please crop the image to make it active on your profile')->with('tabactive','active');
+            }else{
+                return redirect()->back()->with('success_message', 'Picture not uploaded. Try again!');
+            }
         }
         
         
@@ -1079,8 +1146,8 @@ class AdminController extends Controller
 
 
     }
-	
-	public function actorPhotoDelete($id){
+    
+    public function actorPhotoDelete($id){
         $actor = \App\Actor::where('user_id', $id)->first();
         unlink(public_path().'/'.$actor->precrop_path);
         unlink(public_path().'/'.$actor->photo_path);
@@ -1124,41 +1191,41 @@ class AdminController extends Controller
     }
     
     public function actorAuditionList(){
-	    
-	    /*Get All Actors with Auditions*/
-	    $actors = Actor::where('adminAudition_time')->get();
-		foreach($actors as $actor){
+        
+        /*Get All Actors with Auditions*/
+        $actors = Actor::where('adminAudition_time')->get();
+        foreach($actors as $actor){
 
-			$actor_roles = ActorRole::where('user_id', $actor->id)->orderBy('id', 'asc')->get();
-			$actorList = [
-				'actor' 	  => $actor,
-				'actor_roles' => $actor_roles,
-			];
-		}
+            $actor_roles = ActorRole::where('user_id', $actor->id)->orderBy('id', 'asc')->get();
+            $actorList = [
+                'actor'       => $actor,
+                'actor_roles' => $actor_roles,
+            ];
+        }
 
         return view('admin.actorAuditionList')->with($actorList);
     }
         
-	public function adminAuditions(Request $request, $id){
+    public function adminAuditions(Request $request, $id){
 
-		/*Initialize*/
-		$subRequirementFAIL = FALSE;
-		$hours = '';
+        /*Initialize*/
+        $subRequirementFAIL = FALSE;
+        $hours = '';
 
-		/*Core Validator*/
-    	$validator = \Validator::make($request->all(),
+        /*Core Validator*/
+        $validator = \Validator::make($request->all(),
             [
                 'adminAudition_day'   => 'required',
             ]
         );
-		
-		/*Logic Check*/
+        
+        /*Logic Check*/
         if(!is_null($request->adminAudition_hours)){
-	    	if((!is_numeric($request->adminAudition_minutes))||(empty($request->adminAudition_am))){
-				$subRequirementFAIL = TRUE;
-	    	}
+            if((!is_numeric($request->adminAudition_minutes))||(empty($request->adminAudition_am))){
+                $subRequirementFAIL = TRUE;
+            }
         }else{
-	        $time = NULL;
+            $time = NULL;
         }
         
         /*Validator Check - With Error Handling*/
@@ -1170,10 +1237,10 @@ class AdminController extends Controller
                 ->with('error_message', 'Admin Audition Information Not Stored. Try again!');
         }
 
-		/*Query User*/
+        /*Query User*/
         $user = User::findorfail($id);
 
-		/*AM/PM processing*/
+        /*AM/PM processing*/
         if($request->adminAudition_am == "AM") {
             $hours = $request->adminAudition_hours;
             if($hours == 12){
@@ -1195,15 +1262,15 @@ class AdminController extends Controller
         $actor->adminAudition_time = $time;
         $actor->adminAudition_day = $request->adminAudition_day;
         $actor->adminAudition_standby = $request->adminAudition_standBy;
-		$actor->save();
+        $actor->save();
 
         return redirect()->back()->with('success_message', 'Actor ADMIN AUDITIONS Successfully Updated');
     }
 
-	public function postCropPhotoUpdate(Request $request, $id){
+    public function postCropPhotoUpdate(Request $request, $id){
         $targ_w = $targ_h = 230;
         $jpeg_quality = 90;
-		$user = User::findOrFail($id);
+        $user = User::findOrFail($id);
         $actor = $user->actor; 
         $src = $actor->precrop_url;
  
@@ -1246,7 +1313,7 @@ class AdminController extends Controller
 
         $targ_w = $targ_h = 230;
         $jpeg_quality = 90;
-		$user = User::findOrFail($id);
+        $user = User::findOrFail($id);
         $theater = $user->theater;
         $src = $theater->precrop_url;
 
@@ -1331,14 +1398,14 @@ class AdminController extends Controller
 
 
 
-	//======================================================================
-	// Content Pages Functions
-	//======================================================================
-	
-	public function contentPages(){
-    	return view("admin.content_pages")->with('contentactive','active');
+    //======================================================================
+    // Content Pages Functions
+    //======================================================================
+    
+    public function contentPages(){
+        return view("admin.content_pages")->with('contentactive','active');
     }
-	
+    
     public function contentPagesDataTable(){
             // Using Eloquent
             //return Datatables::eloquent(Faq::query())->make(true);
@@ -1351,50 +1418,50 @@ class AdminController extends Controller
 
     }
 
-	
-	public function contentPageEdit($id){
-		$contentPage = ContentPage::with('slideshow')->findOrFail($id);
-		$slideShows = Slideshow::get();
-		//return $slideShows;
-    	return view("admin.content_pagesEdit",compact('contentPage','slideShows'));
+    
+    public function contentPageEdit($id){
+        $contentPage = ContentPage::with('slideshow')->findOrFail($id);
+        $slideShows = Slideshow::get();
+        //return $slideShows;
+        return view("admin.content_pagesEdit",compact('contentPage','slideShows'));
     }
-	
-	public function contentPageUpdate(Request $request, $id){
-    	$validator = \Validator::make($request->all(),
+    
+    public function contentPageUpdate(Request $request, $id){
+        $validator = \Validator::make($request->all(),
             [
                 "title"=>"required|min:5",
-				'description' => "required|min:5",
+                'description' => "required|min:5",
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
         }else{
-			$contentPage = ContentPage::findOrFail($id);
-			$contentPage->title = $request['title'];
-			$contentPage->description = $request['description'];
-			if(isset($request['slideshow_id'])){
-				$contentPage->slideshow_id = $request['slideshow_id'];
-			}
-			$contentPage->save();
-			return redirect()->route('admin::adminContentPages')->with('success_message', 'Page content updated successfully.');
-		}
+            $contentPage = ContentPage::findOrFail($id);
+            $contentPage->title = $request['title'];
+            $contentPage->description = $request['description'];
+            if(isset($request['slideshow_id'])){
+                $contentPage->slideshow_id = $request['slideshow_id'];
+            }
+            $contentPage->save();
+            return redirect()->route('admin::adminContentPages')->with('success_message', 'Page content updated successfully.');
+        }
     }
-	
-	//======================================================================
-	// subscriptions Functions
-	//======================================================================
-	
-	public function subscriptions(){
-		return view("admin.subscription")->with('subscriptionactive','active');
+    
+    //======================================================================
+    // subscriptions Functions
+    //======================================================================
+    
+    public function subscriptions(){
+        return view("admin.subscription")->with('subscriptionactive','active');
     }
-	
-	public function subscriptionsDataTable(){
-		$membershipPeriods = MembershipPeriod::latest()->orderBy('id', 'desc');
-		return Datatables::of($membershipPeriods)
+    
+    public function subscriptionsDataTable(){
+        $membershipPeriods = MembershipPeriod::latest()->orderBy('id', 'desc');
+        return Datatables::of($membershipPeriods)
             ->editColumn('start_date',function($membershipPeriod){
                 $start = Carbon::parse($membershipPeriod->start_date);
                 $start_date = $start->format('m/d/Y');
@@ -1407,120 +1474,126 @@ class AdminController extends Controller
             })
             ->addColumn('status', function ($membershipPeriod) {
                 $status = ($membershipPeriod->status)?"Active":"De-Activated";
-				return $status;
+                return $status;
             })
-			->addColumn('action', function ($membershipPeriod) {
+            ->addColumn('action', function ($membershipPeriod) {
                 $action = '<a href="'.route('admin::adminSubscriptionEdit', $membershipPeriod->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-				return $action;
+                return $action;
             })
-			->make(true);
+            ->make(true);
     }
-		
-	public function subscriptionStorePlan(Request $request){
-		//return $request->all();
-		$validator = \Validator::make($request->all(),
+        
+    public function subscriptionStorePlan(Request $request){
+        //return $request->all();
+        $validator = \Validator::make($request->all(),
             [
-				'start_date' => "required",
-				'end_date' => "required",
-                'type' => "required",
-				'name' => "required",
+                'start_date'        => "required",
+                'end_date'          => "required",
+                'type'              => "required",
+                'name'              => "required",
+                'subscription_type' => 'required',
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
         }else{
-			
-			$membershipPeriod = new MembershipPeriod;
-			$membershipPeriod->name = $request->get('name');
-			$membershipPeriod->price = $request->get('price');
-            $membershipPeriod->type = $request->get('type');
-			$membershipPeriod->start_date = date("Y-m-d",strtotime($request->get('start_date')));
-			$membershipPeriod->end_date = date("Y-m-d",strtotime($request->get('end_date')));
-			$membershipPeriod->save();
-			return redirect()->back()->with('success_message', 'Product added successfully.');
-			
-			
-		}
-		
-	}//end function
-	
-	public function subscriptionEdit($id){
-		
-		$membershipPeriod = MembershipPeriod::findOrFail($id);
-		$membershipPeriod->start_date = date("d/m/Y",strtotime($membershipPeriod->start_date));
-		$membershipPeriod->end_date = date("d/m/Y",strtotime($membershipPeriod->end_date));
-		return view('admin.subscriptionEdit',compact('membershipPeriod'));
+            
+            $membershipPeriod                    = new MembershipPeriod;
+            $membershipPeriod->name              = $request->get('name');
+            $membershipPeriod->price             = $request->get('price');
+            $membershipPeriod->type              = $request->get('type');
+            $membershipPeriod->subscription_type = $request->get('subscription_type');
+            $membershipPeriod->start_date        = date("Y-m-d",strtotime($request->get('start_date')));
+            $membershipPeriod->end_date          = date("Y-m-d",strtotime($request->get('end_date')));
+            $membershipPeriod->save();
+            return redirect()->back()->with('success_message', 'Product added successfully.');
+            
+            
+        }
+        
+    }//end function
+    
+    public function subscriptionEdit($id){
+        
+        $membershipPeriod = MembershipPeriod::findOrFail($id);
+        $membershipPeriod->start_date = date("d/m/Y",strtotime($membershipPeriod->start_date));
+        $membershipPeriod->end_date = date("d/m/Y",strtotime($membershipPeriod->end_date));
+        return view('admin.subscriptionEdit',compact('membershipPeriod'));
     }
-	
-	public function subscriptionUpdate(Request $request, $id){
-	    $validator = \Validator::make($request->all(),
+    
+    public function subscriptionUpdate(Request $request, $id){
+        $validator = \Validator::make($request->all(),
             [
-				'start_date' => "required",
-				'end_date' => "required",
-				'name' => "required",
+                'start_date'        => "required",
+                'end_date'          => "required",
+                'name'              => "required",
+                'subscription_type' => "required",
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
         }else{
-			$membershipPeriod = MembershipPeriod::findOrFail($id);
-			$membershipPeriod->name = $request->get('name');
-			$membershipPeriod->price = $request->get('price');
-			$membershipPeriod->type = $request->get('type')!=Null ? $request->get('type') : $membershipPeriod->type;
-			$membershipPeriod->start_date = date("Y-m-d",strtotime($request->get('start_date')));
-			$membershipPeriod->end_date = date("Y-m-d",strtotime($request->get('end_date')));
-			$membershipPeriod->status = $request->get('status');
-			$membershipPeriod->save();
-			return redirect()->route('admin::adminSubscriptions')->with('success_message', 'Plan edited successfully.');
-		}
+            $membershipPeriod                    = MembershipPeriod::findOrFail($id);
+            $membershipPeriod->name              = $request->get('name');
+            $membershipPeriod->price             = $request->get('price');
+            $membershipPeriod->type              = $request->get('type')!=Null ? $request->get('type') : $membershipPeriod->type;
+            $membershipPeriod->start_date        = date("Y-m-d",strtotime($request->get('start_date')));
+            $membershipPeriod->end_date          = date("Y-m-d",strtotime($request->get('end_date')));
+            $membershipPeriod->subscription_type = $request->get('subscription_type')!=Null ? $request->get('subscription_type') : $membershipPeriod->subscription_type;
+            $membershipPeriod->status            = $request->get('status');
+            $membershipPeriod->save();
+            return redirect()->route('admin::adminSubscriptions')->with('success_message', 'Plan edited successfully.');
+        }
     }
-	
-	public function products(){
-		return view("admin.products")->with('productactive','active');
+    
+    public function products(){
+        return view("admin.products")->with('productactive','active');
     }
-	
-	public function productsDataTable(){
-		$products = Product::latest()->orderBy('id', 'desc');
-		return Datatables::of($products)
+    
+    public function productsDataTable(){
+        $products = Product::latest()->orderBy('id', 'desc');
+        return Datatables::of($products)
             ->addColumn('status', function ($product) {
                 $status = ($product->status)?"Active":"De-Activated";
-				return $status;
+                return $status;
             })
-			->addColumn('action', function ($product) {
+            ->addColumn('action', function ($product) {
                 $action = '<a href="'.route('admin::adminProductEdit', $product->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-				 $action.= '<a href="'.route('admin::adminProductDelete', $product->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-				return $action;
+                 $action.= '<a href="'.route('admin::adminProductDelete', $product->id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                return $action;
             })
-			->make(true);
-		
+            ->make(true);
+        
     }
-	
-	public function productStore(Request $request){
-		$validator = \Validator::make($request->all(),
+    
+    public function productStore(Request $request){
+        $validator = \Validator::make($request->all(),
             [
-                "name"=>"required|min:5",
+                "name"         => "required|min:5",
+                "product_type" => "required",
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
-				->back()
+                ->back()
                 ->withErrors($validator->errors())
-				->with('tabactive', 'active')
+                ->with('tabactive', 'active')
                 ->withInput();
         }else{
-            $prod = new Product;
-            $prod->name = $request->name;
-            $prod->price = "0";
-            $prod->description = $request->description;
+            $prod               = new Product;
+            $prod->name         = $request->name;
+            $prod->price        = "0";
+            $prod->description  = $request->description;
+            $prod->product_type = $request->product_type;
             $prod->save();
 
             foreach($request->varient as $val)
@@ -1533,51 +1606,52 @@ class AdminController extends Controller
             }
 
 
-			return redirect()->back()->with('success_message', 'Product added successfully.');
-		}
+            return redirect()->back()->with('success_message', 'Product added successfully.');
+        }
     }
-	
-	public function productEdit($id){
-		
-		$product = Product::findOrFail($id);
-		$variant = $product->product_variant;
-		return view('admin.productEdit')->with([
-		    'product' => $product,
+    
+    public function productEdit($id){
+        
+        $product = Product::findOrFail($id);
+        $variant = $product->product_variant;
+        return view('admin.productEdit')->with([
+            'product' => $product,
             'variant' => $variant
         ]);
     }
-	
-	public function productUpdate(Request $request, $id){
+    
+    public function productUpdate(Request $request, $id){
 
-    	$validator = \Validator::make($request->all(),
+        $validator = \Validator::make($request->all(),
             [
-                "name"=>"required|min:5",
-				//'price' => "required",
+                "name"         => "required|min:5",
+                'product_type' => "required",
             ]
         );
-		
+        
         if ($validator->fails()) {
             return redirect()
                 ->back()
                 ->withErrors($validator->errors())
                 ->withInput();
         }else{
-			$product = Product::findOrFail($id);
-			$product->name = $request['name'];
-			$product->price = "0";
-			$product->description = $request['description'];
-			$product->status = $request['status'];
-			$product->save();
+            $product               = Product::findOrFail($id);
+            $product->name         = $request['name'];
+            $product->price        = "0";
+            $product->description  = $request['description'];
+            $product->status       = $request['status'];
+            $product->product_type = $request['product_type'];
+            $product->save();
 
-			$iddetect = [];
-			$prod = ProductVariant::where('product_id',$id)->get();
-			$product_old = [];
+            $iddetect = [];
+            $prod = ProductVariant::where('product_id',$id)->get();
+            $product_old = [];
             foreach($prod as $val)
             {
                 $product_old[] = $val['id'];
             }
 
-			if($request->varient) {
+            if($request->varient) {
                 foreach ($request->varient as $val) {
                     if (!empty($val['id'])) {
                         $iddetect[] = $val['id'];
@@ -1602,8 +1676,8 @@ class AdminController extends Controller
 
 
 
-			return redirect()->route('admin::adminProducts')->with('success_message', 'Product updated successfully.');
-		}
+            return redirect()->route('admin::adminProducts')->with('success_message', 'Product updated successfully.');
+        }
     }
 
     public function hardcopy($id, Request $request)
@@ -1616,10 +1690,10 @@ class AdminController extends Controller
         return redirect()->back()->with('success_message', 'Updated Successfully');
     }
 
-	public function productDestroy($id){
-		$product = Product::findOrFail($id);
-		$product->delete();
-		return redirect()->back()->with('success_message', 'Product deleted successfully.');	
+    public function productDestroy($id){
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect()->back()->with('success_message', 'Product deleted successfully.');    
     }
 
     public function audition()
@@ -1647,14 +1721,14 @@ class AdminController extends Controller
     }
 
     public function static_create(Request $request){
-	    $static_page = new StaticPage;
-	    $static_page->slug = $request->slug;
-	    $static_page->page_description = $request->description;
-	    $static_page->status = $request->status;
-	    $static_page->page_title = $request->title;
-	    $static_page->save();
+        $static_page = new StaticPage;
+        $static_page->slug = $request->slug;
+        $static_page->page_description = $request->description;
+        $static_page->status = $request->status;
+        $static_page->page_title = $request->title;
+        $static_page->save();
 
-	    return redirect()->back()->with('success_message', 'Page Created Successfully');
+        return redirect()->back()->with('success_message', 'Page Created Successfully');
     }
 
     public function auditionedit($id)
