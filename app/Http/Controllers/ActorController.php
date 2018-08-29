@@ -20,6 +20,7 @@ use App\AuditionExtra;
 use Yajra\Datatables\Facades\Datatables;
 use DB;
 use PDF;
+use App\SpecialPayment;
 
 class ActorController extends Controller
 {
@@ -211,6 +212,28 @@ class ActorController extends Controller
             $actor = new Actor;
         }
 
+        $actor_dance_experince = "";
+        if($request->get('dance_exp') != "") {
+            $danceExperince = "";
+            foreach($request->get('dance_exp') as $key => $value) {
+                if($value != "") {
+                    $danceExperince .= $value.',';
+                }
+            }
+            $actor_dance_experince = rtrim($danceExperince,', ');
+        }
+
+        $actor_instrument_experince = "";
+        if($request->get('instrument_exp') != "") {
+            $instrumentExperince = "";
+            foreach($request->get('instrument_exp') as $key => $value) {
+                if($value != "") {
+                    $instrumentExperince .= $value.',';
+                }
+            }
+            $actor_instrument_experince = rtrim($instrumentExperince,', ');
+        }
+
         $from_date = Carbon::createFromFormat('d/m/Y', $request->from)->toDateString();
         $to_date = Carbon::createFromFormat('d/m/Y', $request->to)->toDateString();
         $id = \Auth::user()->id;
@@ -236,7 +259,9 @@ class ActorController extends Controller
         $actor->technical = $request->get('technical') ? implode(',', $request->get('technical')) : '';
         $actor->ethnicity = $request->get('ethnicity') ? implode(',', $request->get('ethnicity')) : '';
         $actor->dance = $request->get('dance') ? implode(',', $request->get('dance')) : '';
+        $actor->dance_experince = $actor_dance_experince ? $actor_dance_experince : '';
         $actor->instrument = $request->get('instrument') ? implode(',', $request->get('instrument')) : '';
+        $actor->instrument_experince = $actor_instrument_experince ? $actor_instrument_experince : '';
         $actor->misc = $request->get('misc') ? implode(',', $request->get('misc')) : '';
         $actor->phone_number = $request->phone_number;
         $actor->website_url = $request->website_url;
@@ -382,7 +407,7 @@ class ActorController extends Controller
      * TODO : Dummy payment just chaning payment status for now
      * Will update with proper payment system in future
      */
-    public function payment()
+    public function payment(Request $request)
     {
         $user = User::find(\Auth::user()->id);
         if($user->subscribed('main'))
@@ -391,11 +416,31 @@ class ActorController extends Controller
         }
         else
         {
-            $membershipPeriods = MembershipPeriod::latest()->where('type','Actor')->where('status',1)->orderBy('id', 'desc')->get();
-            $products = Product::orderBy('id', 'desc')->get();
-            //$products = Product::findorfail(2);
-            //$n = $products->product_variant;
-            //dd($n);
+            $payment_type = "";
+            if(isset($request['t']) && $request['t'] != '') {
+                $paymentInfo  = explode("|",base64_decode($request['t']));
+                
+                if(isset($paymentInfo[0]) && $paymentInfo[0] != "") {
+                    $payment_type = $paymentInfo[0];
+                }
+            }
+
+            $membershipPeriods = MembershipPeriod::latest()->where('type','Actor')->where('status',1);
+            if(isset($payment_type) && $payment_type == 's') {
+                $membershipPeriods = $membershipPeriods->where("subscription_type","special");
+            } else {
+                $membershipPeriods = $membershipPeriods->where("subscription_type","default")->orWhere("subscription_type","");
+            }
+            $membershipPeriods = $membershipPeriods->orderBy('id', 'desc')->get();
+
+            $products = Product::where('status',1);
+            if(isset($payment_type) && $payment_type == 's') {
+                $products = $products->where("product_type","special");
+            } else {
+                $products = $products->where("product_type","default")->orWhere("product_type","");
+            }
+            $products = $products->orderBy('id', 'desc')->get();
+
             $states = $this->getStateWithSelected();
             return view('actor.payment')->with(['products'=>$products,'membershipPeriods' => $membershipPeriods, 'states' => $states]);
         }
@@ -412,7 +457,6 @@ class ActorController extends Controller
     }
 
     public function paymentStore(Request $request){
-        $request->all();
         $description = "";
         $totalPrice = 0;
         $membershipPeriod = MembershipPeriod::findOrFail($request->subscription);
@@ -466,13 +510,37 @@ class ActorController extends Controller
             $membership->save();
 
             //save the payment details for subscription
-            $payment = new Payment;
-            $payment->user_id = \Auth::user()->id;
-            $payment->transaction_id = $result->id;
-            //$request->token;
-            $payment->membership_period_id = $membershipPeriod->id;
-            $payment->price = $membershipPeriod->price;
-            $payment->save();
+            $paymentType    = "";
+            $$paymentUserId = "";
+            $paymentToken   = "";
+            if(isset($request->payment_type) && $request->payment_type != '') {
+                $paymentInfo  = explode("|",base64_decode($request->payment_type));
+                $payment_type = "";
+                if(isset($paymentInfo[0]) && $paymentInfo[0] != "") {
+                    $paymentType = $paymentInfo[0];
+                }
+                if(isset($paymentInfo[1]) && $paymentInfo[1] != "") {
+                    $paymentUserId = $paymentInfo[1];
+                }
+                if(isset($paymentInfo[2]) && $paymentInfo[2] != "") {
+                    $paymentToken = $paymentInfo[2];
+                }
+            }
+            if(isset($paymentType) && $paymentType == 's') {
+                $payment = SpecialPayment::where('user_id',$paymentUserId)->where('payment_token',$paymentToken)->first();
+                $payment->transaction_id       = $result->id;
+                $payment->membership_period_id = $membershipPeriod->id;
+                $payment->price                = $membershipPeriod->price;
+                $payment->save();
+            } else {
+               $payment = new Payment;
+                $payment->user_id              = \Auth::user()->id;
+                $payment->transaction_id       = $result->id;
+                $payment->membership_period_id = $membershipPeriod->id;
+                $payment->price                = $membershipPeriod->price;
+                $payment->save(); 
+            }
+            
 
             //subscription table
             $subes = SubscriptionPackage::where('user_id',\Auth::user()->id)->get();
@@ -528,7 +596,7 @@ class ActorController extends Controller
                     $payment->price = (!empty($varient['price'])) ? $varient['price'] : '0';
                     $payment->save();
                 }
-			}
+            }
             }*/
             return redirect()->route('actor::actorProfile')->with('success_message', 'Successfully subscribed.');
         }
@@ -545,6 +613,17 @@ class ActorController extends Controller
         }
 
     }
+
+    /**for preparing audition data
+    public static function actorRoleShow($data){
+        if($data->count() > 0){
+            $prep = $data->implode('roles_chosen');
+            $prep .= $data->implode('show');
+        }else{
+            $prep = "";
+        }
+        return $prep;
+    }**/
 
     /**for checking date comparision and return**/
     public static function check_in_range($start_date, $end_date, $start_lookup, $end_lookup)
@@ -564,61 +643,107 @@ class ActorController extends Controller
         return "false";
 
     }
-	
-	/* Getting actor availability */
-	public static function getAvailability($from, $to){
-		//contion for employment availability
+    
+    /* Getting actor availability */
+    public static function getAvailability($from, $to){
+        //contion for employment availability
 
-			$availability = "";
+            $availability = "";
            //imediate
             $imediate = ActorController::check_in_range($from, $to, date('Y-m-d'), date('Y-m-d'));
             if($imediate == "true")
-				$availability .= "Immediate ";
-				
-			//for getting summer
-			$sd = date("Y-m-d", strtotime("third monday".date("Y-05")));
-			$ed = date("Y-m-d", strtotime("first monday ".date("Y-09")));
-			$summer = ActorController::check_in_range($from, $to, $sd, $ed);
-			if($summer == "true")
-				$availability .= "Summer ";
+                $availability .= "Immediate ";
+                
+            //for getting summer
+            $sd = date("Y-m-d", strtotime("third monday".date("Y-05")));
+            $ed = date("Y-m-d", strtotime("first monday ".date("Y-09")));
+            $summer = ActorController::check_in_range($from, $to, $sd, $ed);
+            if($summer == "true")
+                $availability .= "Summer ";
 
 
-			//for getting fall
-			$fd = date("Y-m-d", strtotime("first monday ".date("Y-09")));
-			$fed = date("Y-12-25");
-			$fall = ActorController::check_in_range($from, $to, $fd, $fed);
-			if($fall == "true")
-				$availability .= "Fall ";
+            //for getting fall
+            $fd = date("Y-m-d", strtotime("first monday ".date("Y-09")));
+            $fed = date("Y-12-25");
+            $fall = ActorController::check_in_range($from, $to, $fd, $fed);
+            if($fall == "true")
+                $availability .= "Fall ";
 
-			//for getting next year
-			$ny = date("Y-m-d", strtotime("+1 year".date("Y-01-01")));
-			$eny = date("Y-m-d", strtotime("+1 year".date("Y-12-31")));
-			$next_year = ActorController::check_in_range($from, $to, $ny, $eny);
-			if($next_year== "true")
-				$availability .= "NextYear ";
-			
-			return $availability;
-	}
+            //for getting next year
+            $ny = date("Y-m-d", strtotime("+1 year".date("Y-01-01")));
+            $eny = date("Y-m-d", strtotime("+1 year".date("Y-12-31")));
+            $next_year = ActorController::check_in_range($from, $to, $ny, $eny);
+            if($next_year== "true")
+                $availability .= "NextYear ";
+            
+            return $availability;
+    }
     /*getting actors in actor view*/
     public function getActors(){
         if(\Auth::check()){
             if((\Auth::user()->payment_status==1)||(\Auth::user()->role == 'admin')) {
-                $actors = \App\User::join('actors', 'actors.user_id', '=', 'users.id')
-                    ->where('users.payment_status', 1)->whereNotNull('actors.photo_path')->orderBy('actors.first_name', 'asc')
-                    ->get();
-
+                $actors = \App\User::join('actors', 'actors.user_id', '=', 'users.id');
+                $actors = $actors->with('actors_roles');
+                $actors = $actors->where('users.payment_status', 1)->whereNotNull('actors.photo_path')->orderBy('actors.first_name', 'asc')->get();
+                
+                foreach($actors as $actor) {
+                    $roles        = "";
+                    $show         = "";
+                    $userRole     = "";
+                    $userShow     = "";
+                    if(isset($actor['actors_roles']) && count($actor['actors_roles']) > 0) {                            
+                        foreach($actor['actors_roles'] as $actors_roles) {
+                            $roles .= $actors_roles['roles_chosen'].',';
+                            $show  .= $actors_roles['show'].',';
+                        }
+                        $userRole = rtrim($roles,', ');
+                        $userShow = rtrim($show,', ');
+                    }
+                    
+                    $actorList[] = array('user_id'              => $actor['user_id'],
+                                         'email'                => $actor['email'],
+                                         'first_name'           => $actor['first_name'],
+                                         'last_name'            => $actor['last_name'],
+                                         'auditionType'         => $actor['auditionType'],
+                                         'from'                 => $actor['from'],
+                                         'to'                   => $actor['to'],
+                                         'ethnicity'            => $actor['ethnicity'],
+                                         'gender'               => $actor['gender'],
+                                         'vocalRange'           => $actor['vocalRange'],
+                                         'feet'                 => $actor['feet'],
+                                         'hair'                 => $actor['hair'],
+                                         'eyes'                 => $actor['eyes'],
+                                         'photo_path'           => $actor['photo_path'],
+                                         'photo_url'            => $actor['photo_url'],
+                                         'weight'               => $actor['weight'],
+                                         'school'               => $actor['school'],
+                                         'payment_status'       => $actor['payment_status'],
+                                         'verified'             => $actor['verified'],
+                                         'misc'                 => $actor['misc'],
+                                         'technical'            => $actor['technical'],
+                                         'dance'                => $actor['dance'],
+                                         'jobType'              => $actor['jobType'],
+                                         'instrument'           => $actor['instrument'],
+                                         'roles'                => $userRole,
+                                         'show'                 => $userShow,
+                                         'dance_experince'      => $actor['dance_experince'],
+                                         'instrument_experince' => $actor['instrument_experince'],
+                                    );
+                }
+                
                 return view('actor.actorSearch')->with([
-                    'actorList' 	=> $actors,
-                    'actoractive' 	=> 'active'
+                    'actorList'     => $actorList,
+                    'actoractive'   => 'active'
                 ]);
             }else{
-            	return redirect()->route('getIndex')->with('error_message', 'You must have a paid subscription');
+                return redirect()->route('getIndex')->with('error_message', 'You must have a paid subscription');
             }
         }
         else{
             return redirect()->route('getIndex')->with('error_message', 'Not Authorised!!!!!');
         }
     }
+
 
     public function actorPhotoDelete(){
         $actor = Actor::where('user_id', \Auth::User()->id)->first();

@@ -85,13 +85,79 @@
 <script src="{{asset('assets/search/mixitup-pagination.min.js')}}"></script>
 <script src="{{asset('assets/search/mixitup-multifilter.min.js')}}"></script>
 <script src="{{asset('assets/search/main.js')}}"></script>
+<script>
+    var container   = document.querySelector('[data-ref="container"]');
+    var inputSearch = document.querySelector('[data-ref="input-search"]');
+    var keyupTimeout;
+    var mixer = mixitup(container, {
+        animation: {
+            duration: 350
+        },
+        callbacks: {
+            onMixClick: function() {
+                if (this.matches('[data-filter]')) {
+                    inputSearch.value = '';
+                }
+            }
+        }
+    });
+    inputSearch.addEventListener('keyup', function() {
+        var searchValue;
+        if (inputSearch.value.length < 3) {
+            searchValue = '';
+        } else {
+            searchValue = inputSearch.value.trim();
+        }
+        clearTimeout(keyupTimeout);
+        keyupTimeout = setTimeout(function() {
+            filterByString(searchValue);
+        }, 350);
+    });
+    function filterByString(searchValue) {
+        if (searchValue) {
+            mixer.filter('[class*="' + searchValue + '"]');
+        } else {
+            mixer.filter('all');
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#experience").change(function(){
+            var exper    = $(this).val();
+            var dan_inst = [];
+            $.each($(".dance_instrument:checked"), function(){            
+                dan_inst.push($(this).val());
+            });
+        });
+
+        $(".dance_instrument").click(function(){
+            var exper    = $(this).val();
+            var dan_inst = [];
+            $.each($(".dance_instrument:checked"), function(){            
+                dan_inst.push($(this).val());
+            });
+        });
+
+        var searchStr = "";
+        for(var i=0; i<dan_inst.length; i++) {
+            searchStr += dan_inst[i]+'_'+exper+' ';
+        }
+
+        if (searchStr) {
+            mixer.filter('[class*="' + searchStr + '"]');
+        } else {
+            mixer.filter('all');
+        }        
+    });
+</script>
 @endsection
 @section('content')
 <!-- BEGIN PAGE CONTENT INNER -->
 <div class="page-content-inner">
     <div class="search-page search-content-3">
         <div class="row">
-        <form class="controls">
+        <form class="controls" id="Filters">
             <div class="col-lg-4">
                 <div class="search-filter ">
                     <div class="row">
@@ -122,14 +188,6 @@
                             @endforeach
                         </select>
                     </fieldset>
-                    <div class="search-label uppercase">States</div>
-                    <fieldset data-filter-group="states" class="control-group">
-                        <select class="form-control">
-                            @foreach(\App\Misc::$states as $key=>$vc)
-                                <option value="[data-state={{$key}}]">{{$vc}}</option>
-                            @endforeach
-                        </select>
-                    </fieldset>
                     <div class="search-label uppercase">First Name</div>
                     <fieldset data-filter-group="first-name" class="text-input-wrapper">
                     <div class="input-icon right">
@@ -143,6 +201,12 @@
                         <i class="icon-magnifier"></i>
                         <input type="text" data-search-attribute="data-last-name"  class="form-control" placeholder="Type last name here"/></div>
                     </fieldset>
+                    <!--<div class="search-label uppercase">Roles/Show</div>
+                    <fieldset class="text-input-wrapper">
+                    <div class="input-icon right">
+                        <i class="icon-magnifier"></i>                        
+                            <input type="text" class="form-control" data-ref="input-search" placeholder="Type roles/show here"/></div>
+                        </fieldset>-->
                      <div class="search-label uppercase">Will Consider</div>
                     <fieldset data-filter-group="jobtype" class="checkbox-group" data-logic="and">
                             @foreach(\App\Misc::$jobTypes as $key=>$j)
@@ -174,13 +238,31 @@
                     <fieldset data-filter-group="dance" class="checkbox-group" data-logic="and">
                             @foreach(\App\Misc::$dance as $key=>$d)
                                  <label class="mt-checkbox mt-checkbox-outline"> {{$d}}
-                                    <input type="checkbox" value=".{{preg_replace('/\s+/', '', $d)}}"/>
+                                    <input type="checkbox" class="dance_instrument" value=".{{preg_replace('/\s+/', '', $d)}}"/>
                                     <span></span>
                                 </label>
                             @endforeach 
                     </fieldset>
                     <div class="search-label uppercase">Instrument</div>
                     <fieldset data-filter-group="instrument" class="checkbox-group" data-logic="and">
+                        @foreach(\App\Misc::$instrument as $key=>$i)
+                                <label class="mt-checkbox mt-checkbox-outline"> {{$i}}
+                                    <input type="checkbox" class="dance_instrument" value=".{{preg_replace('/\s+/', '', $i)}}"/>
+                                    <span></span>
+                                </label>
+                        @endforeach 
+                    </fieldset>
+                    <div class="search-label uppercase">Dance / Instrument Experience</div>
+                    <fieldset class="text-input-wrapper">
+                        <select class="form-control" id="experience">
+                            <option value="">--Experience--</option>
+                            @for($ex=1; $ex<=20; $ex++)
+                                <option value="{{ $ex }}@if($ex == 20)+@endif">{{ $ex }}@if($ex == 20)+@endif</option>
+                            @endfor
+                        </select>
+                    </fieldset>
+                    <div class="search-label uppercase"></div>
+                    <fieldset class="checkbox-group">
                         @foreach(\App\Misc::$instrument as $key=>$i)
                                 <label class="mt-checkbox mt-checkbox-outline"> {{$i}}
                                     <input type="checkbox" value=".{{preg_replace('/\s+/', '', $i)}}"/>
@@ -211,40 +293,40 @@
             </form>
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="actorContainer">
-					@foreach($actorList as $actor)
-                        @if(($actor->email)&&($actor->first_name)&&($actor->last_name)&&($actor->auditionType)&&($actor->from)&&($actor->to)&&($actor->ethnicity)&&($actor->gender)&&($actor->vocalRange)&&($actor->feet)&&($actor->hair)&&($actor->eyes)&&($actor->photo_path)&&($actor->photo_url)&&($actor->weight)&&($actor->school) != NULL && $actor->payment_status == 1 && $actor->verified == 1)
-						<div data-first-name="{{ strtolower($actor->first_name) }}" data-last-name="{{ strtolower($actor->last_name) }}" data-audition-type="{{ preg_replace('/\s+/', '', $actor->auditionType=="Song & Monologue" ? "Song-n-Monologue" : $actor->auditionType) }}" data-skill-vocal="{{ preg_replace('/\s+/', '', $actor->vocalRange) }}" data-state="{{$actor->state}}" class="mix {{
-
-							$mixClass = $actor->gender . ' '. \App\Http\Controllers\ActorController::prepareData($actor->ethnicity). ' '. \App\Http\Controllers\ActorController::prepareData($actor->misc). ' '. \App\Http\Controllers\ActorController::prepareData($actor->technical). ' '. \App\Http\Controllers\ActorController::prepareData($actor->dance). ' '. \App\Http\Controllers\ActorController::prepareData($actor->jobType). ' '. \App\Http\Controllers\ActorController::prepareData($actor->instrument) .' '. \App\Http\Controllers\ActorController::getAvailability($actor->from, $actor->to)
-						}}">
-							<div class="col-md-4">
-								<div class="tile-container">
-									<div class="tile-thumbnail">
-										<a href="{{route('getActorView', $actor->user_id) }}" target="_blank">
-                                            <img src="{{ $actor->photo_url ? asset($actor->photo_url) : asset('assets/images/photos/default-medium.jpg') }}"/>
-										</a>
-									</div>
-									<div class="tile-title">
-										<h3>
-											<a href="javascript:;">{{ $actor->first_name ." ". $actor->last_name }}</a>
-										</h3>
-										<div class="tile-desc">
-											<p>
-												{{ $actor->auditionType }}
-											</p>
-											<p>
-												{{ "Employment Availability:". $actor->from ." to ". $actor->to }}
-											</p>
-										</div>
-										<a href="{{route('getActorView', $actor->user_id) }}" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> {{ $actor->last_name }} </a>
-									</div>
-								</div>
-							</div>
-						</div>
-						{{ $mixClass = "" }}
+                    <div class="actorContainer" data-ref="container">
+                        @foreach($actorList as $actor)
+                            @if(($actor['email'])&&($actor['first_name'])&&($actor['last_name'])&&($actor['auditionType'])&&($actor['from'])&&($actor['to'])&&($actor['ethnicity'])&&($actor['gender'])&&($actor['vocalRange'])&&($actor['feet'])&&($actor['hair'])&&($actor['eyes'])&&($actor['photo_path'])&&($actor['photo_url'])&&($actor['weight'])&&($actor['school']) != NULL && $actor['payment_status'] == 1 && $actor['verified'] == 1 && $actor['roles'] != "" && $actor['show'] != "")
+                                <div data-first-name="{{ strtolower($actor['first_name']) }}" data-last-name="{{ strtolower($actor['last_name']) }}" data-audition-type='{{ preg_replace("/\s+/", "", $actor["auditionType"]=="Song & Monologue" ? "Song-n-Monologue" : $actor["auditionType"]) }}' data-skill-vocal="{{ preg_replace('/\s+/', '', $actor['vocalRange']) }}" class="mix {{ $mixClass = $actor['gender'] . ' '. \App\Http\Controllers\ActorController::prepareData($actor['ethnicity']). ' '. \App\Http\Controllers\ActorController::prepareData($actor['misc']). ' '. \App\Http\Controllers\ActorController::prepareData($actor['technical']). ' '. \App\Http\Controllers\ActorController::prepareData($actor['dance']). ' '. \App\Http\Controllers\ActorController::prepareData($actor['jobType']). ' '. \App\Http\Controllers\ActorController::prepareData($actor['instrument'])  .' '. \App\Http\Controllers\ActorController::prepareData($actor['roles']) .' '. \App\Http\Controllers\ActorController::prepareData($actor['show']) .' '.
+                                \App\Http\Controllers\ActorController::prepareData($actor['dance_experince']) .' '. 
+                                \App\Http\Controllers\ActorController::prepareData($actor['instrument_experince']) .' '. 
+                                \App\Http\Controllers\ActorController::getAvailability($actor['from'], $actor['to']) }}">
+                                    <div class="col-md-4">
+                                        <div class="tile-container">
+                                            <div class="tile-thumbnail">
+                                                <a href="{{route('getActorView', $actor['user_id']) }}" target="_blank">
+                                                    <img src="{{ $actor['photo_url'] ? asset($actor['photo_url']) : asset('assets/images/photos/default-medium.jpg') }}"/>
+                                                </a>
+                                            </div>
+                                            <div class="tile-title">
+                                                <h3>
+                                                    <a href="javascript:;">{{ strtolower($actor['first_name']) }} {{ strtolower($actor['last_name']) }}</a>
+                                                </h3>
+                                                <div class="tile-desc">
+                                                    <p>
+                                                        {{ $actor['auditionType'] }}
+                                                    </p>
+                                                    <p>
+                                                        {{ "Employment Availability:". $actor['from'] ." to ". $actor['to'] }}
+                                                    </p>
+                                                </div>
+                                                <a href="{{route('getActorView', $actor['user_id']) }}" class="btn btn-block btn-default" target="_blank"><span class="glyphicon glyphicon-user"></span> {{ $actor['last_name'] }} </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ $mixClass = "" }}
                             @endif
-					@endforeach
+                        @endforeach
                     </div>
                     <div class="clearfix"></div>
                     <div class="controls-pagination">
