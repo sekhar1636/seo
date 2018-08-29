@@ -535,25 +535,6 @@ class TheaterController extends Controller
                         $varient = ProductVariant::findOrFail($varid);
                         $prodpricecount = (!empty($prod['price'])) ? $prod['price'] : 1;
                         $varientcountprice = (!empty($varient['price'])) ? $prodpricecount * $varient['price'] : '0';
-                        
-                        if(isset($paymentType) && $paymentType == 's') {
-                            $payment = SpecialPayment::where('user_id',$paymentUserId)->where('payment_token',$paymentToken)->first();
-                            $payment->transaction_id = $request->token;
-                            $payment->product_id     = (!empty($product['id'])) ? $product['id'] : '0';
-                            $payment->varient_id     = $varient->id;
-                            $payment->price          = $varientcountprice;
-                            $payment->save();
-                        } else {
-                            $payment = new Payment;
-                            $payment->user_id = \Auth::user()->id;
-                            $payment->transaction_id = $request->token;
-                            $payment->product_id = (!empty($product['id'])) ? $product['id'] : '0';
-                            $payment->varient_id = $varient->id;
-                            $payment->price = $varientcountprice;
-                            $payment->save();
-                        }
-                    }
-                }
             }
             return redirect()->route('theater::theaterProfile')->with('success_message', 'Successfully subscribed.');
         }
