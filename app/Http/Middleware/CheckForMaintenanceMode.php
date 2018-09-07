@@ -2,58 +2,16 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
+use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Middleware;
 
-class CheckForMaintenanceMode
+class CheckForMaintenanceMode extends Middleware
 {
     /**
-     * The application implementation.
+     * The URIs that should be reachable while maintenance mode is enabled.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var array
      */
-    protected $app;
-
-    /**
-     * Create a new middleware instance.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @return void
-     */
-    public function __construct(Application $app)
-    {
-        $this->app = $app;
-    }
-
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     */
-    public function handle($request, Closure $next)
-    {
-        if ($this->app->isDownForMaintenance()) {
-            $data = json_decode(file_get_contents($this->app->storagePath().'/framework/down'), true);
-			
-			$cookie = $request->cookie('secret-cookie');
-			
-			if($cookie){
-				$value = \Illuminate\Support\Facades\Crypt::decrypt($cookie);	
-			}else{
-				$value = '';
-			}
-
-		    if($value != 'WebTestMDT') {
-			    //return response('Under Maintenance Be right back!', 503);
-		        throw new MaintenanceModeException($data['time'], $data['retry'], $data['message']);
-		    }  
-        }
-
-        return $next($request);
-    }    
+    protected $except = [
+        //
+    ];
 }
